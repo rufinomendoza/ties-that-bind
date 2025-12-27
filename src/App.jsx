@@ -22,6 +22,9 @@ import {
 
 import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
 import IMG_LOGO from './assets/navy-horizontal@4x.png';
+import IMG_NECKTIE from './assets/necktie.jpg';
+import IMG_BOWTIE from './assets/bowtie.jpg';
+
 
 // --- Data ---
 const EVENTS_DATA = [
@@ -191,7 +194,24 @@ const ALBUMS_DATA = [
       "The Tombs and 1789 Management"
     ],
     tracks: [
-      { title: "We Meet" }
+      { title: "We Meet" },
+      { title: "Eight Days a Week" },
+      { title: "Soul to Soul" },
+      { title: "In the Still of the Night" },
+      { title: "Just a Gigolo" },
+      { title: "Something Tells Me" },
+      { title: "Glory of Love" },
+      { title: "Cartoon Theme Medley: Duck Tales / Fraggle Rock / Chip ’n’ Dale Rescure Rangers / Inspector Gadget / Gummi Bears" },
+      { title: "Maggie" },
+      { title: "King of Spain" },
+      { title: "Come Go with Me" },
+      { title: "Bright Morning Stars" },
+      { title: "Runaway" },
+      { title: "Change the World" },
+      { title: "Up the Ladder" },
+      { title: "King of Wishful Thinking" },
+      { title: "Georgetown University Fight Song" },
+      { title: "My Comrades" }
     ]
   },
   { 
@@ -263,7 +283,7 @@ const ALBUMS_DATA = [
     link: "https://thechimes.lnk.to/let-the-good-chimes-rollAA",
     linerNotes: [
       {
-        author: "Album Notes",
+        
         text: "This album marks two important milestones for the Georgetown Chimes: our 21st official recording and 50 years at the Hilltop. Over this half century the Chimes have become a fixture on the Georgetown campus; Chimes Nights at the Tombs, and Cherry Tree Massacre, have, for many become unique parts of the Georgetown experience. From its barbershop roots the group has expanded over the years into ’50s and ’60s standards, old English and Irish traditionals, jazz, and most recently, pop. It is often taken as a point of pride that every Chime can sing the “old” songs that pre-date him, some of which come from the group’s founding in 1946. As a result, the repertory of the group does not so much change and revolve as it does grow and evolve in new directions. Today the active repertory consists of well over 200 songs, all still sung in the closest of harmony and by the closest of friends. It is in this context that we hope this album will be a commemoration—a tribute to our past—as well as a celebration of and statement about our future."
       }
     ],
@@ -756,7 +776,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
             {/* Liner Notes Section */}
             {selectedAlbum?.linerNotes && (
                 <div className="mb-32">
-                    <span className="text-[10px] font-bold tracking-[0.2em] text-[#BBBCBC] mb-16 block border-b border-[#041E42]/20 pb-4 uppercase">Editorial</span>
+                    <span className="text-[10px] font-bold tracking-[0.2em] text-[#BBBCBC] mb-16 block border-b border-[#041E42]/20 pb-4 uppercase">Album Notes</span>
                     <div className="space-y-24">
                         {selectedAlbum.linerNotes.map((note, idx) => (
                             <div key={idx} className="pl-4 md:pl-12 border-l border-[#041E42]/10">
@@ -832,13 +852,17 @@ const StoreView = () => (
             {/* Necktie Product */}
             <div className="group cursor-pointer">
                <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center text-[#BBBCBC] font-serif italic text-3xl opacity-50">Necktie</div>
-                  <div className="absolute inset-0 bg-[#041E42] opacity-0 group-hover:opacity-5 transition-opacity duration-700"></div>
+                  <img 
+                    src={IMG_NECKTIE} 
+                    alt="The Silk Necktie"
+                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[#041E42] opacity-0 group-hover:opacity-10 transition-opacity duration-700"></div>
                </div>
                <div className="flex flex-col items-center text-center">
                   <h4 className="text-3xl font-serif text-[#041E42] mb-2">The Silk Necktie</h4>
                   <p className="text-xs text-[#63666A] mb-6 font-bold tracking-widest uppercase">Handmade in the UK</p>
-                  <span className="text-sm font-serif italic text-[#041E42] mb-6">£45.00</span>
+                  <span className="text-sm font-serif italic text-[#041E42] mb-6">$75.00</span>
                   <a 
                      href="https://buy.stripe.com/14k6si2EpcWQemQ3co"
                      target="_blank"
@@ -853,13 +877,16 @@ const StoreView = () => (
              {/* Bow Tie Product */}
              <div className="group cursor-pointer">
                <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
-                  <div className="absolute inset-0 flex items-center justify-center text-[#BBBCBC] font-serif italic text-3xl opacity-50">Bow Tie</div>
-                   <div className="absolute inset-0 bg-[#041E42] opacity-0 group-hover:opacity-5 transition-opacity duration-700"></div>
+		  <img 
+                    src={IMG_BOWTIE} 
+                    alt="The Silk Necktie"
+                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                  />
                </div>
                <div className="flex flex-col items-center text-center">
                   <h4 className="text-3xl font-serif text-[#041E42] mb-2">The Silk Bow Tie</h4>
                   <p className="text-xs text-[#63666A] mb-6 font-bold tracking-widest uppercase">Handmade in the UK</p>
-                  <span className="text-sm font-serif italic text-[#041E42] mb-6">£45.00</span>
+                  <span className="text-sm font-serif italic text-[#041E42] mb-6">$75.00</span>
                   <a 
                      href="https://buy.stripe.com/eVacQGceZ2icceI28l"
                      target="_blank"
