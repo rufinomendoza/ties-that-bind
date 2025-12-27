@@ -1169,7 +1169,7 @@ export default function App() {
       {/* Footer - Minimalist */}
       <footer className="bg-[#F4F4F3] text-[#041E42] border-t border-[#041E42]/10 py-32 px-8 md:px-16">
         <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
-          <div className="md:col-span-4 flex flex-col justify-between">
+          <div className="md:col-span-4 flex flex-col justify-between items-start">
             <img 
               src={IMG_LOGO} 
               alt="Chimes Wordmark" 
