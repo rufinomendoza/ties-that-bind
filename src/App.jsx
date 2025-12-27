@@ -43,7 +43,7 @@ import IMG_LOGO from './assets/logo.png';
 import IMG_LOGO_WHITE from './assets/logo-white.png';
 import IMG_NECKTIE from './assets/necktie.jpg';
 import IMG_BOWTIE from './assets/bowtie.jpg';
-import IMG_DCDM from './assets/dcdm.jpg';
+import IMG_DCDM from './assets/DCDM.jpg';
 import IMG_PARTNERS from './assets/partners.jpg';
 import IMG_THREE_STRIPES from './assets/three-stripes.jpg';
 import IMG_PROSPECT from './assets/36th-prospect.jpg';
