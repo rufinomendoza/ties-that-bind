@@ -37,30 +37,6 @@ import IMG_CHIMES_66 from './assets/chimes-66.jpg';
 import IMG_1959 from './assets/1959.jpg';
 import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
 
-// --- Fallback Assets for Preview ---
-/* const IMG_CHERRY_TREE = "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2600&auto=format&fit=crop"; 
-const IMG_LOGO = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' fill='none'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='40' fill='%23041E42'%3ETHE CHIMES%3C/text%3E%3C/svg%3E`;
-const IMG_LOGO_WHITE = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' fill='none'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='40' fill='%23F4F4F3'%3ETHE CHIMES%3C/text%3E%3C/svg%3E`;
-
-const IMG_NECKTIE = "https://images.unsplash.com/photo-1598522646279-d47783994a37?q=80&w=800&auto=format&fit=crop";
-const IMG_BOWTIE = "https://images.unsplash.com/photo-1596704017254-802521974345?q=80&w=800&auto=format&fit=crop";
-
-// Setting these to null allows the component to fallback to CSS background colors
-const IMG_DCDM = null;
-const IMG_PARTNERS = null;
-const IMG_THREE_STRIPES = null;
-const IMG_PROSPECT = null;
-const IMG_BATTLE_GEAR = null;
-const IMG_PSRC = null;
-const IMG_LTGCR = null;
-const IMG_HOYA_SAXA = null;
-const IMG_CHIMES_75 = null;
-const IMG_CHIMES_66 = null;
-const IMG_1959 = null;
-const IMG_UNDER_THE_TREE = null;
-*/
-
-
 // --- Data ---
 const EVENTS_DATA = [
   { 
@@ -108,6 +84,7 @@ const ALBUMS_DATA = [
     image: IMG_DCDM,
     badge: "PRE-ORDER",
     link: "https://bio.to/ChimesAA",
+    ctaText: "Vinyl Early Access",
     description: "Limited First Pressing Arriving 2026. Join the waitlist for priority access.",
     highlights: ["Vinyl Early Access", "Mastered at Abbey Road Studios"],
     leadSingle: { 
@@ -153,7 +130,7 @@ const ALBUMS_DATA = [
     image: IMG_PARTNERS,
     link: "https://thechimes.lnk.to/partners-in-chimeAA",
     tracks: [
-      { title: "We Meet (Live)" },
+      { title: "We Meet (Live)" }, // , link: "https://georgetownchimes.org" to pass custom links
       { title: "Little Bitty Pretty One", soloist: "Matthew Demartini" },
       { title: "Friends for Now", soloist: "Peter Fanone" },
       { title: "Wayfaring Stanger", soloist: "Jaewoo Kim" },
@@ -898,7 +875,7 @@ const CherryTreeMassacreView = ({ navigateTo }) => (
           {/* Scrollable Content */}
           <div className="lg:w-2/3 pt-4">
             <span className="text-xs font-bold tracking-[0.2em] text-[#D50032] uppercase mb-6 block">The 80th Annual</span>
-            <h1 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-none -ml-1">The Cherry Tree Massacre</h1>
+            <h1 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-none -ml-1">{event.title}</h1>
             
             <div className="text-xl font-normal text-[#63666A] mb-16 leading-relaxed max-w-2xl border-l border-[#D50032] pl-8 space-y-8">
                 <p>
@@ -1100,7 +1077,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
                         onClick={() => window.open(selectedAlbum.link, '_blank')}
                         className="w-full py-5 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors flex items-center justify-center gap-4 mb-8"
                     >
-                        <Play size={10} fill="currentColor" /> Listen
+                        <Play size={10} fill="currentColor" /> {selectedAlbum.ctaText || "Listen"}
                     </button>
                 )}
                 
@@ -1144,7 +1121,13 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
             <div className="flex flex-col mb-32">
               <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">Tracklist</span>
               {selectedAlbum?.tracks.map((track, idx) => (
-                <div key={idx} className="group flex items-center justify-between py-6 border-b border-[#041E42]/5 hover:bg-[#E5E5E4]/30 px-6 -mx-6 transition-colors cursor-default text-[#041E42]">
+                <a 
+                  key={idx} 
+                  href={track.link || selectedAlbum?.link}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group flex items-center justify-between py-6 border-b border-[#041E42]/5 hover:bg-[#E5E5E4]/30 px-6 -mx-6 transition-colors cursor-pointer text-[#041E42] block"
+                >
                   <div className="flex items-baseline gap-12 w-full">
                     <span className="text-xs font-bold text-[#595959] w-8">{String(idx + 1).padStart(2, '0')}</span>
                     <div className="flex flex-col md:flex-row md:items-baseline md:justify-between w-full">
@@ -1163,7 +1146,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
                         </div>
                     </div>
                   </div>
-                </div>
+                </a>
               ))}
             </div>
 
