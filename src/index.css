@@ -1,5 +1,4 @@
 @import "tailwindcss";
-    *(Note: Since you are using Tailwind v4 per your package.json, `@import "tailwindcss";` is the correct syntax. If you were on v3, you would use `@tailwind base; @tailwind components; @tailwind utilities;`)*.
 
 /* src/index.css - Global Page Resets */
 
@@ -10,8 +9,8 @@
 
   /* Force light mode base to match the "Paper" theme */
   color-scheme: light;
-  color: #1A1A1A;
-  background-color: #F5F5F0;
+  color: #041E42; /* Navy base */
+  background-color: #F4F4F3; /* Paper base */
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -23,11 +22,11 @@
 body {
   margin: 0;
   padding: 0;
-  display: block; /* CRITICAL: Was 'flex' in default template, must be block */
+  display: block; 
   min-width: 320px;
   min-height: 100vh;
-  background-color: #F5F5F0;
-  overflow-x: hidden; /* Prevent horizontal scroll from full-width images */
+  background-color: #F4F4F3;
+  overflow-x: hidden;
 }
 
 /* Ensure React root takes full height */
@@ -37,16 +36,16 @@ body {
   isolation: isolate;
 }
 
-/* Global scrollbar styling for a cleaner look */
+/* Global scrollbar styling - minimal and thin */
 ::-webkit-scrollbar {
-  width: 8px;
+  width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #F5F5F0;
+  background: #F4F4F3;
 }
 ::-webkit-scrollbar-thumb {
-  background: #D1D1D1;
-  border-radius: 4px;
+  background: #BBBCBC;
+  border-radius: 0px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: #041E42;
