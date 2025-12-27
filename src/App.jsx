@@ -17,7 +17,7 @@ import {
 // --- Assets & Placeholders ---
 // Mapped to ensure rendering in preview. In local dev, revert these to imports.
 import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
-import IMG_CHERRY_LOGO from './assets/navy-horizontal@4x.png';
+import IMG_LOGO from './assets/navy-horizontal@4x.png';
 
 // --- Data ---
 const EVENTS_DATA = [
