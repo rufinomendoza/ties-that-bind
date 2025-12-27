@@ -16,62 +16,173 @@ import {
 } from 'lucide-react';
 
 // --- Assets Configuration ---
-// NOTE: To use your local uploaded assets, uncomment the import lines below 
-// and comment out the Fallback Assets block.
+// NOTE: The local imports are commented out to ensure the preview runs without build errors.
+// When running this code locally with your assets folder, uncomment the "Local Imports" block
+// and comment out the "Preview Placeholders" block.
 
-import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
-import IMG_LOGO from './assets/logo.png';
-import IMG_LOGO_WHITE from './assets/logo-white.png';
-import IMG_NECKTIE from './assets/necktie.jpg';
-import IMG_BOWTIE from './assets/bowtie.jpg';
-import IMG_DCDM from './assets/DCDM.jpg';
-import IMG_PARTNERS from './assets/partners.jpg';
-import IMG_THREE_STRIPES from './assets/three-stripes.jpg';
-import IMG_PROSPECT from './assets/36th-prospect.jpg';
-import IMG_BATTLE_GEAR from './assets/battle-gear.jpg';
-import IMG_PSRC from './assets/psrc.jpg';
-import IMG_LTGCR from './assets/ltgcr.jpg';
-import IMG_HOYA_SAXA from './assets/hoya-saxa.jpg';
-import IMG_CHIMES_75 from './assets/chimes-75.jpg';
-import IMG_CHIMES_66 from './assets/chimes-66.jpg';
-import IMG_1959 from './assets/1959.jpg';
-import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
+// --- Local Imports (Uncomment for Production) ---
+// import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
+// import IMG_LOGO from './assets/logo.png';
+// import IMG_LOGO_WHITE from './assets/logo-white.png';
+// import IMG_NECKTIE from './assets/necktie.jpg';
+// import IMG_BOWTIE from './assets/bowtie.jpg';
+// import IMG_DCDM from './assets/DCDM.jpg';
+// import IMG_PARTNERS from './assets/partners.jpg';
+// import IMG_THREE_STRIPES from './assets/three-stripes.jpg';
+// import IMG_PROSPECT from './assets/36th-prospect.jpg';
+// import IMG_BATTLE_GEAR from './assets/battle-gear.jpg';
+// import IMG_PSRC from './assets/psrc.jpg';
+// import IMG_LTGCR from './assets/ltgcr.jpg';
+// import IMG_HOYA_SAXA from './assets/hoya-saxa.jpg';
+// import IMG_CHIMES_75 from './assets/chimes-75.jpg';
+// import IMG_CHIMES_66 from './assets/chimes-66.jpg';
+// import IMG_1959 from './assets/1959.jpg';
+// import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
+
+
+// --- Preview Placeholders (Comment out for Production) ---
+const IMG_CHERRY_TREE = "https://placehold.co/800x1000/041E42/F4F4F3?text=Cherry+Tree+Massacre";
+const IMG_LOGO = "https://placehold.co/300x100/F4F4F3/041E42?text=CHIMES+LOGO";
+const IMG_LOGO_WHITE = "https://placehold.co/300x100/041E42/F4F4F3?text=CHIMES+LOGO";
+const IMG_NECKTIE = "https://placehold.co/600x800/E5E5E4/041E42?text=Necktie";
+const IMG_BOWTIE = "https://placehold.co/600x800/E5E5E4/041E42?text=Bowtie";
+const IMG_DCDM = "https://placehold.co/600x600/2A3B55/FFFFFF?text=DCDM";
+const IMG_PARTNERS = "https://placehold.co/600x600/4A5B75/FFFFFF?text=Partners";
+const IMG_THREE_STRIPES = "https://placehold.co/600x600/6A7B95/FFFFFF?text=Three+Stripes";
+const IMG_PROSPECT = "https://placehold.co/600x600/8A9BB5/FFFFFF?text=36th+%26+Prospect";
+const IMG_BATTLE_GEAR = "https://placehold.co/600x600/9AABCA/FFFFFF?text=Battle+Gear";
+const IMG_PSRC = "https://placehold.co/600x600/B0BCCF/FFFFFF?text=PSRC";
+const IMG_LTGCR = "https://placehold.co/600x600/C4CDDC/FFFFFF?text=LTGCR";
+const IMG_HOYA_SAXA = "https://placehold.co/600x600/D8DDE6/FFFFFF?text=Hoya+Saxa";
+const IMG_CHIMES_75 = "https://placehold.co/600x600/2A3B55/FFFFFF?text=Chimes+75";
+const IMG_CHIMES_66 = "https://placehold.co/600x600/4A5B75/FFFFFF?text=Chimes+66";
+const IMG_1959 = "https://placehold.co/600x600/6A7B95/FFFFFF?text=1959";
+const IMG_UNDER_THE_TREE = "https://placehold.co/600x600/8A9BB5/FFFFFF?text=Under+The+Tree";
+
 
 // --- Data ---
 const EVENTS_DATA = [
   { 
     id: 1, 
-    title: "The Cherry Tree Massacre", 
-    date: "FEB 6 2026", 
+    title: "Cherry Tree Massacre", 
+    date: "FEB 6, 2026", 
     time: "7:00 PM",
     location: "GASTON HALL", 
-    type: "CONCERT",
+    type: "Senior Parents & Families Weekend",
+    // eyebrow: "The 53rd Annual Cherry Tree Massacre",
+    priceInfo: "General Admission $26.04",
     link: "https://buytickets.at/chimes/1998396/r/gcaa-site",
-    description: "Senior Parents & Families Weekend, featuring performances by Georgetown groups. The longest-running a cappella tradition at Georgetown.",
+    description: [
+      "For 52 years, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. What began as a fundraiser to pay off a bar tab has evolved into a showcase of the university’s premier a cappella talent.",
+      "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Senior Parents & Families Weekend 2026."
+      ],
+    guestGroups: [
+        "The GraceNotes",
+        "The Phantoms",
+        "Superfood",
+        "The Capitol Gs",
+        "The Virginia Belles",
+        "CUA Take Note",
+        "AU Treble in Paradise"
+    ],
     image: IMG_CHERRY_TREE 
   },
   { 
     id: 2, 
-    title: "The Cherry Tree Massacre", 
-    date: "FEB 21 2026", 
+    title: "Cherry Tree Massacre", 
+    date: "FEB 21, 2026", 
     time: "7:00 PM",
     location: "GASTON HALL", 
-    type: "CONCERT",
-    internalLink: "ctm_feb21", // Use internal routing for this event
-    link: "https://buytickets.at/chimes/1998443/r/gcaa-site",
-    description: "Alumni Weekend, with Welcome Reception & Afterglow details to be announced. The longest-running a cappella tradition at Georgetown.",
+    type: "Alumni Weekend", // kept for listing, overridden by eyebrow in detail view
+    // eyebrow: "The 53rd Annual Cherry Tree Massacre",
+    priceInfo: "General Admission $26.04",
+    actions: [
+        { label: "Buy Concert Tickets", link: "https://buytickets.at/chimes/1998443/r/gcaa-site", primary: true, icon: Ticket },
+        // { label: "Register for Afterglow", link: "https://buytickets.at/chimes/1998443/r/gcaa-site", primary: false }
+    ],
+    description: [
+        "For 52 years, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. What began as a fundraiser to pay off a bar tab has evolved into a showcase of the university’s premier a cappella talent.",
+        "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Alumni Weekend 2026."
+    ],
+    guestGroups: [
+        "The Saxatones",
+        "The GraceNotes",
+        "GU Chamber Singers",
+        "GW Troubadours",
+        "UVA Sil’hooettes",
+        "UVA AcHOOstics",
+        "AU Pitches be Trippin’",
+        "CUA Redline"
+    ],
+    schedule: [
+        {
+            title: "Welcome Reception & Afterglow",
+            description: "To Be Announced",
+            // time: "5:00 PM",
+            // location: "Dahlgren Quadrangle"
+        },
+        // {
+        //     title: "The Afterglow",
+        //     description: "The tradition continues at The Tombs. Join the active group for food, drink, and song immediately following the concert.",
+        //     time: "9:30 PM",
+        //     location: "The Tombs"
+        // }
+    ],
     image: IMG_CHERRY_TREE
   },
   { 
     id: 3, 
     title: "John Carroll Weekend", 
-    date: "APR 18–21 2026", 
+    date: "APR 18–21, 2026", 
     time: "TBD",
     location: "PUERTO RICO", 
-    type: "JCAW",
-    link: "https://jcw.georgetown.edu/",
-    description: "Join us in celebrating Federico Stubbe #177. Check Slack announcements for some special Chimes accommodations and events.",
-    image: null // Will use default CSS background
+    type: "Puerto Rico",
+        actions: [
+        { label: "Chimes Survey", link: "https://www.surveymonkey.com/r/BJ93CBF", primary: true },
+        { label: "More Information", link: "https://jcw.georgetown.edu/", primary: false }
+    ],
+    link: "",
+    description: [
+        "Join us in celebrating Federico Stubbe #177.",
+        "Check Slack announcements or your email for hotel accommodation details."
+      ],
+      schedule: [
+        {
+            title: "Welcome Reception",
+            description: "A Welcome Reception on Thursday night in an 1800s colonial building in Old San Juan, the oldest city in the Western Hemisphere.",
+            time: "Thursday Night",
+            location: "Old San Juan"
+        },
+        {
+            title: "Chimes Night",
+            description: "A Chimes Night immediately afterward at Arena Medalla.",
+            time: "Thursday Night",
+            location: "Arena Medalla"
+        },
+        {
+            title: "A Day of Fun",
+            description: "A full day at Dorado Beach, with its gorgeous beaches, Robert Trent Jones golf courses, over 7 miles of trails, and full resort amenities.",
+            time: "Friday",
+            location: "Dorado Beach"
+        },
+        {
+            title: "Rum Tasting",
+            description: "An exquisite rum tasting.",
+            time: "Friday",
+            location: "TBA"
+        },
+        {
+            title: "John Carroll Awards",
+            description: "Saturday’s John Carroll Awards Gala at the Coca-Cola Music Hall in Distrito T-Mobile, followed by an incredible after-party in the plaza.",
+            time: "Saturday",
+            location: "Coca-Cola Music Hall in Distrito T-Mobile"
+        }
+
+    ],
+
+
+     image: null // Will use default CSS background
+
   },
 ];
 
@@ -139,7 +250,7 @@ const ALBUMS_DATA = [
       { title: "Telephone Line", soloist: "Peter Fanone" },
       { title: "Runaways / When We Were Young", soloist:"Peter Fanone, Jeff Kemp" },
       { title: "How Deep Is Your Love? (Live)", soloist: "Charlie Plissner"},
-      { title: "Sixteen Tons", soloist: "Michael Lucker" },
+      { title: "Sixteen Tons", soloist: "Michael Luckey" },
       { title: "Don’t Worry Baby (Live)", soloist: "Charlie Plissner" },
       { title: "Who Put the Bomp (in the Bomp, Bomp, Bomp)?", soloist: "Peter Hu" },
       { title: "It’s All Right", soloist: "Justin McCarthy" },
@@ -238,7 +349,7 @@ const ALBUMS_DATA = [
     id: 5, 
     title: "Battle Gear", 
     year: "2003", 
-    cover: "bg-[#9AABCA]",
+    cover: "bg-[#9AABCA]", 
     image: IMG_BATTLE_GEAR,
     link: "https://thechimes.lnk.to/battle-gearAA",
     credits: {
@@ -291,7 +402,7 @@ const ALBUMS_DATA = [
     id: 6, 
     title: "Parsley, Sage, Rosemary, & Chime", 
     year: "2002", 
-    cover: "bg-[#B0BCCF]",
+    cover: "bg-[#B0BCCF]", 
     image: IMG_PSRC,
     link: "https://thechimes.lnk.to/parsley-sage-rosemary-chimeAA",
     dedication: "This album is dedicated to Fr. Jim Walsh, S.J., our teacher, mentor, and true friend, celebrating his twentieth year as the Celestial Chime.",
@@ -335,7 +446,7 @@ const ALBUMS_DATA = [
     id: 7, 
     title: "Let the Good Chimes Roll", 
     year: "1997", 
-    cover: "bg-[#C4CDDC]",
+    cover: "bg-[#C4CDDC]", 
     image: IMG_LTGCR,
     link: "https://thechimes.lnk.to/let-the-good-chimes-rollAA",
     linerNotes: [
@@ -392,7 +503,7 @@ const ALBUMS_DATA = [
     id: 8, 
     title: "Hoya Saxa", 
     year: "1984", 
-    cover: "bg-[#D8DDE6]",
+    cover: "bg-[#D8DDE6]", 
     image: IMG_HOYA_SAXA,
     link: "https://thechimes.lnk.to/hoya-saxaAA",
     dedication: "This album is dedicated to three groups: our alumni Chimes, the Georgetown Hoyas, and those in France sans clue.",
@@ -503,7 +614,7 @@ const ALBUMS_DATA = [
     linerNotes: [
         {
             author: "A Chimes “Buff” (1966, Washington, D.C.)",
-            text: "For twenty years, a voice of Georgetown has brought to our community as consistent a professional quality of singing as could be found anywhere. As that voice has come down to us over the years little has changed; to hear the Chimes today is to know how they were then. This consistency, this quality is not accidental. It was part of the very design and discipline of the original group whose strength and character are the first things inherited by any would-be Chime or “neophyte.” A voice, yes, but a Chime first. It is this sense of the past—this permanency, this tradition, if you will—that has brought to Alma Mater a distinction few have been able to achieve. And so we have gathered under the “tree” today all the Chimes as we remember them, one in spirit and comradeship with each other, with their university, with all who have known and admired them. As you listen then to this recording of the ’66 Chimes, you will find something of every Chime past, which was left to others to take up, enhance and then to give off again to future generations of Chimes. For us who hold the Chimes in special affection, we see these past twenty years as only the beginning of something already complete."
+            text: "For twenty years, a voice of Georgetown has brought to our community as consistent a professional quality of singing as could be found anywhere. As that voice has come down to us over the years little has changed; to hear the Chimes today is to know how they were then. This consistency, this quality is not accidental. It was part of the very design and discipline of the original group whose strength and character are the first things inherited by any would-be Chime or “neophyte.” A voice, yes, but a Chime first. It is this sense of the past—this permanency, this tradition, if you will—that has brought to Alma Mater a distinction few have been able to achieve. And to think that Frank Jones planned the whole thing, right from the outset!"
         }
     ],
     credits: {
@@ -670,7 +781,7 @@ const SectionHeader = ({ title, number }) => (
   </div>
 );
 
-const HomeView = ({ navigateTo, openAlbumById }) => (
+const HomeView = ({ navigateTo, openAlbumById, openEvent }) => (
     <>
       {/* Hero */}
       <div 
@@ -684,10 +795,10 @@ const HomeView = ({ navigateTo, openAlbumById }) => (
            {/* Architectural Title Stack */}
           <div className="text-center space-y-4 md:space-y-0 mb-12">
             <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#F4F4F3] block">
-              TRADITION
+              FELLOWSHIP
             </h1>
             <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#F4F4F3] block italic opacity-60">
-              RESONANCE
+              HARMONY
             </h1>
             <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#F4F4F3] block">
               LEGACY
@@ -703,7 +814,7 @@ const HomeView = ({ navigateTo, openAlbumById }) => (
                 Stream "And So It Goes"
              </button>
              <button 
-                onClick={() => navigateTo('ctm_feb21')}
+                onClick={() => openEvent(EVENTS_DATA[1])}
                 className="px-12 py-4 border border-[#F4F4F3] text-[#F4F4F3] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#F4F4F3] hover:text-[#041E42] transition-colors"
              >
                 Book Cherry Tree Tickets
@@ -727,8 +838,8 @@ const HomeView = ({ navigateTo, openAlbumById }) => (
         <div className="md:w-1/2 p-12 md:p-24 flex flex-col justify-center bg-[#F4F4F3] fade-in-element">
             <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-8 block uppercase">Upcoming Gathering</span>
             <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-none">The Cherry Tree Massacre</h3>
-            <p className="text-[#63666A] mb-12 max-w-md text-lg font-normal leading-relaxed">
-                Experience the 80th annual celebration of song at Gaston Hall. A timeless gathering of harmony, history, and brotherhood.
+            <p className="text-[#63666A] mb-12 max-w-prose text-lg font-normal leading-normal text-left hyphens-auto">
+                In 1974, we sang for solvency. In 2026, we sing for the legacy. Most traditions fade. This one just gets louder. Two nights. One historic setlist.
             </p>
             <button onClick={() => navigateTo('agenda')} className="w-fit pb-2 border-b border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:text-[#D50032] hover:border-[#D50032] transition-colors">
                 View Full Agenda
@@ -784,159 +895,115 @@ const EventDetailView = ({ event, navigateTo }) => {
                   <span className="text-2xl font-serif text-[#041E42]">{event.location}</span>
                 </div>
 
-                {event.link && (
-                    <a
-                        href={event.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="w-full py-5 bg-[#041E42] text-[#F4F4F3] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#D50032] transition-colors flex items-center justify-center gap-4 mb-4"
-                    >
-                        <Ticket size={14} /> {event.type === 'CONCERT' ? 'Buy Tickets' : 'Event Info'}
-                    </a>
+                {/* Actions: Render multiple if present, else single link */}
+                {event.actions ? (
+                   <div className="space-y-4">
+                      {event.actions.map((action, idx) => (
+                         <a 
+                             key={idx}
+                             href={action.link}
+                             target="_blank" 
+                             rel="noreferrer"
+                             className={`w-full py-5 text-xs font-bold tracking-[0.25em] uppercase transition-colors flex items-center justify-center gap-4 ${
+                               action.primary 
+                                 ? "bg-[#041E42] text-[#F4F4F3] hover:bg-[#D50032]" 
+                                 : "border border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-[#F4F4F3]"
+                             }`}
+                          >
+                             {action.icon && <action.icon size={14} />} {action.label}
+                          </a>
+                      ))}
+                   </div>
+                ) : (
+                   event.link && (
+                      <a
+                          href={event.link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="w-full py-5 bg-[#041E42] text-[#F4F4F3] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#D50032] transition-colors flex items-center justify-center gap-4 mb-4"
+                      >
+                          <Ticket size={14} /> {event.type === 'CONCERT' ? 'Buy Tickets' : 'Event Info'}
+                      </a>
+                   )
+                )}
+
+                {event.priceInfo && (
+                   <p className="text-center text-xs text-[#63666A] uppercase tracking-widest font-bold mt-4">
+                      {event.priceInfo}
+                   </p>
                 )}
              </div>
           </div>
 
           {/* Scrollable Content */}
           <div className="lg:w-2/3 pt-4">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#D50032] uppercase mb-6 block">{event.type}</span>
+            <span className="text-xs font-bold tracking-[0.2em] text-[#D50032] uppercase mb-6 block">
+              {event.eyebrow || event.type}
+            </span>
             <h1 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-none -ml-1">{event.title}</h1>
 
-            <div className="text-xl font-normal text-[#63666A] mb-16 leading-relaxed max-w-2xl border-l border-[#D50032] pl-8 space-y-8">
-                <p>{event.description}</p>
+            <div className="text-xl font-normal text-[#63666A] mb-16 leading-normal max-w-prose border-l border-[#D50032] pl-8 space-y-8 text-left hyphens-auto">
+                {Array.isArray(event.description) ? (
+                   event.description.map((para, i) => <p key={i}>{para}</p>)
+                ) : (
+                   <p>{event.description}</p>
+                )}
             </div>
+
+            {/* Guest Groups Section */}
+            {event.guestGroups && (
+                <div className="mb-32">
+                    <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">Guest Groups</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        {event.guestGroups.map((group, idx) => (
+                           <div key={idx} className="p-8 border border-[#041E42]/10 bg-white">
+                               <span className="text-xs font-bold text-[#595959] uppercase tracking-widest mb-2 block">Featured Guest</span>
+                               <h4 className="text-2xl font-serif text-[#041E42]">{group}</h4>
+                           </div>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            {/* Schedule / Sub-Events Section */}
+            {event.schedule && (
+              <div className="mb-32 fade-in-element">
+                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">
+                  Alumni Events
+                </span>
+                <div className="space-y-12">
+                  {event.schedule.map((item, idx) => (
+                    <div key={idx} className="bg-white p-8 shadow-sm rounded-sm">
+                      <h4 className="text-3xl font-serif text-[#041E42] mb-4">{item.title}</h4>
+                      <p className="text-[#63666A] text-lg leading-relaxed mb-6 max-w-prose text-left hyphens-auto">
+                        {item.description}
+                      </p>
+                      
+                      {/* Updated Section: Conditional Logic for Schedule Items */}
+                      <div className="flex gap-8 text-xs font-bold tracking-widest uppercase text-[#595959]">
+                        {item.time && (
+                          <span className="flex items-center gap-2">
+                            <Clock size={12} /> {item.time}
+                          </span>
+                        )}
+                        {item.location && (
+                          <span className="flex items-center gap-2">
+                            <MapPin size={12} /> {item.location}
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
           </div>
         </div>
       </div>
     </div>
     );
 };
-
-const CherryTreeMassacreView = ({ navigateTo }) => (
-    <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
-      <div className="max-w-[1920px] mx-auto">
-        <button 
-          onClick={() => navigateTo('agenda')}
-          className="mb-16 text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-3 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element"
-        >
-          <ChevronLeft size={12} /> Return to Agenda
-        </button>
-
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-24 fade-in-element">
-          {/* Sticky Sidebar Area */}
-          <div className="lg:w-1/3">
-             <div className="sticky top-48">
-                <div className="aspect-[4/5] w-full bg-[#E5E5E4] mb-12 relative overflow-hidden">
-                    <img 
-                        src={IMG_CHERRY_TREE}
-                        alt="Gaston Hall" 
-                        className="w-full h-full object-cover grayscale"
-                    />
-                    <div className="absolute inset-0 bg-[#041E42]/20"></div>
-                </div>
-                
-                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-8">
-                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Date</span>
-                  <span className="text-2xl font-serif text-[#041E42]">Feb 21, 2026</span>
-                </div>
-
-                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-8">
-                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Time</span>
-                  <span className="text-2xl font-serif text-[#041E42]">7:00 PM</span>
-                </div>
-
-                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-12">
-                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Venue</span>
-                  <span className="text-2xl font-serif text-[#041E42]">Gaston Hall</span>
-                </div>
-                
-                <div className="space-y-4">
-                    <a 
-                        href="https://buytickets.at/chimes/1998443/r/gcaa-site" 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="w-full py-5 bg-[#041E42] text-[#F4F4F3] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#D50032] transition-colors flex items-center justify-center gap-4"
-                    >
-                        <Ticket size={14} /> Buy Concert Tickets
-                    </a>
-                    <a 
-                        href="https://buytickets.at/chimes/1998443/r/gcaa-site" 
-                        target="_blank" 
-                        rel="noreferrer"
-                        className="w-full py-5 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors flex items-center justify-center gap-4"
-                    >
-                        Register for Afterglow
-                    </a>
-                </div>
-                <p className="text-center text-xs text-[#63666A] uppercase tracking-widest font-bold mt-4">General Admission $30</p>
-             </div>
-          </div>
-
-          {/* Scrollable Content */}
-          <div className="lg:w-2/3 pt-4">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#D50032] uppercase mb-6 block">The 80th Annual</span>
-            <h1 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-none -ml-1">{event.title}</h1>
-            
-            <div className="text-xl font-normal text-[#63666A] mb-16 leading-relaxed max-w-2xl border-l border-[#D50032] pl-8 space-y-8">
-                <p>
-                    For eight decades, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. 
-                    What began as a barbershop gathering has evolved into a showcase of the university's premier a cappella talent.
-                </p>
-                <p>
-                    Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration 
-                    during Alumni Weekend 2026.
-                </p>
-            </div>
-
-            <div className="mb-32">
-                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">Guest Groups</span>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="p-8 border border-[#041E42]/10 bg-white">
-                        <span className="text-xs font-bold text-[#595959] uppercase tracking-widest mb-2 block">Featured Guest</span>
-                        <h4 className="text-2xl font-serif text-[#041E42]">The Georgetown Phantoms</h4>
-                    </div>
-                    <div className="p-8 border border-[#041E42]/10 bg-white">
-                        <span className="text-xs font-bold text-[#595959] uppercase tracking-widest mb-2 block">Featured Guest</span>
-                        <h4 className="text-2xl font-serif text-[#041E42]">The Georgetown GraceNotes</h4>
-                    </div>
-                     <div className="p-8 border border-[#041E42]/10 bg-white">
-                        <span className="text-xs font-bold text-[#595959] uppercase tracking-widest mb-2 block">Featured Guest</span>
-                        <h4 className="text-2xl font-serif text-[#041E42]">Superfood</h4>
-                    </div>
-                </div>
-            </div>
-
-            <div className="mb-32">
-                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">Alumni Events</span>
-                <div className="space-y-12">
-                    <div>
-                        <h4 className="text-3xl font-serif text-[#041E42] mb-4">Welcome Reception</h4>
-                        <p className="text-[#63666A] text-lg leading-relaxed mb-4">
-                            Pre-concert gathering for alumni and families. Light refreshments will be served.
-                        </p>
-                        <div className="flex gap-8 text-xs font-bold tracking-widest uppercase text-[#595959]">
-                            <span className="flex items-center gap-2"><Clock size={12}/> 5:00 PM</span>
-                            <span className="flex items-center gap-2"><MapPin size={12}/> Dahlgren Quadrangle</span>
-                        </div>
-                    </div>
-                    <div>
-                        <h4 className="text-3xl font-serif text-[#041E42] mb-4">The Afterglow</h4>
-                        <p className="text-[#63666A] text-lg leading-relaxed mb-4">
-                            The tradition continues at The Tombs. Join the active group for food, drink, and song immediately following the concert.
-                        </p>
-                        <div className="flex gap-8 text-xs font-bold tracking-widest uppercase text-[#595959]">
-                            <span className="flex items-center gap-2"><Clock size={12}/> 9:30 PM</span>
-                            <span className="flex items-center gap-2"><MapPin size={12}/> The Tombs</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    </div>
-);
 
 const AgendaView = ({ navigateTo, openEvent }) => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
@@ -951,7 +1018,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
               onClick={() => openEvent(event)}
             >
               <div className="md:col-span-3 flex flex-col">
-                 <span className="text-5xl font-serif text-[#041E42] mb-2">{event.date.split(' ')[1]}</span>
+                 <span className="text-5xl font-serif text-[#041E42] mb-2">{event.date.split(' ')[1].replace(',', '')}</span>
                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">{event.date.split(' ')[0]} {event.date.split(' ')[2]}</span>
               </div>
               
@@ -961,7 +1028,9 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                     {event.title}
                 </h3>
                 
-                <p className="text-[#63666A] font-normal max-w-md leading-relaxed">{event.description}</p>
+                <p className="text-[#63666A] font-normal max-w-md leading-normal text-left hyphens-auto">
+                   {Array.isArray(event.description) ? event.description[0] : event.description}
+                </p>
               </div>
 
               <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8">
@@ -984,7 +1053,8 @@ const AgendaView = ({ navigateTo, openEvent }) => (
     </div>
 );
 
-const DiscographyView = ({ openAlbum }) => (
+// Updated: Added navigateTo prop
+const DiscographyView = ({ openAlbum, navigateTo }) => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Discography" number="ARCHIVE" />
@@ -1031,12 +1101,27 @@ const DiscographyView = ({ openAlbum }) => (
         {/* Informational Footer */}
         <div className="border-t border-[#041E42]/10 pt-24 flex flex-col items-center text-center fade-in-element">
             <h3 className="text-4xl font-serif text-[#041E42] mb-6">Incomplete Archives</h3>
-            <p className="text-[#63666A] text-lg font-normal leading-relaxed max-w-3xl mb-8">
+            <p className="text-[#63666A] text-lg font-normal leading-normal max-w-prose mb-8 text-left hyphens-auto">
                 The digitization of the Chimes catalogue is an ongoing preservation project. We are restoring master tapes for future high-fidelity release.
             </p>
-            <a href="https://thechimes.notion.site" target="_blank" rel="noreferrer" className="text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032] transition-colors">
-                Access Preliminary Archives
-            </a>
+            
+            {/* Links container with standard gap for spacing */}
+            <div className="flex flex-col items-center gap-6">
+                <a 
+                    href="https://thechimes.notion.site" 
+                    target="_blank" 
+                    rel="noreferrer" 
+                    className="text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032] transition-colors"
+                >
+                    Access Preliminary Archives
+                </a>
+                <button 
+                    onClick={() => navigateTo && navigateTo('philanthropy')} 
+                    className="text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032] transition-colors"
+                >
+                    Support Digitization
+                </button>
+            </div>
         </div>
       </div>
     </div>
@@ -1082,10 +1167,10 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
                 )}
                 
                 {selectedAlbum?.dedication && (
-                     <div className="mt-8">
-                        <p className="text-xs text-[#595959] uppercase tracking-[0.2em] font-bold mb-4">Dedication</p>
-                        <p className="text-sm font-serif italic text-[#63666A] leading-relaxed">{selectedAlbum.dedication}</p>
-                     </div>
+                      <div className="mt-8">
+                         <p className="text-xs text-[#595959] uppercase tracking-[0.2em] font-bold mb-4">Dedication</p>
+                         <p className="text-sm font-serif italic text-[#63666A] leading-relaxed">{selectedAlbum.dedication}</p>
+                      </div>
                 )}
              </div>
           </div>
@@ -1095,7 +1180,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
             <h1 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-none -ml-1">{selectedAlbum?.title}</h1>
             
             {selectedAlbum?.description && (
-                <p className="text-xl font-normal text-[#63666A] mb-16 leading-relaxed max-w-2xl border-l border-[#D50032] pl-8">
+                <p className="text-xl font-normal text-[#63666A] mb-16 leading-normal max-w-prose border-l border-[#D50032] pl-8 text-left hyphens-auto">
                     {selectedAlbum.description}
                 </p>
             )}
@@ -1158,7 +1243,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
                         {selectedAlbum.linerNotes.map((note, idx) => (
                             <div key={idx} className="pl-4 md:pl-12 border-l border-[#041E42]/10">
                                 {note.author && <h4 className="font-serif text-3xl mb-6 italic text-[#041E42]">{note.author}</h4>}
-                                <p className="text-[#63666A] leading-loose font-normal text-lg text-justify">
+                                <p className="text-[#63666A] leading-loose font-normal text-lg text-left hyphens-auto max-w-prose">
                                     {note.text}
                                 </p>
                             </div>
@@ -1217,7 +1302,7 @@ const StoreView = () => (
           <div className="lg:w-1/3 pt-12">
              <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase block mb-8">Uniform & Regalia</span>
              <h3 className="text-5xl font-serif mb-12 italic text-[#041E42] leading-tight">C’est une cravate.<br/>C’est un nœud papillon.</h3>
-             <div className="text-[#63666A] text-lg leading-relaxed font-normal space-y-8 text-justify">
+             <div className="text-[#63666A] text-lg leading-relaxed font-normal space-y-8 text-left hyphens-auto">
                 <p>Since the Actives are in need of new ties, Nikolai has worked with Drew to produce 50 neckties and 20 bow ties. This allows us to not only fill Active tie needs for the foreseeable future, but also permanently stock ties for any Chime who needs one.</p>
                 <p>Therefore, if you’ve lost your tie and need a replacement—or, let’s be honest, a refreshment—you can purchase one below.</p>
              </div>
@@ -1255,10 +1340,10 @@ const StoreView = () => (
              <div className="group cursor-pointer">
                <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
       <img 
-                    src={IMG_BOWTIE} 
-                    alt="The Silk Necktie"
-                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
-                  />
+                     src={IMG_BOWTIE} 
+                     alt="The Silk Necktie"
+                     className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                   />
                </div>
                <div className="flex flex-col items-center text-center">
                   <h4 className="text-3xl font-serif text-[#041E42] mb-2">The Silk Bow Tie</h4>
@@ -1298,12 +1383,12 @@ const BackstageView = () => (
                     Our central repository for historical data, part tapes, and archival recordings. 
                 </p>
                 <div className="flex flex-col gap-6">
-                     <a href="https://thechimes.notion.site" target="_blank" rel="noreferrer" className="w-full text-center py-5 border border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] text-[#041E42] transition-colors flex justify-center items-center gap-3">
+                      <a href="https://thechimes.notion.site" target="_blank" rel="noreferrer" className="w-full text-center py-5 border border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] text-[#041E42] transition-colors flex justify-center items-center gap-3">
                         Launch Notion <ExternalLink size={12} />
-                     </a>
-                     <a href="https://drive.google.com/uc?export=download&id=1s9YI3af7Y17OpptSKo4LRAsM15QCyOlp" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#595959]">
+                      </a>
+                      <a href="https://drive.google.com/uc?export=download&id=1s9YI3af7Y17OpptSKo4LRAsM15QCyOlp" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#595959]">
                         Download Manual <ArrowRight size={12} />
-                     </a>
+                      </a>
                 </div>
             </div>
 
@@ -1317,12 +1402,12 @@ const BackstageView = () => (
                    Instant messaging for the Active and Alumni community. Channels for coordination, hobbies, and general discourse.
                 </p>
                 <div className="flex flex-col gap-6">
-                     <a href="https://thechimes.slack.com" target="_blank" rel="noreferrer" className="w-full text-center py-5 border border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] text-[#041E42] transition-colors flex justify-center items-center gap-3">
+                      <a href="https://thechimes.slack.com" target="_blank" rel="noreferrer" className="w-full text-center py-5 border border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] text-[#041E42] transition-colors flex justify-center items-center gap-3">
                         Launch Slack <ExternalLink size={12} />
-                     </a>
-                     <a href="https://drive.google.com/uc?export=download&id=1AeangbSpDCNOv-sHq5yqaz5Djk0YmesR" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#595959]">
+                      </a>
+                      <a href="https://drive.google.com/uc?export=download&id=1AeangbSpDCNOv-sHq5yqaz5Djk0YmesR" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#595959]">
                         Download Manual <ArrowRight size={12} />
-                     </a>
+                      </a>
                 </div>
             </div>
         </div>
@@ -1347,7 +1432,7 @@ const PhilanthropyView = () => (
                 <h3 className="text-4xl md:text-5xl font-serif mb-8 leading-tight text-[#041E42]">
                     The Donor Guild is the steady heartbeat that allows the Alumni Association to operate with confidence.
                 </h3>
-                <p className="text-xl text-[#63666A] font-normal max-w-2xl leading-relaxed">
+                <p className="text-xl text-[#63666A] font-normal max-w-prose leading-relaxed text-left hyphens-auto">
                     By subscribing, you ensure the tradition is waiting for you: the tables piled high, the tankards full, and the door open.
                 </p>
             </div>
@@ -1394,7 +1479,7 @@ const PhilanthropyView = () => (
             </div>
             <div className="lg:w-2/3">
                 <h3 className="text-6xl font-serif mb-12 text-[#041E42]">Upgrade the ride.</h3>
-                <p className="text-[#63666A] text-xl leading-relaxed mb-12 font-normal max-w-2xl text-justify">
+                <p className="text-[#63666A] text-xl leading-relaxed mb-12 font-normal max-w-prose text-left hyphens-auto">
                     If the Donor Guild keeps the engine running, One-Time Gifts upgrade the ride. Your contributions allow us to hold Cadillac reunions at Chevrolet rates. They are the catalyst that brings our history alive.
                 </p>
                 <a 
@@ -1473,19 +1558,15 @@ export default function App() {
   }
 
   const openEvent = (event) => {
-      if (event.id === 2) {
-        navigateTo('ctm_feb21');
-      } else {
-        setSelectedEvent(event);
-        setActivePage('event_detail');
-        window.scrollTo(0, 0);
-      }
+    setSelectedEvent(event);
+    setActivePage('event_detail');
+    window.scrollTo(0, 0);
   }
 
   // Logic for dynamic Navbar styling
   const isHome = activePage === 'home';
   const isTransparent = isHome && !scrolled && !isMenuOpen;
-  
+   
   // Use White text/logo when transparent (on top of dark background), Navy otherwise
   const navTextColor = isTransparent ? 'text-[#F4F4F3]' : 'text-[#041E42]';
   const currentLogo = isTransparent ? IMG_LOGO_WHITE : IMG_LOGO;
@@ -1507,7 +1588,7 @@ export default function App() {
   );
 
   return (
-    <div className="font-sans text-[#041E42] bg-[#F4F4F3]">
+    <div className="font-sans text-[#041E42] bg-[#F4F4F3] selection:bg-[#D50032] selection:text-[#F4F4F3]">
       {/* Global CSS Overrides */}
       <style>{`
         :root {
@@ -1591,15 +1672,15 @@ export default function App() {
       </nav>
 
       <main className="min-h-screen">
-        {activePage === 'home' && <HomeView navigateTo={navigateTo} openAlbumById={openAlbumById} />}
+        {activePage === 'home' && <HomeView navigateTo={navigateTo} openAlbumById={openAlbumById} openEvent={openEvent} />}
         {activePage === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
-        {activePage === 'discography' && <DiscographyView openAlbum={openAlbum} />}
+        {/* Updated: Passing navigateTo to DiscographyView */}
+        {activePage === 'discography' && <DiscographyView openAlbum={openAlbum} navigateTo={navigateTo} />}
         {activePage === 'album_detail' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
         {activePage === 'event_detail' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
         {activePage === 'philanthropy' && <PhilanthropyView />}
         {activePage === 'store' && <StoreView />}
         {activePage === 'backstage' && <BackstageView />}
-        {activePage === 'ctm_feb21' && <CherryTreeMassacreView navigateTo={navigateTo} />}
       </main>
 
       {/* Footer - Minimalist */}
