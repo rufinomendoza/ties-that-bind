@@ -15,35 +15,16 @@ import {
   Ticket
 } from 'lucide-react';
 
-// --- Fallback Assets for Preview ---
-// const IMG_CHERRY_TREE = "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2600&auto=format&fit=crop"; // Concert hall vibe
-// // Simple SVG Logo Fallback
-// const IMG_LOGO = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' fill='none'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='40' fill='%23041E42'%3ETHE CHIMES%3C/text%3E%3C/svg%3E`;
-// const IMG_LOGO_WHITE = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' fill='none'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='40' fill='%23F4F4F3'%3ETHE CHIMES%3C/text%3E%3C/svg%3E`;
-
-// const IMG_NECKTIE = "https://images.unsplash.com/photo-1598522646279-d47783994a37?q=80&w=800&auto=format&fit=crop";
-// const IMG_BOWTIE = "https://images.unsplash.com/photo-1596704017254-802521974345?q=80&w=800&auto=format&fit=crop";
-
-// // Setting these to null uses the existing CSS background color fallbacks in your component
-// const IMG_DCDM = null;
-// const IMG_PARTNERS = null;
-// const IMG_THREE_STRIPES = null;
-// const IMG_PROSPECT = null;
-// const IMG_BATTLE_GEAR = null;
-// const IMG_PSRC = null;
-// const IMG_LTGCR = null;
-// const IMG_HOYA_SAXA = null;
-// const IMG_CHIMES_75 = null;
-// const IMG_CHIMES_66 = null;
-// const IMG_1959 = null;
-// const IMG_UNDER_THE_TREE = null;
+// --- Assets Configuration ---
+// NOTE: To use your local uploaded assets, uncomment the import lines below 
+// and comment out the Fallback Assets block.
 
 import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
 import IMG_LOGO from './assets/logo.png';
 import IMG_LOGO_WHITE from './assets/logo-white.png';
 import IMG_NECKTIE from './assets/necktie.jpg';
 import IMG_BOWTIE from './assets/bowtie.jpg';
-import IMG_DCDM from './assets/dcdm.jpg';
+import IMG_DCDM from './assets/DCDM.jpg';
 import IMG_PARTNERS from './assets/partners.jpg';
 import IMG_THREE_STRIPES from './assets/three-stripes.jpg';
 import IMG_PROSPECT from './assets/36th-prospect.jpg';
@@ -56,6 +37,30 @@ import IMG_CHIMES_66 from './assets/chimes-66.jpg';
 import IMG_1959 from './assets/1959.jpg';
 import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
 
+// --- Fallback Assets for Preview ---
+/* const IMG_CHERRY_TREE = "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2600&auto=format&fit=crop"; 
+const IMG_LOGO = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' fill='none'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='40' fill='%23041E42'%3ETHE CHIMES%3C/text%3E%3C/svg%3E`;
+const IMG_LOGO_WHITE = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' fill='none'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='40' fill='%23F4F4F3'%3ETHE CHIMES%3C/text%3E%3C/svg%3E`;
+
+const IMG_NECKTIE = "https://images.unsplash.com/photo-1598522646279-d47783994a37?q=80&w=800&auto=format&fit=crop";
+const IMG_BOWTIE = "https://images.unsplash.com/photo-1596704017254-802521974345?q=80&w=800&auto=format&fit=crop";
+
+// Setting these to null allows the component to fallback to CSS background colors
+const IMG_DCDM = null;
+const IMG_PARTNERS = null;
+const IMG_THREE_STRIPES = null;
+const IMG_PROSPECT = null;
+const IMG_BATTLE_GEAR = null;
+const IMG_PSRC = null;
+const IMG_LTGCR = null;
+const IMG_HOYA_SAXA = null;
+const IMG_CHIMES_75 = null;
+const IMG_CHIMES_66 = null;
+const IMG_1959 = null;
+const IMG_UNDER_THE_TREE = null;
+*/
+
+
 // --- Data ---
 const EVENTS_DATA = [
   { 
@@ -66,7 +71,8 @@ const EVENTS_DATA = [
     location: "GASTON HALL", 
     type: "CONCERT",
     link: "https://buytickets.at/chimes/1998396/r/gcaa-site",
-    description: "Senior Parents & Families Weekend, featuring performances by Georgetown groups. The longest-running a cappella tradition at Georgetown."
+    description: "Senior Parents & Families Weekend, featuring performances by Georgetown groups. The longest-running a cappella tradition at Georgetown.",
+    image: IMG_CHERRY_TREE 
   },
   { 
     id: 2, 
@@ -77,7 +83,8 @@ const EVENTS_DATA = [
     type: "CONCERT",
     internalLink: "ctm_feb21", // Use internal routing for this event
     link: "https://buytickets.at/chimes/1998443/r/gcaa-site",
-    description: "Alumni Weekend, with Welcome Reception & Afterglow details to be announced. The longest-running a cappella tradition at Georgetown."
+    description: "Alumni Weekend, with Welcome Reception & Afterglow details to be announced. The longest-running a cappella tradition at Georgetown.",
+    image: IMG_CHERRY_TREE
   },
   { 
     id: 3, 
@@ -87,7 +94,8 @@ const EVENTS_DATA = [
     location: "PUERTO RICO", 
     type: "JCAW",
     link: "https://jcw.georgetown.edu/",
-    description: "Join us in celebrating Federico Stubbe #177. Check Slack announcements for some special Chimes accommodations and events."
+    description: "Join us in celebrating Federico Stubbe #177. Check Slack announcements for some special Chimes accommodations and events.",
+    image: null // Will use default CSS background
   },
 ];
 
@@ -561,13 +569,13 @@ const DONOR_TIERS = [
 // --- Components ---
 
 const SectionHeader = ({ title, number }) => (
-  <div className="flex items-center justify-between border-b border-[#041E42]/20 pb-8 mb-24 fade-in-element">
-    <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] tracking-tight">{title}</h2>
-    <span className="text-xs font-sans font-bold tracking-[0.25em] text-[#595959] uppercase">{number}</span>
+  <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#041E42]/20 pb-8 mb-24 fade-in-element gap-4">
+    <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] tracking-tight leading-none">{title}</h2>
+    <span className="text-xs font-sans font-bold tracking-[0.25em] text-[#595959] uppercase md:mb-2">{number}</span>
   </div>
 );
 
-const HomeView = ({ navigateTo }) => (
+const HomeView = ({ navigateTo, openAlbumById }) => (
     <>
       {/* Hero */}
       <div 
@@ -593,22 +601,18 @@ const HomeView = ({ navigateTo }) => (
 
           {/* New CTAs */}
           <div className="flex flex-col md:flex-row gap-6 items-center">
-             <a 
-                href="https://thechimes.lnk.to/AndSoItGoesAA" 
-                target="_blank" 
-                rel="noreferrer"
+             <button 
+                onClick={() => openAlbumById(1)}
                 className="px-12 py-4 bg-[#F4F4F3] text-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#D50032] hover:text-[#F4F4F3] transition-colors"
              >
                 Stream "And So It Goes"
-             </a>
-             <a 
-                href="https://buytickets.at/chimes/1998396/r/gcaa-site" 
-                target="_blank" 
-                rel="noreferrer"
+             </button>
+             <button 
+                onClick={() => navigateTo('ctm_feb21')}
                 className="px-12 py-4 border border-[#F4F4F3] text-[#F4F4F3] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#F4F4F3] hover:text-[#041E42] transition-colors"
              >
                 Book Cherry Tree Tickets
-             </a>
+             </button>
           </div>
         </div>
       </div>
@@ -638,6 +642,80 @@ const HomeView = ({ navigateTo }) => (
       </section>
     </>
 );
+
+const EventDetailView = ({ event, navigateTo }) => {
+    if (!event) return null;
+    return (
+    <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
+      <div className="max-w-[1920px] mx-auto">
+        <button
+          onClick={() => navigateTo('agenda')}
+          className="mb-16 text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-3 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element"
+        >
+          <ChevronLeft size={12} /> Return to Agenda
+        </button>
+
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-24 fade-in-element">
+          {/* Sticky Sidebar Area */}
+          <div className="lg:w-1/3">
+             <div className="sticky top-48">
+                <div className="aspect-[4/5] w-full bg-[#E5E5E4] mb-12 relative overflow-hidden">
+                    {event.image ? (
+                        <img
+                            src={event.image}
+                            alt="Event"
+                            className="w-full h-full object-cover grayscale"
+                        />
+                    ) : (
+                        <div className="w-full h-full bg-[#041E42]/10 flex items-center justify-center">
+                            <img src={IMG_LOGO} className="w-1/2 opacity-20" alt="Logo" />
+                        </div>
+                    )}
+                    <div className="absolute inset-0 bg-[#041E42]/20"></div>
+                </div>
+
+                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-8">
+                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Date</span>
+                  <span className="text-2xl font-serif text-[#041E42]">{event.date}</span>
+                </div>
+
+                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-8">
+                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Time</span>
+                  <span className="text-2xl font-serif text-[#041E42]">{event.time}</span>
+                </div>
+
+                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-12">
+                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Venue</span>
+                  <span className="text-2xl font-serif text-[#041E42]">{event.location}</span>
+                </div>
+
+                {event.link && (
+                    <a
+                        href={event.link}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="w-full py-5 bg-[#041E42] text-[#F4F4F3] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#D50032] transition-colors flex items-center justify-center gap-4 mb-4"
+                    >
+                        <Ticket size={14} /> {event.type === 'CONCERT' ? 'Buy Tickets' : 'Event Info'}
+                    </a>
+                )}
+             </div>
+          </div>
+
+          {/* Scrollable Content */}
+          <div className="lg:w-2/3 pt-4">
+            <span className="text-xs font-bold tracking-[0.2em] text-[#D50032] uppercase mb-6 block">{event.type}</span>
+            <h1 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-none -ml-1">{event.title}</h1>
+
+            <div className="text-xl font-normal text-[#63666A] mb-16 leading-relaxed max-w-2xl border-l border-[#D50032] pl-8 space-y-8">
+                <p>{event.description}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    );
+};
 
 const CherryTreeMassacreView = ({ navigateTo }) => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
@@ -677,15 +755,25 @@ const CherryTreeMassacreView = ({ navigateTo }) => (
                   <span className="text-2xl font-serif text-[#041E42]">Gaston Hall</span>
                 </div>
                 
-                <a 
-                    href="https://buytickets.at/chimes/1998443/r/gcaa-site" 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="w-full py-5 bg-[#041E42] text-[#F4F4F3] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#D50032] transition-colors flex items-center justify-center gap-4 mb-4"
-                >
-                    <Ticket size={14} /> Buy Tickets
-                </a>
-                <p className="text-center text-xs text-[#63666A] uppercase tracking-widest font-bold">General Admission $30</p>
+                <div className="space-y-4">
+                    <a 
+                        href="https://buytickets.at/chimes/1998443/r/gcaa-site" 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="w-full py-5 bg-[#041E42] text-[#F4F4F3] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#D50032] transition-colors flex items-center justify-center gap-4"
+                    >
+                        <Ticket size={14} /> Buy Concert Tickets
+                    </a>
+                    <a 
+                        href="https://buytickets.at/chimes/1998443/r/gcaa-site" 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="w-full py-5 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors flex items-center justify-center gap-4"
+                    >
+                        Register for Afterglow
+                    </a>
+                </div>
+                <p className="text-center text-xs text-[#63666A] uppercase tracking-widest font-bold mt-4">General Admission $30</p>
              </div>
           </div>
 
@@ -755,7 +843,7 @@ const CherryTreeMassacreView = ({ navigateTo }) => (
     </div>
 );
 
-const AgendaView = ({ navigateTo }) => (
+const AgendaView = ({ navigateTo, openEvent }) => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Agenda" number="2026" />
@@ -764,7 +852,8 @@ const AgendaView = ({ navigateTo }) => (
           {EVENTS_DATA.map((event) => (
             <div 
               key={event.id} 
-              className="group border-t border-[#041E42]/10 py-16 px-6 md:px-12 hover:bg-[#E5E5E4]/30 transition-colors duration-700 grid grid-cols-1 md:grid-cols-12 gap-8 items-start relative"
+              className="group border-t border-[#041E42]/10 py-16 px-6 md:px-12 hover:bg-[#E5E5E4]/30 transition-colors duration-700 grid grid-cols-1 md:grid-cols-12 gap-8 items-start relative cursor-pointer"
+              onClick={() => openEvent(event)}
             >
               <div className="md:col-span-3 flex flex-col">
                  <span className="text-5xl font-serif text-[#041E42] mb-2">{event.date.split(' ')[1]}</span>
@@ -773,20 +862,9 @@ const AgendaView = ({ navigateTo }) => (
               
               <div className="md:col-span-6 pr-12">
                 <span className="inline-block mb-4 text-xs font-bold tracking-[0.2em] uppercase text-[#D50032]">{event.type}</span>
-                {event.internalLink ? (
-                    <button 
-                        onClick={() => navigateTo(event.internalLink)} 
-                        className="block text-left"
-                    >
-                        <h3 className="text-4xl md:text-5xl font-serif mb-6 text-[#041E42] group-hover:text-[#D50032] transition-colors">
-                        {event.title}
-                        </h3>
-                    </button>
-                ) : (
-                    <h3 className="text-4xl md:text-5xl font-serif mb-6 text-[#041E42]">
-                        {event.title}
-                    </h3>
-                )}
+                <h3 className="text-4xl md:text-5xl font-serif mb-6 text-[#041E42] group-hover:text-[#D50032] transition-colors">
+                    {event.title}
+                </h3>
                 
                 <p className="text-[#63666A] font-normal max-w-md leading-relaxed">{event.description}</p>
               </div>
@@ -797,16 +875,11 @@ const AgendaView = ({ navigateTo }) => (
                    <span className="flex items-center gap-2">{event.location} <MapPin size={12} /></span>
                 </div>
                 
-                {event.link && (
-                    <a 
-                      href={event.link} 
-                      target="_blank" 
-                      rel="noreferrer"
-                      className="px-8 py-4 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors duration-500"
-                    >
-                      Reserve
-                    </a>
-                )}
+                <span 
+                  className="px-8 py-4 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors duration-500"
+                >
+                  View Details
+                </span>
               </div>
             </div>
           ))}
@@ -1251,6 +1324,7 @@ const PhilanthropyView = () => (
 export default function App() {
   const [activePage, setActivePage] = useState('home');
   const [selectedAlbum, setSelectedAlbum] = useState(null);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -1283,6 +1357,7 @@ export default function App() {
     setActivePage(page);
     setIsMenuOpen(false);
     setSelectedAlbum(null);
+    if(page !== 'event_detail') setSelectedEvent(null);
   };
 
   const openAlbum = (album) => {
@@ -1290,6 +1365,21 @@ export default function App() {
     setActivePage('album_detail');
     window.scrollTo(0, 0);
   };
+
+  const openAlbumById = (id) => {
+    const album = ALBUMS_DATA.find(a => a.id === id);
+    if (album) openAlbum(album);
+  }
+
+  const openEvent = (event) => {
+      if (event.id === 2) {
+        navigateTo('ctm_feb21');
+      } else {
+        setSelectedEvent(event);
+        setActivePage('event_detail');
+        window.scrollTo(0, 0);
+      }
+  }
 
   // Logic for dynamic Navbar styling
   const isHome = activePage === 'home';
@@ -1304,7 +1394,7 @@ export default function App() {
       onClick={() => navigateTo(page)}
       className={`${
         mobile 
-          ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42]' 
+          ? 'block w-full text-center text-4xl font-serif py-4 text-[#041E42]' 
           : `text-xs font-bold tracking-[0.2em] uppercase transition-colors duration-500 relative group ${activePage === page ? (isTransparent ? 'text-[#F4F4F3]' : 'text-[#041E42]') : (isTransparent ? 'text-[#F4F4F3]/70 hover:text-[#F4F4F3]' : 'text-[#595959] hover:text-[#041E42]')}`
       }`}
     >
@@ -1380,7 +1470,7 @@ export default function App() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden z-50 p-2 ${isTransparent ? 'text-[#F4F4F3]' : 'text-[#041E42]'}`}
+              className={`md:hidden z-50 p-2 ${isTransparent && !isMenuOpen ? 'text-[#F4F4F3]' : 'text-[#041E42]'}`}
             >
               {isMenuOpen ? <X size={24} strokeWidth={1} className="text-[#041E42]" /> : <Menu size={24} strokeWidth={1} />}
             </button>
@@ -1388,8 +1478,8 @@ export default function App() {
         </div>
 
         {/* Mobile Fullscreen Menu */}
-        <div className={`fixed inset-0 bg-[#F4F4F3] z-40 transition-all duration-[1s] ease-in-out ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
-          <div className="h-full flex flex-col justify-center items-center px-6 text-[#041E42] space-y-4">
+        <div className={`fixed inset-0 bg-[#F4F4F3] z-40 transition-all duration-[500ms] ease-in-out ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'} flex flex-col`}>
+          <div className="flex-1 w-full flex flex-col justify-center items-center px-6 text-[#041E42] space-y-8 overflow-y-auto py-8">
             <NavLink page="agenda" mobile>Agenda</NavLink>
             <NavLink page="discography" mobile>Archive</NavLink>
             <NavLink page="philanthropy" mobile>Patronage</NavLink>
@@ -1400,10 +1490,11 @@ export default function App() {
       </nav>
 
       <main className="min-h-screen">
-        {activePage === 'home' && <HomeView navigateTo={navigateTo} />}
-        {activePage === 'agenda' && <AgendaView navigateTo={navigateTo} />}
+        {activePage === 'home' && <HomeView navigateTo={navigateTo} openAlbumById={openAlbumById} />}
+        {activePage === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
         {activePage === 'discography' && <DiscographyView openAlbum={openAlbum} />}
         {activePage === 'album_detail' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
+        {activePage === 'event_detail' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
         {activePage === 'philanthropy' && <PhilanthropyView />}
         {activePage === 'store' && <StoreView />}
         {activePage === 'backstage' && <BackstageView />}
