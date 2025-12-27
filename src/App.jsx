@@ -11,17 +11,36 @@ import {
   MapPin,
   Disc,
   MessageSquare,
-  Database
+  Database,
+  Ticket
 } from 'lucide-react';
 
-// --- Assets & Placeholders ---
-// Replaced local imports with placeholders to fix build resolution errors.
-// Uncomment the lines below when running in a local environment with assets present.
-// const IMG_CHERRY_TREE = "./assets/Composite Set-Monochrome-Compressed.jpg";
-// const IMG_LOGO = "./assets/navy-horizontal@4x.png";
+// --- Fallback Assets for Preview ---
+// const IMG_CHERRY_TREE = "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?q=80&w=2600&auto=format&fit=crop"; // Concert hall vibe
+// // Simple SVG Logo Fallback
+// const IMG_LOGO = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' fill='none'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='40' fill='%23041E42'%3ETHE CHIMES%3C/text%3E%3C/svg%3E`;
+// const IMG_LOGO_WHITE = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100' fill='none'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-family='serif' font-weight='bold' font-size='40' fill='%23F4F4F3'%3ETHE CHIMES%3C/text%3E%3C/svg%3E`;
+
+// const IMG_NECKTIE = "https://images.unsplash.com/photo-1598522646279-d47783994a37?q=80&w=800&auto=format&fit=crop";
+// const IMG_BOWTIE = "https://images.unsplash.com/photo-1596704017254-802521974345?q=80&w=800&auto=format&fit=crop";
+
+// // Setting these to null uses the existing CSS background color fallbacks in your component
+// const IMG_DCDM = null;
+// const IMG_PARTNERS = null;
+// const IMG_THREE_STRIPES = null;
+// const IMG_PROSPECT = null;
+// const IMG_BATTLE_GEAR = null;
+// const IMG_PSRC = null;
+// const IMG_LTGCR = null;
+// const IMG_HOYA_SAXA = null;
+// const IMG_CHIMES_75 = null;
+// const IMG_CHIMES_66 = null;
+// const IMG_1959 = null;
+// const IMG_UNDER_THE_TREE = null;
 
 import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
-import IMG_LOGO from './assets/navy-horizontal@4x.png';
+import IMG_LOGO from './assets/logo.png';
+import IMG_LOGO_WHITE from './assets/logo-white.png';
 import IMG_NECKTIE from './assets/necktie.jpg';
 import IMG_BOWTIE from './assets/bowtie.jpg';
 import IMG_DCDM from './assets/dcdm.jpg';
@@ -36,7 +55,6 @@ import IMG_CHIMES_75 from './assets/chimes-75.jpg';
 import IMG_CHIMES_66 from './assets/chimes-66.jpg';
 import IMG_1959 from './assets/1959.jpg';
 import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
-
 
 // --- Data ---
 const EVENTS_DATA = [
@@ -57,6 +75,7 @@ const EVENTS_DATA = [
     time: "7:00 PM",
     location: "GASTON HALL", 
     type: "CONCERT",
+    internalLink: "ctm_feb21", // Use internal routing for this event
     link: "https://buytickets.at/chimes/1998443/r/gcaa-site",
     description: "Alumni Weekend, with Welcome Reception & Afterglow details to be announced. The longest-running a cappella tradition at Georgetown."
   },
@@ -504,35 +523,35 @@ const DONOR_TIERS = [
   },
   {
     title: "The Tonic",
-    price: "$10/month or $100/year",
+    price: "$10/month",
     link: "https://buy.stripe.com/28o3g692N6ysa6AaEJ",
     description: "Ten bucks a month. It funds the casual hospitality that defines the Chimes, ensuring that when we meet again, the green tea with honey (and other beverages) is always flowing.",
     cta: "Fill the Cup"
   },
   {
     title: "The 1946 Society",
-    price: "$19.46/month or $194.60/year",
+    price: "$19.46/month",
     link: "https://buy.stripe.com/6oEbMC7YJf4YbaE5kt",
     description: "The definitive commitment. By matching the year of our founding every month, you cover the operational essentials. You are the backbone of the day-to-day.",
     cta: "Make It Official"
   },
   {
     title: "The Social Chair",
-    price: "$27.80/month or $278/year",
+    price: "$27.80/month",
     link: "https://buy.stripe.com/aEUaIy7YJaOI5QkcMW",
     description: "The Chimes are nothing without the gathering. This tier is dedicated to the experience. You help subsidize the cost of events, like reunions or the Cherry Tree Massacre afterglow. You are ensuring that when we get together, we can afford to do it right.",
     cta: "Start the Party"
   },
   {
     title: "The Founder’s League",
-    price: "$46/month or $460/year",
+    price: "$46/month",
     link: "https://buy.stripe.com/aEUeYO2EpaOI0w04gv",
     description: "At this level, you aren’t just paying dues; you are subsidizing the future. You fund the archival work that keeps our history from fading.",
     cta: "Save the History"
   },
   {
     title: "The Good Fellow",
-    price: "$100/month or $1,000/year",
+    price: "$100/month",
     link: "https://buy.stripe.com/5kA17Y92N6ysguYbIY",
     description: "This is the bedrock of the Alumni Association. Your contribution carries the heavy lifting for our most ambitious projects, ensuring the Chimes legacy is secure for decades to come.",
     cta: "Lead the Way"
@@ -551,31 +570,46 @@ const SectionHeader = ({ title, number }) => (
 const HomeView = ({ navigateTo }) => (
     <>
       {/* Hero */}
-      <div className="relative min-h-screen flex flex-col justify-center px-8 md:px-16 border-b border-[#041E42]/10 bg-[#F4F4F3]">
+      <div 
+        className="relative min-h-screen flex flex-col justify-center px-8 md:px-16 border-b border-[#041E42]/10 bg-[#041E42] bg-cover bg-center"
+        style={{ backgroundImage: `url(${IMG_CHERRY_TREE})` }}
+      >
+        {/* Dark Overlay for Text Contrast */}
+        <div className="absolute inset-0 bg-black/40 z-0"></div>
+
         <div className="max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 fade-in-element">
            {/* Architectural Title Stack */}
-          <div className="text-center space-y-4 md:space-y-0">
-            <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#041E42] block">
+          <div className="text-center space-y-4 md:space-y-0 mb-12">
+            <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#F4F4F3] block">
               TRADITION
             </h1>
-            <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#041E42] block italic opacity-30">
+            <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#F4F4F3] block italic opacity-60">
               RESONANCE
             </h1>
-            <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#041E42] block">
+            <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#F4F4F3] block">
               LEGACY
             </h1>
           </div>
-        </div>
-        
-        <div className="absolute bottom-12 left-0 w-full px-8 md:px-16 flex flex-col md:flex-row justify-between items-end fade-in-element">
-          <p className="max-w-xs text-xs uppercase tracking-widest leading-loose text-[#63666A] font-bold">
-            The Georgetown Chimes<br/> Alumni Association
-          </p>
-          <div className="hidden md:block w-px h-24 bg-[#041E42]/20 mx-auto"></div>
-           <button onClick={() => navigateTo('agenda')} className="group flex items-center gap-6 text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors mt-8 md:mt-0">
-            Enter the Archive
-            <ArrowRight size={14} className="group-hover:translate-x-2 transition-transform duration-500" />
-          </button>
+
+          {/* New CTAs */}
+          <div className="flex flex-col md:flex-row gap-6 items-center">
+             <a 
+                href="https://thechimes.lnk.to/AndSoItGoesAA" 
+                target="_blank" 
+                rel="noreferrer"
+                className="px-12 py-4 bg-[#F4F4F3] text-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#D50032] hover:text-[#F4F4F3] transition-colors"
+             >
+                Stream "And So It Goes"
+             </a>
+             <a 
+                href="https://buytickets.at/chimes/1998396/r/gcaa-site" 
+                target="_blank" 
+                rel="noreferrer"
+                className="px-12 py-4 border border-[#F4F4F3] text-[#F4F4F3] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#F4F4F3] hover:text-[#041E42] transition-colors"
+             >
+                Book Cherry Tree Tickets
+             </a>
+          </div>
         </div>
       </div>
 
@@ -605,7 +639,123 @@ const HomeView = ({ navigateTo }) => (
     </>
 );
 
-const AgendaView = () => (
+const CherryTreeMassacreView = ({ navigateTo }) => (
+    <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
+      <div className="max-w-[1920px] mx-auto">
+        <button 
+          onClick={() => navigateTo('agenda')}
+          className="mb-16 text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-3 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element"
+        >
+          <ChevronLeft size={12} /> Return to Agenda
+        </button>
+
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-24 fade-in-element">
+          {/* Sticky Sidebar Area */}
+          <div className="lg:w-1/3">
+             <div className="sticky top-48">
+                <div className="aspect-[4/5] w-full bg-[#E5E5E4] mb-12 relative overflow-hidden">
+                    <img 
+                        src={IMG_CHERRY_TREE}
+                        alt="Gaston Hall" 
+                        className="w-full h-full object-cover grayscale"
+                    />
+                    <div className="absolute inset-0 bg-[#041E42]/20"></div>
+                </div>
+                
+                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-8">
+                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Date</span>
+                  <span className="text-2xl font-serif text-[#041E42]">Feb 21, 2026</span>
+                </div>
+
+                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-8">
+                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Time</span>
+                  <span className="text-2xl font-serif text-[#041E42]">7:00 PM</span>
+                </div>
+
+                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-12">
+                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Venue</span>
+                  <span className="text-2xl font-serif text-[#041E42]">Gaston Hall</span>
+                </div>
+                
+                <a 
+                    href="https://buytickets.at/chimes/1998443/r/gcaa-site" 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="w-full py-5 bg-[#041E42] text-[#F4F4F3] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#D50032] transition-colors flex items-center justify-center gap-4 mb-4"
+                >
+                    <Ticket size={14} /> Buy Tickets
+                </a>
+                <p className="text-center text-xs text-[#63666A] uppercase tracking-widest font-bold">General Admission $30</p>
+             </div>
+          </div>
+
+          {/* Scrollable Content */}
+          <div className="lg:w-2/3 pt-4">
+            <span className="text-xs font-bold tracking-[0.2em] text-[#D50032] uppercase mb-6 block">The 80th Annual</span>
+            <h1 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-none -ml-1">The Cherry Tree Massacre</h1>
+            
+            <div className="text-xl font-normal text-[#63666A] mb-16 leading-relaxed max-w-2xl border-l border-[#D50032] pl-8 space-y-8">
+                <p>
+                    For eight decades, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. 
+                    What began as a barbershop gathering has evolved into a showcase of the university's premier a cappella talent.
+                </p>
+                <p>
+                    Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration 
+                    during Alumni Weekend 2026.
+                </p>
+            </div>
+
+            <div className="mb-32">
+                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">Guest Groups</span>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="p-8 border border-[#041E42]/10 bg-white">
+                        <span className="text-xs font-bold text-[#595959] uppercase tracking-widest mb-2 block">Featured Guest</span>
+                        <h4 className="text-2xl font-serif text-[#041E42]">The Georgetown Phantoms</h4>
+                    </div>
+                    <div className="p-8 border border-[#041E42]/10 bg-white">
+                        <span className="text-xs font-bold text-[#595959] uppercase tracking-widest mb-2 block">Featured Guest</span>
+                        <h4 className="text-2xl font-serif text-[#041E42]">The Georgetown GraceNotes</h4>
+                    </div>
+                     <div className="p-8 border border-[#041E42]/10 bg-white">
+                        <span className="text-xs font-bold text-[#595959] uppercase tracking-widest mb-2 block">Featured Guest</span>
+                        <h4 className="text-2xl font-serif text-[#041E42]">Superfood</h4>
+                    </div>
+                </div>
+            </div>
+
+            <div className="mb-32">
+                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">Alumni Events</span>
+                <div className="space-y-12">
+                    <div>
+                        <h4 className="text-3xl font-serif text-[#041E42] mb-4">Welcome Reception</h4>
+                        <p className="text-[#63666A] text-lg leading-relaxed mb-4">
+                            Pre-concert gathering for alumni and families. Light refreshments will be served.
+                        </p>
+                        <div className="flex gap-8 text-xs font-bold tracking-widest uppercase text-[#595959]">
+                            <span className="flex items-center gap-2"><Clock size={12}/> 5:00 PM</span>
+                            <span className="flex items-center gap-2"><MapPin size={12}/> Dahlgren Quadrangle</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4 className="text-3xl font-serif text-[#041E42] mb-4">The Afterglow</h4>
+                        <p className="text-[#63666A] text-lg leading-relaxed mb-4">
+                            The tradition continues at The Tombs. Join the active group for food, drink, and song immediately following the concert.
+                        </p>
+                        <div className="flex gap-8 text-xs font-bold tracking-widest uppercase text-[#595959]">
+                            <span className="flex items-center gap-2"><Clock size={12}/> 9:30 PM</span>
+                            <span className="flex items-center gap-2"><MapPin size={12}/> The Tombs</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+);
+
+const AgendaView = ({ navigateTo }) => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Agenda" number="2026" />
@@ -614,7 +764,7 @@ const AgendaView = () => (
           {EVENTS_DATA.map((event) => (
             <div 
               key={event.id} 
-              className="group border-t border-[#041E42]/10 py-16 hover:bg-[#E5E5E4]/30 transition-colors duration-700 grid grid-cols-1 md:grid-cols-12 gap-8 items-start relative"
+              className="group border-t border-[#041E42]/10 py-16 px-6 md:px-12 hover:bg-[#E5E5E4]/30 transition-colors duration-700 grid grid-cols-1 md:grid-cols-12 gap-8 items-start relative"
             >
               <div className="md:col-span-3 flex flex-col">
                  <span className="text-5xl font-serif text-[#041E42] mb-2">{event.date.split(' ')[1]}</span>
@@ -623,9 +773,21 @@ const AgendaView = () => (
               
               <div className="md:col-span-6 pr-12">
                 <span className="inline-block mb-4 text-xs font-bold tracking-[0.2em] uppercase text-[#D50032]">{event.type}</span>
-                <h3 className="text-4xl md:text-5xl font-serif mb-6 text-[#041E42]">
-                  {event.title}
-                </h3>
+                {event.internalLink ? (
+                    <button 
+                        onClick={() => navigateTo(event.internalLink)} 
+                        className="block text-left"
+                    >
+                        <h3 className="text-4xl md:text-5xl font-serif mb-6 text-[#041E42] group-hover:text-[#D50032] transition-colors">
+                        {event.title}
+                        </h3>
+                    </button>
+                ) : (
+                    <h3 className="text-4xl md:text-5xl font-serif mb-6 text-[#041E42]">
+                        {event.title}
+                    </h3>
+                )}
+                
                 <p className="text-[#63666A] font-normal max-w-md leading-relaxed">{event.description}</p>
               </div>
 
@@ -918,7 +1080,7 @@ const StoreView = () => (
              {/* Bow Tie Product */}
              <div className="group cursor-pointer">
                <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
-		  <img 
+      <img 
                     src={IMG_BOWTIE} 
                     alt="The Silk Necktie"
                     className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
@@ -1022,11 +1184,16 @@ const PhilanthropyView = () => (
             {DONOR_TIERS.map((tier, idx) => (
                 <div key={idx} className="border border-[#041E42]/10 p-12 flex flex-col justify-between min-h-[450px] hover:border-[#041E42] transition-colors duration-700 group bg-white">
                     <div>
-                        <div className="flex justify-between items-start mb-6">
-                            <h4 className="text-3xl font-serif text-[#041E42]">{tier.title}</h4>
-                            <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase border border-[#BBBCBC] px-2 py-1 rounded-full">{tier.price.split('/')[0]}</span>
+                        <div className="mb-6">
+                            <h4 className="text-3xl font-serif text-[#041E42] mb-3">{tier.title}</h4>
+                            <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase block">{tier.price}</span>
                         </div>
-                        <div className="w-8 h-px bg-[#D50032] mb-8 group-hover:w-16 transition-all duration-500"></div>
+                        {/* Tri-stripe Separator - Equal Lengths */}
+                        <div className="flex flex-col gap-1 mb-8 w-fit">
+                            <div className="w-8 h-[2px] bg-[#BBBCBC]"></div>
+                            <div className="w-8 h-[2px] bg-[#BBBCBC]"></div>
+                            <div className="w-8 h-[2px] bg-[#BBBCBC]"></div>
+                        </div>
                         <p className="text-[#63666A] text-sm leading-loose font-normal">
                             {tier.description}
                         </p>
@@ -1035,7 +1202,7 @@ const PhilanthropyView = () => (
                         href={tier.link} 
                         target="_blank" 
                         rel="noreferrer"
-                        className="w-full text-center py-4 border-t border-[#041E42]/10 text-[#041E42] text-xs font-bold tracking-[0.2em] uppercase group-hover:bg-[#041E42] group-hover:text-[#F4F4F3] transition-colors mt-12"
+                        className="w-full text-center py-4 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors mt-12"
                     >
                         {tier.cta}
                     </a>
@@ -1124,18 +1291,26 @@ export default function App() {
     window.scrollTo(0, 0);
   };
 
+  // Logic for dynamic Navbar styling
+  const isHome = activePage === 'home';
+  const isTransparent = isHome && !scrolled && !isMenuOpen;
+  
+  // Use White text/logo when transparent (on top of dark background), Navy otherwise
+  const navTextColor = isTransparent ? 'text-[#F4F4F3]' : 'text-[#041E42]';
+  const currentLogo = isTransparent ? IMG_LOGO_WHITE : IMG_LOGO;
+
   const NavLink = ({ page, children, mobile }) => (
     <button
       onClick={() => navigateTo(page)}
       className={`${
         mobile 
           ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42]' 
-          : `text-xs font-bold tracking-[0.2em] uppercase transition-colors duration-500 relative group ${activePage === page ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`
+          : `text-xs font-bold tracking-[0.2em] uppercase transition-colors duration-500 relative group ${activePage === page ? (isTransparent ? 'text-[#F4F4F3]' : 'text-[#041E42]') : (isTransparent ? 'text-[#F4F4F3]/70 hover:text-[#F4F4F3]' : 'text-[#595959] hover:text-[#041E42]')}`
       }`}
     >
       {children}
       {!mobile && activePage === page && (
-          <span className="absolute -bottom-2 left-1/2 w-full h-px bg-[#041E42] transform -translate-x-1/2"></span>
+          <span className={`absolute -bottom-2 left-1/2 w-full h-px transform -translate-x-1/2 ${isTransparent ? 'bg-[#F4F4F3]' : 'bg-[#041E42]'}`}></span>
       )}
     </button>
   );
@@ -1187,9 +1362,9 @@ export default function App() {
               onClick={() => navigateTo('home')}
             >
               <img 
-                src={IMG_LOGO}
+                src={currentLogo}
                 alt="Chimes Wordmark" 
-                className={`h-8 w-auto`}
+                className={`h-8 w-auto transition-all duration-500`}
               />
             </div>
             
@@ -1205,9 +1380,9 @@ export default function App() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden z-50 p-2 text-[#041E42]`}
+              className={`md:hidden z-50 p-2 ${isTransparent ? 'text-[#F4F4F3]' : 'text-[#041E42]'}`}
             >
-              {isMenuOpen ? <X size={24} strokeWidth={1} /> : <Menu size={24} strokeWidth={1} />}
+              {isMenuOpen ? <X size={24} strokeWidth={1} className="text-[#041E42]" /> : <Menu size={24} strokeWidth={1} />}
             </button>
           </div>
         </div>
@@ -1226,12 +1401,13 @@ export default function App() {
 
       <main className="min-h-screen">
         {activePage === 'home' && <HomeView navigateTo={navigateTo} />}
-        {activePage === 'agenda' && <AgendaView />}
+        {activePage === 'agenda' && <AgendaView navigateTo={navigateTo} />}
         {activePage === 'discography' && <DiscographyView openAlbum={openAlbum} />}
         {activePage === 'album_detail' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
         {activePage === 'philanthropy' && <PhilanthropyView />}
         {activePage === 'store' && <StoreView />}
         {activePage === 'backstage' && <BackstageView />}
+        {activePage === 'ctm_feb21' && <CherryTreeMassacreView navigateTo={navigateTo} />}
       </main>
 
       {/* Footer - Minimalist */}
