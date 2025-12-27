@@ -1,3 +1,6 @@
+@import "tailwindcss";
+    *(Note: Since you are using Tailwind v4 per your package.json, `@import "tailwindcss";` is the correct syntax. If you were on v3, you would use `@tailwind base; @tailwind components; @tailwind utilities;`)*.
+
 /* src/index.css - Global Page Resets */
 
 :root {

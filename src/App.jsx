@@ -16,20 +16,21 @@ import {
   Database
 } from 'lucide-react';
 
-// --- Assets ---
-// Assuming these are in the public folder or handled by the build system.
-// In a real Vite environment, you might import them: import compositeImg from './assets/...'
-const IMG_CHERRY_TREE = "Composite Set-Monochrome-Compressed.jpg";
-const IMG_LOGO = "navy-horizontal@4x.png"; 
+// --- Assets & Placeholders ---
 
-// --- Design System ---
+// NEW
+import IMG_CHERRY_TREE from './assets/Composite Set-Monochrome-Compressed.jpg';
+import IMG_CHERRY_LOGO from './assets/navy-horizontal@4x.png';
+
+
+// --- Design System Constants ---
 const THEME = {
   colors: {
     navy: '#041E42',
-    slate: '#4A5B75', // Softened navy for secondary text
-    paper: '#F5F5F0', // Warm, luxury paper tone (Hermès/LVMH style)
+    slate: '#4A5B75',
+    paper: '#F5F5F0',
     white: '#FFFFFF',
-    accent: '#D50032', // Heritage Red, used extremely sparingly
+    accent: '#D50032',
     charcoal: '#1A1A1A',
     border: '#D1D1D1',
   },
@@ -39,7 +40,7 @@ const THEME = {
   }
 };
 
-// --- Data (Preserved from original) ---
+// --- Data ---
 const EVENTS_DATA = [
   { 
     id: 1, 
@@ -195,19 +196,18 @@ const Navigation = ({ activePage, setActivePage, isMenuOpen, setIsMenuOpen }) =>
   const navItems = [
     { id: 'agenda', label: 'Agenda' },
     { id: 'discography', label: 'Discography' },
-    { id: 'philanthropy', label: 'Maison' }, // Renamed for luxury feel
-    { id: 'store', label: 'Boutique' },      // Renamed for luxury feel
+    { id: 'philanthropy', label: 'Maison' },
+    { id: 'store', label: 'Boutique' },
     { id: 'backstage', label: 'Backstage' },
   ];
 
   return (
     <>
-      <nav className="fixed top-0 left-0 right-0 z-50 py-8 px-6 md:px-12 flex justify-between items-center mix-blend-difference text-white pointer-events-none">
-        {/* Logo / Brand Name - Pointer events auto to allow clicking */}
+      <nav className="fixed top-0 left-0 right-0 z-50 py-8 px-6 md:px-12 flex justify-between items-center text-white pointer-events-none mix-blend-difference">
+        {/* Logo / Brand Name */}
         <button 
           onClick={() => { setActivePage('home'); setIsMenuOpen(false); }}
-          className="pointer-events-auto text-2xl md:text-3xl font-serif tracking-tighter hover:opacity-70 transition-opacity"
-          style={{ fontFamily: THEME.fonts.serif }}
+          className="pointer-events-auto text-2xl md:text-3xl font-serif tracking-tighter hover:opacity-70 transition-opacity z-50"
         >
           THE CHIMES
         </button>
@@ -219,7 +219,6 @@ const Navigation = ({ activePage, setActivePage, isMenuOpen, setIsMenuOpen }) =>
               key={item.id}
               onClick={() => setActivePage(item.id)}
               className={`text-xs uppercase tracking-[0.2em] transition-all hover:text-[#D50032] ${activePage === item.id ? 'border-b border-white pb-1' : ''}`}
-              style={{ fontFamily: THEME.fonts.sans }}
             >
               {item.label}
             </button>
@@ -229,7 +228,7 @@ const Navigation = ({ activePage, setActivePage, isMenuOpen, setIsMenuOpen }) =>
         {/* Mobile Menu Toggle */}
         <button 
           onClick={() => setIsMenuOpen(!isMenuOpen)} 
-          className="md:hidden pointer-events-auto"
+          className="md:hidden pointer-events-auto z-50 text-white"
         >
           {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
@@ -245,7 +244,6 @@ const Navigation = ({ activePage, setActivePage, isMenuOpen, setIsMenuOpen }) =>
               key={item.id}
               onClick={() => { setActivePage(item.id); setIsMenuOpen(false); }}
               className="text-4xl font-serif text-left hover:text-[#D50032] transition-colors"
-              style={{ fontFamily: THEME.fonts.serif }}
             >
               {item.label}
             </button>
@@ -260,11 +258,11 @@ const SectionTitle = ({ title, subtitle }) => (
   <div className="mb-16 md:mb-24 pt-24 border-t border-[#D1D1D1]">
     <FadeIn>
       <div className="flex flex-col md:flex-row justify-between items-baseline">
-        <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#041E42] leading-none" style={{ fontFamily: THEME.fonts.serif }}>
+        <h2 className="text-5xl md:text-7xl lg:text-8xl font-serif text-[#041E42] leading-none">
           {title}
         </h2>
         {subtitle && (
-          <span className="mt-4 md:mt-0 text-xs font-bold tracking-[0.2em] uppercase text-[#4A5B75]" style={{ fontFamily: THEME.fonts.sans }}>
+          <span className="mt-4 md:mt-0 text-xs font-bold tracking-[0.2em] uppercase text-[#4A5B75] font-sans">
             {subtitle}
           </span>
         )}
@@ -279,7 +277,7 @@ const HomeView = ({ setActivePage }) => (
   <div className="min-h-screen">
     {/* Hero Section */}
     <section className="relative h-screen w-full flex flex-col justify-between px-6 md:px-12 py-12 overflow-hidden">
-      {/* Background Image with subtle movement or just static elegant crop */}
+      {/* Background Image */}
       <div className="absolute inset-0 z-0">
         <img 
           src={IMG_CHERRY_TREE} 
@@ -314,7 +312,7 @@ const HomeView = ({ setActivePage }) => (
       </div>
     </section>
 
-    {/* Featured Section (Editorial Layout) */}
+    {/* Featured Section */}
     <section className="px-6 md:px-12 py-24 md:py-32">
       <FadeIn>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
@@ -409,7 +407,6 @@ const DiscographyView = () => (
         <FadeIn key={album.id}>
           <div className="group cursor-pointer">
             <div className="relative aspect-square overflow-hidden bg-[#E5E5E4] mb-6">
-              {/* Fallback color if image fails or for design */}
               <div className={`w-full h-full ${album.cover} opacity-80 group-hover:opacity-100 transition-opacity duration-700`}></div>
               
               {/* Hover Overlay */}
@@ -440,7 +437,6 @@ const DiscographyView = () => (
       ))}
     </div>
 
-    {/* Note */}
     <div className="mt-32 border-t border-[#D1D1D1] pt-12">
        <p className="text-lg font-serif italic text-[#4A5B75] max-w-2xl">
          "We are in the process of releasing the rest of our back catalogue onto streaming platforms. In many cases, this involves going back to the studio tapes, since they are of much higher quality compared to the vinyls."
@@ -550,7 +546,7 @@ const BackstageView = () => (
 
 // --- Main App ---
 
-const App = () => {
+export default function App() {
   const [activePage, setActivePage] = useState('home');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -559,32 +555,54 @@ const App = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [activePage]);
 
-  // Load Adobe Fonts (primary) and Google Fonts (fallback)
+  // Load Adobe Fonts and Google Fonts
   useEffect(() => {
-    // Adobe Typekit Injection
     const typekitLink = document.createElement('link');
     typekitLink.href = 'https://use.typekit.net/uzl4kqy.css';
     typekitLink.rel = 'stylesheet';
     document.head.appendChild(typekitLink);
 
-    // Google Fonts Injection (Fallback)
     const googleLink = document.createElement('link');
     googleLink.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;700&display=swap';
     googleLink.rel = 'stylesheet';
     document.head.appendChild(googleLink);
 
     return () => {
-      // Clean up on unmount
       if (document.head.contains(typekitLink)) document.head.removeChild(typekitLink);
       if (document.head.contains(googleLink)) document.head.removeChild(googleLink);
     };
   }, []);
 
   return (
-    <div 
-      className="bg-[#F5F5F0] min-h-screen transition-colors duration-1000"
-      style={{ fontFamily: THEME.fonts.sans, color: THEME.colors.charcoal }}
-    >
+    <div className="font-sans text-charcoal bg-[#F5F5F0]">
+      {/* Global CSS Overrides to match Tailwind Config behavior */}
+      <style>{`
+        :root {
+          color-scheme: light;
+        }
+        body {
+          margin: 0;
+          padding: 0;
+          background-color: #F5F5F0;
+          overflow-x: hidden;
+        }
+        /* Custom Font Mappings from tailwind.config.js */
+        .font-serif {
+          font-family: "adobe-caslon-pro", "Cormorant Garamond", serif !important;
+        }
+        .font-sans {
+          font-family: "neue-haas-unica", "Montserrat", sans-serif !important;
+        }
+        /* Animations */
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .fade-in {
+          animation: fadeIn 1s ease-out forwards;
+        }
+      `}</style>
+
       <Navigation 
         activePage={activePage} 
         setActivePage={setActivePage} 
@@ -630,5 +648,3 @@ const App = () => {
     </div>
   );
 };
-
-export default App;
