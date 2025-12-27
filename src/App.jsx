@@ -185,7 +185,7 @@ const ALBUMS_DATA = [
       { title: "My Girl" },
       { title: "Georgetown Guy" },
       { title: "Georgetown Girl" },
-      { title: "Moomdance" },
+      { title: "Moondance" },
       { title: "A Beatles Medley: All You Need Is Love / Blackbird / All My Loving / Here Comes the Sun / Hey Jude" },
       { title: "Jessie’s Girl" },
       { title: "Hold the Line" },
@@ -289,7 +289,25 @@ const ALBUMS_DATA = [
       "Our friends, families, neophytes, and alumni"
     ],
     tracks: [
-      { title: "We Meet" }
+      { title: "We Meet" },
+      { title: "I’ve Just Seen a Face" },
+      { title: "Peaceful Easy Feeling" },
+      { title: "Apeman" },
+      { title: "Tempted" },
+      { title: "Danny Boy" },
+      { title: "I’m Beginning to See the Light" },
+      { title: "Just You, Just Me" },
+      { title: "Prodigal Son" },
+      { title: "Kiss Him Goodbye" },
+      { title: "They Can’t Take That Away from Me" },
+      { title: "Crazy Little Thing Called Love" },
+      { title: "Poor Heart" },
+      { title: "California Dreamin’" },
+      { title: "Sixty Minute Man" },
+      { title: "Jet Airliner" },
+      { title: "When I’m 64" },
+      { title: "Georgetown University Fight Song" },
+      { title: "My Comrades" }
     ]
   },
   { 
@@ -317,7 +335,23 @@ const ALBUMS_DATA = [
       "Our alumni, friends, girlfriends, and families"
     ],
     tracks: [
-      { title: "We Meet" }
+      { title: "We Meet" },
+      { title: "All Night Long" },
+      { title: "Donne" },
+      { title: "Another Saturday Night" },
+      { title: "My Love Is Like a Red, Red Rose" },
+      { title: "Soul to Soul" },
+      { title: "All of Me (Live)" },
+      { title: "Running to Stand Still (Live)" },
+      { title: "Loch Lomond" },
+      { title: "Kiss the Brown Eyed Girl" },
+      { title: "Medley: Just a Gigolo / I Ain’t Got Nobody" },
+      { title: "And So It Goes" },
+      { title: "Hold Me Tight" },
+      { title: "Don’t Blame Me" },
+      { title: "Viva La Mamma" },
+      { title: "The Georgetown University Fight Song" },
+      { title: "My Comrades" }
     ]
   },
   { 
@@ -355,7 +389,26 @@ const ALBUMS_DATA = [
       "Matt Donaghue"
     ],
     tracks: [
-      { title: "We Meet" }
+      { title: "We Meet (Live)" },
+      { title: "L.O.V.E." },
+      { title: "Operator" },
+      { title: "Loch Lomond" },
+      { title: "Every Little Kiss" },
+      { title: "Bring Him Home" },
+      { title: "Naturally (Live)" },
+      { title: "Qui Belles Amours A" },
+      { title: "Georgia on My Mind" },
+      { title: "Since I Fell for You" },
+      { title: "Danny Boy" },
+      { title: "What’ll I Do" },
+      { title: "Shape of My Heart (Live)" },
+      { title: "And So It Goes" },
+      { title: "All of Me" },
+      { title: "Some Folks’ Lives Roll Easy" },
+      { title: "MLK" },
+      { title: "Zombie Jamboree (Live)" },
+      { title: "Georgetown University Fight Song" },
+      { title: "My Comrades" }
     ]
   },
   { 
@@ -390,10 +443,28 @@ const ALBUMS_DATA = [
         "The Boston Common"
     ],
     tracks: [
-      { title: "St. Louis Blues", soloist: "Mark Williams, Dave Walsh, John Sheridan" },
-      { title: "Good Fellow", soloist: "Tim Naughton" },
-      { title: "The Great Historical Bum", soloist: "Steve Mohyla" },
-      { title: "So Much In Love", soloist: "Kevin O’Brien" }
+      { title: "We Meet" },
+      { title: "I've Been Feelin’ Blue" },
+      { title: "Somebody Loves Me" },
+      { title: "It’s A Good Day" },
+      { title: "I’m Gonna Sit Right Down and Write Myself a Letter" },
+      { title: "Great Historical Bum" },
+      { title: "Sh-Boom (Life Could Be a Dream)" },
+      { title: "Temptation" },
+      { title: "Georgetown Fight Song" },
+      { title: "Good Fellow" },
+      { title: "Who Put The Bomp (In The Bomp, Bomp, Bomp)" },
+      { title: "So Much in Love" },
+      { title: "Chattanooga Shoe Shine Boy" },
+      { title: "Ten Feet Off the Ground" },
+      { title: "I Got Rhythm" },
+      { title: "Come Go With Me" },
+      { title: "St. Louis Blues" },
+      { title: "At the Moving Picture Ball" },
+      { title: "Sons of Georgetown" },
+      { title: "Yes Sir, That’s My Baby" },
+      { title: "My Comrades" },
+      { title: "Wazoo" }
     ]
   },
   {
@@ -425,7 +496,23 @@ const ALBUMS_DATA = [
         ]
     },
     tracks: [
-      { title: "We Meet" }
+      { title: "We Meet (Live)" },
+      { title: "Hoya Saxa Joe (Live)" },
+      { title: "More I Cannot Wish You" },
+      { title: "My Cutie’s Due (Live)" },
+      { title: "Mood Indigo (Live)" },
+      { title: "Lady Is a Tramp (Live)" },
+      { title: "Sons Of" },
+      { title: "Piano Roll Blues (Live)" },
+      { title: "I’ll Fly Away (Live)" },
+      { title: "Hey Boys (Live)" },
+      { title: "Canadian Railroad Trilogy" },
+      { title: "Sitting on Top of the World (Live)" },
+      { title: "Big Babaloo (Live)" },
+      { title: "Georgetown Fight Song (Live)" },
+      { title: "Upper Peabody Tech (Live)" },
+      { title: "My Comrades (Live)" },
+      { title: "Wazoo (Live)" }
     ]
   },
   {
@@ -450,12 +537,22 @@ const ALBUMS_DATA = [
         ]
     },
     tracks: [
-      { title: "In the Still of the Night" },
-      { title: "Silhouettes" },
-      { title: "Blue Moon" },
-      { title: "Teenager in Love" },
-      { title: "Come Go With Me" },
-      { title: "Canadian Railroad Trilogy", soloist: "Dave Cosco" }
+      { title: "We Meet" },
+      { title: "Roguish Eyes" },
+      { title: "Betty Coed" },
+      { title: "The Mountains O’Mourne" },
+      { title: "Mandy" },
+      { title: "Wouldn’t It Be Loverly" },
+      { title: "Barefoot Days and Hey There Boys" },
+      { title: "The Hunter" },
+      { title: "Good Fellow" },
+      { title: "Old Grey Bonnet" },
+      { title: "Our Strong Band" },
+      { title: "Rimsky-Korsakov Concerto for Violin and Chorus in E Flat, Opus 16" },
+      { title: "The Patriot Game" },
+      { title: "The Great Historical Bum" },
+      { title: "Come Along Home" },
+      { title: "Wazoo" }
     ]
   },
   {
@@ -472,7 +569,28 @@ const ALBUMS_DATA = [
         }
     ],
     tracks: [
-      { title: "We Meet" }
+      { title: "We Meet" },
+      { title: "Here She Comes" },
+      { title: "Love Walked In" },
+      { title: "Hearts Win" },
+      { title: "Katie Malone" },
+      { title: "Down the Old Ox Road" },
+      { title: "Skinnamarink" },
+      { title: "Mood Indigo" },
+      { title: "Zingy Wing" },
+      { title: "Temptation" },
+      { title: "Good Fellow" },
+      { title: "The Georgetown Chimes" },
+      { title: "Let’s Get Away From It All" },
+      { title: "I Love the Ladies" },
+      { title: "A Foggy Day in London Town" },
+      { title: "Wait Till the Sun Shines Nellie" },
+      { title: "Sweet Roses of Morn" },
+      { title: "Hoya Saxa Joe" },
+      { title: "The Three Bells" },
+      { title: "Mandy" },
+      { title: "Serenade" },
+      { title: "Wazoo" }
     ]
   },
   {
@@ -505,7 +623,7 @@ const ALBUMS_DATA = [
       { title: "Mountain Greenery" },
       { title: "Somebody Loves Me & Tea Leaves" },
       { title: "Aloha Medley" },
-      { title: "Ohy By Jingo" },
+      { title: "Oh By Jingo" },
       { title: "Magazine Cover & Police Gazette" },
       { title: "Georgetown Medley" },
       { title: "Some of These Days" },
