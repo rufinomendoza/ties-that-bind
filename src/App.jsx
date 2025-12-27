@@ -21,43 +21,43 @@ import {
 // and comment out the "Preview Placeholders" block.
 
 // --- Local Imports (Uncomment for Production) ---
-// import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
-// import IMG_LOGO from './assets/logo.png';
-// import IMG_LOGO_WHITE from './assets/logo-white.png';
-// import IMG_NECKTIE from './assets/necktie.jpg';
-// import IMG_BOWTIE from './assets/bowtie.jpg';
-// import IMG_DCDM from './assets/DCDM.jpg';
-// import IMG_PARTNERS from './assets/partners.jpg';
-// import IMG_THREE_STRIPES from './assets/three-stripes.jpg';
-// import IMG_PROSPECT from './assets/36th-prospect.jpg';
-// import IMG_BATTLE_GEAR from './assets/battle-gear.jpg';
-// import IMG_PSRC from './assets/psrc.jpg';
-// import IMG_LTGCR from './assets/ltgcr.jpg';
-// import IMG_HOYA_SAXA from './assets/hoya-saxa.jpg';
-// import IMG_CHIMES_75 from './assets/chimes-75.jpg';
-// import IMG_CHIMES_66 from './assets/chimes-66.jpg';
-// import IMG_1959 from './assets/1959.jpg';
-// import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
+import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
+import IMG_LOGO from './assets/logo.png';
+import IMG_LOGO_WHITE from './assets/logo-white.png';
+import IMG_NECKTIE from './assets/necktie.jpg';
+import IMG_BOWTIE from './assets/bowtie.jpg';
+import IMG_DCDM from './assets/DCDM.jpg';
+import IMG_PARTNERS from './assets/partners.jpg';
+import IMG_THREE_STRIPES from './assets/three-stripes.jpg';
+import IMG_PROSPECT from './assets/36th-prospect.jpg';
+import IMG_BATTLE_GEAR from './assets/battle-gear.jpg';
+import IMG_PSRC from './assets/psrc.jpg';
+import IMG_LTGCR from './assets/ltgcr.jpg';
+import IMG_HOYA_SAXA from './assets/hoya-saxa.jpg';
+import IMG_CHIMES_75 from './assets/chimes-75.jpg';
+import IMG_CHIMES_66 from './assets/chimes-66.jpg';
+import IMG_1959 from './assets/1959.jpg';
+import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
 
 
 // --- Preview Placeholders (Comment out for Production) ---
-const IMG_CHERRY_TREE = "https://placehold.co/800x1000/041E42/F4F4F3?text=Cherry+Tree+Massacre";
-const IMG_LOGO = "https://placehold.co/300x100/F4F4F3/041E42?text=CHIMES+LOGO";
-const IMG_LOGO_WHITE = "https://placehold.co/300x100/041E42/F4F4F3?text=CHIMES+LOGO";
-const IMG_NECKTIE = "https://placehold.co/600x800/E5E5E4/041E42?text=Necktie";
-const IMG_BOWTIE = "https://placehold.co/600x800/E5E5E4/041E42?text=Bowtie";
-const IMG_DCDM = "https://placehold.co/600x600/2A3B55/FFFFFF?text=DCDM";
-const IMG_PARTNERS = "https://placehold.co/600x600/4A5B75/FFFFFF?text=Partners";
-const IMG_THREE_STRIPES = "https://placehold.co/600x600/6A7B95/FFFFFF?text=Three+Stripes";
-const IMG_PROSPECT = "https://placehold.co/600x600/8A9BB5/FFFFFF?text=36th+%26+Prospect";
-const IMG_BATTLE_GEAR = "https://placehold.co/600x600/9AABCA/FFFFFF?text=Battle+Gear";
-const IMG_PSRC = "https://placehold.co/600x600/B0BCCF/FFFFFF?text=PSRC";
-const IMG_LTGCR = "https://placehold.co/600x600/C4CDDC/FFFFFF?text=LTGCR";
-const IMG_HOYA_SAXA = "https://placehold.co/600x600/D8DDE6/FFFFFF?text=Hoya+Saxa";
-const IMG_CHIMES_75 = "https://placehold.co/600x600/2A3B55/FFFFFF?text=Chimes+75";
-const IMG_CHIMES_66 = "https://placehold.co/600x600/4A5B75/FFFFFF?text=Chimes+66";
-const IMG_1959 = "https://placehold.co/600x600/6A7B95/FFFFFF?text=1959";
-const IMG_UNDER_THE_TREE = "https://placehold.co/600x600/8A9BB5/FFFFFF?text=Under+The+Tree";
+// const IMG_CHERRY_TREE = "https://placehold.co/800x1000/041E42/F4F4F3?text=Cherry+Tree+Massacre";
+// const IMG_LOGO = "https://placehold.co/300x100/F4F4F3/041E42?text=CHIMES+LOGO";
+// const IMG_LOGO_WHITE = "https://placehold.co/300x100/041E42/F4F4F3?text=CHIMES+LOGO";
+// const IMG_NECKTIE = "https://placehold.co/600x800/E5E5E4/041E42?text=Necktie";
+// const IMG_BOWTIE = "https://placehold.co/600x800/E5E5E4/041E42?text=Bowtie";
+// const IMG_DCDM = "https://placehold.co/600x600/2A3B55/FFFFFF?text=DCDM";
+// const IMG_PARTNERS = "https://placehold.co/600x600/4A5B75/FFFFFF?text=Partners";
+// const IMG_THREE_STRIPES = "https://placehold.co/600x600/6A7B95/FFFFFF?text=Three+Stripes";
+// const IMG_PROSPECT = "https://placehold.co/600x600/8A9BB5/FFFFFF?text=36th+%26+Prospect";
+// const IMG_BATTLE_GEAR = "https://placehold.co/600x600/9AABCA/FFFFFF?text=Battle+Gear";
+// const IMG_PSRC = "https://placehold.co/600x600/B0BCCF/FFFFFF?text=PSRC";
+// const IMG_LTGCR = "https://placehold.co/600x600/C4CDDC/FFFFFF?text=LTGCR";
+// const IMG_HOYA_SAXA = "https://placehold.co/600x600/D8DDE6/FFFFFF?text=Hoya+Saxa";
+// const IMG_CHIMES_75 = "https://placehold.co/600x600/2A3B55/FFFFFF?text=Chimes+75";
+// const IMG_CHIMES_66 = "https://placehold.co/600x600/4A5B75/FFFFFF?text=Chimes+66";
+// const IMG_1959 = "https://placehold.co/600x600/6A7B95/FFFFFF?text=1959";
+// const IMG_UNDER_THE_TREE = "https://placehold.co/600x600/8A9BB5/FFFFFF?text=Under+The+Tree";
 
 
 // --- Data ---
