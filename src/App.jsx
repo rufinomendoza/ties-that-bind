@@ -38,6 +38,8 @@ import IMG_CHIMES_75 from './assets/chimes-75.jpg';
 import IMG_CHIMES_66 from './assets/chimes-66.jpg';
 import IMG_1959 from './assets/1959.jpg';
 import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
+import IMG_PUERTO_RICO from './assets/eric-ardito-uz1XrK91iGw-unsplash.jpeg';
+
 
 
 // --- Preview Placeholders (Comment out for Production) ---
@@ -151,7 +153,7 @@ const EVENTS_DATA = [
             title: "Welcome Reception",
             description: "A Welcome Reception on Thursday night in an 1800s colonial building in Old San Juan, the oldest city in the Western Hemisphere.",
             time: "Thursday Night",
-            location: "Old San Juan"
+            location: "Antiguo Casino de Puerto Rico"
         },
         {
             title: "Chimes Night",
@@ -173,7 +175,7 @@ const EVENTS_DATA = [
         },
         {
             title: "John Carroll Awards",
-            description: "Saturday’s John Carroll Awards Gala at the Coca-Cola Music Hall in Distrito T-Mobile, followed by an incredible after-party in the plaza.",
+            description: "At the Coca-Cola Music Hall in Distrito T-Mobile, followed by an incredible after-party in the plaza.",
             time: "Saturday",
             location: "Coca-Cola Music Hall in Distrito T-Mobile"
         }
@@ -181,7 +183,7 @@ const EVENTS_DATA = [
     ],
 
 
-     image: null // Will use default CSS background
+     image: IMG_PUERTO_RICO
 
   },
 ];
@@ -298,7 +300,7 @@ const ALBUMS_DATA = [
     link: "https://thechimes.lnk.to/36th-prospectAA",
     linerNotes: [
       {
-        author: "James P.M. Walsh, SJ #119",
+        author: "James P.M. Walsh, S.J. #119",
         text: "Twenty-seven years of involvement with The Chimes, a quarter century as the Active Chime who will never graduate… Each group is different and yet somehow the same as all the others. It’s like Commedia dell’arte: the same cast of characters, but played by different actors each year; the same basic script, but with interesting variants. Or maybe it’s more like South Park. As Celestial Chime, it’s been my privilege to preside at Chimes weddings and funerals, and to baptize Chimes children. I seem to have been given this “parish” comprising generations and continents. It’s a pastoral gig I never envisioned when I got ordained in 1970. But half my life as a Jesuit has been with The Chimes. It has been a privilege and, on the whole, joy, Deo gratias. And to think that Frank Jones planned the whole thing, right from the outset!"
       },
       {
@@ -325,24 +327,24 @@ const ALBUMS_DATA = [
       "The Tombs and 1789 Management"
     ],
     tracks: [
-      { title: "We Meet" },
-      { title: "Eight Days a Week" },
-      { title: "Soul to Soul" },
-      { title: "In the Still of the Night" },
-      { title: "Just a Gigolo" },
-      { title: "Something Tells Me" },
-      { title: "Glory of Love" },
-      { title: "Cartoon Theme Medley: Duck Tales / Fraggle Rock / Chip ’n’ Dale Rescure Rangers / Inspector Gadget / Gummi Bears" },
-      { title: "Maggie" },
-      { title: "King of Spain" },
-      { title: "Come Go with Me" },
-      { title: "Bright Morning Stars" },
-      { title: "Runaway" },
-      { title: "Change the World" },
-      { title: "Up the Ladder" },
-      { title: "King of Wishful Thinking" },
-      { title: "Georgetown University Fight Song" },
-      { title: "My Comrades" }
+      { title: "We Meet", composer: "Traditional", group:"2006 Group"},
+      { title: "Eight Days a Week", composer: "The Beatles (arr. Deke Sharon)", soloist: "Steve Alleva #195", group:"2004 Group" },
+      { title: "Soul to Soul", composer: "The Beatles (arr. Deke Sharon)", soloist: "Justin Douds #202", group:"2007 Group" },
+      { title: "In the Still of the Night", composer: "The Five Satins (arr. Boyz II Men)", soloist: "Tom Nicholas #203", group:"2006 Group" },
+      { title: "Just a Gigolo", composer: "Louis Prima", soloist: "Jeff Civillico #193", group:"2004 Group" },
+      { title: "Something Tells Me", composer: "Herman’s Hermits (arr. Jeff Gordon #192)", soloist: "Jeff Carlson #206", group:"2006 Group" },
+      { title: "Glory of Love", composer: "Sam Sanders #204", soloist: "Sam Sanders #204", group:"2007 Group" },
+      { title: "Cartoon Theme Medley: Duck Tales / Fraggle Rock / Chip ’n’ Dale Rescure Rangers / Inspector Gadget / Gummi Bears", composer: "Various (arr. Gerard Yun)", soloist: "Various", group:"2005 Group" },
+      { title: "Maggie", composer: "Traditional Barbershop", group:"2007 Group" },
+      { title: "King of Spain", composer: "Moxy Fruvous", soloist: "Jeff Civillico #193", group:"2004 Group" },
+      { title: "Come Go with Me", composer: "The Del-Vikings (arr. Jeff Gordon #192)", soloist: "Jeff Gordon #192", group:"2004 Group" },
+      { title: "Bright Morning Stars", composer: "The King’s Singers (arr. Stanley Brothers)", soloist: "Father J.P.M. Walsh #119", group:"2004 Group" },
+      { title: "Runaway", composer: "Del Shannon (arr. Deke Sharon)", soloist: "Sam Sanders #204", group:"2005 Group" },
+      { title: "Change the World", composer: "Eric Clapton (arr. Mark Patton #166)", soloist: "Eddie Keels #198", group:"2006 Group" },
+      { title: "Up the Ladder", composer: "The Supremes (arr. Jeff Carlson #206 & Eddie Keels #198)", soloist: "Justin Douds #202", group:"2007 Group" },
+      { title: "King of Wishful Thinking", composer: "Go West (arr. Deke Sharon)", soloist: "Pat McKegney #199", group:"2006 Group" },
+      { title: "Georgetown University Fight Song", composer: "The Georgetown Chimes", group:"2006 Group" },
+      { title: "My Comrades",composer: "Traditional",  soloist: "Eddie Keels #198", group:"2006 Group" }
     ]
   },
   { 
@@ -753,7 +755,7 @@ const DONOR_TIERS = [
     title: "The Social Chair",
     price: "$27.80/month",
     link: "https://buy.stripe.com/aEUaIy7YJaOI5QkcMW",
-    description: "The Chimes are nothing without the gathering. This tier is dedicated to the experience. You help subsidize the cost of events, like reunions or the Cherry Tree Massacre afterglow. You are ensuring that when we get together, we can afford to do it right.",
+    description: "The Chimes are nothing without the gathering. This tier is dedicated to the experience. You are ensuring that when we get together, we can afford to do it right.",
     cta: "Start the Party"
   },
   {
@@ -870,7 +872,7 @@ const EventDetailView = ({ event, navigateTo }) => {
                         <img
                             src={event.image}
                             alt="Event"
-                            className="w-full h-full object-cover grayscale"
+                            className="w-full h-full object-cover"
                         />
                     ) : (
                         <div className="w-full h-full bg-[#041E42]/10 flex items-center justify-center">
@@ -1223,9 +1225,12 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
                                   {track.composer}
                                </span>
                            )}
-                           {track.soloist && (
+                           {/* Updated logic for Group and Soloist */}
+                           {(track.group || track.soloist) && (
                                <span className="text-xs text-[#63666A] font-sans uppercase tracking-widest mt-1">
-                                  Feat. {track.soloist}
+                                  {track.group && track.group}
+                                  {track.group && track.soloist && " "}
+                                  {track.soloist && `Feat. ${track.soloist}`}
                                </span>
                            )}
                         </div>
@@ -1304,7 +1309,7 @@ const StoreView = () => (
              <h3 className="text-5xl font-serif mb-12 italic text-[#041E42] leading-tight">C’est une cravate.<br/>C’est un nœud papillon.</h3>
              <div className="text-[#63666A] text-lg leading-relaxed font-normal space-y-8 text-left hyphens-auto">
                 <p>Since the Actives are in need of new ties, Nikolai has worked with Drew to produce 50 neckties and 20 bow ties. This allows us to not only fill Active tie needs for the foreseeable future, but also permanently stock ties for any Chime who needs one.</p>
-                <p>Therefore, if you’ve lost your tie and need a replacement—or, let’s be honest, a refreshment—you can purchase one below.</p>
+                <p>Therefore, if you’ve lost your tie and need a replacement—or, let’s be honest, a <em>refreshment</em>—you can purchase one below.</p>
              </div>
           </div>
 
@@ -1399,7 +1404,7 @@ const BackstageView = () => (
                 </span>
                 <h3 className="text-4xl font-serif mb-8 text-[#041E42]">Slack Workspace</h3>
                 <p className="text-[#63666A] text-lg leading-relaxed font-normal mb-12">
-                   Instant messaging for the Active and Alumni community. Channels for coordination, hobbies, and general discourse.
+                   Instant messaging for the Active and Alumni community.
                 </p>
                 <div className="flex flex-col gap-6">
                       <a href="https://thechimes.slack.com" target="_blank" rel="noreferrer" className="w-full text-center py-5 border border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] text-[#041E42] transition-colors flex justify-center items-center gap-3">
@@ -1694,6 +1699,8 @@ export default function App() {
             />
             <p className="text-xs uppercase tracking-widest leading-loose text-[#595959]">
               Georgetown Chimes Alumni Association, Inc.<br/>
+              Michael Luckey, President<br />
+              Rufino A. Mendoza II, Treasurer<br />
               Alex Newton, Acting Secretary
             </p>
           </div>
