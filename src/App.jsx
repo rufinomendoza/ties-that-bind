@@ -9,9 +9,6 @@ import {
   Play,
   Clock,
   MapPin,
-  Disc,
-  MessageSquare,
-  Database,
   Ticket
 } from 'lucide-react';
 
@@ -41,26 +38,26 @@ import IMG_1959 from './assets/1959.jpg';
 import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
 import IMG_PUERTO_RICO from './assets/eric-ardito-uz1XrK91iGw-unsplash.jpeg';
 
-
-
 // --- Preview Placeholders (Comment out for Production) ---
-// const IMG_CHERRY_TREE = "https://placehold.co/800x1000/041E42/F4F4F3?text=Cherry+Tree+Massacre";
-// const IMG_LOGO = "https://placehold.co/300x100/F4F4F3/041E42?text=CHIMES+LOGO";
-// const IMG_LOGO_WHITE = "https://placehold.co/300x100/041E42/F4F4F3?text=CHIMES+LOGO";
-// const IMG_NECKTIE = "https://placehold.co/600x800/E5E5E4/041E42?text=Necktie";
-// const IMG_BOWTIE = "https://placehold.co/600x800/E5E5E4/041E42?text=Bowtie";
-// const IMG_DCDM = "https://placehold.co/600x600/2A3B55/FFFFFF?text=DCDM";
-// const IMG_PARTNERS = "https://placehold.co/600x600/4A5B75/FFFFFF?text=Partners";
-// const IMG_THREE_STRIPES = "https://placehold.co/600x600/6A7B95/FFFFFF?text=Three+Stripes";
-// const IMG_PROSPECT = "https://placehold.co/600x600/8A9BB5/FFFFFF?text=36th+%26+Prospect";
-// const IMG_BATTLE_GEAR = "https://placehold.co/600x600/9AABCA/FFFFFF?text=Battle+Gear";
-// const IMG_PSRC = "https://placehold.co/600x600/B0BCCF/FFFFFF?text=PSRC";
-// const IMG_LTGCR = "https://placehold.co/600x600/C4CDDC/FFFFFF?text=LTGCR";
-// const IMG_HOYA_SAXA = "https://placehold.co/600x600/D8DDE6/FFFFFF?text=Hoya+Saxa";
-// const IMG_CHIMES_75 = "https://placehold.co/600x600/2A3B55/FFFFFF?text=Chimes+75";
-// const IMG_CHIMES_66 = "https://placehold.co/600x600/4A5B75/FFFFFF?text=Chimes+66";
-// const IMG_1959 = "https://placehold.co/600x600/6A7B95/FFFFFF?text=1959";
-// const IMG_UNDER_THE_TREE = "https://placehold.co/600x600/8A9BB5/FFFFFF?text=Under+The+Tree";
+// const IMG_CHERRY_TREE = "https://placehold.co/1920x1080/0A0A0A/FFFFFF?text=The+Classic";
+// const IMG_CTM_BOND = "https://placehold.co/1200x1600/111111/EEEEEE?text=Cherry+Tree+Massacre";
+// const IMG_LOGO = "https://placehold.co/400x100/F5F5F0/041E42?text=CHIMES";
+// const IMG_LOGO_WHITE = "https://placehold.co/400x100/041E42/F5F5F0?text=CHIMES";
+// const IMG_NECKTIE = "https://placehold.co/1000x1200/E5E5E4/041E42?text=Necktie";
+// const IMG_BOWTIE = "https://placehold.co/1000x1200/E5E5E4/041E42?text=Bowtie";
+// const IMG_DCDM = "https://placehold.co/1000x1000/2A3B55/FFFFFF?text=DCDM";
+// const IMG_PARTNERS = "https://placehold.co/1000x1000/4A5B75/FFFFFF?text=Partners";
+// const IMG_THREE_STRIPES = "https://placehold.co/1000x1000/6A7B95/FFFFFF?text=Three+Stripes";
+// const IMG_PROSPECT = "https://placehold.co/1000x1000/8A9BB5/FFFFFF?text=36th+%26+Prospect";
+// const IMG_BATTLE_GEAR = "https://placehold.co/1000x1000/9AABCA/FFFFFF?text=Battle+Gear";
+// const IMG_PSRC = "https://placehold.co/1000x1000/B0BCCF/FFFFFF?text=PSRC";
+// const IMG_LTGCR = "https://placehold.co/1000x1000/C4CDDC/FFFFFF?text=LTGCR";
+// const IMG_HOYA_SAXA = "https://placehold.co/1000x1000/D8DDE6/FFFFFF?text=Hoya+Saxa";
+// const IMG_CHIMES_75 = "https://placehold.co/1000x1000/2A3B55/FFFFFF?text=Chimes+75";
+// const IMG_CHIMES_66 = "https://placehold.co/1000x1000/4A5B75/FFFFFF?text=Chimes+66";
+// const IMG_1959 = "https://placehold.co/1000x1000/6A7B95/FFFFFF?text=1959";
+// const IMG_UNDER_THE_TREE = "https://placehold.co/1000x1000/8A9BB5/FFFFFF?text=Under+The+Tree";
+// const IMG_PUERTO_RICO = "https://placehold.co/1200x800/111111/EEEEEE?text=Puerto+Rico";
 
 
 // --- Data ---
@@ -72,7 +69,6 @@ const EVENTS_DATA = [
     time: "7:00 PM",
     location: "GASTON HALL", 
     type: "Senior Parents & Families Weekend",
-    // eyebrow: "The 53rd Annual Cherry Tree Massacre",
     priceInfo: "General Admission $26.04",
     link: "https://buytickets.at/chimes/1998396/r/gcaa-site",
     description: [
@@ -98,11 +94,9 @@ const EVENTS_DATA = [
     time: "7:00 PM",
     location: "GASTON HALL", 
     type: "Alumni Weekend", // kept for listing, overridden by eyebrow in detail view
-    // eyebrow: "The 53rd Annual Cherry Tree Massacre",
     priceInfo: "General Admission $26.04",
     actions: [
         { label: "Buy Concert Tickets", link: "https://buytickets.at/chimes/1998443/r/gcaa-site", primary: true, icon: Ticket },
-        // { label: "Register for Afterglow", link: "https://buytickets.at/chimes/1998443/r/gcaa-site", primary: false }
     ],
     description: [
         "For 52 years, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. What began as a fundraiser to pay off a bar tab has evolved into a showcase of the university’s premier a cappella talent.",
@@ -123,15 +117,7 @@ const EVENTS_DATA = [
         {
             title: "Welcome Reception & Afterglow",
             description: "To Be Announced",
-            // time: "5:00 PM",
-            // location: "Dahlgren Quadrangle"
         },
-        // {
-        //     title: "The Afterglow",
-        //     description: "The tradition continues at The Tombs. Join the active group for food, drink, and song immediately following the concert.",
-        //     time: "9:30 PM",
-        //     location: "The Tombs"
-        // }
     ],
     image: IMG_CHERRY_TREE
   },
@@ -184,10 +170,7 @@ const EVENTS_DATA = [
         }
 
     ],
-
-
      image: IMG_PUERTO_RICO
-
   },
 ];
 
@@ -246,7 +229,7 @@ const ALBUMS_DATA = [
     image: IMG_PARTNERS,
     link: "https://thechimes.lnk.to/partners-in-chimeAA",
     tracks: [
-      { title: "We Meet (Live)" }, // , link: "https://georgetownchimes.org" to pass custom links
+      { title: "We Meet (Live)" }, 
       { title: "Little Bitty Pretty One", soloist: "Matthew Demartini" },
       { title: "Friends for Now", soloist: "Peter Fanone" },
       { title: "Wayfaring Stanger", soloist: "Jaewoo Kim" },
@@ -785,9 +768,9 @@ const DONOR_TIERS = [
 // --- Components ---
 
 const SectionHeader = ({ title, number }) => (
-  <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#041E42]/20 pb-8 mb-24 fade-in-element gap-4">
-    <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] tracking-tight leading-none">{title}</h2>
-    <span className="text-xs font-sans font-bold tracking-[0.25em] text-[#595959] uppercase md:mb-2">{number}</span>
+  <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#041E42]/10 pb-8 mb-32 fade-in-element gap-4">
+    <h2 className="text-6xl md:text-9xl font-serif text-[#041E42] tracking-tight leading-none">{title}</h2>
+    <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase md:mb-4">{number}</span>
   </div>
 );
 
@@ -795,64 +778,66 @@ const HomeView = ({ navigateTo, openAlbumById, openEvent }) => (
     <>
       {/* Hero */}
       <div 
-        className="relative min-h-screen flex flex-col justify-center px-8 md:px-16 border-b border-[#041E42]/10 bg-[#041E42] bg-cover bg-center"
-        style={{ backgroundImage: `url(${IMG_CHERRY_TREE})` }}
+        className="relative min-h-screen flex flex-col justify-center px-8 md:px-16 border-b border-[#041E42]/10 bg-[#F4F4F3]"
       >
-        {/* Dark Overlay for Text Contrast */}
-        <div className="absolute inset-0 bg-black/40 z-0"></div>
+        {/* Subtle texture or color wash */}
+        <div className="absolute inset-0 bg-[#F4F4F3] z-0"></div>
 
-        <div className="max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 fade-in-element">
-           {/* Architectural Title Stack */}
-          <div className="text-center space-y-4 md:space-y-0 mb-12">
-            <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#F4F4F3] block">
+        <div className="max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 fade-in-element py-32">
+           {/* Architectural Title Stack - Ultra Large, Serif, Tight Leading */}
+          <div className="text-center space-y-0 mb-24 select-none" aria-label="Values: Fellowship, Harmony, Legacy">
+            <h1 className="text-[14vw] font-serif leading-[0.8] tracking-tighter text-[#041E42] block">
               FELLOWSHIP
             </h1>
-            <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#F4F4F3] block italic opacity-60">
+            <h1 className="text-[14vw] font-serif leading-[0.8] tracking-tighter text-[#041E42] block opacity-40 italic">
               HARMONY
             </h1>
-            <h1 className="text-[12vw] font-serif leading-[0.85] tracking-tight text-[#F4F4F3] block">
+            <h1 className="text-[14vw] font-serif leading-[0.8] tracking-tighter text-[#041E42] block">
               LEGACY
             </h1>
           </div>
 
-          {/* New CTAs */}
-          <div className="flex flex-col md:flex-row gap-6 items-center">
+          {/* Minimalist CTAs */}
+          <div className="flex flex-col md:flex-row gap-12 items-center">
              <button 
                 onClick={() => openAlbumById(1)}
-                className="px-12 py-4 bg-[#F4F4F3] text-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#D50032] hover:text-[#F4F4F3] transition-colors"
+                className="group relative pb-1 text-xs font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
              >
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
                 Stream "And So It Goes"
              </button>
              <button 
                 onClick={() => openEvent(EVENTS_DATA[1])}
-                className="px-12 py-4 border border-[#F4F4F3] text-[#F4F4F3] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#F4F4F3] hover:text-[#041E42] transition-colors"
+                className="group relative pb-1 text-xs font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
              >
+                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
                 Book Cherry Tree Tickets
              </button>
           </div>
         </div>
       </div>
 
-      {/* Featured Event Teaser - Split Screen */}
-      <section className="min-h-[80vh] flex flex-col md:flex-row border-b border-[#041E42]/10">
-        <div className="md:w-1/2 p-12 md:p-24 flex flex-col justify-center bg-[#E5E5E4] fade-in-element relative overflow-hidden group">
+      {/* Featured Event Teaser - Asymmetrical Editorial Layout */}
+      <section className="min-h-screen flex flex-col md:flex-row border-b border-[#041E42]/10 bg-[#F4F4F3]">
+        <div className="md:w-5/12 p-12 md:p-24 flex flex-col justify-end bg-[#E5E5E4] fade-in-element relative overflow-hidden group">
              <div className="absolute inset-0 z-0">
                  <img 
                  src={IMG_CTM_BOND}
-                 alt="The Cherry Tree Massacre" 
-                 className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1.5s]"
+                 alt="The Cherry Tree Massacre Event Poster" 
+                 className="w-full h-full object-cover grayscale opacity-90 group-hover:scale-105 transition-transform duration-[2s] ease-out"
                />
              </div>
         </div>
         
-        <div className="md:w-1/2 p-12 md:p-24 flex flex-col justify-center bg-[#F4F4F3] fade-in-element">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-8 block uppercase">Upcoming Gathering</span>
-            <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-none">The Cherry Tree Massacre</h3>
-            <p className="text-[#63666A] mb-12 max-w-prose text-lg font-normal leading-normal text-left hyphens-auto">
+        <div className="md:w-7/12 p-12 md:p-32 flex flex-col justify-center bg-[#F4F4F3] fade-in-element">
+            <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] mb-12 block uppercase">Upcoming Gathering</span>
+            <h3 className="text-7xl md:text-9xl font-serif mb-12 text-[#041E42] leading-[0.9] -ml-2">The Cherry Tree Massacre</h3>
+            <div className="w-24 h-[1px] bg-[#041E42]/20 mb-12"></div>
+            <p className="text-[#041E42] mb-16 max-w-lg text-xl font-serif italic leading-relaxed text-left">
                 In 1974, we sang for solvency. In 2026, we sing for the legacy. Most traditions fade. This one just gets louder. Two nights. One historic setlist.
             </p>
-            <button onClick={() => navigateTo('agenda')} className="w-fit pb-2 border-b border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:text-[#D50032] hover:border-[#D50032] transition-colors">
-                View Full Agenda
+            <button onClick={() => navigateTo('agenda')} className="w-fit text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
+                View Full Agenda <ArrowRight size={14} />
             </button>
         </div>
       </section>
@@ -866,79 +851,80 @@ const EventDetailView = ({ event, navigateTo }) => {
       <div className="max-w-[1920px] mx-auto">
         <button
           onClick={() => navigateTo('agenda')}
-          className="mb-16 text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-3 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element"
+          className="mb-24 text-[10px] font-bold tracking-[0.3em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
         >
-          <ChevronLeft size={12} /> Return to Agenda
+          <ChevronLeft size={10} /> Return to Agenda
         </button>
 
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-24 fade-in-element">
+        <div className="flex flex-col lg:flex-row gap-24 lg:gap-48 mb-32 fade-in-element">
           {/* Sticky Sidebar Area */}
-          <div className="lg:w-1/3">
-             <div className="sticky top-48">
-                <div className="aspect-[4/5] w-full bg-[#E5E5E4] mb-12 relative overflow-hidden">
+          <div className="lg:w-4/12">
+             <div className="sticky top-32">
+                <div className="aspect-[3/4] w-full bg-[#E5E5E4] mb-16 relative overflow-hidden">
                     {event.image ? (
                         <img
                             src={event.image}
-                            alt="Event"
-                            className="w-full h-full object-cover"
+                            alt={`${event.title} Event Poster`}
+                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"
                         />
                     ) : (
-                        <div className="w-full h-full bg-[#041E42]/10 flex items-center justify-center">
-                            <img src={IMG_LOGO} className="w-1/2 opacity-20" alt="Logo" />
+                        <div className="w-full h-full bg-[#041E42]/5 flex items-center justify-center">
+                            <img src={IMG_LOGO} className="w-1/2 opacity-20" alt="Chimes Logo Placeholder" />
                         </div>
                     )}
-                    <div className="absolute inset-0 bg-[#041E42]/20"></div>
                 </div>
 
-                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-8">
-                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Date</span>
-                  <span className="text-2xl font-serif text-[#041E42]">{event.date}</span>
+                <div className="space-y-8 font-serif text-[#041E42]">
+                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4">
+                      <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Date</span>
+                      <span className="text-2xl italic">{event.date}</span>
+                    </div>
+
+                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4">
+                      <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Time</span>
+                      <span className="text-2xl italic">{event.time}</span>
+                    </div>
+
+                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4">
+                      <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Venue</span>
+                      <span className="text-2xl italic">{event.location}</span>
+                    </div>
                 </div>
 
-                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-8">
-                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Time</span>
-                  <span className="text-2xl font-serif text-[#041E42]">{event.time}</span>
-                </div>
-
-                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-12">
-                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Venue</span>
-                  <span className="text-2xl font-serif text-[#041E42]">{event.location}</span>
-                </div>
-
-                {/* Actions: Render multiple if present, else single link */}
+                {/* Actions: Clean Text Links */}
+                <div className="mt-16 space-y-6">
                 {event.actions ? (
-                   <div className="space-y-4">
-                      {event.actions.map((action, idx) => (
+                      event.actions.map((action, idx) => (
                          <a 
                              key={idx}
                              href={action.link}
                              target="_blank" 
-                             rel="noreferrer"
-                             className={`w-full py-5 text-xs font-bold tracking-[0.25em] uppercase transition-colors flex items-center justify-center gap-4 ${
+                             rel="noopener noreferrer"
+                             className={`block w-full py-4 text-[10px] font-bold tracking-[0.3em] uppercase transition-colors text-center border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 ${
                                action.primary 
-                                 ? "bg-[#041E42] text-[#F4F4F3] hover:bg-[#D50032]" 
-                                 : "border border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-[#F4F4F3]"
+                                 ? "border-[#041E42] bg-[#041E42] text-[#F4F4F3] hover:bg-[#D50032] hover:border-[#D50032]" 
+                                 : "border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-[#F4F4F3]"
                              }`}
                           >
-                             {action.icon && <action.icon size={14} />} {action.label}
+                             {action.label} <span className="sr-only">(opens in new tab)</span>
                           </a>
-                      ))}
-                   </div>
+                      ))
                 ) : (
                    event.link && (
                       <a
                           href={event.link}
                           target="_blank"
-                          rel="noreferrer"
-                          className="w-full py-5 bg-[#041E42] text-[#F4F4F3] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#D50032] transition-colors flex items-center justify-center gap-4 mb-4"
+                          rel="noopener noreferrer"
+                          className="block w-full py-4 text-[10px] font-bold tracking-[0.3em] uppercase transition-colors text-center border border-[#041E42] bg-[#041E42] text-[#F4F4F3] hover:bg-[#D50032] hover:border-[#D50032] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                       >
-                          <Ticket size={14} /> {event.type === 'CONCERT' ? 'Buy Tickets' : 'Event Info'}
+                          {event.type === 'CONCERT' ? 'Purchase Tickets' : 'Event Info'} <span className="sr-only">(opens in new tab)</span>
                       </a>
                    )
                 )}
+                </div>
 
                 {event.priceInfo && (
-                   <p className="text-center text-xs text-[#63666A] uppercase tracking-widest font-bold mt-4">
+                   <p className="text-center text-[10px] text-[#63666A] uppercase tracking-[0.3em] font-bold mt-8">
                       {event.priceInfo}
                    </p>
                 )}
@@ -946,13 +932,13 @@ const EventDetailView = ({ event, navigateTo }) => {
           </div>
 
           {/* Scrollable Content */}
-          <div className="lg:w-2/3 pt-4">
-            <span className="text-xs font-bold tracking-[0.2em] text-[#D50032] uppercase mb-6 block">
+          <div className="lg:w-7/12 pt-8">
+            <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] mb-12 block uppercase">
               {event.eyebrow || event.type}
             </span>
-            <h1 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-none -ml-1">{event.title}</h1>
+            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[0.9] -ml-2">{event.title}</h1>
 
-            <div className="text-xl font-normal text-[#63666A] mb-16 leading-normal max-w-prose border-l border-[#D50032] pl-8 space-y-8 text-left hyphens-auto">
+            <div className="text-xl md:text-2xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-prose space-y-12 text-left">
                 {Array.isArray(event.description) ? (
                    event.description.map((para, i) => <p key={i}>{para}</p>)
                 ) : (
@@ -962,13 +948,12 @@ const EventDetailView = ({ event, navigateTo }) => {
 
             {/* Guest Groups Section */}
             {event.guestGroups && (
-                <div className="mb-32">
-                    <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">Guest Groups</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="mb-48 border-t border-[#041E42]/10 pt-24">
+                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-16 block uppercase">Guest Groups</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                         {event.guestGroups.map((group, idx) => (
-                           <div key={idx} className="p-8 border border-[#041E42]/10 bg-white">
-                               <span className="text-xs font-bold text-[#595959] uppercase tracking-widest mb-2 block">Featured Guest</span>
-                               <h4 className="text-2xl font-serif text-[#041E42]">{group}</h4>
+                           <div key={idx} className="">
+                               <h4 className="text-3xl font-serif text-[#041E42]">{group}</h4>
                            </div>
                         ))}
                     </div>
@@ -977,30 +962,22 @@ const EventDetailView = ({ event, navigateTo }) => {
 
             {/* Schedule / Sub-Events Section */}
             {event.schedule && (
-              <div className="mb-32 fade-in-element">
-                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">
-                  Alumni Events
+              <div className="mb-32 fade-in-element border-t border-[#041E42]/10 pt-24">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-16 block uppercase">
+                  Itinerary
                 </span>
-                <div className="space-y-12">
+                <div className="space-y-24">
                   {event.schedule.map((item, idx) => (
-                    <div key={idx} className="bg-white p-8 shadow-sm rounded-sm">
-                      <h4 className="text-3xl font-serif text-[#041E42] mb-4">{item.title}</h4>
-                      <p className="text-[#63666A] text-lg leading-relaxed mb-6 max-w-prose text-left hyphens-auto">
-                        {item.description}
-                      </p>
-                      
-                      {/* Updated Section: Conditional Logic for Schedule Items */}
-                      <div className="flex gap-8 text-xs font-bold tracking-widest uppercase text-[#595959]">
-                        {item.time && (
-                          <span className="flex items-center gap-2">
-                            <Clock size={12} /> {item.time}
-                          </span>
-                        )}
-                        {item.location && (
-                          <span className="flex items-center gap-2">
-                            <MapPin size={12} /> {item.location}
-                          </span>
-                        )}
+                    <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-12">
+                      <div className="md:col-span-4 text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase space-y-4">
+                         {item.time && <div className="block">{item.time}</div>}
+                         {item.location && <div className="block text-[#041E42]">{item.location}</div>}
+                      </div>
+                      <div className="md:col-span-8">
+                        <h4 className="text-4xl font-serif text-[#041E42] mb-6 italic">{item.title}</h4>
+                        <p className="text-[#63666A] text-lg font-serif leading-relaxed max-w-md">
+                            {item.description}
+                        </p>
                       </div>
                     </div>
                   ))}
@@ -1024,35 +1001,45 @@ const AgendaView = ({ navigateTo, openEvent }) => (
           {EVENTS_DATA.map((event) => (
             <div 
               key={event.id} 
-              className="group border-t border-[#041E42]/10 py-16 px-6 md:px-12 hover:bg-[#E5E5E4]/30 transition-colors duration-700 grid grid-cols-1 md:grid-cols-12 gap-8 items-start relative cursor-pointer"
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openEvent(event);
+                }
+              }}
+              className="group border-t border-[#041E42]/10 py-24 hover:bg-white transition-colors duration-1000 grid grid-cols-1 md:grid-cols-12 gap-12 items-baseline relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
               onClick={() => openEvent(event)}
+              aria-label={`View details for ${event.title} on ${event.date}`}
             >
-              <div className="md:col-span-3 flex flex-col">
-                 <span className="text-5xl font-serif text-[#041E42] mb-2">{event.date.split(' ')[1].replace(',', '')}</span>
-                 <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">{event.date.split(' ')[0]} {event.date.split(' ')[2]}</span>
+              <div className="md:col-span-2 flex flex-col">
+                 <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-4">{event.date.split(' ')[0]}</span>
+                 <span className="text-6xl font-serif text-[#041E42] italic">{event.date.split(' ')[1].replace(',', '')}</span>
               </div>
               
-              <div className="md:col-span-6 pr-12">
-                <span className="inline-block mb-4 text-xs font-bold tracking-[0.2em] uppercase text-[#D50032]">{event.type}</span>
-                <h3 className="text-4xl md:text-5xl font-serif mb-6 text-[#041E42] group-hover:text-[#D50032] transition-colors">
+              <div className="md:col-span-7 pr-12">
+                <span className="inline-block mb-8 text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">{event.type}</span>
+                <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-[0.9]">
                     {event.title}
                 </h3>
                 
-                <p className="text-[#63666A] font-normal max-w-md leading-normal text-left hyphens-auto">
+                <p className="text-[#041E42] font-serif italic text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700">
                    {Array.isArray(event.description) ? event.description[0] : event.description}
                 </p>
               </div>
 
-              <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8">
-                <div className="text-xs tracking-[0.2em] text-[#63666A] uppercase flex flex-col items-end gap-2 text-right">
-                   <span className="flex items-center gap-2">{event.time} <Clock size={12} /></span>
-                   <span className="flex items-center gap-2">{event.location} <MapPin size={12} /></span>
+              <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-12">
+                <div className="text-[10px] tracking-[0.3em] text-[#041E42] uppercase flex flex-col items-end gap-4 text-right">
+                   <span className="block">{event.time}</span>
+                   <span className="block">{event.location}</span>
                 </div>
                 
                 <span 
-                  className="px-8 py-4 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors duration-500"
+                  className="hidden md:inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors"
+                  aria-hidden="true"
                 >
-                  View Details
+                  View Details &rarr;
                 </span>
               </div>
             </div>
@@ -1063,44 +1050,52 @@ const AgendaView = ({ navigateTo, openEvent }) => (
     </div>
 );
 
-// Updated: Added navigateTo prop
 const DiscographyView = ({ openAlbum, navigateTo }) => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="Discography" number="ARCHIVE" />
+        <SectionHeader title="Archive" number="DISCOGRAPHY" />
         
-        {/* Minimalist Grid - High Spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24 mb-32 fade-in-element">
+        {/* Gallery Grid - Generous Spacing */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-32 mb-48 fade-in-element">
           {ALBUMS_DATA.map((album) => (
             <div 
               key={album.id} 
+              role="button"
+              tabIndex={0}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  openAlbum(album);
+                }
+              }}
               onClick={() => openAlbum(album)}
-              className="group cursor-pointer flex flex-col gap-6"
+              className="group cursor-pointer flex flex-col gap-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-8"
+              aria-label={`View details for album ${album.title}`}
             >
-              <div className="relative overflow-hidden aspect-square bg-[#E5E5E4]">
+              <div className="relative aspect-square bg-[#E5E5E4] overflow-hidden">
                  {/* Conditionally render Image or CSS Background */}
                  {album.image ? (
                     <img 
                       src={album.image} 
                       alt={album.title} 
-                      className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                      className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105 filter grayscale hover:grayscale-0"
                     />
                  ) : (
-                    <div className={`w-full h-full ${album.cover} transition-transform duration-[1.5s] ease-out group-hover:scale-105`}></div>
+                    <div className={`w-full h-full ${album.cover} transition-transform duration-[2s] ease-out group-hover:scale-105`}></div>
                  )}
                  
                  {album.badge && (
-                    <div className="absolute top-0 left-0 bg-[#D50032] text-[#F4F4F3] px-3 py-1 text-xs font-bold tracking-[0.25em] uppercase">
+                    <div className="absolute top-4 left-4 bg-[#D50032] text-[#F4F4F3] px-4 py-2 text-[10px] font-bold tracking-[0.3em] uppercase">
                       {album.badge}
                     </div>
                   )}
               </div>
 
-              <div className="flex flex-col items-center text-center">
-                <span className="text-xs font-bold tracking-[0.25em] text-[#595959] mb-3 block uppercase">
+              <div className="flex flex-col items-start pl-2 border-l border-[#041E42]/10 group-hover:border-[#D50032] transition-colors duration-500">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-4 block uppercase ml-4">
                   {album.year}
                 </span>
-                <h3 className="font-serif text-3xl text-[#041E42] group-hover:text-[#D50032] transition-colors duration-500">
+                <h3 className="font-serif text-3xl text-[#041E42] group-hover:text-[#D50032] transition-colors duration-500 ml-4 leading-tight">
                   {album.title}
                 </h3>
               </div>
@@ -1109,25 +1104,25 @@ const DiscographyView = ({ openAlbum, navigateTo }) => (
         </div>
 
         {/* Informational Footer */}
-        <div className="border-t border-[#041E42]/10 pt-24 flex flex-col items-center text-center fade-in-element">
-            <h3 className="text-4xl font-serif text-[#041E42] mb-6">Incomplete Archives</h3>
-            <p className="text-[#63666A] text-lg font-normal leading-normal max-w-prose mb-8 text-left hyphens-auto">
+        <div className="border-t border-[#041E42]/10 pt-32 flex flex-col items-center text-center fade-in-element">
+            <h3 className="text-5xl font-serif text-[#041E42] mb-12 italic">The Vault is Incomplete.</h3>
+            <p className="text-[#041E42] text-xl font-serif leading-relaxed max-w-prose mb-16">
                 The digitization of the Chimes catalogue is an ongoing preservation project. We are restoring master tapes for future high-fidelity release.
             </p>
             
-            {/* Links container with standard gap for spacing */}
-            <div className="flex flex-col items-center gap-6">
+            {/* Links container */}
+            <div className="flex flex-col items-center gap-8">
                 <a 
                     href="https://thechimes.notion.site" 
                     target="_blank" 
-                    rel="noreferrer" 
-                    className="text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032] transition-colors"
+                    rel="noopener noreferrer" 
+                    className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                 >
-                    Access Preliminary Archives
+                    Access Preliminary Archives <span className="sr-only">(opens in new tab)</span>
                 </a>
                 <button 
                     onClick={() => navigateTo && navigateTo('philanthropy')} 
-                    className="text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032] transition-colors"
+                    className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                 >
                     Support Digitization
                 </button>
@@ -1142,102 +1137,101 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
       <div className="max-w-[1920px] mx-auto">
         <button 
           onClick={() => navigateTo('discography')}
-          className="mb-16 text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-3 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element"
+          className="mb-24 text-[10px] font-bold tracking-[0.3em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
         >
-          <ChevronLeft size={12} /> Return to Index
+          <ChevronLeft size={10} /> Return to Index
         </button>
 
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-24 fade-in-element">
+        <div className="flex flex-col lg:flex-row gap-24 lg:gap-48 mb-32 fade-in-element">
           {/* Sticky Sidebar Area */}
-          <div className="lg:w-1/3">
-             <div className="sticky top-48">
+          <div className="lg:w-4/12">
+             <div className="sticky top-32">
                 {/* Conditionally render Image or CSS Background */}
                 {selectedAlbum?.image ? (
                    <img 
                      src={selectedAlbum.image} 
-                     alt={selectedAlbum.title} 
-                     className="aspect-square w-full object-cover mb-12 shadow-2xl shadow-[#041E42]/5"
+                     alt={`Album cover for ${selectedAlbum.title}`}
+                     className="aspect-square w-full object-cover mb-16 shadow-xl shadow-[#041E42]/5 grayscale hover:grayscale-0 transition-all duration-[1.5s]"
                    />
                 ) : (
-                   <div className={`aspect-square w-full ${selectedAlbum?.cover || 'bg-[#E5E5E4]'} mb-12 shadow-2xl shadow-[#041E42]/5`}></div>
+                   <div className={`aspect-square w-full ${selectedAlbum?.cover || 'bg-[#E5E5E4]'} mb-16 shadow-xl shadow-[#041E42]/5`}></div>
                 )}
                 
-                <div className="flex justify-between items-baseline border-b border-[#041E42]/20 pb-6 mb-8">
-                  <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase">Issued</span>
-                  <span className="text-2xl font-serif text-[#041E42]">{selectedAlbum?.year}</span>
+                <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 mb-8">
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase">Issued</span>
+                  <span className="text-3xl font-serif text-[#041E42] italic">{selectedAlbum?.year}</span>
                 </div>
                 
                 {selectedAlbum?.link && (
                     <button 
                         onClick={() => window.open(selectedAlbum.link, '_blank')}
-                        className="w-full py-5 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors flex items-center justify-center gap-4 mb-8"
+                        className="w-full py-4 border border-[#041E42] bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] hover:border-[#D50032] transition-colors flex items-center justify-center gap-4 mb-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                     >
-                        <Play size={10} fill="currentColor" /> {selectedAlbum.ctaText || "Listen"}
+                         {selectedAlbum.ctaText || "Listen on Streaming"}
                     </button>
                 )}
                 
                 {selectedAlbum?.dedication && (
-                      <div className="mt-8">
-                         <p className="text-xs text-[#595959] uppercase tracking-[0.2em] font-bold mb-4">Dedication</p>
-                         <p className="text-sm font-serif italic text-[#63666A] leading-relaxed">{selectedAlbum.dedication}</p>
+                      <div className="mt-12">
+                         <p className="text-[10px] text-[#595959] uppercase tracking-[0.3em] font-bold mb-6">Dedication</p>
+                         <p className="text-sm font-serif italic text-[#041E42] leading-loose">{selectedAlbum.dedication}</p>
                       </div>
                 )}
              </div>
           </div>
 
           {/* Scrollable Content */}
-          <div className="lg:w-2/3 pt-4">
-            <h1 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-none -ml-1">{selectedAlbum?.title}</h1>
+          <div className="lg:w-7/12 pt-8">
+            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[0.9] -ml-2">{selectedAlbum?.title}</h1>
             
             {selectedAlbum?.description && (
-                <p className="text-xl font-normal text-[#63666A] mb-16 leading-normal max-w-prose border-l border-[#D50032] pl-8 text-left hyphens-auto">
+                <p className="text-2xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-prose">
                     {selectedAlbum.description}
                 </p>
             )}
             
             {selectedAlbum?.leadSingle && (
-                <div className="bg-[#E5E5E4]/30 p-12 mb-24 border border-[#041E42]/5">
-                    <span className="text-xs font-bold tracking-[0.2em] text-[#D50032] uppercase mb-4 block">Featured Track</span>
-                    <h3 className="text-4xl font-serif text-[#041E42] mb-2">{selectedAlbum.leadSingle.title}</h3>
-                    <p className="text-xs text-[#63666A] uppercase tracking-widest mb-8">{selectedAlbum.leadSingle.composer}</p>
+                <div className="bg-white p-12 mb-32 border border-[#041E42]/5 shadow-sm">
+                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] uppercase mb-6 block">Featured Track</span>
+                    <h3 className="text-5xl font-serif text-[#041E42] mb-2 italic">{selectedAlbum.leadSingle.title}</h3>
+                    <p className="text-[10px] text-[#595959] uppercase tracking-[0.2em] mb-12">{selectedAlbum.leadSingle.composer}</p>
                     {selectedAlbum.leadSingle.link && (
                         <a 
                             href={selectedAlbum.leadSingle.link}
                             target="_blank"
-                            rel="noreferrer"
-                            className="inline-block text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032]"
+                            rel="noopener noreferrer"
+                            className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                         >
-                            Play Track
+                            Play Track <span className="sr-only">(opens in new tab)</span>
                         </a>
                     )}
                 </div>
             )}
 
-            <div className="flex flex-col mb-32">
-              <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-12 block border-b border-[#041E42]/20 pb-4 uppercase">Tracklist</span>
+            <div className="flex flex-col mb-48">
+              <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-16 block border-b border-[#041E42]/10 pb-4 uppercase">Tracklist</span>
               {selectedAlbum?.tracks.map((track, idx) => (
                 <a 
                   key={idx} 
                   href={track.link || selectedAlbum?.link}
                   target="_blank"
-                  rel="noreferrer"
-                  className="group flex items-center justify-between py-6 border-b border-[#041E42]/5 hover:bg-[#E5E5E4]/30 px-6 -mx-6 transition-colors cursor-pointer text-[#041E42] block"
+                  rel="noopener noreferrer"
+                  className="group flex items-baseline justify-between py-6 border-b border-[#041E42]/5 hover:pl-4 transition-all duration-500 cursor-pointer text-[#041E42] block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
                 >
                   <div className="flex items-baseline gap-12 w-full">
-                    <span className="text-xs font-bold text-[#595959] w-8">{String(idx + 1).padStart(2, '0')}</span>
-                    <div className="flex flex-col md:flex-row md:items-baseline md:justify-between w-full">
-                        <span className="font-serif text-2xl">{track.title}</span>
-                        <div className="flex flex-col md:text-right mt-2 md:mt-0">
+                    <span className="text-[10px] font-bold text-[#595959] w-8">{String(idx + 1).padStart(2, '0')}</span>
+                    <div className="flex flex-col w-full">
+                        <span className="font-serif text-3xl group-hover:italic group-hover:text-[#D50032] transition-colors">{track.title}</span>
+                         <div className="flex flex-col md:flex-row md:items-baseline gap-4 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
                            {track.composer && (
-                               <span className="text-xs text-[#595959] font-sans uppercase tracking-widest">
+                               <span className="text-[10px] text-[#595959] font-sans uppercase tracking-widest">
                                   {track.composer}
                                </span>
                            )}
-                           {/* Updated logic for Group and Soloist */}
                            {(track.group || track.soloist) && (
-                               <span className="text-xs text-[#63666A] font-sans uppercase tracking-widest mt-1">
+                               <span className="text-[10px] text-[#595959] font-sans uppercase tracking-widest">
                                   {track.group && track.group}
-                                  {track.group && track.soloist && " "}
+                                  {track.group && track.soloist && " / "}
                                   {track.soloist && `Feat. ${track.soloist}`}
                                </span>
                            )}
@@ -1250,13 +1244,13 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
 
             {/* Liner Notes Section */}
             {selectedAlbum?.linerNotes && (
-                <div className="mb-32">
-                    <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-16 block border-b border-[#041E42]/20 pb-4 uppercase">Album Notes</span>
-                    <div className="space-y-24">
+                <div className="mb-48">
+                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-24 block border-b border-[#041E42]/10 pb-4 uppercase">Album Notes</span>
+                    <div className="space-y-32">
                         {selectedAlbum.linerNotes.map((note, idx) => (
-                            <div key={idx} className="pl-4 md:pl-12 border-l border-[#041E42]/10">
-                                {note.author && <h4 className="font-serif text-3xl mb-6 italic text-[#041E42]">{note.author}</h4>}
-                                <p className="text-[#63666A] leading-loose font-normal text-lg text-left hyphens-auto max-w-prose">
+                            <div key={idx} className="">
+                                {note.author && <h4 className="font-serif text-4xl mb-8 italic text-[#041E42]">{note.author}</h4>}
+                                <p className="text-[#041E42] leading-loose font-serif text-xl text-left hyphens-auto max-w-prose">
                                     {note.text}
                                 </p>
                             </div>
@@ -1265,22 +1259,22 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
                 </div>
             )}
 
-            {/* Credits Section */}
+            {/* Credits Section - Three Column for density */}
             {selectedAlbum?.credits && (
                 <div className="mb-32">
-                    <span className="text-xs font-bold tracking-[0.2em] text-[#595959] mb-16 block border-b border-[#041E42]/20 pb-4 uppercase">Production Credits</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-24 block border-b border-[#041E42]/10 pb-4 uppercase">Production Credits</span>
+                    <div className="grid grid-cols-1 gap-y-24">
                         {Object.entries(selectedAlbum.credits).map(([section, roles]) => (
-                            <div key={section} className="col-span-2 md:col-span-1">
-                                <h5 className="font-bold text-xs uppercase tracking-[0.2em] mb-8 text-[#041E42]">{section}</h5>
-                                <ul className="space-y-8">
+                            <div key={section} className="grid grid-cols-1 md:grid-cols-4 gap-8 border-t border-[#041E42]/5 pt-8">
+                                <h5 className="font-bold text-[10px] uppercase tracking-[0.3em] text-[#041E42] col-span-1">{section}</h5>
+                                <div className="col-span-3 grid grid-cols-1 md:grid-cols-2 gap-12">
                                     {roles.map((role, idx) => (
-                                        <li key={idx} className="flex flex-col">
-                                            <span className="text-[#595959] text-xs uppercase tracking-[0.15em] mb-1">{role.role}</span>
-                                            <span className="font-serif text-xl leading-snug text-[#041E42]">{role.name}</span>
-                                        </li>
+                                        <div key={idx} className="flex flex-col">
+                                            <span className="text-[#595959] text-[9px] uppercase tracking-[0.2em] mb-2">{role.role}</span>
+                                            <span className="font-serif text-lg leading-snug text-[#041E42]">{role.name}</span>
+                                        </div>
                                     ))}
-                                </ul>
+                                </div>
                             </div>
                         ))}
                     </div>
@@ -1289,11 +1283,11 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
             
             {/* Acknowledgements */}
             {selectedAlbum?.acknowledgements && (
-                <div className="py-24 border-t border-b border-[#041E42]/10">
-                      <h5 className="font-bold text-xs uppercase tracking-[0.2em] mb-12 text-[#041E42] text-center">Acknowledgements</h5>
-                      <div className="flex flex-wrap justify-center gap-x-12 gap-y-6 max-w-2xl mx-auto">
+                <div className="py-32 border-t border-b border-[#041E42]/10">
+                      <h5 className="font-bold text-[10px] uppercase tracking-[0.3em] mb-16 text-[#041E42] text-center">Acknowledgements</h5>
+                      <div className="flex flex-wrap justify-center gap-x-12 gap-y-8 max-w-4xl mx-auto">
                         {selectedAlbum.acknowledgements.map((name, i) => (
-                            <span key={i} className="text-lg text-[#63666A] font-serif italic">{name}</span>
+                            <span key={i} className="text-xl text-[#041E42] font-serif italic opacity-70">{name}</span>
                         ))}
                       </div>
                 </div>
@@ -1312,63 +1306,62 @@ const StoreView = () => (
 
         <div className="flex flex-col lg:flex-row gap-24 lg:gap-48 mb-32 fade-in-element">
           {/* Editorial Copy */}
-          <div className="lg:w-1/3 pt-12">
-             <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase block mb-8">Uniform & Regalia</span>
-             <h3 className="text-5xl font-serif mb-12 italic text-[#041E42] leading-tight">C’est une cravate.<br/>C’est un nœud papillon.</h3>
-             <div className="text-[#63666A] text-lg leading-relaxed font-normal space-y-8 text-left hyphens-auto">
+          <div className="lg:w-4/12 pt-12">
+             <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block mb-12">Uniform & Regalia</span>
+             <h3 className="text-6xl font-serif mb-12 italic text-[#041E42] leading-tight">C’est une cravate.<br/>C’est un nœud papillon.</h3>
+             <div className="text-[#041E42] text-xl font-serif italic leading-relaxed space-y-8 text-left max-w-sm">
                 <p>Since the Actives are in need of new ties, Nikolai has worked with Drew to produce 50 neckties and 20 bow ties. This allows us to not only fill Active tie needs for the foreseeable future, but also permanently stock ties for any Chime who needs one.</p>
                 <p>Therefore, if you’ve lost your tie and need a replacement—or, let’s be honest, a <em>refreshment</em>—you can purchase one below.</p>
              </div>
           </div>
 
           {/* Product Grid */}
-          <div className="lg:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-24">
+          <div className="lg:w-8/12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-32">
             
             {/* Necktie Product */}
             <div className="group cursor-pointer">
-               <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
+               <div className="bg-[#E5E5E4] aspect-[3/4] mb-12 relative overflow-hidden">
                   <img 
                     src={IMG_NECKTIE} 
-                    alt="The Silk Necktie"
-                    className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                    alt="The Silk Necktie product shot"
+                    className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                   />
-                  <div className="absolute inset-0 bg-[#041E42] opacity-0 group-hover:opacity-10 transition-opacity duration-700"></div>
                </div>
                <div className="flex flex-col items-center text-center">
-                  <h4 className="text-3xl font-serif text-[#041E42] mb-2">The Silk Necktie</h4>
-                  <p className="text-xs text-[#63666A] mb-6 font-bold tracking-widest uppercase">Handmade in the UK</p>
-                  <span className="text-sm font-serif italic text-[#041E42] mb-6">$75.00</span>
+                  <h4 className="text-4xl font-serif text-[#041E42] mb-4 italic">The Silk Necktie</h4>
+                  <p className="text-[10px] text-[#63666A] mb-8 font-bold tracking-[0.3em] uppercase">Handmade in the UK</p>
+                  <span className="text-lg font-serif text-[#041E42] mb-8">$75.00</span>
                   <a 
                      href="https://buy.stripe.com/14k6si2EpcWQemQ3co"
                      target="_blank"
-                     rel="noreferrer"
-                     className="inline-block px-12 py-4 border border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors"
+                     rel="noopener noreferrer"
+                     className="inline-block px-12 py-4 border border-[#041E42] bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] hover:border-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                     >
-                     Acquire
+                     Acquire <span className="sr-only">The Silk Necktie (opens in new tab)</span>
                    </a>
                </div>
             </div>
 
              {/* Bow Tie Product */}
              <div className="group cursor-pointer">
-               <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
-      <img 
+               <div className="bg-[#E5E5E4] aspect-[3/4] mb-12 relative overflow-hidden">
+                  <img 
                      src={IMG_BOWTIE} 
-                     alt="The Silk Necktie"
-                     className="w-full h-full object-cover transition-transform duration-[1.5s] ease-out group-hover:scale-105"
+                     alt="The Silk Bow Tie product shot"
+                     className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                    />
                </div>
                <div className="flex flex-col items-center text-center">
-                  <h4 className="text-3xl font-serif text-[#041E42] mb-2">The Silk Bow Tie</h4>
-                  <p className="text-xs text-[#63666A] mb-6 font-bold tracking-widest uppercase">Handmade in the UK</p>
-                  <span className="text-sm font-serif italic text-[#041E42] mb-6">$75.00</span>
+                  <h4 className="text-4xl font-serif text-[#041E42] mb-4 italic">The Silk Bow Tie</h4>
+                  <p className="text-[10px] text-[#63666A] mb-8 font-bold tracking-[0.3em] uppercase">Handmade in the UK</p>
+                  <span className="text-lg font-serif text-[#041E42] mb-8">$75.00</span>
                   <a 
                      href="https://buy.stripe.com/eVacQGceZ2icceI28l"
                      target="_blank"
-                     rel="noreferrer"
-                     className="inline-block px-12 py-4 border border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase text-[#041E42] hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors"
+                     rel="noopener noreferrer"
+                     className="inline-block px-12 py-4 border border-[#041E42] bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] hover:border-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                     >
-                     Acquire
+                     Acquire <span className="sr-only">The Silk Bow Tie (opens in new tab)</span>
                    </a>
                </div>
             </div>
@@ -1387,39 +1380,43 @@ const BackstageView = () => (
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-32 fade-in-element">
             {/* GleeManager Section */}
-            <div className="p-16 border border-[#041E42]/10 hover:border-[#041E42]/30 transition-colors duration-700 bg-[#FFFFFF]">
-                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase mb-8 flex items-center gap-3">
-                  Database
-                </span>
-                <h3 className="text-4xl font-serif mb-8 text-[#041E42]">GleeManager on Notion</h3>
-                <p className="text-[#63666A] text-lg leading-relaxed font-normal mb-12">
-                    Our central repository for historical data, part tapes, and archival recordings. 
-                </p>
+            <div className="p-24 border border-[#041E42]/10 bg-white hover:border-[#041E42] transition-colors duration-1000 flex flex-col justify-between h-full">
+                <div>
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-12 block">
+                    Database
+                  </span>
+                  <h3 className="text-5xl font-serif mb-8 text-[#041E42] italic">GleeManager on Notion</h3>
+                  <p className="text-[#041E42] text-xl font-serif leading-relaxed mb-16">
+                      Our central repository for historical data, part tapes, and archival recordings. 
+                  </p>
+                </div>
                 <div className="flex flex-col gap-6">
-                      <a href="https://thechimes.notion.site" target="_blank" rel="noreferrer" className="w-full text-center py-5 border border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] text-[#041E42] transition-colors flex justify-center items-center gap-3">
-                        Launch Notion <ExternalLink size={12} />
+                      <a href="https://thechimes.notion.site" target="_blank" rel="noopener noreferrer" className="w-full text-center py-5 bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] transition-colors flex justify-center items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
+                        Launch Notion <ExternalLink size={12} aria-hidden="true" /> <span className="sr-only">(opens in new tab)</span>
                       </a>
-                      <a href="https://drive.google.com/uc?export=download&id=1s9YI3af7Y17OpptSKo4LRAsM15QCyOlp" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#595959]">
-                        Download Manual <ArrowRight size={12} />
+                      <a href="https://drive.google.com/uc?export=download&id=1s9YI3af7Y17OpptSKo4LRAsM15QCyOlp" className="text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#041E42] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
+                        Download Manual <ArrowRight size={12} aria-hidden="true" />
                       </a>
                 </div>
             </div>
 
             {/* Slack Section */}
-            <div className="p-16 border border-[#041E42]/10 hover:border-[#041E42]/30 transition-colors duration-700 bg-[#FFFFFF]">
-                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase mb-8 flex items-center gap-3">
-                  Messaging
-                </span>
-                <h3 className="text-4xl font-serif mb-8 text-[#041E42]">Slack Workspace</h3>
-                <p className="text-[#63666A] text-lg leading-relaxed font-normal mb-12">
-                   Instant messaging for the Active and Alumni community.
-                </p>
+            <div className="p-24 border border-[#041E42]/10 bg-white hover:border-[#041E42] transition-colors duration-1000 flex flex-col justify-between h-full">
+                <div>
+                  <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-12 block">
+                    Messaging
+                  </span>
+                  <h3 className="text-5xl font-serif mb-8 text-[#041E42] italic">Slack Workspace</h3>
+                  <p className="text-[#041E42] text-xl font-serif leading-relaxed mb-16">
+                    Instant messaging for the Active and Alumni community.
+                  </p>
+                </div>
                 <div className="flex flex-col gap-6">
-                      <a href="https://thechimes.slack.com" target="_blank" rel="noreferrer" className="w-full text-center py-5 border border-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] text-[#041E42] transition-colors flex justify-center items-center gap-3">
-                        Launch Slack <ExternalLink size={12} />
+                      <a href="https://thechimes.slack.com" target="_blank" rel="noopener noreferrer" className="w-full text-center py-5 bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] transition-colors flex justify-center items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
+                        Launch Slack <ExternalLink size={12} aria-hidden="true" /> <span className="sr-only">(opens in new tab)</span>
                       </a>
-                      <a href="https://drive.google.com/uc?export=download&id=1AeangbSpDCNOv-sHq5yqaz5Djk0YmesR" className="text-xs font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#595959]">
-                        Download Manual <ArrowRight size={12} />
+                      <a href="https://drive.google.com/uc?export=download&id=1AeangbSpDCNOv-sHq5yqaz5Djk0YmesR" className="text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#041E42] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
+                        Download Manual <ArrowRight size={12} aria-hidden="true" />
                       </a>
                 </div>
             </div>
@@ -1431,52 +1428,46 @@ const BackstageView = () => (
 const PhilanthropyView = () => (
     <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-48 px-8 md:px-16 pb-32">
        <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="Fund the Brotherhood" number="PATRONAGE" />
+        <SectionHeader title="Patronage" number="FUND THE BROTHERHOOD" />
         
         {/* Intro */}
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-32 fade-in-element">
-            <div className="lg:w-1/3 pt-4">
-                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase block mb-6">01. The Donor Guild</span>
-                <p className="text-[#63666A] text-xs leading-loose font-bold uppercase tracking-widest max-w-xs">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-48 fade-in-element">
+            <div className="lg:w-4/12 pt-4 border-t border-[#041E42]/10">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block mb-6 mt-6">01. The Donor Guild</span>
+                <p className="text-[#041E42] text-[10px] leading-loose font-bold uppercase tracking-widest max-w-xs">
                    Note: Contributions to the Georgetown Chimes Alumni Association 501(c)(7) are not tax deductible.
                 </p>
             </div>
-            <div className="lg:w-2/3">
-                <h3 className="text-4xl md:text-5xl font-serif mb-8 leading-tight text-[#041E42]">
+            <div className="lg:w-8/12">
+                <h3 className="text-5xl md:text-7xl font-serif mb-12 leading-[0.9] text-[#041E42]">
                     The Donor Guild is the steady heartbeat that allows the Alumni Association to operate with confidence.
                 </h3>
-                <p className="text-xl text-[#63666A] font-normal max-w-prose leading-relaxed text-left hyphens-auto">
+                <p className="text-2xl text-[#041E42] font-serif italic max-w-prose leading-relaxed text-left">
                     By subscribing, you ensure the tradition is waiting for you: the tables piled high with Wisey’s, the tankards full, and the door open.
                 </p>
             </div>
         </div>
 
         {/* Guild Tiers Grid - Clean Borders, No Fill */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 mb-48 fade-in-element">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-64 fade-in-element">
             {DONOR_TIERS.map((tier, idx) => (
-                <div key={idx} className="border border-[#041E42]/10 p-12 flex flex-col justify-between min-h-[450px] hover:border-[#041E42] transition-colors duration-700 group bg-white">
+                <div key={idx} className="border-t border-[#041E42]/20 pt-8 flex flex-col justify-between min-h-[400px] hover:border-[#D50032] transition-colors duration-700 group">
                     <div>
-                        <div className="mb-6">
-                            <h4 className="text-3xl font-serif text-[#041E42] mb-3">{tier.title}</h4>
-                            <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase block">{tier.price}</span>
+                        <div className="mb-8">
+                            <h4 className="text-4xl font-serif text-[#041E42] mb-4 italic">{tier.title}</h4>
+                            <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block">{tier.price}</span>
                         </div>
-                        {/* Tri-stripe Separator - Equal Lengths */}
-                        <div className="flex flex-col gap-1 mb-8 w-fit">
-                            <div className="w-8 h-[2px] bg-[#BBBCBC]"></div>
-                            <div className="w-8 h-[2px] bg-[#BBBCBC]"></div>
-                            <div className="w-8 h-[2px] bg-[#BBBCBC]"></div>
-                        </div>
-                        <p className="text-[#63666A] text-sm leading-loose font-normal">
+                        <p className="text-[#041E42] text-lg leading-loose font-serif">
                             {tier.description}
                         </p>
                     </div>
                     <a 
                         href={tier.link} 
                         target="_blank" 
-                        rel="noreferrer"
-                        className="w-full text-center py-4 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.2em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors mt-12"
+                        rel="noopener noreferrer"
+                        className="w-full text-left py-4 text-[#041E42] text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors mt-12 flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                     >
-                        {tier.cta}
+                        {tier.cta} <ArrowRight size={12} aria-hidden="true" /> <span className="sr-only">(opens in new tab)</span>
                     </a>
                 </div>
             ))}
@@ -1484,33 +1475,33 @@ const PhilanthropyView = () => (
 
         {/* One Time Gift */}
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 border-t border-[#041E42]/10 pt-32 fade-in-element">
-             <div className="lg:w-1/3">
-                <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase block mb-6">02. Single Contribution</span>
-                <p className="text-[#63666A] text-xs leading-loose font-bold uppercase tracking-widest max-w-xs">
+             <div className="lg:w-4/12 pt-6">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block mb-6">02. Single Contribution</span>
+                <p className="text-[#041E42] text-[10px] leading-loose font-bold uppercase tracking-widest max-w-xs">
                    Legacy Projects & Capital Improvements
                 </p>
             </div>
-            <div className="lg:w-2/3">
-                <h3 className="text-6xl font-serif mb-12 text-[#041E42]">Upgrade the ride.</h3>
-                <p className="text-[#63666A] text-xl leading-relaxed mb-12 font-normal max-w-prose text-left hyphens-auto">
+            <div className="lg:w-8/12">
+                <h3 className="text-8xl font-serif mb-12 text-[#041E42]">Upgrade the ride.</h3>
+                <p className="text-[#041E42] text-2xl font-serif italic leading-relaxed mb-16 max-w-prose">
                     If the Donor Guild keeps the engine running, One-Time Gifts upgrade the ride. Your contributions allow us to hold Cadillac reunions at Chevrolet rates. They are the catalyst that brings our history alive.
                 </p>
                 <a 
                     href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4"
                     target="_blank" 
-                    rel="noreferrer"
-                    className="inline-block px-16 py-6 border border-[#041E42] text-[#041E42] text-xs font-bold tracking-[0.25em] uppercase hover:bg-[#041E42] hover:text-[#F4F4F3] transition-colors"
+                    rel="noopener noreferrer"
+                    className="inline-block px-12 py-5 bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                 >
-                    Make a Contribution
+                    Make a Contribution <span className="sr-only">(opens in new tab)</span>
                 </a>
             </div>
         </div>
 
         {/* Management */}
-        <div className="mt-32 pt-16 border-t border-[#041E42]/5 text-center fade-in-element">
-            <h4 className="font-serif text-2xl mb-4 text-[#041E42] italic">Membership Services</h4>
-            <p className="text-[#63666A] text-sm font-normal">
-                Manage your guild subscription via the <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noreferrer" className="text-[#041E42] underline decoration-1 underline-offset-4 hover:text-[#D50032]">Stripe Portal</a>.
+        <div className="mt-48 pt-24 border-t border-[#041E42]/5 text-center fade-in-element">
+            <h4 className="font-serif text-3xl mb-4 text-[#041E42] italic">Membership Services</h4>
+            <p className="text-[#041E42] text-sm font-sans">
+                Manage your guild subscription via the <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[#041E42] underline decoration-1 underline-offset-4 hover:text-[#D50032] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]">Stripe Portal<span className="sr-only"> (opens in new tab)</span></a>.
             </p>
         </div>
 
@@ -1578,24 +1569,22 @@ export default function App() {
 
   // Logic for dynamic Navbar styling
   const isHome = activePage === 'home';
-  const isTransparent = isHome && !scrolled && !isMenuOpen;
-   
-  // Use White text/logo when transparent (on top of dark background), Navy otherwise
-  const navTextColor = isTransparent ? 'text-[#F4F4F3]' : 'text-[#041E42]';
-  const currentLogo = isTransparent ? IMG_LOGO_WHITE : IMG_LOGO;
+  // Keep navigation consistent color (Dark Navy) for high-end look, unless over a dark image (which we aren't doing anymore, home is now light)
+  const navTextColor = 'text-[#041E42]'; 
+  const currentLogo = IMG_LOGO; 
 
   const NavLink = ({ page, children, mobile }) => (
     <button
       onClick={() => navigateTo(page)}
       className={`${
         mobile 
-          ? 'block w-full text-center text-4xl font-serif py-4 text-[#041E42]' 
-          : `text-xs font-bold tracking-[0.2em] uppercase transition-colors duration-500 relative group ${activePage === page ? (isTransparent ? 'text-[#F4F4F3]' : 'text-[#041E42]') : (isTransparent ? 'text-[#F4F4F3]/70 hover:text-[#F4F4F3]' : 'text-[#595959] hover:text-[#041E42]')}`
+          ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42] border-b border-[#041E42]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset' 
+          : `text-[10px] font-bold tracking-[0.25em] uppercase transition-all duration-500 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 ${activePage === page ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`
       }`}
     >
       {children}
-      {!mobile && activePage === page && (
-          <span className={`absolute -bottom-2 left-1/2 w-full h-px transform -translate-x-1/2 ${isTransparent ? 'bg-[#F4F4F3]' : 'bg-[#041E42]'}`}></span>
+      {!mobile && (
+          <span className={`absolute -bottom-2 left-0 w-full h-[1px] bg-[#041E42] transform origin-left transition-transform duration-500 ${activePage === page ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
       )}
     </button>
   );
@@ -1623,35 +1612,42 @@ export default function App() {
           font-family: "neue-haas-unica", "Montserrat", sans-serif !important;
         }
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(30px); }
+          from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
         .fade-in-element {
-          animation: fadeIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+          animation: fadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
         }
       `}</style>
 
-      {/* Navigation - Ultra Minimal */}
+      {/* Skip to Content for Accessibility */}
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] px-6 py-4 bg-[#041E42] text-[#F4F4F3] text-xs font-bold uppercase tracking-widest border border-[#D50032]">
+        Skip to main content
+      </a>
+
+      {/* Navigation - High End Minimal */}
       <nav 
-        className={`fixed top-0 w-full z-50 transition-all duration-700 ease-out border-b ${
+        className={`fixed top-0 w-full z-50 transition-all duration-700 ease-out ${
           scrolled || isMenuOpen 
-            ? 'bg-[#F4F4F3]/95 backdrop-blur-md border-[#041E42]/10 py-4' 
-            : 'bg-transparent border-transparent py-10'
+            ? 'bg-[#F4F4F3]/95 backdrop-blur-md py-6 border-b border-[#041E42]/5' 
+            : 'bg-transparent py-12'
         }`}
+        aria-label="Main Navigation"
       >
         <div className="max-w-[1920px] mx-auto px-8 md:px-16">
           <div className="flex items-center justify-between">
             {/* Logo */}
-            <div 
-              className={`cursor-pointer z-50 transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-100'}`}
+            <button 
+              className={`cursor-pointer z-50 transition-all duration-500 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4`}
               onClick={() => navigateTo('home')}
+              aria-label="Go to Homepage"
             >
               <img 
                 src={currentLogo}
                 alt="Chimes Wordmark" 
-                className={`h-8 w-auto transition-all duration-500`}
+                className={`h-6 w-auto`}
               />
-            </div>
+            </button>
             
             {/* Desktop Menu - Spaced Out */}
             <div className={`hidden md:flex items-center gap-16`}>
@@ -1665,29 +1661,37 @@ export default function App() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden z-50 p-2 ${isTransparent && !isMenuOpen ? 'text-[#F4F4F3]' : 'text-[#041E42]'}`}
+              className={`md:hidden z-50 p-2 text-[#041E42] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]`}
+              aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-menu"
             >
-              {isMenuOpen ? <X size={24} strokeWidth={1} className="text-[#041E42]" /> : <Menu size={24} strokeWidth={1} />}
+              {isMenuOpen ? <X size={20} strokeWidth={1} /> : <Menu size={20} strokeWidth={1} />}
             </button>
           </div>
         </div>
 
-        {/* Mobile Fullscreen Menu */}
-        <div className={`fixed inset-0 bg-[#F4F4F3] z-40 transition-all duration-[500ms] ease-in-out ${isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'} flex flex-col`}>
-          <div className="flex-1 w-full flex flex-col justify-center items-center px-6 text-[#041E42] space-y-8 overflow-y-auto py-8">
+        {/* Mobile Fullscreen Menu - Elegant Overlay */}
+        <div 
+          id="mobile-menu"
+          className={`fixed inset-0 bg-[#F4F4F3] z-40 transition-all duration-[800ms] cubic-bezier(0.86, 0, 0.07, 1) ${isMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-full invisible'} flex flex-col`}
+          aria-hidden={!isMenuOpen}
+        >
+          <div className="flex-1 w-full flex flex-col justify-center items-center px-8 text-[#041E42] space-y-4">
+             <div className="w-full max-w-sm border-t border-[#041E42]/10"></div>
             <NavLink page="agenda" mobile>Agenda</NavLink>
             <NavLink page="discography" mobile>Archive</NavLink>
             <NavLink page="philanthropy" mobile>Patronage</NavLink>
             <NavLink page="store" mobile>Atelier</NavLink>
             <NavLink page="backstage" mobile>Backstage</NavLink>
+            <div className="w-full max-w-sm border-t border-[#041E42]/10"></div>
           </div>
         </div>
       </nav>
 
-      <main className="min-h-screen">
+      <main id="main-content" className="min-h-screen">
         {activePage === 'home' && <HomeView navigateTo={navigateTo} openAlbumById={openAlbumById} openEvent={openEvent} />}
         {activePage === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
-        {/* Updated: Passing navigateTo to DiscographyView */}
         {activePage === 'discography' && <DiscographyView openAlbum={openAlbum} navigateTo={navigateTo} />}
         {activePage === 'album_detail' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
         {activePage === 'event_detail' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
@@ -1696,52 +1700,47 @@ export default function App() {
         {activePage === 'backstage' && <BackstageView />}
       </main>
 
-      {/* Footer - Minimalist */}
-      <footer className="bg-[#F4F4F3] text-[#041E42] border-t border-[#041E42]/10 py-32 px-8 md:px-16">
+      {/* Footer - Minimalist & Archival */}
+      <footer className="bg-[#F4F4F3] text-[#041E42] border-t border-[#041E42]/5 py-48 px-8 md:px-16">
         <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
-          <div className="md:col-span-4 flex flex-col justify-between items-start">
+          <div className="md:col-span-4 flex flex-col justify-between items-start h-full">
             <img 
               src={IMG_LOGO} 
               alt="Chimes Wordmark" 
-              className="h-8 w-auto mb-8 opacity-50 grayscale" 
+              className="h-6 w-auto mb-12 opacity-80" 
             />
-            <p className="text-xs uppercase tracking-widest leading-loose text-[#595959]">
+            <p className="text-[10px] uppercase tracking-[0.25em] leading-loose text-[#595959]">
               Georgetown Chimes Alumni Association, Inc.<br/>
-              Michael Luckey, President<br />
-              Rufino A. Mendoza II, Treasurer<br />
-              Alex Newton, Acting Secretary
+              Est. 1946<br />
+              Washington, D.C.
             </p>
           </div>
           
-          <div className="md:col-span-8 flex flex-wrap justify-end gap-24">
-            <div className="flex flex-col gap-6">
-              <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#595959]">Index</span>
-              <button onClick={() => navigateTo('agenda')} className="text-left text-sm font-serif hover:text-[#D50032] transition-colors">Events</button>
-              <button onClick={() => navigateTo('discography')} className="text-left text-sm font-serif hover:text-[#D50032] transition-colors">Archive</button>
-              <button onClick={() => navigateTo('philanthropy')} className="text-left text-sm font-serif hover:text-[#D50032] transition-colors">Patronage</button>
-              <button onClick={() => navigateTo('store')} className="text-left text-sm font-serif hover:text-[#D50032] transition-colors">Atelier</button>
+          <div className="md:col-span-8 flex flex-wrap justify-end gap-32">
+            <div className="flex flex-col gap-8">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#595959]">Index</span>
+              <button onClick={() => navigateTo('agenda')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Events</button>
+              <button onClick={() => navigateTo('discography')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Archive</button>
+              <button onClick={() => navigateTo('philanthropy')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Patronage</button>
+              <button onClick={() => navigateTo('store')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Atelier</button>
             </div>
             
-             <div className="flex flex-col gap-6">
-              <span className="text-xs font-bold tracking-[0.2em] uppercase text-[#595959]">Members</span>
-              <button onClick={() => navigateTo('backstage')} className="text-left text-sm font-serif hover:text-[#D50032] transition-colors">Database</button>
-              <button onClick={() => navigateTo('backstage')} className="text-left text-sm font-serif hover:text-[#D50032] transition-colors">Messaging</button>
-            </div>
-
-             <div className="flex flex-col justify-end">
-              <button 
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="text-xs font-bold tracking-[0.2em] uppercase flex items-center gap-2 group hover:text-[#D50032] transition-colors"
-              >
-                Return to Top <ChevronDown className="rotate-180 group-hover:-translate-y-1 transition-transform duration-500" size={12} />
-              </button>
+             <div className="flex flex-col gap-8">
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#595959]">Members</span>
+              <button onClick={() => navigateTo('backstage')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Database</button>
+              <button onClick={() => navigateTo('backstage')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Messaging</button>
             </div>
           </div>
         </div>
         
-        <div className="max-w-[1920px] mx-auto mt-24 pt-8 border-t border-[#041E42]/5 flex justify-between items-center text-xs text-[#595959] uppercase tracking-widest">
+        <div className="max-w-[1920px] mx-auto mt-32 pt-12 border-t border-[#041E42]/5 flex flex-col md:flex-row justify-between items-center text-[9px] text-[#595959] uppercase tracking-[0.3em] gap-8">
           <span>© {new Date().getFullYear()} Georgetown Chimes Alumni Association, Inc.</span>
-          <span>Crafted in Canvas</span>
+          <button 
+                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+                className="flex items-center gap-2 group hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
+              >
+                Return to Top <ChevronDown className="rotate-180" size={10} aria-hidden="true" />
+          </button>
         </div>
       </footer>
     </div>
