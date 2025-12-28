@@ -1034,7 +1034,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                     {event.title}
                 </h3>
                 
-                <p className="text-[#041E42] font-serif italic text-lg md:text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700 px-0 md:px-4">
+                <p className="text-[#041E42] font-serif italic text-lg md:text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700 pl-1 -ml-1 md:ml-0 md:px-4">
                    {Array.isArray(event.description) ? event.description[0] : event.description}
                 </p>
               </div>
