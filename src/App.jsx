@@ -845,23 +845,24 @@ const HomeView = ({ navigateTo, openAlbumById, openEvent }) => (
     </>
 );
 
+// --- Detail View ---
 const EventDetailView = ({ event, navigateTo }) => {
     if (!event) return null;
     return (
-    <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
+    <div className="min-h-screen pt-32 md:pt-48 px-6 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
         <button
           onClick={() => navigateTo('agenda')}
-          className="mb-24 text-[10px] font-bold tracking-[0.3em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
+          className="mb-16 md:mb-24 text-[10px] font-bold tracking-[0.3em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
         >
           <ChevronLeft size={10} /> Return to Agenda
         </button>
 
-        <div className="flex flex-col lg:flex-row gap-24 lg:gap-48 mb-32 fade-in-element">
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-48 mb-32 fade-in-element">
           {/* Sticky Sidebar Area */}
           <div className="lg:w-4/12">
-             <div className="sticky top-32">
-                <div className="aspect-[3/4] w-full bg-[#E5E5E4] mb-16 relative overflow-hidden">
+             <div className="lg:sticky lg:top-32">
+                <div className="aspect-[3/4] w-full bg-[#E5E5E4] mb-12 md:mb-16 relative overflow-hidden shadow-lg md:shadow-none">
                     {event.image ? (
                         <img
                             src={event.image}
@@ -875,25 +876,25 @@ const EventDetailView = ({ event, navigateTo }) => {
                     )}
                 </div>
 
-                <div className="space-y-8 font-serif text-[#041E42]">
-                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-3">
+                <div className="space-y-6 md:space-y-8 font-serif text-[#041E42]">
+                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-1 md:px-3">
                       <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Date</span>
-                      <span className="text-2xl italic">{event.date}</span>
+                      <span className="text-xl md:text-2xl italic">{event.date}</span>
                     </div>
 
-                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-3">
+                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-1 md:px-3">
                       <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Time</span>
-                      <span className="text-2xl italic">{event.time}</span>
+                      <span className="text-xl md:text-2xl italic">{event.time}</span>
                     </div>
 
-                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-3">
+                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-1 md:px-3">
                       <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Venue</span>
-                      <span className="text-2xl italic">{event.location}</span>
+                      <span className="text-xl md:text-2xl italic text-right pl-4">{event.location}</span>
                     </div>
                 </div>
 
                 {/* Actions: Clean Text Links */}
-                <div className="mt-16 space-y-6">
+                <div className="mt-12 md:mt-16 space-y-4 md:space-y-6">
                 {event.actions ? (
                       event.actions.map((action, idx) => (
                          <a 
@@ -933,13 +934,16 @@ const EventDetailView = ({ event, navigateTo }) => {
           </div>
 
           {/* Scrollable Content */}
-          <div className="lg:w-7/12 pt-8">
-            <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] mb-12 block uppercase">
+          <div className="lg:w-7/12 pt-0 md:pt-8">
+            <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] mb-8 md:mb-12 block uppercase">
               {event.eyebrow || event.type}
             </span>
-            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[1.0] -ml-2">{event.title}</h1>
+            
+            <h1 className="text-5xl md:text-9xl font-serif mb-8 md:mb-16 text-[#041E42] leading-[1.0] ml-0 md:-ml-6 px-0 md:px-4">
+                {event.title}
+            </h1>
 
-            <div className="text-xl md:text-2xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-prose space-y-12 text-left">
+            <div className="text-lg md:text-2xl font-serif italic text-[#041E42] mb-16 md:mb-24 leading-relaxed max-w-prose space-y-8 md:space-y-12 text-left px-0 md:px-4">
                 {Array.isArray(event.description) ? (
                    event.description.map((para, i) => <p key={i}>{para}</p>)
                 ) : (
@@ -949,9 +953,9 @@ const EventDetailView = ({ event, navigateTo }) => {
 
             {/* Guest Groups Section */}
             {event.guestGroups && (
-                <div className="mb-48 border-t border-[#041E42]/10 pt-24">
-                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-16 block uppercase">Guest Groups</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+                <div className="mb-32 md:mb-48 border-t border-[#041E42]/10 pt-16 md:pt-24">
+                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-12 md:mb-16 block uppercase">Guest Groups</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 md:gap-y-16">
                         {event.guestGroups.map((group, idx) => (
                            <div key={idx} className="">
                                <h4 className="text-3xl font-serif text-[#041E42]">{group}</h4>
@@ -963,19 +967,19 @@ const EventDetailView = ({ event, navigateTo }) => {
 
             {/* Schedule / Sub-Events Section */}
             {event.schedule && (
-              <div className="mb-32 fade-in-element border-t border-[#041E42]/10 pt-24">
+              <div className="mb-32 fade-in-element border-t border-[#041E42]/10 pt-16 md:pt-24">
                 <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-16 block uppercase">
                   Itinerary
                 </span>
-                <div className="space-y-24">
+                <div className="space-y-16 md:space-y-24">
                   {event.schedule.map((item, idx) => (
-                    <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-12">
+                    <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
                       <div className="md:col-span-4 text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase space-y-4">
                          {item.time && <div className="block">{item.time}</div>}
                          {item.location && <div className="block text-[#041E42]">{item.location}</div>}
                       </div>
                       <div className="md:col-span-8">
-                        <h4 className="text-4xl font-serif text-[#041E42] mb-6 italic">{item.title}</h4>
+                        <h4 className="text-3xl md:text-4xl font-serif text-[#041E42] mb-6 italic">{item.title}</h4>
                         <p className="text-[#63666A] text-lg font-serif leading-relaxed max-w-md">
                             {item.description}
                         </p>
@@ -993,8 +997,9 @@ const EventDetailView = ({ event, navigateTo }) => {
     );
 };
 
+// --- Agenda View ---
 const AgendaView = ({ navigateTo, openEvent }) => (
-    <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
+    <div className="min-h-screen pt-32 md:pt-48 px-6 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Agenda" number="2026" />
         
@@ -1010,34 +1015,38 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                   openEvent(event);
                 }
               }}
-              className="group border-t border-[#041E42]/10 py-24 px-8 md:px-12 hover:bg-white transition-colors duration-1000 grid grid-cols-1 md:grid-cols-12 gap-12 items-baseline relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
+              // UPDATED: Added px-4 (instead of px-0) on mobile to ensure content isn't edge-to-edge
+              className="group border-t border-[#041E42]/10 py-16 md:py-24 px-4 md:px-12 hover:bg-white transition-colors duration-1000 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
               onClick={() => openEvent(event)}
               aria-label={`View details for ${event.title} on ${event.date}`}
             >
-              <div className="md:col-span-2 flex flex-col">
-                 <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-4">{event.date.split(' ')[0]}</span>
-                 <span className="text-6xl font-serif text-[#041E42] italic">{event.date.split(' ')[1].replace(',', '')}</span>
+              <div className="md:col-span-2 flex flex-col md:pl-2">
+                 <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-2 md:mb-4">{event.date.split(' ')[0]}</span>
+                 <span className="text-5xl md:text-6xl font-serif text-[#041E42] italic">{event.date.split(' ')[1].replace(',', '')}</span>
               </div>
               
-              <div className="md:col-span-7 pr-12">
-                <span className="inline-block mb-8 text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">{event.type}</span>
-                <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-[1.0]">
+              <div className="md:col-span-7 pr-0 md:pr-12">
+                <span className="inline-block mb-6 md:mb-8 text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032] px-0 md:px-2">
+                    {event.type}
+                </span>
+                
+                <h3 className="text-4xl md:text-7xl font-serif mb-6 md:mb-8 text-[#041E42] leading-[1.0] px-0 md:px-4">
                     {event.title}
                 </h3>
                 
-                <p className="text-[#041E42] font-serif italic text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700">
+                <p className="text-[#041E42] font-serif italic text-lg md:text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700 pl-1 -ml-1 md:ml-0 md:px-4">
                    {Array.isArray(event.description) ? event.description[0] : event.description}
                 </p>
               </div>
 
-              <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-12">
-                <div className="text-[10px] tracking-[0.3em] text-[#041E42] uppercase flex flex-col items-end gap-4 text-right">
+              <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8 md:gap-12 mt-4 md:mt-0">
+                <div className="text-[10px] tracking-[0.3em] text-[#041E42] uppercase flex flex-col items-start md:items-end gap-2 md:gap-4 text-left md:text-right">
                    <span className="block">{event.time}</span>
                    <span className="block">{event.location}</span>
                 </div>
                 
                 <span 
-                  className="hidden md:inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors"
+                  className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors"
                   aria-hidden="true"
                 >
                   View Details &rarr;
