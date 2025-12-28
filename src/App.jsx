@@ -1020,12 +1020,12 @@ const AgendaView = ({ navigateTo, openEvent }) => (
               </div>
               
               <div className="md:col-span-7 pr-12">
-                <span className="inline-block mb-8 text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">{event.type}</span>
-                <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-[1.0]">
+                <span className="inline-block mb-8 text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032] px-2">{event.type}</span>
+                <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-[1.0] px-2">
                     {event.title}
                 </h3>
                 
-                <p className="text-[#041E42] font-serif italic text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700">
+                <p className="text-[#041E42] font-serif italic text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700 px-2">
                    {Array.isArray(event.description) ? event.description[0] : event.description}
                 </p>
               </div>
