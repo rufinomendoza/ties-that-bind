@@ -136,7 +136,7 @@ const EVENTS_DATA = [
     id: 3, 
     title: "John Carroll Weekend", 
     date: "APR 18–21, 2026", 
-    time: "TBD",
+    time: "ALL DAY",
     location: "PUERTO RICO", 
     type: "Puerto Rico",
         actions: [
@@ -216,9 +216,9 @@ const ALBUMS_DATA = [
       ],
       "Engineering": [
         { role: "Recording Engineer", name: "Blaine Misner at Cue Recording, Falls Church, VA" },
-        { role: "Mixing", name: "Blaine Misner at Cue Recording, Falls Church, VA" },
+        { role: "Mixing", name: "Blaine Misner at Cue Recording" },
         { role: "Editing", name: "Blaine Misner at Cue Recording" },
-        { role: "Mastering", name: "Geoff Pesche at Abbey Road Studios, London" }
+        { role: "Mastering", name: "Geoff Pesche at Abbey Road Studios" }
       ],
       "Art & Design": [
         { role: "Cover Art", name: "Caleb Morris" },
@@ -379,25 +379,25 @@ const ALBUMS_DATA = [
       "Our friends, families, neophytes, and alumni"
     ],
     tracks: [
-      { title: "We Meet" },
-      { title: "I’ve Just Seen a Face" },
-      { title: "Peaceful Easy Feeling" },
-      { title: "Apeman" },
-      { title: "Tempted" },
-      { title: "Danny Boy" },
-      { title: "I’m Beginning to See the Light" },
-      { title: "Just You, Just Me" },
-      { title: "Prodigal Son" },
-      { title: "Kiss Him Goodbye" },
-      { title: "They Can’t Take That Away from Me" },
-      { title: "Crazy Little Thing Called Love" },
-      { title: "Poor Heart" },
-      { title: "California Dreamin’" },
-      { title: "Sixty Minute Man" },
-      { title: "Jet Airliner" },
-      { title: "When I’m 64" },
-      { title: "Georgetown University Fight Song" },
-      { title: "My Comrades" }
+      { title: "We Meet", composer: "Traditional" },
+      { title: "I’ve Just Seen a Face", composer: "John Lennon/Paul McCartney (arr. Evan Seiler ’02)", soloist: "Ryan Ramagosa ’03" },
+      { title: "Peaceful Easy Feeling", composer: "Jack Tempchin (arr. Jeff Gordon ’04)", soloist: "Dan Phillips ’03" },
+      { title: "Apeman", composer: "Ray Davies (arr. Andy Neustaetter ’02)", soloist: "Andy Neustaetter ’02" },
+      { title: "Tempted", composer: "Chris Difford/Glenn Tilbrook (arr. Nick Amatuzzi ’00)", soloist: "Nick Giannotti ’02",},
+      { title: "Danny Boy", composer: "Traditional (arr. Jay Spadone)" },
+      { title: "I’m Beginning to See the Light", composer: "Duke Ellington (arr. Andrew Cranin" },
+      { title: "Just You, Just Me", composer: "Raymond Klarges/Jesse Greer (arr. Sean Altman/Elliott Kerman; bass line by Barry Carl)", soloist: "O’Brien (Bass), Phillips (Baritone), Gordon (Lead), Ramagosa (Tenor)" },
+      { title: "Prodigal Son", composer: "Luke 15:11–32 (arr. Nashville Bluegrass Band)" },
+      { title: "Kiss Him Goodbye", composer: "Dale Frashuer/Gary Decarlo/Paul Leko (arr. Bill Henderson/The Nylons)", soloist: "Ryan Ramagosa ’03" },
+      { title: "They Can’t Take That Away from Me", composer: "George Gershwin/Ira Gershwin (arr. Sean Collins ’83)", soloist: "Evan Seiler ’02" },
+      { title: "Crazy Little Thing Called Love", composer: "Freddie Mercury (arr. Jeff Gordon ’04)", soloist: "Jeff Gordon ’04" },
+      { title: "Poor Heart", composer: "Michael Gordon (arr. FRED)", soloist: "Quartet: Beaton (Bass), Seiler (Baritone), Giannotti (Lead), Neustaetter (Tenor)" },
+      { title: "California Dreamin’", composer: "John and Michelle Phillips (arr. Mike Taylor)" },
+      { title: "Sixty Minute Man", composer: "by: William “Billy” Ward, a.p.b. the Persuasions and Rockapella", soloist: "Sean O’Brien ’04)" },
+      { title: "Jet Airliner", composer: "Paul Pena (arr. Evan Seiler ’02)", soloist: "Nick Giannotti ’02" },
+      { title: "When I’m 64", composer: "John Lennon/Paul McCartney (arr. Andrew Cranin)", soloist: "Ryan Ramagosa ’03" },
+      { title: "Georgetown University Fight Song", composer: "Traditional" },
+      { title: "My Comrades", composer: "Traditional" }
     ]
   },
   { 
@@ -426,20 +426,20 @@ const ALBUMS_DATA = [
     ],
     tracks: [
       { title: "We Meet" },
-      { title: "All Night Long" },
-      { title: "Donne" },
-      { title: "Another Saturday Night" },
-      { title: "My Love Is Like a Red, Red Rose" },
-      { title: "Soul to Soul" },
-      { title: "All of Me (Live)" },
-      { title: "Running to Stand Still (Live)" },
-      { title: "Loch Lomond" },
-      { title: "Kiss the Brown Eyed Girl" },
-      { title: "Medley: Just a Gigolo / I Ain’t Got Nobody" },
-      { title: "And So It Goes" },
-      { title: "Hold Me Tight" },
-      { title: "Don’t Blame Me" },
-      { title: "Viva La Mamma" },
+      { title: "All Night Long", composer: "Richie (arr. Ryan)", soloist: "Giannotti" },
+      { title: "Donne", composer: "Zuchero, a.p.b. Neri Per Caso (arr. Patton ’97)", soloist: "Pritchard & Stubbe" },
+      { title: "Another Saturday Night", composer: "Cooke (arr. Lockart)", soloist: "Bedoya" },
+      { title: "My Love Is Like a Red, Red Rose", composer: "Traditional (arr. King’s Singers)", soloist: "Kay, Coslov, and Hoy" },
+      { title: "Soul to Soul", composer: "Carter / Nevada", soloist: "Patel" },
+      { title: "All of Me (Live)", composer: "Simmons & Marks (arr. Laird, Patton)", soloist: "Stubbe" },
+      { title: "Running to Stand Still (Live)", composer: "Bono (arr. Hall)", soloist: "Pritchard" },
+      { title: "Loch Lomond", composer: "Traditional (arr. Mattimore ’92)", soloist: "Kay" },
+      { title: "Kiss the Brown Eyed Girl", composer: "Menkin & Ashman / Morrison (arr. Amatuzzi)", soloist: "Amatuzzi & Neustaetter" },
+      { title: "Medley: Just a Gigolo / I Ain’t Got Nobody", composer: "Casucci & Caesar / Williams & Graham (arr. Manassee)", soloist: "Pritchard" },
+      { title: "And So It Goes", composer: "Joel (arr. King’s Singers", soloist: "Walsh" },
+      { title: "Hold Me Tight", composer: "Rand (’86)", soloist: "Stubbe" },
+      { title: "Don’t Blame Me", composer: "Traditional, a.p.b. Boston Common" },
+      { title: "Viva La Mamma", composer: "a.p.b. Neri Per Caso (arr. Patton ’97)" },
       { title: "The Georgetown University Fight Song" },
       { title: "My Comrades" }
     ]
@@ -479,26 +479,26 @@ const ALBUMS_DATA = [
       "Matt Donaghue"
     ],
     tracks: [
-      { title: "We Meet (Live)" },
-      { title: "L.O.V.E." },
-      { title: "Operator" },
-      { title: "Loch Lomond" },
-      { title: "Every Little Kiss" },
-      { title: "Bring Him Home" },
-      { title: "Naturally (Live)" },
-      { title: "Qui Belles Amours A" },
-      { title: "Georgia on My Mind" },
-      { title: "Since I Fell for You" },
-      { title: "Danny Boy" },
-      { title: "What’ll I Do" },
-      { title: "Shape of My Heart (Live)" },
-      { title: "And So It Goes" },
-      { title: "All of Me" },
-      { title: "Some Folks’ Lives Roll Easy" },
-      { title: "MLK" },
-      { title: "Zombie Jamboree (Live)" },
-      { title: "Georgetown University Fight Song" },
-      { title: "My Comrades" }
+      { title: "We Meet (Live)", composer: "Traditional" },
+      { title: "L.O.V.E.", composer: "B. Kaempfert/M. Gabler (arr. Patton ’97)", soloist: "Robards ’97" },
+      { title: "Operator", composer: "Spivery (arr. Collins ’83)", soloist: "Lemley ’97" },
+      { title: "Loch Lomond", composer: "Traditional (arr. Mattimore ’92)", soloist: "Laird ’96" },
+      { title: "Every Little Kiss", composer: "Hornsby (arr. Lemley ’97, based on Prindle/Amherst Zumbyes)", soloist: "Hillenbrand ’97" },
+      { title: "Bring Him Home", composer: "Webber (arr. Mattimore ’92)", soloist: "Patel ’98" },
+      { title: "Naturally (Live)", composer: "Lewis (arr. Collins ’83)", soloist: "O’Brien ’95" },
+      { title: "Qui Belles Amours A", composer: "Josquin des Prez" },
+      { title: "Georgia on My Mind", composer: "Gorrell/Carmichael (arr. Patton ’97)", soloist: "Patton" },
+      { title: "Since I Fell for You", composer: "Johnson (arr. Grannis ’85)", soloist: "Laird" },
+      { title: "Danny Boy", composer: "Traditional (arr. Patton ’97, based on King’s Singers)", soloist: "Glaser ’96" },
+      { title: "What’ll I Do", soloist: "Hillenbrand" },
+      { title: "Shape of My Heart (Live)", composer: "Sting (arr. Patton ’97)", soloist: "Robards" },
+      { title: "And So It Goes", composer: "Joel (arr. King’s Singers)", soloist: "Glaser" },
+      { title: "All of Me", composer: "S. Simons/G. Marks (arr. Laird/Patton, based on Prindle/Amherst Zumbyes)", soloist: "Laird" },
+      { title: "Some Folks’ Lives Roll Easy", composer: "Simon (arr. Patton ’97)", soloist: "Lemley, Patel" },
+      { title: "MLK", composer: "Evans, Hewson, Clayton, Mullen Jr. (arr. Hall)", soloist: "Hillenbrand" },
+      { title: "Zombie Jamboree (Live)", composer: "Mauge (arr. Sharon/Raugh)", soloist: "Klein ’97" },
+      { title: "Georgetown University Fight Song", composer: "Georgetown Traditional" },
+      { title: "My Comrades", composer: "Traditional" }
     ]
   },
   { 
@@ -511,7 +511,7 @@ const ALBUMS_DATA = [
     dedication: "This album is dedicated to three groups: our alumni Chimes, the Georgetown Hoyas, and those in France sans clue.",
     linerNotes: [
         {
-            author: "Album Notes",
+            author: "Lie Down, Forever, Lie Down",
             text: "The Georgetown Chimes treasure their tradition. It is for this reason that several of our seventeen albums are musical anthologies. In a way, this too is an anthology, but unlike the others, we didn’t use tapes of soloists with their own active group, but rather, called them back to sing the songs with our group. Perhaps the most active of our alums is Kevin O’Brien. Throughout the year he has sung “So Much in Love” to the delight of Chimes’ audiences everywhere. He was also M.C. for this year’s Cherry Tree Massacre and was responsible for our appearance on “P.M. Magazine.” Steve Mohyla solos “Great Historical Bum” and helped on many of the baritone parts. Tim Naughton was called in to sing “Good Fellow,” despite his voice, and Bob Gaylord, specialist, was brought in for the final bell chord. Another alumnus we’d like to thank is Mark Ganz. Although he has no solos on this album, he too helped with many of the baritone parts and was part of last year’s active group. He was our only loss this year, but he helped to develop the sound we have now; for that we are grateful. “St. Louis Blues,” with its three solos, posed a particular problem. We had to try to synchronize the schedules of Mark Williams (’59), Dave Walsh (’58), and John Sheridan (’59). Not only that, but we had to put up with them for the recording weekend. In spite of the logistical difficulties of getting all these alumni together for the album, it has been a lot of fun, and it has reminded us once again what the group really means to each one of us. We realize that this camaraderie cannot be conveyed on a 12-inch disc of vinyl; nonetheless, we hope you enjoy this album as much as we enjoyed singing it for you."
         }
     ],
@@ -535,25 +535,25 @@ const ALBUMS_DATA = [
     tracks: [
       { title: "We Meet" },
       { title: "I've Been Feelin’ Blue" },
-      { title: "Somebody Loves Me" },
+      { title: "Somebody Loves Me", composer: "arr. Sean Collins", soloist: "Sean Collins SFS ’83" },
       { title: "It’s A Good Day" },
-      { title: "I’m Gonna Sit Right Down and Write Myself a Letter" },
-      { title: "Great Historical Bum" },
-      { title: "Sh-Boom (Life Could Be a Dream)" },
-      { title: "Temptation" },
-      { title: "Georgetown Fight Song" },
-      { title: "Good Fellow" },
-      { title: "Who Put The Bomp (In The Bomp, Bomp, Bomp)" },
-      { title: "So Much in Love" },
-      { title: "Chattanooga Shoe Shine Boy" },
+      { title: "I’m Gonna Sit Right Down and Write Myself a Letter", soloist: "Sean Collins" },
+      { title: "Great Historical Bum", soloist: "Steve Mohyla SBA ’79" },
+      { title: "Sh-Boom (Life Could Be a Dream)", composer: "arr. Sean Collins", soloist: "Sean Collins" },
+      { title: "Temptation", soloist: "Kevin Laborde SBA ’78 and Ed Robinson CAS ’74" },
+      { title: "Georgetown Fight Song", soloist: "Tim Naughton SBA ’77" },
+      { title: "Good Fellow", soloist: "Tim Naughton SBA ’77" },
+      { title: "Who Put The Bomp (In The Bomp, Bomp, Bomp)", composer: "arr. Mark Grannis", soloist: "Kevin O’Brien CAS ’65 and Mark Grannis CAS ’85" },
+      { title: "So Much in Love", composer: "arr. Mark Grannis", soloist: "Kevin O’Brien CAS ’65" },
+      { title: "Chattanooga Shoe Shine Boy", soloist: "Sean Collins" },
       { title: "Ten Feet Off the Ground" },
-      { title: "I Got Rhythm" },
-      { title: "Come Go With Me" },
-      { title: "St. Louis Blues" },
+      { title: "I Got Rhythm", soloist: "Sean Collins", composer: "arr. Mark Grannis" },
+      { title: "Come Go With Me", composer: "arr. Mark Grannis", soloist: "Mark Grannis" },
+      { title: "St. Louis Blues", soloist: "David J. Walsh CAS ’58" },
       { title: "At the Moving Picture Ball" },
       { title: "Sons of Georgetown" },
       { title: "Yes Sir, That’s My Baby" },
-      { title: "My Comrades" },
+      { title: "My Comrades", soloist: "George Peacock CAS ’84" },
       { title: "Wazoo" }
     ]
   },
@@ -564,11 +564,14 @@ const ALBUMS_DATA = [
     cover: "bg-[#2A3B55]",
     image: IMG_CHIMES_75,
     link: "https://thechimes.lnk.to/chimes-75AA",
-    description: "Tim Naughton; Father Yates; Ken Quinn; John P. Dearie, Jr., ephus; Cliffe Laborde; Kevin O’Neill; Bob Kingsland; Mark O’Connor",
     dedication: "This album dedicated to Gerard F. Yates, S.J.—our Coney Island Baby, a Curbstone Cutie Visiting Professor from Upper Peabody Tech Priest, confidant, friend—just “Yatsie.”",
     linerNotes: [
         {
-            author: "Album Notes",
+            author: "Featuring",
+            text: "Left-to-right on album cover: Tim Naughton; Father Yates; Ken Quinn; John P. Dearie, Jr., ephus; Cliffe Laborde; Kevin O’Neill; Bob Kingsland; and Mark O’Connor."
+        },
+        {
+            author: "Recorded Live",
             text: "This record sung live February 5, 1975 in the heart of the Georgetown University community at 1789."
         },
         {
@@ -588,19 +591,19 @@ const ALBUMS_DATA = [
     tracks: [
       { title: "We Meet (Live)" },
       { title: "Hoya Saxa Joe (Live)" },
-      { title: "More I Cannot Wish You" },
-      { title: "My Cutie’s Due (Live)" },
-      { title: "Mood Indigo (Live)" },
-      { title: "Lady Is a Tramp (Live)" },
-      { title: "Sons Of" },
+      { title: "More I Cannot Wish You", soloist: "Dearie, O’Connor; Kingsland" },
+      { title: "My Cutie’s Due (Live)", soloist: "O’Neill" },
+      { title: "Mood Indigo (Live)", soloist: "Kingsland" },
+      { title: "Lady Is a Tramp (Live)", soloist: "Naughton" },
+      { title: "Sons Of", soloist: "Kingsland" },
       { title: "Piano Roll Blues (Live)" },
       { title: "I’ll Fly Away (Live)" },
       { title: "Hey Boys (Live)" },
-      { title: "Canadian Railroad Trilogy" },
+      { title: "Canadian Railroad Trilogy", soloist: "Cosco" },
       { title: "Sitting on Top of the World (Live)" },
-      { title: "Big Babaloo (Live)" },
+      { title: "Big Babaloo (Live)", soloist: "Dearie" },
       { title: "Georgetown Fight Song (Live)" },
-      { title: "Upper Peabody Tech (Live)" },
+      { title: "Upper Peabody Tech (Live)", soloist: "Yates" },
       { title: "My Comrades (Live)" },
       { title: "Wazoo (Live)" }
     ]
@@ -612,8 +615,11 @@ const ALBUMS_DATA = [
     cover: "bg-[#4A5B75]",
     image: IMG_CHIMES_66,
     link: "https://thechimes.lnk.to/chimes-66AA",
-    description: "Tim Mattimore; Fred Cosco, Ephus; Bill Casey; John Reed; Dave Cosco; Bob Flanagan; Bill Edgerton; Jerry Casey.",
     linerNotes: [
+        {
+            author: "On the Album",
+            text: "Tim Mattimore; Fred Cosco, Ephus; Bill Casey; John Reed; Dave Cosco; Bob Flanagan; Bill Edgerton; and Jerry Casey."
+        },
         {
             author: "A Chimes “Buff” (1966, Washington, D.C.)",
             text: "For twenty years, a voice of Georgetown has brought to our community as consistent a professional quality of singing as could be found anywhere. As that voice has come down to us over the years little has changed; to hear the Chimes today is to know how they were then. This consistency, this quality is not accidental. It was part of the very design and discipline of the original group whose strength and character are the first things inherited by any would-be Chime or “neophyte.” A voice, yes, but a Chime first. It is this sense of the past—this permanency, this tradition, if you will—that has brought to Alma Mater a distinction few have been able to achieve. And to think that Frank Jones planned the whole thing, right from the outset!"
@@ -629,19 +635,19 @@ const ALBUMS_DATA = [
     tracks: [
       { title: "We Meet" },
       { title: "Roguish Eyes" },
-      { title: "Betty Coed" },
-      { title: "The Mountains O’Mourne" },
+      { title: "Betty Coed", composer: "arr. D. Colleton" },
+      { title: "The Mountains O’Mourne", soloist: "J. Reed" },
       { title: "Mandy" },
-      { title: "Wouldn’t It Be Loverly" },
-      { title: "Barefoot Days and Hey There Boys" },
-      { title: "The Hunter" },
+      { title: "Wouldn’t It Be Loverly", composer: "arr. D. Colleton" },
+      { title: "Barefoot Days and Hey There Boys", soloist: "F. Cosco" },
+      { title: "The Hunter", composer: "arr. D. Colleton", soloist: "B. Casey and F. Cosco" },
       { title: "Good Fellow" },
-      { title: "Old Grey Bonnet" },
-      { title: "Our Strong Band" },
-      { title: "Rimsky-Korsakov Concerto for Violin and Chorus in E Flat, Opus 16" },
-      { title: "The Patriot Game" },
-      { title: "The Great Historical Bum" },
-      { title: "Come Along Home" },
+      { title: "Old Grey Bonnet", composer: "arr. B. Casey and F. Cosco", soloist: "B. Casey" },
+      { title: "Our Strong Band", soloist: "B. Edgerton" },
+      { title: "Rimsky-Korsakov Concerto for Violin and Chorus in E Flat, Opus 16", soloist: "F. Cosco", composer: "arr. B. Casey and F. Cosco" },
+      { title: "The Patriot Game", composer: "arr. B. Casey and F. Cosco", soloist: "J. Reed" },
+      { title: "The Great Historical Bum", composer: "arr. B. Casey and F. Cosco", soloist: "F. Cosco" },
+      { title: "Come Along Home", composer: "arr. D. Colleton" },
       { title: "Wazoo" }
     ]
   },
@@ -654,32 +660,31 @@ const ALBUMS_DATA = [
     link: "https://thechimes.lnk.to/1958-1959AA",
     linerNotes: [
         {
-            author: "Album Notes",
             text: "To characterize The Chimes as merely another college singing group would be to overlook much of what has made them one of the most popular and respected organizations, not only on the Georgetown campus, but throughout the East Coast. Since their founding in 1946 by Frank “Ephus” Jones, they have provided countless hours of entertainment for lovers of barbershop harmony. From the original quartet which gave the group its initial impetus, the annual number of Chimes has gradually swelled till the present when the full complement of ten may be heard rendering many of the old favorites as well as an occasional contemporary arrangement. Though their main interest and support are centered in the Washington area, the Chimes are well-known for their weekend safaris up and down the East Coast. In addition to several radio and television engagements, they have appeared at the Ivy Jazz Band Ball in New York. But the highlight of every year’s activities is the Reunion held at Manasquan, New Jersey on Labor Day Weekend when the “actives” join in song and camaraderie with the Chimes of the past. Anyone who has accompanied the Chimes during one of their frequent “hums” at Mac’s Pub or Gusti’s Restaurant soon realizes that the mutual love of singing is not the only bond uniting them. For their common interests, extending to every sphere of Georgetown life, have given rise to a deep and unifying friendship, which has been nurtured by their close and willing association during many hours of rehearsal, travel and extra-curricular sociability. It is hoped that this recording will reflect the musical ability and friendliness of style which has made The Chimes a part of the tradition of Georgetown."
         }
     ],
     tracks: [
       { title: "We Meet" },
       { title: "Here She Comes" },
-      { title: "Love Walked In" },
+      { title: "Love Walked In", composer:"arr. O’Neill ’61", soloist:"Kelly" },
       { title: "Hearts Win" },
-      { title: "Katie Malone" },
-      { title: "Down the Old Ox Road" },
+      { title: "Katie Malone", soloist: "Murphy" },
+      { title: "Down the Old Ox Road", composer:"arr. O’Neill ’61" },
       { title: "Skinnamarink" },
-      { title: "Mood Indigo" },
-      { title: "Zingy Wing" },
-      { title: "Temptation" },
+      { title: "Mood Indigo", soloist:"Kelly" },
+      { title: "Zingy Wing", soloist:"Williams" },
+      { title: "Temptation", composer:"arr. O’Neill ’61", soloist:"Reardon, Scannell" },
       { title: "Good Fellow" },
-      { title: "The Georgetown Chimes" },
-      { title: "Let’s Get Away From It All" },
+      { title: "The Georgetown Chimes", soloist:"Kelly" },
+      { title: "Let’s Get Away From It All", composer:"arr. Cramsie ’54", soloist:"Kelly" },
       { title: "I Love the Ladies" },
-      { title: "A Foggy Day in London Town" },
+      { title: "A Foggy Day in London Town", composer:"arr. O’Neill ’61" },
       { title: "Wait Till the Sun Shines Nellie" },
       { title: "Sweet Roses of Morn" },
       { title: "Hoya Saxa Joe" },
-      { title: "The Three Bells" },
+      { title: "The Three Bells", composer:"arr. O’Neill ’61", soloist:"Scannell" },
       { title: "Mandy" },
-      { title: "Serenade" },
+      { title: "Serenade", soloist:"Kelly" },
       { title: "Wazoo" }
     ]
   },
@@ -706,24 +711,24 @@ const ALBUMS_DATA = [
     tracks: [
       { title: "We Meet" },
       { title: "Alabamy Bound" },
-      { title: "Lullaby of Birdland" },
-      { title: "Wimoweh" },
-      { title: "Blue Skies" },
+      { title: "Lullaby of Birdland", soloist:"Tanger" },
+      { title: "Wimoweh", soloist:"Walsh" },
+      { title: "Blue Skies", soloist:"Kelly" },
       { title: "Sugar Blues" },
-      { title: "Mountain Greenery" },
-      { title: "Somebody Loves Me & Tea Leaves" },
+      { title: "Mountain Greenery", soloist:"Scannell" },
+      { title: "Somebody Loves Me & Tea Leaves", soloist:"Tanger" },
       { title: "Aloha Medley" },
       { title: "Oh By Jingo" },
       { title: "Magazine Cover & Police Gazette" },
       { title: "Georgetown Medley" },
       { title: "Some of These Days" },
-      { title: "I Love Paris" },
+      { title: "I Love Paris", soloist:"Reardon" },
       { title: "Roguish Eyes" },
-      { title: "Greensleves" },
+      { title: "Greensleves", soloist:"Kelly" },
       { title: "Coney Island Washboard" },
-      { title: "Summertime" },
-      { title: "Donegal" },
-      { title: "St. Louis Blues" },
+      { title: "Summertime", soloist:"Walsh" },
+      { title: "Donegal", soloist:"Walsh" },
+      { title: "St. Louis Blues", soloist:"Tanger" },
       { title: "Wazoo" }
     ]
   }
@@ -1383,7 +1388,7 @@ const BackstageView = () => (
                 <span className="text-xs font-bold tracking-[0.2em] text-[#595959] uppercase mb-8 flex items-center gap-3">
                   Database
                 </span>
-                <h3 className="text-4xl font-serif mb-8 text-[#041E42]">GleeManager</h3>
+                <h3 className="text-4xl font-serif mb-8 text-[#041E42]">GleeManager on Notion</h3>
                 <p className="text-[#63666A] text-lg leading-relaxed font-normal mb-12">
                     Our central repository for historical data, part tapes, and archival recordings. 
                 </p>
@@ -1438,7 +1443,7 @@ const PhilanthropyView = () => (
                     The Donor Guild is the steady heartbeat that allows the Alumni Association to operate with confidence.
                 </h3>
                 <p className="text-xl text-[#63666A] font-normal max-w-prose leading-relaxed text-left hyphens-auto">
-                    By subscribing, you ensure the tradition is waiting for you: the tables piled high, the tankards full, and the door open.
+                    By subscribing, you ensure the tradition is waiting for you: the tables piled high with Wisey’s, the tankards full, and the door open.
                 </p>
             </div>
         </div>
