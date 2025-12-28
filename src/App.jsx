@@ -22,6 +22,7 @@ import {
 
 // --- Local Imports (Uncomment for Production) ---
 import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
+import IMG_CTM_BOND from './assets/ctm-bond.jpeg';
 import IMG_LOGO from './assets/logo.png';
 import IMG_LOGO_WHITE from './assets/logo-white.png';
 import IMG_NECKTIE from './assets/necktie.jpg';
@@ -76,7 +77,8 @@ const EVENTS_DATA = [
     link: "https://buytickets.at/chimes/1998396/r/gcaa-site",
     description: [
       "For 52 years, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. What began as a fundraiser to pay off a bar tab has evolved into a showcase of the university’s premier a cappella talent.",
-      "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Senior Parents & Families Weekend 2026."
+      "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Senior Parents & Families Weekend 2026.",
+      "Doors open at 6:30."
       ],
     guestGroups: [
         "The GraceNotes",
@@ -87,7 +89,7 @@ const EVENTS_DATA = [
         "CUA Take Note",
         "AU Treble in Paradise"
     ],
-    image: IMG_CHERRY_TREE 
+    image: IMG_CTM_BOND 
   },
   { 
     id: 2, 
@@ -104,7 +106,8 @@ const EVENTS_DATA = [
     ],
     description: [
         "For 52 years, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. What began as a fundraiser to pay off a bar tab has evolved into a showcase of the university’s premier a cappella talent.",
-        "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Alumni Weekend 2026."
+        "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Alumni Weekend 2026.",
+        "Doors open at 6:30."
     ],
     guestGroups: [
         "The Saxatones",
@@ -145,7 +148,7 @@ const EVENTS_DATA = [
     ],
     link: "",
     description: [
-        "Join us in celebrating Federico Stubbe #177.",
+        "Join us in celebrating Federico Stubbe #177!",
         "Check Slack announcements or your email for hotel accommodation details."
       ],
       schedule: [
@@ -835,7 +838,7 @@ const HomeView = ({ navigateTo, openAlbumById, openEvent }) => (
         <div className="md:w-1/2 p-12 md:p-24 flex flex-col justify-center bg-[#E5E5E4] fade-in-element relative overflow-hidden group">
              <div className="absolute inset-0 z-0">
                  <img 
-                 src={IMG_CHERRY_TREE}
+                 src={IMG_CTM_BOND}
                  alt="The Cherry Tree Massacre" 
                  className="w-full h-full object-cover grayscale opacity-80 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-[1.5s]"
                />
