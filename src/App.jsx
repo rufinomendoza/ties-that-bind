@@ -18,7 +18,8 @@ import {
 // and comment out the "Preview Placeholders" block.
 
 // --- Local Imports (Uncomment for Production) ---
-import IMG_CHERRY_TREE from './assets/Composite-Set-Monochrome-Compressed.jpg';
+import IMG_CHERRY_TREE from './assets/composite-set-compressed.jpg';
+import IMG_CHERRY_TREE_MONOCHROME from './assets/Composite-Set-Monochrome-Compressed.jpg';
 import IMG_CTM_BOND from './assets/ctm-bond.jpeg';
 import IMG_LOGO from './assets/logo.png';
 import IMG_LOGO_WHITE from './assets/logo-white.png';
@@ -64,10 +65,10 @@ import IMG_PUERTO_RICO from './assets/eric-ardito-uz1XrK91iGw-unsplash.jpeg';
 const EVENTS_DATA = [
   { 
     id: 1, 
-    title: "Cherry Tree Massacre", 
-    date: "FEB 6, 2026", 
-    time: "7:00 PM",
-    location: "GASTON HALL", 
+    title: "Cherry Tree Massacre I", 
+    date: "February 6, 2026", 
+    time: "7:00 p.m.",
+    location: "Gaston Hall", 
     type: "Senior Parents & Families Weekend",
     priceInfo: "General Admission $26.04",
     link: "https://buytickets.at/chimes/1998396/r/gcaa-site",
@@ -89,10 +90,10 @@ const EVENTS_DATA = [
   },
   { 
     id: 2, 
-    title: "Cherry Tree Massacre", 
-    date: "FEB 21, 2026", 
-    time: "7:00 PM",
-    location: "GASTON HALL", 
+    title: "Cherry Tree Massacre II", 
+    date: "February 21, 2026", 
+    time: "7:00 p.m.",
+    location: "Gaston Hall", 
     type: "Alumni Weekend", // kept for listing, overridden by eyebrow in detail view
     priceInfo: "General Admission $26.04",
     actions: [
@@ -124,9 +125,9 @@ const EVENTS_DATA = [
   { 
     id: 3, 
     title: "John Carroll Weekend", 
-    date: "APR 18–21, 2026", 
-    time: "ALL DAY",
-    location: "PUERTO RICO", 
+    date: "April 18–21, 2026", 
+    time: "All Day",
+    location: "Puerto Rico", 
     type: "Puerto Rico",
         actions: [
         { label: "Chimes Survey", link: "https://www.surveymonkey.com/r/BJ93CBF", primary: true },
@@ -875,17 +876,17 @@ const EventDetailView = ({ event, navigateTo }) => {
                 </div>
 
                 <div className="space-y-8 font-serif text-[#041E42]">
-                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4">
+                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-3">
                       <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Date</span>
                       <span className="text-2xl italic">{event.date}</span>
                     </div>
 
-                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4">
+                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-3">
                       <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Time</span>
                       <span className="text-2xl italic">{event.time}</span>
                     </div>
 
-                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4">
+                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-3">
                       <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Venue</span>
                       <span className="text-2xl italic">{event.location}</span>
                     </div>
@@ -1020,7 +1021,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
               
               <div className="md:col-span-7 pr-12">
                 <span className="inline-block mb-8 text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">{event.type}</span>
-                <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-[0.9]">
+                <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-[1.0]">
                     {event.title}
                 </h3>
                 
@@ -1405,17 +1406,22 @@ const StoreView = () => (
             {/* Necktie */}
             <div className="group cursor-pointer">
                <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
-                  <img 
-                    src={IMG_NECKTIE} 
-                    alt="The Silk Necktie"
-                    className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
-                  />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 flex items-center">
-                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75</span>
-                  </div>
+                  <a href="https://buy.stripe.com/14k6si2EpcWQemQ3co" target="_blank" rel="noopener noreferrer">
+                    <img 
+                      src={IMG_NECKTIE} 
+                      
+                      alt="The Silk Necktie"
+                      className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
+                    />
+                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 flex items-center">
+                        <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75</span>
+                    </div>
+                  </a>
                </div>
                <div className="flex flex-col items-start">
-                  <h4 className="text-3xl font-serif text-[#041E42] italic mb-2">The Silk Necktie</h4>
+                  <a href="https://buy.stripe.com/14k6si2EpcWQemQ3co" target="_blank" rel="noopener noreferrer">
+                    <h4 className="text-3xl font-serif text-[#041E42] italic mb-2">The Silk Necktie</h4>
+                  </a>
                   <a 
                      href="https://buy.stripe.com/14k6si2EpcWQemQ3co"
                      target="_blank"
@@ -1430,17 +1436,22 @@ const StoreView = () => (
              {/* Bow Tie */}
              <div className="group cursor-pointer">
                <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
-                  <img 
-                     src={IMG_BOWTIE} 
-                     alt="The Silk Bow Tie"
-                     className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
-                   />
-                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 flex items-center">
-                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75</span>
-                  </div>
+                  <a href="https://buy.stripe.com/eVacQGceZ2icceI28l" target="_blank" rel="noopener noreferrer">
+                    <img 
+                       src={IMG_BOWTIE}
+                       href="https://buy.stripe.com/eVacQGceZ2icceI28l"
+                       alt="The Silk Bow Tie"
+                       className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
+                     />
+                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 flex items-center">
+                        <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75</span>
+                    </div>
+                  </a>
                </div>
                <div className="flex flex-col items-start">
-                  <h4 className="text-3xl font-serif text-[#041E42] italic mb-2">The Silk Bow Tie</h4>
+                  <a href="https://buy.stripe.com/eVacQGceZ2icceI28l" target="_blank" rel="noopener noreferrer">
+                    <h4 className="text-3xl font-serif text-[#041E42] italic mb-2">The Silk Bow Tie</h4>
+                  </a>
                   <a 
                      href="https://buy.stripe.com/eVacQGceZ2icceI28l"
                      target="_blank"
