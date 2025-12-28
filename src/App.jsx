@@ -520,7 +520,7 @@ const ALBUMS_DATA = [
     ],
     tracks: [
       { title: "We Meet" },
-      { title: "I've Been Feelin’ Blue" },
+      { title: "I’ve Been Feelin’ Blue" },
       { title: "Somebody Loves Me", composer: "arr. Sean Collins", soloist: "Sean Collins SFS ’83" },
       { title: "It’s A Good Day" },
       { title: "I’m Gonna Sit Right Down and Write Myself a Letter", soloist: "Sean Collins" },
@@ -1299,6 +1299,88 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
     </div>
 );
 
+const PhilanthropyView = () => (
+    <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-48 px-8 md:px-16 pb-32">
+       <div className="max-w-[1920px] mx-auto">
+        <SectionHeader title="Patronage" number="FUND THE BROTHERHOOD" />
+        
+        {/* Intro */}
+        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-32 fade-in-element items-end">
+            <div className="lg:w-5/12">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] uppercase block mb-8">01. The Donor Guild</span>
+                <h3 className="text-5xl md:text-6xl font-serif leading-[1.1] text-[#041E42]">
+                    The heartbeat of the Association.
+                </h3>
+            </div>
+            <div className="lg:w-7/12 pb-2">
+                <p className="text-xl text-[#041E42] font-serif italic max-w-prose leading-relaxed opacity-80">
+                    By subscribing, you ensure the tradition remains uninterrupted: the history documented, the reunions funded, and the legacy secured.
+                </p>
+                 <p className="text-[#041E42] text-[9px] leading-loose font-bold uppercase tracking-widest mt-8 opacity-60">
+                   Note: Contributions to the Georgetown Chimes Alumni Association 501(c)(7) are not tax deductible.
+                </p>
+            </div>
+        </div>
+
+        {/* Guild Tiers Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24 mb-64 fade-in-element">
+            {DONOR_TIERS.map((tier, idx) => (
+                <div key={idx} className="flex flex-col justify-between group">
+                    <div className="border-t border-[#041E42]/10 pt-6 group-hover:border-[#D50032] transition-colors duration-500">
+                        <div className="flex justify-between items-baseline mb-6">
+                             <h4 className="text-3xl font-serif text-[#041E42] italic">{tier.title}</h4>
+                             <span className="text-[10px] font-bold tracking-[0.2em] text-[#595959] uppercase">{tier.price}</span>
+                        </div>
+                        <p className="text-[#041E42] text-lg leading-relaxed font-serif opacity-80">
+                            {tier.description}
+                        </p>
+                    </div>
+                    <a 
+                        href={tier.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="w-full text-left py-4 text-[#041E42] text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors mt-8 flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
+                    >
+                        {tier.cta} <ArrowRight size={12} aria-hidden="true" />
+                    </a>
+                </div>
+            ))}
+        </div>
+
+        {/* One Time Gift - Editorial Style */}
+        <div className="border-t border-[#041E42]/10 pt-32 fade-in-element">
+             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+                 <div className="lg:col-span-4">
+                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] uppercase block mb-8">02. Single Contribution</span>
+                    <h3 className="text-6xl font-serif text-[#041E42] leading-none mb-8">Legacy &<br/>Capital.</h3>
+                 </div>
+                 <div className="lg:col-span-8 flex flex-col justify-end items-start pl-0 lg:pl-32">
+                    <p className="text-[#041E42] text-2xl font-serif italic leading-relaxed mb-12 max-w-xl">
+                        While the Guild sustains our rhythm, Single Contributions drive our evolution. These gifts fund the archival restoration and capital projects that define our future.
+                    </p>
+                    <a 
+                        href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4"
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-block px-12 py-5 bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
+                    >
+                        Make a Contribution
+                    </a>
+                 </div>
+             </div>
+        </div>
+
+        {/* Management */}
+        <div className="mt-48 pt-12 border-t border-[#041E42]/5 flex justify-center fade-in-element">
+            <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[#595959] text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors">
+                Manage Subscription
+            </a>
+        </div>
+
+      </div>
+    </div>
+);
+
 const StoreView = () => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
@@ -1306,62 +1388,66 @@ const StoreView = () => (
 
         <div className="flex flex-col lg:flex-row gap-24 lg:gap-48 mb-32 fade-in-element">
           {/* Editorial Copy */}
-          <div className="lg:w-4/12 pt-12">
-             <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block mb-12">Uniform & Regalia</span>
-             <h3 className="text-6xl font-serif mb-12 italic text-[#041E42] leading-tight">C’est une cravate.<br/>C’est un nœud papillon.</h3>
-             <div className="text-[#041E42] text-xl font-serif italic leading-relaxed space-y-8 text-left max-w-sm">
-                <p>Since the Actives are in need of new ties, Nikolai has worked with Drew to produce 50 neckties and 20 bow ties. This allows us to not only fill Active tie needs for the foreseeable future, but also permanently stock ties for any Chime who needs one.</p>
-                <p>Therefore, if you’ve lost your tie and need a replacement—or, let’s be honest, a <em>refreshment</em>—you can purchase one below.</p>
+          <div className="lg:w-4/12 pt-4">
+             <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block mb-8">Uniform & Regalia</span>
+             <h3 className="text-5xl font-serif mb-12 text-[#041E42] leading-tight italic">
+               Standard Issue.
+             </h3>
+             <div className="text-[#041E42] text-lg font-serif leading-relaxed space-y-8 text-left max-w-sm opacity-90">
+                <p>Commissioned for the Active group and available to the Alumni. Woven in silk, these pieces are designed to replace the lost, the stained, and the borrowed.</p>
+                <p>A Drew Poling original, produced in collaboration with our partners in the UK.</p>
              </div>
           </div>
 
           {/* Product Grid */}
-          <div className="lg:w-8/12 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-32">
+          <div className="lg:w-8/12 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-32">
             
-            {/* Necktie Product */}
+            {/* Necktie */}
             <div className="group cursor-pointer">
-               <div className="bg-[#E5E5E4] aspect-[3/4] mb-12 relative overflow-hidden">
+               <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
                   <img 
                     src={IMG_NECKTIE} 
-                    alt="The Silk Necktie product shot"
+                    alt="The Silk Necktie"
                     className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                   />
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1">
+                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75.00</span>
+                  </div>
                </div>
-               <div className="flex flex-col items-center text-center">
-                  <h4 className="text-4xl font-serif text-[#041E42] mb-4 italic">The Silk Necktie</h4>
-                  <p className="text-[10px] text-[#63666A] mb-8 font-bold tracking-[0.3em] uppercase">Handmade in the UK</p>
-                  <span className="text-lg font-serif text-[#041E42] mb-8">$75.00</span>
+               <div className="flex flex-col items-start">
+                  <h4 className="text-3xl font-serif text-[#041E42] italic mb-2">The Silk Necktie</h4>
                   <a 
                      href="https://buy.stripe.com/14k6si2EpcWQemQ3co"
                      target="_blank"
                      rel="noopener noreferrer"
-                     className="inline-block px-12 py-4 border border-[#041E42] bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] hover:border-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
+                     className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032] hover:text-[#041E42] transition-colors mt-4"
                     >
-                     Acquire <span className="sr-only">The Silk Necktie (opens in new tab)</span>
+                     Acquire &rarr;
                    </a>
                </div>
             </div>
 
-             {/* Bow Tie Product */}
+             {/* Bow Tie */}
              <div className="group cursor-pointer">
-               <div className="bg-[#E5E5E4] aspect-[3/4] mb-12 relative overflow-hidden">
+               <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
                   <img 
                      src={IMG_BOWTIE} 
-                     alt="The Silk Bow Tie product shot"
+                     alt="The Silk Bow Tie"
                      className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                    />
+                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1">
+                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75.00</span>
+                  </div>
                </div>
-               <div className="flex flex-col items-center text-center">
-                  <h4 className="text-4xl font-serif text-[#041E42] mb-4 italic">The Silk Bow Tie</h4>
-                  <p className="text-[10px] text-[#63666A] mb-8 font-bold tracking-[0.3em] uppercase">Handmade in the UK</p>
-                  <span className="text-lg font-serif text-[#041E42] mb-8">$75.00</span>
+               <div className="flex flex-col items-start">
+                  <h4 className="text-3xl font-serif text-[#041E42] italic mb-2">The Silk Bow Tie</h4>
                   <a 
                      href="https://buy.stripe.com/eVacQGceZ2icceI28l"
                      target="_blank"
                      rel="noopener noreferrer"
-                     className="inline-block px-12 py-4 border border-[#041E42] bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] hover:border-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
+                     className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032] hover:text-[#041E42] transition-colors mt-4"
                     >
-                     Acquire <span className="sr-only">The Silk Bow Tie (opens in new tab)</span>
+                     Acquire &rarr;
                    </a>
                </div>
             </div>
@@ -1421,90 +1507,6 @@ const BackstageView = () => (
                 </div>
             </div>
         </div>
-      </div>
-    </div>
-);
-
-const PhilanthropyView = () => (
-    <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-48 px-8 md:px-16 pb-32">
-       <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="Patronage" number="FUND THE BROTHERHOOD" />
-        
-        {/* Intro */}
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-48 fade-in-element">
-            <div className="lg:w-4/12 pt-4 border-t border-[#041E42]/10">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block mb-6 mt-6">01. The Donor Guild</span>
-                <p className="text-[#041E42] text-[10px] leading-loose font-bold uppercase tracking-widest max-w-xs">
-                   Note: Contributions to the Georgetown Chimes Alumni Association 501(c)(7) are not tax deductible.
-                </p>
-            </div>
-            <div className="lg:w-8/12">
-                <h3 className="text-5xl md:text-7xl font-serif mb-12 leading-[0.9] text-[#041E42]">
-                    The Donor Guild is the steady heartbeat that allows the Alumni Association to operate with confidence.
-                </h3>
-                <p className="text-2xl text-[#041E42] font-serif italic max-w-prose leading-relaxed text-left">
-                    By subscribing, you ensure the tradition is waiting for you: the tables piled high with Wisey’s, the tankards full, and the door open.
-                </p>
-            </div>
-        </div>
-
-        {/* Guild Tiers Grid - Clean Borders, No Fill */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 mb-64 fade-in-element">
-            {DONOR_TIERS.map((tier, idx) => (
-                <div key={idx} className="border-t border-[#041E42]/20 pt-8 flex flex-col justify-between min-h-[400px] hover:border-[#D50032] transition-colors duration-700 group">
-                    <div>
-                        <div className="mb-8">
-                            <h4 className="text-4xl font-serif text-[#041E42] mb-4 italic">{tier.title}</h4>
-                            <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block">{tier.price}</span>
-                        </div>
-                        <p className="text-[#041E42] text-lg leading-loose font-serif">
-                            {tier.description}
-                        </p>
-                    </div>
-                    <a 
-                        href={tier.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="w-full text-left py-4 text-[#041E42] text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors mt-12 flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-                    >
-                        {tier.cta} <ArrowRight size={12} aria-hidden="true" /> <span className="sr-only">(opens in new tab)</span>
-                    </a>
-                </div>
-            ))}
-        </div>
-
-        {/* One Time Gift */}
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 border-t border-[#041E42]/10 pt-32 fade-in-element">
-             <div className="lg:w-4/12 pt-6">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block mb-6">02. Single Contribution</span>
-                <p className="text-[#041E42] text-[10px] leading-loose font-bold uppercase tracking-widest max-w-xs">
-                   Legacy Projects & Capital Improvements
-                </p>
-            </div>
-            <div className="lg:w-8/12">
-                <h3 className="text-8xl font-serif mb-12 text-[#041E42]">Upgrade the ride.</h3>
-                <p className="text-[#041E42] text-2xl font-serif italic leading-relaxed mb-16 max-w-prose">
-                    If the Donor Guild keeps the engine running, One-Time Gifts upgrade the ride. Your contributions allow us to hold Cadillac reunions at Chevrolet rates. They are the catalyst that brings our history alive.
-                </p>
-                <a 
-                    href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4"
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="inline-block px-12 py-5 bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-                >
-                    Make a Contribution <span className="sr-only">(opens in new tab)</span>
-                </a>
-            </div>
-        </div>
-
-        {/* Management */}
-        <div className="mt-48 pt-24 border-t border-[#041E42]/5 text-center fade-in-element">
-            <h4 className="font-serif text-3xl mb-4 text-[#041E42] italic">Membership Services</h4>
-            <p className="text-[#041E42] text-sm font-sans">
-                Manage your guild subscription via the <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[#041E42] underline decoration-1 underline-offset-4 hover:text-[#D50032] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]">Stripe Portal<span className="sr-only"> (opens in new tab)</span></a>.
-            </p>
-        </div>
-
       </div>
     </div>
 );
@@ -1711,7 +1713,7 @@ export default function App() {
             />
             <p className="text-[10px] uppercase tracking-[0.25em] leading-loose text-[#595959]">
               Georgetown Chimes Alumni Association, Inc.<br/>
-              Est. 1946<br />
+              A 501(c)(7) Corporation<br />
               Washington, D.C.
             </p>
           </div>
