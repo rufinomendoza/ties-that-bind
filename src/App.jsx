@@ -1009,7 +1009,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                   openEvent(event);
                 }
               }}
-              className="group border-t border-[#041E42]/10 py-24 hover:bg-white transition-colors duration-1000 grid grid-cols-1 md:grid-cols-12 gap-12 items-baseline relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
+              className="group border-t border-[#041E42]/10 py-24 px-8 md:px-12 hover:bg-white transition-colors duration-1000 grid grid-cols-1 md:grid-cols-12 gap-12 items-baseline relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
               onClick={() => openEvent(event)}
               aria-label={`View details for ${event.title} on ${event.date}`}
             >
@@ -1410,8 +1410,8 @@ const StoreView = () => (
                     alt="The Silk Necktie"
                     className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                   />
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1">
-                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75.00</span>
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 flex items-center">
+                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75</span>
                   </div>
                </div>
                <div className="flex flex-col items-start">
@@ -1435,8 +1435,8 @@ const StoreView = () => (
                      alt="The Silk Bow Tie"
                      className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                    />
-                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1">
-                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75.00</span>
+                   <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 flex items-center">
+                      <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75</span>
                   </div>
                </div>
                <div className="flex flex-col items-start">
@@ -1712,9 +1712,8 @@ export default function App() {
               className="h-6 w-auto mb-12 opacity-80" 
             />
             <p className="text-[10px] uppercase tracking-[0.25em] leading-loose text-[#595959]">
-              Georgetown Chimes Alumni Association, Inc.<br/>
-              A 501(c)(7) Corporation<br />
-              Washington, D.C.
+                Incorporated in Delaware &middot; 501(c)(7)<br/>
+                Kindly be advised that contributions are not tax-deductible
             </p>
           </div>
           
