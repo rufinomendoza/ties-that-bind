@@ -937,9 +937,9 @@ const EventDetailView = ({ event, navigateTo }) => {
             <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] mb-12 block uppercase">
               {event.eyebrow || event.type}
             </span>
-            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[1.0] -ml-2">{event.title}</h1>
+            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[1.0] -ml-6 px-4">{event.title}</h1>
 
-            <div className="text-xl md:text-2xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-prose space-y-12 text-left">
+            <div className="text-xl md:text-2xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-prose space-y-12 text-left px-4">
                 {Array.isArray(event.description) ? (
                    event.description.map((para, i) => <p key={i}>{para}</p>)
                 ) : (
@@ -1021,11 +1021,11 @@ const AgendaView = ({ navigateTo, openEvent }) => (
               
               <div className="md:col-span-7 pr-12">
                 <span className="inline-block mb-8 text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032] px-2">{event.type}</span>
-                <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-[1.0] px-2">
+                <h3 className="text-5xl md:text-7xl font-serif mb-8 text-[#041E42] leading-[1.0] px-4">
                     {event.title}
                 </h3>
                 
-                <p className="text-[#041E42] font-serif italic text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700 px-2">
+                <p className="text-[#041E42] font-serif italic text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700 px-4">
                    {Array.isArray(event.description) ? event.description[0] : event.description}
                 </p>
               </div>
