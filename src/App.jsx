@@ -1631,7 +1631,7 @@ export default function App() {
       <nav 
         className={`fixed top-0 w-full z-50 transition-all duration-700 ease-out ${
           scrolled || isMenuOpen 
-            ? 'bg-[#F4F4F3]/95 backdrop-blur-md py-6 border-b border-[#041E42]/5' 
+            ? 'bg-[#F4F4F3] py-6 border-b border-[#041E42]/5' 
             : 'bg-transparent py-12'
         }`}
         aria-label="Main Navigation"
