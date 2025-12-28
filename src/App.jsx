@@ -936,7 +936,7 @@ const EventDetailView = ({ event, navigateTo }) => {
             <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] mb-12 block uppercase">
               {event.eyebrow || event.type}
             </span>
-            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[0.9] -ml-2">{event.title}</h1>
+            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[1.0] -ml-2">{event.title}</h1>
 
             <div className="text-xl md:text-2xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-prose space-y-12 text-left">
                 {Array.isArray(event.description) ? (
@@ -1182,7 +1182,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
 
           {/* Scrollable Content */}
           <div className="lg:w-7/12 pt-8">
-            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[0.9] -ml-2">{selectedAlbum?.title}</h1>
+            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[1.0] -ml-2">{selectedAlbum?.title}</h1>
             
             {selectedAlbum?.description && (
                 <p className="text-2xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-prose">
