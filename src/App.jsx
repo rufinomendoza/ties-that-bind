@@ -805,7 +805,7 @@ const HomeView = ({ navigateTo, openAlbumById, openEvent }) => (
                 className="group relative pb-1 text-xs font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
              >
                 <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
-                Stream "And So It Goes"
+                Stream “And So It Goes”
              </button>
              <button 
                 onClick={() => openEvent(EVENTS_DATA[1])}
