@@ -1060,41 +1060,6 @@ const AgendaView = ({ navigateTo, openEvent }) => (
     </div>
 );
 
-// --- Main App Component ---
-export default function App() {
-  const [view, setView] = useState('agenda');
-  const [selectedEvent, setSelectedEvent] = useState(null);
-
-  const navigateTo = (newView) => {
-    window.scrollTo(0, 0);
-    setView(newView);
-  };
-
-  const openEvent = (event) => {
-    setSelectedEvent(event);
-    navigateTo('detail');
-  };
-
-  return (
-    <div className="font-sans antialiased text-gray-900 bg-[#F4F4F3]">
-       {/* Simple Sticky Header for context */}
-       <nav className="fixed w-full z-50 bg-[#F4F4F3]/90 backdrop-blur-md border-b border-[#041E42]/10 h-24 flex items-center justify-between px-8 md:px-16">
-            <div className="flex items-center gap-4">
-                <div className="w-8 h-8 bg-[#041E42] rounded-full flex items-center justify-center text-white font-serif italic">Y</div>
-                <span className="text-[10px] tracking-[0.2em] font-bold uppercase hidden md:block">Yale Men's Glee Club</span>
-            </div>
-            <div className="flex gap-8">
-                <button className="text-[10px] tracking-[0.2em] font-bold uppercase hover:text-[#D50032] transition-colors">Menu</button>
-            </div>
-       </nav>
-
-       {view === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
-       {view === 'detail' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
-    </div>
-  );
-}
-
-
 const DiscographyView = ({ openAlbum, navigateTo }) => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
