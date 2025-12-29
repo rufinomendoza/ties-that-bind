@@ -7,8 +7,6 @@ import {
   ExternalLink,
   ChevronLeft,
   Play,
-  Clock,
-  MapPin,
   Ticket
 } from 'lucide-react';
 
@@ -19,7 +17,6 @@ import {
 
 // --- Local Imports (Uncomment for Production) ---
 import IMG_CHERRY_TREE from './assets/composite-set-compressed.jpg';
-import IMG_CHERRY_TREE_MONOCHROME from './assets/Composite-Set-Monochrome-Compressed.jpg';
 import IMG_CTM_BOND from './assets/ctm-bond.jpeg';
 import IMG_LOGO from './assets/logo.png';
 import IMG_LOGO_WHITE from './assets/logo-white.png';
@@ -743,42 +740,42 @@ const DONOR_TIERS = [
     price: "$19.46/year",
     link: "https://buy.stripe.com/dR67wmceZ3mgdiM9AS",
     description: "In conducting, the ictus is the precise moment the beat occurs. It is the pulse that holds the ensemble together. For $19.46 a year, you provide that pulse, ensuring the beat goes on.",
-    cta: "Keep the Beat"
+    cta: "Join the Guild"
   },
   {
     title: "The Tonic",
     price: "$10/month",
     link: "https://buy.stripe.com/28o3g692N6ysa6AaEJ",
     description: "Ten bucks a month. It funds the casual hospitality that defines the Chimes, ensuring that when we meet again, the green tea with honey (and other beverages) is always flowing.",
-    cta: "Fill the Cup"
+    cta: "Join The Guild"
   },
   {
     title: "The 1946 Society",
     price: "$19.46/month",
     link: "https://buy.stripe.com/6oEbMC7YJf4YbaE5kt",
     description: "The definitive commitment. By matching the year of our founding every month, you cover the operational essentials. You are the backbone of the day-to-day.",
-    cta: "Make It Official"
+    cta: "Join the Guild"
   },
   {
     title: "The Social Chair",
     price: "$27.80/month",
     link: "https://buy.stripe.com/aEUaIy7YJaOI5QkcMW",
     description: "The Chimes are nothing without the gathering. This tier is dedicated to the experience. You are ensuring that when we get together, we can afford to do it right.",
-    cta: "Start the Party"
+    cta: "Join the Guild"
   },
   {
     title: "The Founder’s League",
     price: "$46/month",
     link: "https://buy.stripe.com/aEUeYO2EpaOI0w04gv",
     description: "At this level, you aren’t just paying dues; you are subsidizing the future. You fund the archival work that keeps our history from fading.",
-    cta: "Save the History"
+    cta: "Join the Guild"
   },
   {
     title: "The Good Fellow",
     price: "$100/month",
     link: "https://buy.stripe.com/5kA17Y92N6ysguYbIY",
     description: "This is the bedrock of the Alumni Association. Your contribution carries the heavy lifting for our most ambitious projects, ensuring the Chimes legacy is secure for decades to come.",
-    cta: "Lead the Way"
+    cta: "Join the Guild"
   }
 ];
 
@@ -791,7 +788,21 @@ const SectionHeader = ({ title, number }) => (
   </div>
 );
 
-const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => (
+
+// --- Home View ---
+const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
+  // State to trigger the fade-in animation
+  const [isHeroVisible, setIsHeroVisible] = useState(false);
+
+  useEffect(() => {
+    // Trigger the opacity change after mount
+    const timer = setTimeout(() => {
+      setIsHeroVisible(true);
+    }, 100); 
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
     <>
       {/* Hero */}
       <div 
@@ -800,8 +811,20 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => (
         {/* Subtle texture or color wash */}
         <div className="absolute inset-0 bg-[#F4F4F3] z-0"></div>
 
-        <div className="max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 fade-in-element py-32">
-           {/* Architectural Title Stack - Ultra Large, Serif, Tight Leading */}
+        {/* Background Image Layer */}
+        <div 
+          className={`absolute inset-0 z-0 w-full h-full bg-cover bg-center grayscale bg-[#041E42] bg-blend-screen mix-blend-multiply pointer-events-none transition-opacity duration-[3000ms] ease-in-out ${isHeroVisible ? 'opacity-15' : 'opacity-0'}`}
+          style={{ 
+            backgroundImage: `url(${IMG_CHERRY_TREE})`
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Content Container */}
+        <div 
+          className={`max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 py-32 transition-all duration-[3000ms] ease-in-out ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+        >
+           {/* Architectural Title Stack */}
           <div className="text-center space-y-0 mb-24 select-none" aria-label="Values: Fellowship, Harmony, Legacy">
             <h1 className="text-[14vw] font-serif leading-[0.8] tracking-tighter text-[#041E42] block">
               FELLOWSHIP
@@ -834,7 +857,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => (
         </div>
       </div>
 
-      {/* Featured Event Teaser - Asymmetrical Editorial Layout */}
+      {/* Featured Event Teaser */}
       <section className="min-h-screen flex flex-col md:flex-row border-b border-[#041E42]/10 bg-[#F4F4F3]">
         <div className="md:w-5/12 p-12 md:p-24 flex flex-col justify-end bg-[#E5E5E4] fade-in-element relative overflow-hidden group">
              <div className="absolute inset-0 z-0">
@@ -859,7 +882,8 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => (
         </div>
       </section>
     </>
-);
+  );
+};
 
 // --- Detail View ---
 const EventDetailView = ({ event, navigateTo }) => {
@@ -1037,7 +1061,6 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                   openEvent(event);
                 }
               }}
-              // UPDATED: Added px-4 (instead of px-0) on mobile to ensure content isn't edge-to-edge
               className="group border-t border-[#041E42]/10 py-16 md:py-24 px-4 md:px-12 hover:bg-white transition-colors duration-1000 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
               onClick={() => openEvent(event)}
               aria-label={`View details for ${event.title} on ${event.date}`}
@@ -1082,14 +1105,50 @@ const AgendaView = ({ navigateTo, openEvent }) => (
     </div>
 );
 
-const DiscographyView = ({ openAlbum, navigateTo }) => (
+
+// --- Discography View ---
+
+const DiscographyView = ({ openAlbum, navigateTo }) => {
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [triggerAnim, setTriggerAnim] = useState(false);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const promises = ALBUMS_DATA.map((album) => {
+        if (!album.image) return Promise.resolve();
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = album.image;
+          img.onload = resolve;
+          img.onerror = resolve; 
+        });
+      });
+
+      await Promise.all(promises);
+      setImagesLoaded(true);
+      setTimeout(() => setTriggerAnim(true), 100);
+    };
+
+    preloadImages();
+  }, []);
+
+  if (!imagesLoaded) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F4F4F3]">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42]">Loading Archive</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Archive" number="DISCOGRAPHY" />
         
-        {/* Gallery Grid - Generous Spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-32 mb-48 fade-in-element">
-          {ALBUMS_DATA.map((album) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-32 mb-48">
+          {ALBUMS_DATA.map((album, index) => (
             <div 
               key={album.id} 
               role="button"
@@ -1101,11 +1160,13 @@ const DiscographyView = ({ openAlbum, navigateTo }) => (
                 }
               }}
               onClick={() => openAlbum(album)}
-              className="group cursor-pointer flex flex-col gap-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-8"
+              // Container Entry Animation Only
+              // Removed all hover transforms from here
+              className={`group cursor-pointer flex flex-col gap-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-8 transition-all duration-[2000ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: `${index * 150}ms` }}
               aria-label={`View details for album ${album.title}`}
             >
               <div className="relative aspect-square bg-[#E5E5E4] overflow-hidden">
-                 {/* Conditionally render Image or CSS Background */}
                  {album.image ? (
                     <img 
                       src={album.image} 
@@ -1135,14 +1196,15 @@ const DiscographyView = ({ openAlbum, navigateTo }) => (
           ))}
         </div>
 
-        {/* Informational Footer */}
-        <div className="border-t border-[#041E42]/10 pt-32 flex flex-col items-center text-center fade-in-element">
+        <div 
+            className={`border-t border-[#041E42]/10 pt-32 flex flex-col items-center text-center transition-all duration-[2000ms] ease-out ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+            style={{ transitionDelay: '800ms' }}
+        >
             <h3 className="text-5xl font-serif text-[#041E42] mb-12 italic">The Vault is Incomplete.</h3>
             <p className="text-[#041E42] text-xl font-serif leading-relaxed max-w-prose mb-16">
                 The digitization of the Chimes catalogue is an ongoing preservation project. We are restoring master tapes for future high-fidelity release.
             </p>
             
-            {/* Links container */}
             <div className="flex flex-col items-center gap-8">
                 <a 
                     href="https://thechimes.notion.site" 
@@ -1162,7 +1224,8 @@ const DiscographyView = ({ openAlbum, navigateTo }) => (
         </div>
       </div>
     </div>
-);
+  );
+};
 
 const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
     if (!selectedAlbum) return (
@@ -1452,7 +1515,6 @@ const StoreView = () => (
                   <a href="https://buy.stripe.com/14k6si2EpcWQemQ3co" target="_blank" rel="noopener noreferrer">
                     <img 
                       src={IMG_NECKTIE} 
-                      
                       alt="The Silk Necktie"
                       className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                     />
@@ -1482,7 +1544,6 @@ const StoreView = () => (
                   <a href="https://buy.stripe.com/eVacQGceZ2icceI28l" target="_blank" rel="noopener noreferrer">
                     <img 
                        src={IMG_BOWTIE}
-                       href="https://buy.stripe.com/eVacQGceZ2icceI28l"
                        alt="The Silk Bow Tie"
                        className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                      />
