@@ -34,7 +34,7 @@ import IMG_CHIMES_75 from './assets/chimes-75.jpg';
 import IMG_CHIMES_66 from './assets/chimes-66.jpg';
 import IMG_1959 from './assets/1959.jpg';
 import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
-import IMG_PUERTO_RICO from './assets/eric-ardito-uz1XrK91iGw-unsplash.jpeg';
+import IMG_PUERTO_RICO from './assets/nils-huenerfuerst-SrYs4XxTRfk-unsplash.jpeg';
 
 // --- Preview Placeholders (Comment out for Production) ---
 // const IMG_CHERRY_TREE = "https://placehold.co/1920x1080/0A0A0A/FFFFFF?text=The+Classic";
