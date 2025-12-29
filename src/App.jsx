@@ -117,7 +117,7 @@ const EVENTS_DATA = [
     schedule: [
         {
             title: "Welcome Reception & Afterglow",
-            description: "To Be Announced",
+            time: "To Be Announced",
         },
     ],
     image: IMG_CHERRY_TREE
@@ -944,7 +944,7 @@ const EventDetailView = ({ event, navigateTo }) => {
                 {event.title}
             </h1>
 
-            <div className="text-lg md:text-2xl font-serif italic text-[#041E42] mb-16 md:mb-24 leading-relaxed max-w-prose space-y-8 md:space-y-12 text-left px-0 md:px-4">
+            <div className="text-lg md:text-2xl font-serif italic text-[#041E42] mb-16 md:mb-24 leading-relaxed max-w-prose space-y-8 md:space-y-12 text-left pl-2 -ml-2">
                 {Array.isArray(event.description) ? (
                    event.description.map((para, i) => <p key={i}>{para}</p>)
                 ) : (
