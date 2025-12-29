@@ -1596,15 +1596,10 @@ export default function App() {
     if (cleanPath === '/his-successes') return { view: 'external-redirect', slug: null };
 
     if (cleanPath === '/' || cleanPath === '') return { view: 'home', slug: null };
-    if (cleanPath === '/agenda') return { view: 'agenda', slug: null };
     if (cleanPath === '/events') return { view: 'agenda', slug: null };
-    if (cleanPath === '/archive') return { view: 'discography', slug: null };
     if (cleanPath === '/albums') return { view: 'discography', slug: null };
-    if (cleanPath === '/music') return { view: 'discography', slug: null };
     if (cleanPath === '/give') return { view: 'philanthropy', slug: null };
-    if (cleanPath === '/atelier') return { view: 'store', slug: null };
     if (cleanPath === '/store') return { view: 'store', slug: null };
-    if (cleanPath === '/backstage') return { view: 'backstage', slug: null };
     if (cleanPath === '/comms') return { view: 'backstage', slug: null };
     
     // Dynamic Routes
@@ -1656,11 +1651,11 @@ export default function App() {
     // Map internal views to clean URLs
     switch(view) {
         case 'home': path = '/'; break;
-        case 'agenda': path = '/agenda'; break;
-        case 'discography': path = '/archive'; break;
+        case 'agenda': path = '/events'; break;
+        case 'discography': path = '/albums'; break;
         case 'philanthropy': path = '/give'; break;
-        case 'store': path = '/atelier'; break;
-        case 'backstage': path = '/backstage'; break;
+        case 'store': path = '/store'; break;
+        case 'backstage': path = '/comms'; break;
         case 'event': path = `/event/${slug}`; break;
         case 'album': path = `/album/${slug}`; break;
         default: path = '/';
