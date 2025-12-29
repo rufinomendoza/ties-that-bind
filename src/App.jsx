@@ -189,7 +189,7 @@ const ALBUMS_DATA = [
     highlights: ["Vinyl Early Access", "Mastered at Abbey Road Studios"],
     leadSingle: { 
       title: "And So It Goes", 
-      composer: "Billy Joel (arr. Bob Chilcott)",
+      composer: "Billy Joel (arr. Bob Chilcott) / Feat. Aidan Metz",
       link: "https://thechimes.lnk.to/AndSoItGoesAA"
     },
     credits: {
