@@ -135,7 +135,7 @@ const EVENTS_DATA = [
     ],
     link: "",
     description: [
-        "Experience the definitive Caribbean gathering April 16–19 as we honor Federico Stubbe #177 during John Carroll Weekend 2026.",
+        "Experience an unforgettable Caribbean gathering April 16–19 as we honor Federico Stubbe #177 during John Carroll Weekend 2026.",
         "Set against the vibrant backdrop of Puerto Rico, this weekend blends cultural immersion with exceptional celebration, culminating in the John Carroll Awards Gala. Please refer to Slack announcements or your email to secure your accommodations within our private block."
       ],
       schedule: [
