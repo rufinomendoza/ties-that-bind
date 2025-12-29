@@ -125,8 +125,8 @@ const EVENTS_DATA = [
     id: 3, 
     slug: "john-carroll-weekend",
     title: "John Carroll Weekend", 
-    date: "April 18–21, 2026", 
-    time: "All Day",
+    date: "April 16–19, 2026", 
+    time: "Four Days of Celebration",
     location: "Puerto Rico", 
     type: "Puerto Rico",
         actions: [
@@ -135,39 +135,39 @@ const EVENTS_DATA = [
     ],
     link: "",
     description: [
-        "Join us in celebrating Federico Stubbe #177!",
-        "Check Slack announcements or your email for hotel accommodation details."
+        "Experience the definitive Caribbean gathering April 16–19 as we honor Federico Stubbe #177 during John Carroll Weekend 2026.",
+        "Set against the vibrant backdrop of Puerto Rico, this weekend blends cultural immersion with exceptional celebration, culminating in the John Carroll Awards Gala. Please refer to Slack announcements or your email to secure your accommodations within our private block."
       ],
       schedule: [
         {
             title: "Welcome Reception",
-            description: "A Welcome Reception on Thursday night in an 1800s colonial building in Old San Juan, the oldest city in the Western Hemisphere.",
-            time: "Thursday Night",
+            description: "Commence the weekend with an evening of historical elegance at the Antiguo Casino, set within the timeless colonial architecture of Old San Juan, the oldest city in the Western Hemisphere.",
+            time: "Thursday Evening",
             location: "Antiguo Casino de Puerto Rico"
         },
         {
             title: "Chimes Night",
-            description: "A Chimes Night immediately afterward at Arena Medalla.",
+            description: "Immediately following the reception, adjourn to Arena Medalla for a vibrant celebration blending spirited camaraderie with the distinctive energy of the Chimes.",
             time: "Thursday Night",
             location: "Arena Medalla"
         },
         {
-            title: "A Day of Fun",
-            description: "A full day at Dorado Beach, with its gorgeous beaches, Robert Trent Jones golf courses, over 7 miles of trails, and full resort amenities.",
+            title: "A Day of Leisure",
+            description: "Immerse yourself in a day of relaxation at the legendary Dorado Beach. Enjoy championship Robert Trent Jones golf courses, seven miles of scenic nature trails, and pristine coastlines.",
             time: "Friday",
             location: "Dorado Beach"
         },
         {
-            title: "Rum Tasting",
-            description: "An exquisite rum tasting.",
+            title: "Private Rum Tasting",
+            description: "An exclusive tasting journey showcasing the finest heritage spirits of Puerto Rico. (Event confirmation contingent upon interest.)",
             time: "Friday",
-            location: "TBA"
+            location: "To Be Announced"
         },
         {
-            title: "John Carroll Awards",
-            description: "At the Coca-Cola Music Hall in Distrito T-Mobile, followed by an incredible after-party in the plaza.",
+            title: "The John Carroll Awards Gala",
+            description: "The weekend’s premier event. Join us at the Coca-Cola Music Hall to honor Federico Stubbe #177. The ceremony will be followed by a spectacular after-party in the heart of the plaza.",
             time: "Saturday",
-            location: "Coca-Cola Music Hall in Distrito T-Mobile"
+            location: "Coca-Cola Music Hall\nDistrito T-Mobile"
         }
 
     ],
@@ -1022,7 +1022,7 @@ const EventDetailView = ({ event, navigateTo }) => {
                     <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
                       <div className="md:col-span-4 text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase space-y-4">
                           {item.time && <div className="block">{item.time}</div>}
-                          {item.location && <div className="block text-[#041E42]">{item.location}</div>}
+                          {item.location && <div className="block text-[#041E42] whitespace-pre-line">{item.location}</div>}
                       </div>
                       <div className="md:col-span-8">
                         <h4 className="text-3xl md:text-4xl font-serif text-[#041E42] mb-6 italic">{item.title}</h4>
