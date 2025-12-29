@@ -65,6 +65,7 @@ import IMG_PUERTO_RICO from './assets/eric-ardito-uz1XrK91iGw-unsplash.jpeg';
 const EVENTS_DATA = [
   { 
     id: 1, 
+    slug: "cherry-tree-seniors",
     title: "Cherry Tree Massacre I", 
     date: "February 6, 2026", 
     time: "7:00 p.m.",
@@ -90,6 +91,7 @@ const EVENTS_DATA = [
   },
   { 
     id: 2, 
+    slug: "cherry-tree-alumni",
     title: "Cherry Tree Massacre II", 
     date: "February 21, 2026", 
     time: "7:00 p.m.",
@@ -124,6 +126,7 @@ const EVENTS_DATA = [
   },
   { 
     id: 3, 
+    slug: "john-carroll-weekend",
     title: "John Carroll Weekend", 
     date: "April 18–21, 2026", 
     time: "All Day",
@@ -178,6 +181,7 @@ const EVENTS_DATA = [
 const ALBUMS_DATA = [
   { 
     id: 1, 
+    slug: "desperate-chimes-desperate-measures",
     title: "Desperate Chimes, Desperate Measures", 
     year: "2026", 
     cover: "bg-[#2A3B55]", 
@@ -225,6 +229,7 @@ const ALBUMS_DATA = [
   },
   { 
     id: 2, 
+    slug: "partners-in-chime",
     title: "Partners in Chime", 
     year: "2016", 
     cover: "bg-[#4A5B75]",
@@ -251,6 +256,7 @@ const ALBUMS_DATA = [
   },
   { 
     id: 3, 
+    slug: "three-stripes",
     title: "Three Stripes", 
     year: "2012", 
     cover: "bg-[#6A7B95]",
@@ -281,6 +287,7 @@ const ALBUMS_DATA = [
   },
   { 
     id: 4, 
+    slug: "36th-and-prospect",
     title: "36th & Prospect", 
     year: "2009", 
     cover: "bg-[#8A9BB5]",
@@ -337,6 +344,7 @@ const ALBUMS_DATA = [
   },
   { 
     id: 5, 
+    slug: "battle-gear",
     title: "Battle Gear", 
     year: "2003", 
     cover: "bg-[#9AABCA]", 
@@ -390,6 +398,7 @@ const ALBUMS_DATA = [
   },
   { 
     id: 6, 
+    slug: "parsley-sage-rosemary-chime",
     title: "Parsley, Sage, Rosemary, & Chime", 
     year: "2002", 
     cover: "bg-[#B0BCCF]", 
@@ -434,6 +443,7 @@ const ALBUMS_DATA = [
   },
   { 
     id: 7, 
+    slug: "let-the-good-chimes-roll",
     title: "Let the Good Chimes Roll", 
     year: "1997", 
     cover: "bg-[#C4CDDC]", 
@@ -491,6 +501,7 @@ const ALBUMS_DATA = [
   },
   { 
     id: 8, 
+    slug: "hoya-saxa",
     title: "Hoya Saxa", 
     year: "1984", 
     cover: "bg-[#D8DDE6]", 
@@ -547,6 +558,7 @@ const ALBUMS_DATA = [
   },
   {
     id: 9,
+    slug: "chimes-75",
     title: "Chimes ’75",
     year: "1975",
     cover: "bg-[#2A3B55]",
@@ -598,6 +610,7 @@ const ALBUMS_DATA = [
   },
   {
     id: 10,
+    slug: "chimes-66",
     title: "Chimes ’66",
     year: "1966",
     cover: "bg-[#4A5B75]",
@@ -641,6 +654,7 @@ const ALBUMS_DATA = [
   },
   {
     id: 11,
+    slug: "1958-1959",
     title: "1958–1959",
     year: "1959",
     cover: "bg-[#6A7B95]",
@@ -678,6 +692,7 @@ const ALBUMS_DATA = [
   },
   {
     id: 12,
+    slug: "under-the-tree",
     title: "Under the Tree",
     year: "1958",
     cover: "bg-[#8A9BB5]",
@@ -776,7 +791,7 @@ const SectionHeader = ({ title, number }) => (
   </div>
 );
 
-const HomeView = ({ navigateTo, openAlbumById, openEvent }) => (
+const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => (
     <>
       {/* Hero */}
       <div 
@@ -802,7 +817,7 @@ const HomeView = ({ navigateTo, openAlbumById, openEvent }) => (
           {/* Minimalist CTAs */}
           <div className="flex flex-col md:flex-row gap-12 items-center">
              <button 
-                onClick={() => openAlbumById(1)}
+                onClick={() => openAlbumBySlug('desperate-chimes-desperate-measures')}
                 className="group relative pb-1 text-xs font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
              >
                 <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
@@ -848,7 +863,13 @@ const HomeView = ({ navigateTo, openAlbumById, openEvent }) => (
 
 // --- Detail View ---
 const EventDetailView = ({ event, navigateTo }) => {
-    if (!event) return null;
+    if (!event) return (
+      <div className="min-h-screen pt-48 px-16 flex flex-col items-center justify-center bg-[#F4F4F3]">
+        <h2 className="text-4xl font-serif italic text-[#041E42] mb-8">Event Not Found</h2>
+        <button onClick={() => navigateTo('agenda')} className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">Return to Agenda</button>
+      </div>
+    );
+    
     return (
     <div className="min-h-screen pt-32 md:pt-48 px-6 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
@@ -1143,7 +1164,15 @@ const DiscographyView = ({ openAlbum, navigateTo }) => (
     </div>
 );
 
-const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
+const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
+    if (!selectedAlbum) return (
+      <div className="min-h-screen pt-48 px-16 flex flex-col items-center justify-center bg-[#F4F4F3]">
+        <h2 className="text-4xl font-serif italic text-[#041E42] mb-8">Album Not Found</h2>
+        <button onClick={() => navigateTo('discography')} className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">Return to Discography</button>
+      </div>
+    );
+    
+    return (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
         <button 
@@ -1184,8 +1213,8 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
                 
                 {selectedAlbum?.dedication && (
                       <div className="mt-12">
-                         <p className="text-[10px] text-[#595959] uppercase tracking-[0.3em] font-bold mb-6">Dedication</p>
-                         <p className="text-sm font-serif italic text-[#041E42] leading-loose">{selectedAlbum.dedication}</p>
+                          <p className="text-[10px] text-[#595959] uppercase tracking-[0.3em] font-bold mb-6">Dedication</p>
+                          <p className="text-sm font-serif italic text-[#041E42] leading-loose">{selectedAlbum.dedication}</p>
                       </div>
                 )}
              </div>
@@ -1311,7 +1340,8 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
         </div>
       </div>
     </div>
-);
+    );
+};
 
 const PhilanthropyView = () => (
     <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-48 px-8 md:px-16 pb-32">
@@ -1538,11 +1568,100 @@ const BackstageView = () => (
 // --- Main App ---
 
 export default function App() {
-  const [activePage, setActivePage] = useState('home');
-  const [selectedAlbum, setSelectedAlbum] = useState(null);
-  const [selectedEvent, setSelectedEvent] = useState(null);
+  // --- CUSTOM ROUTER LOGIC ---
+  const getRouteFromPath = () => {
+    const path = window.location.pathname;
+    // Normalize path (remove trailing slash for consistency, though root remains '/')
+    const cleanPath = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+    
+    if (cleanPath === '/' || cleanPath === '') return { view: 'home', slug: null };
+    if (cleanPath === '/agenda') return { view: 'agenda', slug: null };
+    if (cleanPath === '/events') return { view: 'agenda', slug: null };
+    if (cleanPath === '/archive') return { view: 'discography', slug: null };
+    if (cleanPath === '/albums') return { view: 'discography', slug: null };
+    if (cleanPath === '/music') return { view: 'discography', slug: null };
+    if (cleanPath === '/give') return { view: 'philanthropy', slug: null };
+    if (cleanPath === '/atelier') return { view: 'store', slug: null };
+    if (cleanPath === '/store') return { view: 'store', slug: null };
+    if (cleanPath === '/backstage') return { view: 'backstage', slug: null };
+    if (cleanPath === '/comms') return { view: 'backstage', slug: null };
+    
+    // Dynamic Routes
+    const eventMatch = cleanPath.match(/^\/event\/([\w-]+)$/);
+    if (eventMatch) return { view: 'event', slug: eventMatch[1] };
+    
+    const albumMatch = cleanPath.match(/^\/album\/([\w-]+)$/);
+    if (albumMatch) return { view: 'album', slug: albumMatch[1] };
+    
+    return { view: 'home', slug: null };
+  };
+
+  const [route, setRoute] = useState(getRouteFromPath());
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+
+  // Listen for browser navigation (back/forward)
+  useEffect(() => {
+    const handlePopState = () => {
+      setRoute(getRouteFromPath());
+      setIsMenuOpen(false);
+      window.scrollTo(0, 0);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    
+    const handleScroll = () => {
+        setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  // Update URL to navigate
+  const navigateTo = (view, slug = null) => {
+    let path = '/';
+    // Map internal views to clean URLs
+    switch(view) {
+        case 'home': path = '/'; break;
+        case 'agenda': path = '/agenda'; break;
+        case 'discography': path = '/archive'; break;
+        case 'philanthropy': path = '/give'; break;
+        case 'store': path = '/atelier'; break;
+        case 'backstage': path = '/backstage'; break;
+        case 'event': path = `/event/${slug}`; break;
+        case 'album': path = `/album/${slug}`; break;
+        default: path = '/';
+    }
+    
+    try {
+      window.history.pushState({}, '', path);
+    } catch (err) {
+      // In sandboxed environments (like the code preview), pushState might fail.
+      // We catch this to allow the app to function using internal state navigation only.
+      console.log('History API not available, falling back to state navigation');
+    }
+    setRoute({ view, slug });
+    setIsMenuOpen(false);
+    window.scrollTo(0, 0);
+  };
+
+  // Helper wrappers for child components
+  const openAlbumBySlug = (slug) => navigateTo('album', slug);
+  const openAlbum = (album) => navigateTo('album', album.slug);
+  const openEvent = (event) => navigateTo('event', event.slug);
+
+  // --- Derived State from URL ---
+  const activePage = route.view;
+  const selectedEvent = activePage === 'event' && route.slug 
+    ? EVENTS_DATA.find(e => e.slug === route.slug) 
+    : null;
+  const selectedAlbum = activePage === 'album' && route.slug 
+    ? ALBUMS_DATA.find(a => a.slug === route.slug) 
+    : null;
 
   // Load Adobe Fonts and Google Fonts
   useEffect(() => {
@@ -1556,46 +1675,14 @@ export default function App() {
     googleLink.rel = 'stylesheet';
     document.head.appendChild(googleLink);
 
-    const handleScroll = () => {
-        setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-
     return () => {
       if (document.head.contains(typekitLink)) document.head.removeChild(typekitLink);
       if (document.head.contains(googleLink)) document.head.removeChild(googleLink);
-      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 
-  const navigateTo = (page) => {
-    window.scrollTo(0, 0);
-    setActivePage(page);
-    setIsMenuOpen(false);
-    setSelectedAlbum(null);
-    if(page !== 'event_detail') setSelectedEvent(null);
-  };
-
-  const openAlbum = (album) => {
-    setSelectedAlbum(album);
-    setActivePage('album_detail');
-    window.scrollTo(0, 0);
-  };
-
-  const openAlbumById = (id) => {
-    const album = ALBUMS_DATA.find(a => a.id === id);
-    if (album) openAlbum(album);
-  }
-
-  const openEvent = (event) => {
-    setSelectedEvent(event);
-    setActivePage('event_detail');
-    window.scrollTo(0, 0);
-  }
-
   // Logic for dynamic Navbar styling
   const isHome = activePage === 'home';
-  // Keep navigation consistent color (Dark Navy) for high-end look, unless over a dark image (which we aren't doing anymore, home is now light)
   const navTextColor = 'text-[#041E42]'; 
   const currentLogo = IMG_LOGO; 
 
@@ -1716,11 +1803,11 @@ export default function App() {
       </nav>
 
       <main id="main-content" className="min-h-screen">
-        {activePage === 'home' && <HomeView navigateTo={navigateTo} openAlbumById={openAlbumById} openEvent={openEvent} />}
+        {activePage === 'home' && <HomeView navigateTo={navigateTo} openAlbumBySlug={openAlbumBySlug} openEvent={openEvent} />}
         {activePage === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
         {activePage === 'discography' && <DiscographyView openAlbum={openAlbum} navigateTo={navigateTo} />}
-        {activePage === 'album_detail' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
-        {activePage === 'event_detail' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
+        {activePage === 'album' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
+        {activePage === 'event' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
         {activePage === 'philanthropy' && <PhilanthropyView />}
         {activePage === 'store' && <StoreView />}
         {activePage === 'backstage' && <BackstageView />}
