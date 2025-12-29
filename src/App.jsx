@@ -25,7 +25,7 @@ import IMG_LOGO from './assets/logo.png';
 import IMG_LOGO_WHITE from './assets/logo-white.png';
 import IMG_NECKTIE from './assets/necktie.jpg';
 import IMG_BOWTIE from './assets/bowtie.jpg';
-import IMG_DCDM from './assets/DCDM.jpg';
+import IMG_DCDM from './assets/dcdm.jpeg';
 import IMG_PARTNERS from './assets/partners.jpg';
 import IMG_THREE_STRIPES from './assets/three-stripes.jpg';
 import IMG_PROSPECT from './assets/36th-prospect.jpg';
@@ -189,7 +189,8 @@ const ALBUMS_DATA = [
     highlights: ["Vinyl Early Access", "Mastered at Abbey Road Studios"],
     leadSingle: { 
       title: "And So It Goes", 
-      composer: "Billy Joel (arr. Bob Chilcott) / Feat. Aidan Metz",
+      composer: "Billy Joel (arr. Bob Chilcott)",
+      soloist: "Aidan Metz",
       link: "https://thechimes.lnk.to/AndSoItGoesAA"
     },
     credits: {
@@ -1204,13 +1205,16 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => (
                 <div className="bg-white p-12 mb-32 border border-[#041E42]/5 shadow-sm">
                     <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] uppercase mb-6 block">Featured Track</span>
                     <h3 className="text-5xl font-serif text-[#041E42] mb-2 italic">{selectedAlbum.leadSingle.title}</h3>
-                    <p className="text-[10px] text-[#595959] uppercase tracking-[0.2em] mb-12">{selectedAlbum.leadSingle.composer}</p>
+                    <p className="text-[10px] text-[#595959] uppercase tracking-[0.2em]">{selectedAlbum.leadSingle.composer}</p>
+                    {selectedAlbum.leadSingle.soloist && (
+                    <p className="text-[10px] text-[#595959] uppercase tracking-[0.2em]">Feat. {selectedAlbum.leadSingle.soloist}</p>
+                    )}
                     {selectedAlbum.leadSingle.link && (
                         <a 
                             href={selectedAlbum.leadSingle.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
+                            className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 mt-12"
                         >
                             Play Track <span className="sr-only">(opens in new tab)</span>
                         </a>
@@ -1486,13 +1490,13 @@ const BackstageView = () => (
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-32 fade-in-element">
             {/* GleeManager Section */}
-            <div className="p-24 border border-[#041E42]/10 bg-white hover:border-[#041E42] transition-colors duration-1000 flex flex-col justify-between h-full">
+            <div className="p-8 md:p-24 border border-[#041E42]/10 bg-white hover:border-[#041E42] transition-colors duration-1000 flex flex-col justify-between h-full">
                 <div>
                   <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-12 block">
                     Database
                   </span>
-                  <h3 className="text-5xl font-serif mb-8 text-[#041E42] italic">GleeManager on Notion</h3>
-                  <p className="text-[#041E42] text-xl font-serif leading-relaxed mb-16">
+                  <h3 className="text-4xl md:text-5xl font-serif mb-8 text-[#041E42] italic">GleeManager on Notion</h3>
+                  <p className="text-[#041E42] text-l md:text-xl font-serif leading-relaxed mb-16">
                       Our central repository for historical data, part tapes, and archival recordings. 
                   </p>
                 </div>
@@ -1507,13 +1511,13 @@ const BackstageView = () => (
             </div>
 
             {/* Slack Section */}
-            <div className="p-24 border border-[#041E42]/10 bg-white hover:border-[#041E42] transition-colors duration-1000 flex flex-col justify-between h-full">
+            <div className="p-8 md:p-24 border border-[#041E42]/10 bg-white hover:border-[#041E42] transition-colors duration-1000 flex flex-col justify-between h-full">
                 <div>
                   <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-12 block">
                     Messaging
                   </span>
-                  <h3 className="text-5xl font-serif mb-8 text-[#041E42] italic">Slack Workspace</h3>
-                  <p className="text-[#041E42] text-xl font-serif leading-relaxed mb-16">
+                  <h3 className="text-4xl md:text-5xl font-serif mb-8 text-[#041E42] italic">Slack Workspace</h3>
+                  <p className="text-[#041E42] text-l md:text-xl font-serif leading-relaxed mb-16">
                     Instant messaging for the Active and Alumni community.
                   </p>
                 </div>
