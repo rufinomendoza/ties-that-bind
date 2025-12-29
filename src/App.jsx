@@ -19,7 +19,6 @@ import {
 
 // --- Local Imports (Uncomment for Production) ---
 import IMG_CHERRY_TREE from './assets/composite-set-compressed.jpg';
-import IMG_CHERRY_TREE_MONOCHROME from './assets/Composite-Set-Monochrome-Compressed.jpg';
 import IMG_CTM_BOND from './assets/ctm-bond.jpeg';
 import IMG_LOGO from './assets/logo.png';
 import IMG_LOGO_WHITE from './assets/logo-white.png';
@@ -791,7 +790,21 @@ const SectionHeader = ({ title, number }) => (
   </div>
 );
 
-const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => (
+
+// --- Home View ---
+const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
+  // State to trigger the fade-in animation
+  const [isHeroVisible, setIsHeroVisible] = useState(false);
+
+  useEffect(() => {
+    // Trigger the opacity change after mount
+    const timer = setTimeout(() => {
+      setIsHeroVisible(true);
+    }, 100); 
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
     <>
       {/* Hero */}
       <div 
@@ -800,8 +813,24 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => (
         {/* Subtle texture or color wash */}
         <div className="absolute inset-0 bg-[#F4F4F3] z-0"></div>
 
-        <div className="max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 fade-in-element py-32">
-           {/* Architectural Title Stack - Ultra Large, Serif, Tight Leading */}
+        {/* Background Image Layer */}
+        <div 
+          className={`absolute inset-0 z-0 w-full h-full bg-cover bg-center grayscale bg-[#041E42] bg-blend-screen mix-blend-multiply pointer-events-none transition-opacity duration-[3000ms] ease-in-out ${isHeroVisible ? 'opacity-15' : 'opacity-0'}`}
+          style={{ 
+            backgroundImage: `url(${IMG_CHERRY_TREE})`
+          }}
+          aria-hidden="true"
+        />
+
+        {/* Content Container 
+            1. Removed 'fade-in-element' class.
+            2. Added transition-all, duration, and ease to match the image.
+            3. Added conditional opacity and translate-y to slide it up slightly while fading.
+        */}
+        <div 
+          className={`max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 py-32 transition-all duration-[3000ms] ease-in-out ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+        >
+           {/* Architectural Title Stack */}
           <div className="text-center space-y-0 mb-24 select-none" aria-label="Values: Fellowship, Harmony, Legacy">
             <h1 className="text-[14vw] font-serif leading-[0.8] tracking-tighter text-[#041E42] block">
               FELLOWSHIP
@@ -834,7 +863,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => (
         </div>
       </div>
 
-      {/* Featured Event Teaser - Asymmetrical Editorial Layout */}
+      {/* Featured Event Teaser */}
       <section className="min-h-screen flex flex-col md:flex-row border-b border-[#041E42]/10 bg-[#F4F4F3]">
         <div className="md:w-5/12 p-12 md:p-24 flex flex-col justify-end bg-[#E5E5E4] fade-in-element relative overflow-hidden group">
              <div className="absolute inset-0 z-0">
@@ -859,7 +888,8 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => (
         </div>
       </section>
     </>
-);
+  );
+};
 
 // --- Detail View ---
 const EventDetailView = ({ event, navigateTo }) => {
@@ -1082,14 +1112,51 @@ const AgendaView = ({ navigateTo, openEvent }) => (
     </div>
 );
 
-const DiscographyView = ({ openAlbum, navigateTo }) => (
+
+// --- Discography View ---
+// Replace the existing DiscographyView component with this version
+
+const DiscographyView = ({ openAlbum, navigateTo }) => {
+  const [imagesLoaded, setImagesLoaded] = useState(false);
+  const [triggerAnim, setTriggerAnim] = useState(false);
+
+  useEffect(() => {
+    const preloadImages = async () => {
+      const promises = ALBUMS_DATA.map((album) => {
+        if (!album.image) return Promise.resolve();
+        return new Promise((resolve) => {
+          const img = new Image();
+          img.src = album.image;
+          img.onload = resolve;
+          img.onerror = resolve; 
+        });
+      });
+
+      await Promise.all(promises);
+      setImagesLoaded(true);
+      setTimeout(() => setTriggerAnim(true), 100);
+    };
+
+    preloadImages();
+  }, []);
+
+  if (!imagesLoaded) {
+    return (
+      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F4F4F3]">
+        <div className="animate-pulse flex flex-col items-center gap-4">
+           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42]">Loading Archive</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Archive" number="DISCOGRAPHY" />
         
-        {/* Gallery Grid - Generous Spacing */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-32 mb-48 fade-in-element">
-          {ALBUMS_DATA.map((album) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-32 mb-48">
+          {ALBUMS_DATA.map((album, index) => (
             <div 
               key={album.id} 
               role="button"
@@ -1101,11 +1168,13 @@ const DiscographyView = ({ openAlbum, navigateTo }) => (
                 }
               }}
               onClick={() => openAlbum(album)}
-              className="group cursor-pointer flex flex-col gap-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-8"
+              // Container Entry Animation Only
+              // Removed all hover transforms from here
+              className={`group cursor-pointer flex flex-col gap-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-8 transition-all duration-[2000ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+              style={{ transitionDelay: `${index * 150}ms` }}
               aria-label={`View details for album ${album.title}`}
             >
               <div className="relative aspect-square bg-[#E5E5E4] overflow-hidden">
-                 {/* Conditionally render Image or CSS Background */}
                  {album.image ? (
                     <img 
                       src={album.image} 
@@ -1135,14 +1204,15 @@ const DiscographyView = ({ openAlbum, navigateTo }) => (
           ))}
         </div>
 
-        {/* Informational Footer */}
-        <div className="border-t border-[#041E42]/10 pt-32 flex flex-col items-center text-center fade-in-element">
+        <div 
+            className={`border-t border-[#041E42]/10 pt-32 flex flex-col items-center text-center transition-all duration-[2000ms] ease-out ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
+            style={{ transitionDelay: '800ms' }}
+        >
             <h3 className="text-5xl font-serif text-[#041E42] mb-12 italic">The Vault is Incomplete.</h3>
             <p className="text-[#041E42] text-xl font-serif leading-relaxed max-w-prose mb-16">
                 The digitization of the Chimes catalogue is an ongoing preservation project. We are restoring master tapes for future high-fidelity release.
             </p>
             
-            {/* Links container */}
             <div className="flex flex-col items-center gap-8">
                 <a 
                     href="https://thechimes.notion.site" 
@@ -1162,7 +1232,8 @@ const DiscographyView = ({ openAlbum, navigateTo }) => (
         </div>
       </div>
     </div>
-);
+  );
+};
 
 const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
     if (!selectedAlbum) return (
@@ -1452,7 +1523,6 @@ const StoreView = () => (
                   <a href="https://buy.stripe.com/14k6si2EpcWQemQ3co" target="_blank" rel="noopener noreferrer">
                     <img 
                       src={IMG_NECKTIE} 
-                      
                       alt="The Silk Necktie"
                       className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                     />
@@ -1482,7 +1552,6 @@ const StoreView = () => (
                   <a href="https://buy.stripe.com/eVacQGceZ2icceI28l" target="_blank" rel="noopener noreferrer">
                     <img 
                        src={IMG_BOWTIE}
-                       href="https://buy.stripe.com/eVacQGceZ2icceI28l"
                        alt="The Silk Bow Tie"
                        className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
                      />
