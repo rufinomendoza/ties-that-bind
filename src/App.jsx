@@ -7,8 +7,6 @@ import {
   ExternalLink,
   ChevronLeft,
   Play,
-  Clock,
-  MapPin,
   Ticket
 } from 'lucide-react';
 
@@ -742,42 +740,42 @@ const DONOR_TIERS = [
     price: "$19.46/year",
     link: "https://buy.stripe.com/dR67wmceZ3mgdiM9AS",
     description: "In conducting, the ictus is the precise moment the beat occurs. It is the pulse that holds the ensemble together. For $19.46 a year, you provide that pulse, ensuring the beat goes on.",
-    cta: "Keep the Beat"
+    cta: "Join the Guild"
   },
   {
     title: "The Tonic",
     price: "$10/month",
     link: "https://buy.stripe.com/28o3g692N6ysa6AaEJ",
     description: "Ten bucks a month. It funds the casual hospitality that defines the Chimes, ensuring that when we meet again, the green tea with honey (and other beverages) is always flowing.",
-    cta: "Fill the Cup"
+    cta: "Join The Guild"
   },
   {
     title: "The 1946 Society",
     price: "$19.46/month",
     link: "https://buy.stripe.com/6oEbMC7YJf4YbaE5kt",
     description: "The definitive commitment. By matching the year of our founding every month, you cover the operational essentials. You are the backbone of the day-to-day.",
-    cta: "Make It Official"
+    cta: "Join the Guild"
   },
   {
     title: "The Social Chair",
     price: "$27.80/month",
     link: "https://buy.stripe.com/aEUaIy7YJaOI5QkcMW",
     description: "The Chimes are nothing without the gathering. This tier is dedicated to the experience. You are ensuring that when we get together, we can afford to do it right.",
-    cta: "Start the Party"
+    cta: "Join the Guild"
   },
   {
     title: "The Founder’s League",
     price: "$46/month",
     link: "https://buy.stripe.com/aEUeYO2EpaOI0w04gv",
     description: "At this level, you aren’t just paying dues; you are subsidizing the future. You fund the archival work that keeps our history from fading.",
-    cta: "Save the History"
+    cta: "Join the Guild"
   },
   {
     title: "The Good Fellow",
     price: "$100/month",
     link: "https://buy.stripe.com/5kA17Y92N6ysguYbIY",
     description: "This is the bedrock of the Alumni Association. Your contribution carries the heavy lifting for our most ambitious projects, ensuring the Chimes legacy is secure for decades to come.",
-    cta: "Lead the Way"
+    cta: "Join the Guild"
   }
 ];
 
@@ -822,11 +820,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
           aria-hidden="true"
         />
 
-        {/* Content Container 
-            1. Removed 'fade-in-element' class.
-            2. Added transition-all, duration, and ease to match the image.
-            3. Added conditional opacity and translate-y to slide it up slightly while fading.
-        */}
+        {/* Content Container */}
         <div 
           className={`max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 py-32 transition-all duration-[3000ms] ease-in-out ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
         >
@@ -1067,7 +1061,6 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                   openEvent(event);
                 }
               }}
-              // UPDATED: Added px-4 (instead of px-0) on mobile to ensure content isn't edge-to-edge
               className="group border-t border-[#041E42]/10 py-16 md:py-24 px-4 md:px-12 hover:bg-white transition-colors duration-1000 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
               onClick={() => openEvent(event)}
               aria-label={`View details for ${event.title} on ${event.date}`}
@@ -1114,7 +1107,6 @@ const AgendaView = ({ navigateTo, openEvent }) => (
 
 
 // --- Discography View ---
-// Replace the existing DiscographyView component with this version
 
 const DiscographyView = ({ openAlbum, navigateTo }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
