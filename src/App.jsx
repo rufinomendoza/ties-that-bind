@@ -174,7 +174,7 @@ const EVENTS_DATA = [
         }
 
     ],
-     image: IMG_PUERTO_RICO
+      image: IMG_PUERTO_RICO
   },
 ];
 
@@ -515,7 +515,7 @@ const ALBUMS_DATA = [
         }
     ],
     credits: {
-        "Production": [
+      "Production": [
             { role: "Front Cover", name: "Felix T. Cat" },
             { role: "Producer and Engineer", name: "John Burr" },
             { role: "Photography", name: "Cristina Del Sesto" },
@@ -524,12 +524,12 @@ const ALBUMS_DATA = [
         ]
     },
     acknowledgements: [
-        "Father Timothy Healy S.J.",
-        "R.J. McCooey",
-        "Kevin O'Brien",
-        "David J. Walsh",
-        "Brian Freeman",
-        "The Boston Common"
+      "Father Timothy Healy S.J.",
+      "R.J. McCooey",
+      "Kevin O'Brien",
+      "David J. Walsh",
+      "Brian Freeman",
+      "The Boston Common"
     ],
     tracks: [
       { title: "We Meet" },
@@ -580,7 +580,7 @@ const ALBUMS_DATA = [
         }
     ],
     credits: {
-        "Production": [
+      "Production": [
             { role: "Layout", name: "R. J. McCooey" },
             { role: "Art Work", name: "Susan Lee" },
             { role: "Photography", name: "Rosemary Suozzi" },
@@ -627,7 +627,7 @@ const ALBUMS_DATA = [
         }
     ],
     credits: {
-        "Production": [
+      "Production": [
             { role: "Cover Design and Layout", name: "R. McCooey and F. Cosco Ltd." },
             { role: "Cover Photo", name: "Peter Carter" },
             { role: "Art Work", name: "Commercial Art Studios" }
@@ -705,7 +705,7 @@ const ALBUMS_DATA = [
         }
     ],
     credits: {
-        "Production": [
+      "Production": [
             { role: "Pictures", name: "Stan Sitnik" },
             { role: "Recorded and Pressed by", name: "RCA Custom Records" },
             { role: "Cover and Liner Printed by", name: "MacMurray Press, N.Y." }
@@ -929,9 +929,9 @@ const EventDetailView = ({ event, navigateTo }) => {
                                  ? "border-[#041E42] bg-[#041E42] text-[#F4F4F3] hover:bg-[#D50032] hover:border-[#D50032]" 
                                  : "border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-[#F4F4F3]"
                              }`}
-                          >
+                           >
                              {action.label} <span className="sr-only">(opens in new tab)</span>
-                          </a>
+                           </a>
                       ))
                 ) : (
                    event.link && (
@@ -997,8 +997,8 @@ const EventDetailView = ({ event, navigateTo }) => {
                   {event.schedule.map((item, idx) => (
                     <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
                       <div className="md:col-span-4 text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase space-y-4">
-                         {item.time && <div className="block">{item.time}</div>}
-                         {item.location && <div className="block text-[#041E42]">{item.location}</div>}
+                          {item.time && <div className="block">{item.time}</div>}
+                          {item.location && <div className="block text-[#041E42]">{item.location}</div>}
                       </div>
                       <div className="md:col-span-8">
                         <h4 className="text-3xl md:text-4xl font-serif text-[#041E42] mb-6 italic">{item.title}</h4>
@@ -1565,6 +1565,25 @@ const BackstageView = () => (
     </div>
 );
 
+const NotFoundView = ({ navigateTo }) => (
+    <div className="min-h-screen pt-48 px-8 md:px-16 flex flex-col items-center justify-center bg-[#F4F4F3] text-center fade-in-element">
+        <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] uppercase mb-8">Error 404</span>
+        <h1 className="text-6xl md:text-9xl font-serif text-[#041E42] mb-8 italic leading-none">
+            Discordant Note.
+        </h1>
+        <div className="w-24 h-[1px] bg-[#041E42]/20 mb-8"></div>
+        <p className="text-[#041E42] text-xl font-serif leading-relaxed mb-16 max-w-lg">
+            The page you requested cannot be found in our repertoire. It may have been moved, deleted, or never existed at all.
+        </p>
+        <button 
+            onClick={() => navigateTo('home')} 
+            className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 border-b border-[#041E42] pb-1 hover:border-[#D50032]"
+        >
+            Return to Harmony
+        </button>
+    </div>
+);
+
 // --- Main App ---
 
 export default function App() {
@@ -1574,6 +1593,8 @@ export default function App() {
     // Normalize path (remove trailing slash for consistency, though root remains '/')
     const cleanPath = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
     
+    if (cleanPath === '/his-successes') return { view: 'external-redirect', slug: null };
+
     if (cleanPath === '/' || cleanPath === '') return { view: 'home', slug: null };
     if (cleanPath === '/agenda') return { view: 'agenda', slug: null };
     if (cleanPath === '/events') return { view: 'agenda', slug: null };
@@ -1593,7 +1614,8 @@ export default function App() {
     const albumMatch = cleanPath.match(/^\/album\/([\w-]+)$/);
     if (albumMatch) return { view: 'album', slug: albumMatch[1] };
     
-    return { view: 'home', slug: null };
+    // Default fallback to 404 for unknown routes
+    return { view: '404', slug: null };
   };
 
   const [route, setRoute] = useState(getRouteFromPath());
@@ -1620,6 +1642,13 @@ export default function App() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
+  // Handle External Redirects
+  useEffect(() => {
+    if (route.view === 'external-redirect') {
+      window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLScYnADpitsc31nvqlJvj7f5tnMfS0uArn-PnsGJnj_cSNBqWA/viewform";
+    }
+  }, [route]);
 
   // Update URL to navigate
   const navigateTo = (view, slug = null) => {
@@ -1811,6 +1840,12 @@ export default function App() {
         {activePage === 'philanthropy' && <PhilanthropyView />}
         {activePage === 'store' && <StoreView />}
         {activePage === 'backstage' && <BackstageView />}
+        {activePage === '404' && <NotFoundView navigateTo={navigateTo} />}
+        {activePage === 'external-redirect' && (
+            <div className="min-h-screen bg-[#F4F4F3] flex items-center justify-center">
+                <p className="text-[#041E42] font-serif italic text-xl animate-pulse">Redirecting...</p>
+            </div>
+        )}
       </main>
 
       {/* Footer - Minimalist & Archival */}
