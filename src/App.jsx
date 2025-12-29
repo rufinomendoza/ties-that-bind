@@ -34,7 +34,7 @@ import IMG_CHIMES_75 from './assets/chimes-75.jpg';
 import IMG_CHIMES_66 from './assets/chimes-66.jpg';
 import IMG_1959 from './assets/1959.jpg';
 import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
-import IMG_PUERTO_RICO from './assets/eric-ardito-uz1XrK91iGw-unsplash.jpeg';
+import IMG_PUERTO_RICO from './assets/nils-huenerfuerst-SrYs4XxTRfk-unsplash.jpeg';
 
 // --- Preview Placeholders (Comment out for Production) ---
 // const IMG_CHERRY_TREE = "https://placehold.co/1920x1080/0A0A0A/FFFFFF?text=The+Classic";
@@ -1919,7 +1919,7 @@ export default function App() {
             </p>
           </div>
           
-          <div className="md:col-span-8 flex flex-wrap justify-end gap-32">
+          <div className="md:col-span-8 flex flex-wrap justify-start md:justify-end gap-32">
             <div className="flex flex-col gap-8">
               <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#595959]">Index</span>
               <button onClick={() => navigateTo('agenda')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Events</button>
