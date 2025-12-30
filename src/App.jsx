@@ -876,7 +876,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 In 1974, we sang for solvency. In 2026, we sing for the legacy. Most traditions fade. This one just gets louder. Two nights. One historic setlist.
             </p>
             <button onClick={() => navigateTo('agenda')} className="w-fit text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
-                View Full Agenda <ArrowRight size={14} />
+                View the Full 2026 Season <ArrowRight size={14} />
             </button>
         </div>
       </section>
@@ -889,7 +889,7 @@ const EventDetailView = ({ event, navigateTo }) => {
     if (!event) return (
       <div className="min-h-screen pt-48 px-16 flex flex-col items-center justify-center bg-[#F4F4F3]">
         <h2 className="text-4xl font-serif italic text-[#041E42] mb-8">Event Not Found</h2>
-        <button onClick={() => navigateTo('agenda')} className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">Return to Agenda</button>
+        <button onClick={() => navigateTo('agenda')} className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">Return to the Box Office</button>
       </div>
     );
     
@@ -900,7 +900,7 @@ const EventDetailView = ({ event, navigateTo }) => {
           onClick={() => navigateTo('agenda')}
           className="mb-16 md:mb-24 text-[10px] font-bold tracking-[0.3em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
         >
-          <ChevronLeft size={10} /> Return to Agenda
+          <ChevronLeft size={10} /> Return to the Box Office
         </button>
 
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-48 mb-32 fade-in-element">
@@ -1046,7 +1046,7 @@ const EventDetailView = ({ event, navigateTo }) => {
 const AgendaView = ({ navigateTo, openEvent }) => (
     <div className="min-h-screen pt-32 md:pt-48 px-6 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="Agenda" number="2026" />
+        <SectionHeader title="The 2026 Season" number="Tickets & Gatherings" />
         
         <div className="flex flex-col fade-in-element">
           {EVENTS_DATA.map((event) => (
@@ -1135,7 +1135,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center bg-[#F4F4F3]">
         <div className="animate-pulse flex flex-col items-center gap-4">
-           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42]">Loading Archive</span>
+           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42]">Loading Albums</span>
         </div>
       </div>
     );
@@ -1144,7 +1144,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
   return (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="Archive" number="DISCOGRAPHY" />
+        <SectionHeader title="The Listening Room" number="Recorded Works" />
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-32 mb-48">
           {ALBUMS_DATA.map((album, index) => (
@@ -1199,7 +1199,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
             className={`border-t border-[#041E42]/10 pt-32 flex flex-col items-center text-center transition-all duration-[2000ms] ease-out ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
             style={{ transitionDelay: '800ms' }}
         >
-            <h3 className="text-5xl font-serif text-[#041E42] mb-12 italic">The Vault is Incomplete.</h3>
+            <h3 className="text-5xl font-serif text-[#041E42] mb-12 italic">The Listening Room is Incomplete.</h3>
             <p className="text-[#041E42] text-xl font-serif leading-relaxed max-w-prose mb-16">
                 The digitization of the Chimes catalogue is an ongoing preservation project. We are restoring master tapes for future high-fidelity release.
             </p>
@@ -1211,7 +1211,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                     rel="noopener noreferrer" 
                     className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
                 >
-                    Access Preliminary Archives <span className="sr-only">(opens in new tab)</span>
+                    Explore the Rough Cuts <span className="sr-only">(opens in new tab)</span>
                 </a>
                 <button 
                     onClick={() => navigateTo && navigateTo('philanthropy')} 
@@ -1241,7 +1241,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
           onClick={() => navigateTo('discography')}
           className="mb-24 text-[10px] font-bold tracking-[0.3em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
         >
-          <ChevronLeft size={10} /> Return to Index
+          <ChevronLeft size={10} /> Return to the Listening Room
         </button>
 
         <div className="flex flex-col lg:flex-row gap-24 lg:gap-48 mb-32 fade-in-element">
@@ -1408,7 +1408,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 const PhilanthropyView = () => (
     <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-48 px-8 md:px-16 pb-32">
        <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="Patronage" number="FUND THE BROTHERHOOD" />
+        <SectionHeader title="Patronage" number="Fund the Brotherhood" />
         
         {/* Intro */}
         <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-32 fade-in-element items-end">
@@ -1490,7 +1490,7 @@ const PhilanthropyView = () => (
 const StoreView = () => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="Atelier" number="COLLECTION" />
+        <SectionHeader title="The Haberdashery" number="Specially Commissioned" />
 
         <div className="flex flex-col lg:flex-row gap-24 lg:gap-48 mb-32 fade-in-element">
           {/* Editorial Copy */}
@@ -1576,7 +1576,7 @@ const StoreView = () => (
 const BackstageView = () => (
     <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
       <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="Backstage" number="INTERNAL ACCESS" />
+        <SectionHeader title="Backstage" number="Authorized Access" />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-32 fade-in-element">
             {/* GleeManager Section */}
@@ -1848,10 +1848,10 @@ export default function App() {
             
             {/* Desktop Menu - Spaced Out */}
             <div className={`hidden md:flex items-center gap-16`}>
-              <NavLink page="agenda">Agenda</NavLink>
-              <NavLink page="discography">Archive</NavLink>
+              <NavLink page="agenda">Box Office</NavLink>
+              <NavLink page="discography">Listening Room</NavLink>
               <NavLink page="philanthropy">Patronage</NavLink>
-              <NavLink page="store">Atelier</NavLink>
+              <NavLink page="store">Haberdasher</NavLink>
               <NavLink page="backstage">Backstage</NavLink>
             </div>
 
@@ -1876,10 +1876,10 @@ export default function App() {
         >
           <div className="flex-1 w-full flex flex-col justify-center items-center px-8 text-[#041E42] space-y-4">
              <div className="w-full max-w-sm border-t border-[#041E42]/10"></div>
-            <NavLink page="agenda" mobile>Agenda</NavLink>
-            <NavLink page="discography" mobile>Archive</NavLink>
+            <NavLink page="agenda" mobile>Box Office</NavLink>
+            <NavLink page="discography" mobile>Listening Room</NavLink>
             <NavLink page="philanthropy" mobile>Patronage</NavLink>
-            <NavLink page="store" mobile>Atelier</NavLink>
+            <NavLink page="store" mobile>Haberdasher</NavLink>
             <NavLink page="backstage" mobile>Backstage</NavLink>
             <div className="w-full max-w-sm border-t border-[#041E42]/10"></div>
           </div>
@@ -1921,14 +1921,14 @@ export default function App() {
           <div className="md:col-span-8 flex flex-wrap justify-start md:justify-end gap-32">
             <div className="flex flex-col gap-8">
               <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#595959]">Index</span>
-              <button onClick={() => navigateTo('agenda')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Events</button>
-              <button onClick={() => navigateTo('discography')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Archive</button>
+              <button onClick={() => navigateTo('agenda')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Box Office</button>
+              <button onClick={() => navigateTo('discography')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Listening Room</button>
               <button onClick={() => navigateTo('philanthropy')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Patronage</button>
-              <button onClick={() => navigateTo('store')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Atelier</button>
+              <button onClick={() => navigateTo('store')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Haberdasher</button>
             </div>
             
              <div className="flex flex-col gap-8">
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#595959]">Members</span>
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#595959]">Backstage</span>
               <button onClick={() => navigateTo('backstage')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Database</button>
               <button onClick={() => navigateTo('backstage')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Messaging</button>
             </div>
