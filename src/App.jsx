@@ -186,8 +186,7 @@ const ALBUMS_DATA = [
     badge: "PRE-ORDER",
     link: "https://bio.to/ChimesAA",
     ctaText: "Vinyl Early Access",
-    description: "Limited First Pressing Arriving 2026. Join the waitlist for priority access.",
-    highlights: ["Vinyl Early Access", "Mastered at Abbey Road Studios"],
+    description: "Experience the Georgetown Chimes in uncompromising high fidelity. Arriving later this year, Desperate Chimes, Desperate Measures presents the group’s latest arrangements on a premium, 180g double LP. Stream the lead single now and join the waitlist for priority access to the First Pressing.",
     leadSingle: { 
       title: "And So It Goes", 
       composer: "Billy Joel (arr. Bob Chilcott)",
@@ -200,7 +199,7 @@ const ALBUMS_DATA = [
         { role: "Executive Producer", name: "Michael Luckey" },
         { role: "Musical Direction", name: "Christian Kim" },
         { role: "Artistic Direction", name: "Aidan Metz" },
-        { role: "Co-Producers", name: "Ben Fosnocht, Robby Della Bernarda, Aidan Metz, Arjun Singh, Youngsung Sim, and Rufino A. Mendoza II" },
+        { role: "Co-Producers", name: "Robert Della Bernarda, Ben Fosnocht, Aidan Metz, Arjun Singh, Youngsung Sim, and Rufino A. Mendoza II" },
         { role: "Album Sequencing", name: "Aidan Metz" }
       ],
       "Engineering": [
@@ -214,10 +213,10 @@ const ALBUMS_DATA = [
         { role: "Art Direction & Design", name: "Rufino A. Mendoza II" }
       ],
       "Administration": [
-        { role: "Production Coordinators", name: "Ben Fosnocht, Robby Della Bernarda, and Rufino A. Mendoza II" },
+        { role: "Production Coordinators", name: "Ben Fosnocht, Robert Della Bernarda, and Rufino A. Mendoza II" },
         { role: "Licensing & Clearance", name: "Easy Song" },
-        { role: "Licensing Coordinator", name: "Robby Della Bernarda" },
-        { role: "Liner Notes & Metadata", name: "Rufino A. Mendoza II and Robby Della Bernarda" }
+        { role: "Licensing Coordinator", name: "Robert Della Bernarda" },
+        { role: "Liner Notes & Metadata", name: "Rufino A. Mendoza II and Robert Della Bernarda" }
       ]
     },
     tracks: [
