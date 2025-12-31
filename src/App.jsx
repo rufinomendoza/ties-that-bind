@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import { 
   Menu, 
   X, 
@@ -834,12 +835,19 @@ const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) =
 };
 
 // --- Home View ---
-const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
+cconst HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
   useEffect(() => { setTimeout(() => setIsHeroVisible(true), 100); }, []);
 
   return (
     <>
+      {/* --- SEO INTEGRATION --- */}
+      <Helmet>
+        <title>Georgetown Chimes Alumni Association</title>
+        <meta name="description" content="Brotherhood, Harmony, History. The official home of the Georgetown Chimes Alumni Association." />
+      </Helmet>
+      {/* ----------------------- */}
+
       <div className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 border-b-2 border-[#041E42] bg-[#F4F4F3] overflow-hidden antialiased selection:bg-[#D50032] selection:text-white">
         <div 
           className={`absolute inset-0 z-0 w-full h-full bg-cover bg-center grayscale bg-[#041E42] bg-blend-screen mix-blend-multiply pointer-events-none transition-opacity duration-[2000ms] ease-in-out ${isHeroVisible ? 'opacity-15' : 'opacity-0'}`}
@@ -941,8 +949,16 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
 // --- Agenda View ---
 const AgendaView = ({ navigateTo, openEvent }) => (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
+      {/* --- SEO INTEGRATION --- */}
+      <Helmet>
+        <title>Box Office | Georgetown Chimes Alumni Association</title>
+        <meta name="description" content="Upcoming concerts, events, and reunions for the Georgetown Chimes." />
+      </Helmet>
+      {/* ----------------------- */}
+
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="The 2026 Season" number="Tickets & Gatherings" />
+        {/* ... (Rest of AgendaView Logic remains unchanged) ... */}
         <div className="hidden md:grid grid-cols-12 gap-12 pb-4 mb-4 border-b-2 border-[#041E42] opacity-100">
             <span className="col-span-2 text-[10px] font-sans font-bold tracking-[0.1em] uppercase">Date</span>
             <span className="col-span-7 text-[10px] font-sans font-bold tracking-[0.1em] uppercase">Program</span>
@@ -977,14 +993,28 @@ const AgendaView = ({ navigateTo, openEvent }) => (
 // --- Event Detail View ---
 const EventDetailView = ({ event, navigateTo }) => {
   if (!event) return null;
+
+  // Helper to extract plain text for meta description
+  const metaDescription = Array.isArray(event.description) 
+    ? event.description[0] 
+    : event.description;
+
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
+      {/* --- SEO INTEGRATION --- */}
+      <Helmet>
+        <title>{`${typeset(event.title)} | Georgetown Chimes Alumni Association`}</title>
+        <meta name="description" content={metaDescription} />
+      </Helmet>
+      {/* ----------------------- */}
+
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-between items-end mb-12">
             <button onClick={() => navigateTo('agenda')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4">
             <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to Box Office
             </button>
         </div>
+        {/* ... (Rest of EventDetailView Logic remains unchanged) ... */}
         <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
           <div className="lg:col-span-4">
              <div className="sticky top-32">
@@ -1057,8 +1087,16 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
 
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
+      {/* --- SEO INTEGRATION --- */}
+      <Helmet>
+        <title>Listening Room | Georgetown Chimes Alumni Association</title>
+        <meta name="description" content="Explore the recorded history of the Georgetown Chimes, featuring albums from 1958 to present." />
+      </Helmet>
+      {/* ----------------------- */}
+
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="The Listening Room" number="Recorded Works" />
+        {/* ... (Rest of DiscographyView Logic remains unchanged) ... */}
         <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
             <div className="lg:col-span-4"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span></div>
             <div className="lg:col-span-8">
@@ -1099,12 +1137,21 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
   if (!selectedAlbum) return null;
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
+      {/* --- SEO INTEGRATION --- */}
+      <Helmet>
+        <title>{`${typeset(selectedAlbum.title)} | Georgetown Chimes Alumni Association`}</title>
+        <meta name="description" content={selectedAlbum.description || `Listen to ${selectedAlbum.title} (${selectedAlbum.year}) by the Georgetown Chimes.`} />
+      </Helmet>
+      {/* ----------------------- */}
+
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-between items-end mb-12">
             <button onClick={() => navigateTo('discography')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4">
                 <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to Archive
             </button>
         </div>
+        
+        {/* ... (Rest of AlbumDetailView Logic remains unchanged) ... */}
         
         <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
           
@@ -1256,11 +1303,19 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
 const StoreView = () => (
   <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] antialiased text-[#041E42] selection:bg-[#D50032] selection:text-white">
+    {/* --- SEO INTEGRATION --- */}
+    <Helmet>
+      <title>Haberdashery | Georgetown Chimes Alumni Association</title>
+      <meta name="description" content="Official Battle Gear of the Georgetown Chimes. Specially commissioned silk neckwear." />
+    </Helmet>
+    {/* ----------------------- */}
+
     <div className="max-w-[1920px] mx-auto">
       <SectionHeader title="The Haberdashery" number="Specially Commissioned" />
 
       {/* MANIFESTO: The Big Statement (Heavy Top Border) */}
       <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12">
+        {/* ... (Rest of StoreView Logic remains unchanged) ... */}
         <div className="lg:col-span-4">
           <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#d50032] uppercase block mb-4">
             01 — Battle Gear
@@ -1378,8 +1433,16 @@ const StoreView = () => (
 
 const PhilanthropyView = () => (
     <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-40 px-6 md:px-12 pb-32 antialiased selection:bg-[#D50032] selection:text-white">
+       {/* --- SEO INTEGRATION --- */}
+       <Helmet>
+         <title>Patronage | Georgetown Chimes Alumni Association</title>
+         <meta name="description" content="Fund the Brotherhood. Join the Donor Guild and support the Georgetown Chimes Alumni Association." />
+       </Helmet>
+       {/* ----------------------- */}
+
        <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Patronage" number="Fund the Brotherhood" />
+        {/* ... (Rest of PhilanthropyView Logic remains unchanged) ... */}
         
         {/* MANIFESTO: The Big Statement */}
         <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
@@ -1516,9 +1579,17 @@ const PhilanthropyView = () => (
 
 const BackstageView = () => (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] antialiased text-[#041E42] selection:bg-[#D50032] selection:text-white">
+      {/* --- SEO INTEGRATION --- */}
+      <Helmet>
+        <title>Backstage | Georgetown Chimes Alumni Association</title>
+        <meta name="description" content="Authorized Access Only. Internal tools and database management for Alumni." />
+      </Helmet>
+      {/* ----------------------- */}
+
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Backstage" number="Authorized Access" />
-
+        {/* ... (Rest of BackstageView Logic remains unchanged) ... */}
+        
         {/* Heavy Anchor Line */}
         <div className="border-t-2 border-[#041E42] pt-0">
              <div className="grid grid-cols-1 md:grid-cols-2">
@@ -1629,6 +1700,13 @@ const BackstageView = () => (
 
 const NotFoundView = ({ navigateTo }) => (
     <div className="min-h-screen pt-40 px-6 md:px-12 flex flex-col items-center justify-center bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
+        {/* --- SEO INTEGRATION --- */}
+        <Helmet>
+            <title>404 | Georgetown Chimes Alumni Association</title>
+            <meta name="description" content="Page not found." />
+        </Helmet>
+        {/* ----------------------- */}
+
         <div className="w-full max-w-3xl border-t-2 border-[#041E42] pt-12">
             
             {/* 1. Meta Label */}
