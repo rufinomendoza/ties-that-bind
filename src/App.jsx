@@ -372,22 +372,22 @@ const ALBUMS_DATA = [
     ],
     tracks: [
       { title: "We Meet", composer: "Traditional" },
-      { title: "I’ve Just Seen a Face", composer: "John Lennon/Paul McCartney (arr. Evan Seiler ’02)", soloist: "Ryan Ramagosa ’03" },
+      { title: "I’ve Just Seen a Face", composer: "John Lennon · Paul McCartney (arr. Evan Seiler ’02)", soloist: "Ryan Ramagosa ’03" },
       { title: "Peaceful Easy Feeling", composer: "Jack Tempchin (arr. Jeff Gordon ’04)", soloist: "Dan Phillips ’03" },
       { title: "Apeman", composer: "Ray Davies (arr. Andy Neustaetter ’02)", soloist: "Andy Neustaetter ’02" },
-      { title: "Tempted", composer: "Chris Difford/Glenn Tilbrook (arr. Nick Amatuzzi ’00)", soloist: "Nick Giannotti ’02",},
+      { title: "Tempted", composer: "Chris Difford · Glenn Tilbrook (arr. Nick Amatuzzi ’00)", soloist: "Nick Giannotti ’02",},
       { title: "Danny Boy", composer: "Traditional (arr. Jay Spadone)" },
       { title: "I’m Beginning to See the Light", composer: "Duke Ellington (arr. Andrew Cranin)" },
-      { title: "Just You, Just Me", composer: "Raymond Klarges/Jesse Greer (arr. Sean Altman/Elliott Kerman; bass line by Barry Carl)", soloist: "O’Brien (Bass), Phillips (Baritone), Gordon (Lead), Ramagosa (Tenor)" },
+      { title: "Just You, Just Me", composer: "Raymond Klarges · Jesse Greer (arr. Sean Altman · Elliott Kerman; bass line by Barry Carl)", soloist: "O’Brien (Bass), Phillips (Baritone), Gordon (Lead), Ramagosa (Tenor)" },
       { title: "Prodigal Son", composer: "Luke 15:11–32 (arr. Nashville Bluegrass Band)" },
-      { title: "Kiss Him Goodbye", composer: "Dale Frashuer/Gary Decarlo/Paul Leko (arr. Bill Henderson/The Nylons)", soloist: "Ryan Ramagosa ’03" },
+      { title: "Kiss Him Goodbye", composer: "Dale Frashuer · Gary Decarlo · Paul Leko (arr. Bill Henderson · The Nylons)", soloist: "Ryan Ramagosa ’03" },
       { title: "They Can’t Take That Away from Me", composer: "George Gershwin & Ira Gershwin (arr. Sean Collins ’83)", soloist: "Evan Seiler ’02" },
       { title: "Crazy Little Thing Called Love", composer: "Freddie Mercury (arr. Jeff Gordon ’04)", soloist: "Jeff Gordon ’04" },
       { title: "Poor Heart", composer: "Michael Gordon (arr. FRED)", soloist: "Quartet: Beaton (Bass), Seiler (Baritone), Giannotti (Lead), Neustaetter (Tenor)" },
       { title: "California Dreamin’", composer: "John and Michelle Phillips (arr. Mike Taylor)" },
       { title: "Sixty Minute Man", composer: "by: William “Billy” Ward, a.p.b. the Persuasions and Rockapella", soloist: "Sean O’Brien ’04" },
       { title: "Jet Airliner", composer: "Paul Pena (arr. Evan Seiler ’02)", soloist: "Nick Giannotti ’02" },
-      { title: "When I’m 64", composer: "John Lennon/Paul McCartney (arr. Andrew Cranin)", soloist: "Ryan Ramagosa ’03" },
+      { title: "When I’m 64", composer: "John Lennon · Paul McCartney (arr. Andrew Cranin)", soloist: "Ryan Ramagosa ’03" },
       { title: "Georgetown University Fight Song", composer: "Traditional" },
       { title: "My Comrades", composer: "Traditional" }
     ]
@@ -428,7 +428,7 @@ const ALBUMS_DATA = [
       { title: "Running to Stand Still (Live)", composer: "Bono (arr. Hall)", soloist: "Pritchard" },
       { title: "Loch Lomond", composer: "Traditional (arr. Mattimore ’92)", soloist: "Kay" },
       { title: "Kiss the Brown Eyed Girl", composer: "Menkin & Ashman · Morrison (arr. Amatuzzi)", soloist: "Amatuzzi & Neustaetter" },
-      { title: "Medley: Just a Gigolo · I Ain’t Got Nobody", composer: "Casucci & Caesar / Williams & Graham (arr. Manassee)", soloist: "Pritchard" },
+      { title: "Medley: Just a Gigolo · I Ain’t Got Nobody", composer: "Casucci & Caesar · Williams & Graham (arr. Manassee)", soloist: "Pritchard" },
       { title: "And So It Goes", composer: "Joel (arr. King’s Singers", soloist: "Walsh" },
       { title: "Hold Me Tight", composer: "Rand (’86)", soloist: "Stubbe" },
       { title: "Don’t Blame Me", composer: "Traditional, a.p.b. Boston Common" },
@@ -1140,7 +1140,8 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
           {/* Content */}
           <div className="lg:col-span-8">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[0.85] tracking-tighter mb-16 antialiased text-[#041E42] [text-wrap:balance]">
+            {/* ADDED: pt-2 to push the Cap Height down to align with the image top */}
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[0.85] tracking-tighter mb-16 antialiased text-[#041E42] [text-wrap:balance] pt-5">
                 {typeset(selectedAlbum.title)}
             </h1>
             
@@ -1168,16 +1169,23 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                 <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-12 block uppercase">Repertoire</span>
                 <div>
                     {selectedAlbum.tracks.map((track, idx) => (
-                        <div key={idx} className="group flex items-baseline justify-between py-6 border-b border-[#041E42]/10 hover:bg-white hover:pl-4 -ml-4 pl-4 pr-4 transition-all duration-300">
-                            <div className="flex items-baseline gap-8">
-                                <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 tabular-nums w-8">{String(idx + 1).padStart(2, '0')}</span>
+                        <div key={idx} className="group grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-8 border-b border-[#041E42]/10 py-6 hover:bg-white hover:pl-4 -ml-4 pl-4 pr-4 transition-all duration-300 items-baseline">
+                            
+                            {/* Left Col: Index & Title (Spans 7 Cols) */}
+                            <div className="md:col-span-7 flex items-baseline gap-8">
+                                <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 tabular-nums w-8 flex-shrink-0">
+                                    {String(idx + 1).padStart(2, '0')}
+                                </span>
                                 <div>
-                                    <span className="font-serif text-2xl md:text-3xl text-[#041E42] group-hover:italic transition-all leading-none">{typeset(track.title)}</span>
+                                    <span className="font-serif text-2xl md:text-3xl text-[#041E42] group-hover:italic transition-all leading-tight pb-1 block [text-wrap:balance]">
+                                        {typeset(track.title)}
+                                    </span>
                                 </div>
                             </div>
-                            {/* UPDATED LOGIC: Join array to prevent dangling bullets */}
-                            <div className="hidden md:block text-right opacity-40 group-hover:opacity-100 transition-opacity">
-                                <span className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">
+
+                            {/* Right Col: Metadata (Spans 5 Cols) */}
+                            <div className="hidden md:block md:col-span-5 text-right opacity-40 group-hover:opacity-100 transition-opacity">
+                                <span className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] leading-tight block [text-wrap:balance]">
                                     {[
                                         track.composer, 
                                         track.group, 
@@ -1185,6 +1193,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                                     ].filter(Boolean).join(" · ")}
                                 </span>
                             </div>
+
                         </div>
                     ))}
                 </div>
@@ -1201,7 +1210,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                                     {roles.map((role, idx) => (
                                         <div key={idx} className="flex flex-col">
                                             <span className="text-[9px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/40 mb-1">{role.role}</span>
-                                            <span className="font-serif text-xl text-[#041E42] leading-tight">{role.name}</span>
+                                            <span className="font-serif text-xl text-[#041E42] leading-tight [text-wrap:balance]">{role.name}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -1218,7 +1227,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                         {selectedAlbum.linerNotes.map((note, idx) => (
                             <div key={idx} className="max-w-2xl">
                                 {note.author && <h4 className="font-serif text-3xl mb-6 italic">{typeset(note.author)}</h4>}
-                                <p className="leading-loose font-serif text-lg opacity-90 antialiased">{typeset(note.text)}</p>
+                                <p className="leading-relaxed font-serif text-lg opacity-90 antialiased">{typeset(note.text)}</p>
                             </div>
                         ))}
                     </div>
