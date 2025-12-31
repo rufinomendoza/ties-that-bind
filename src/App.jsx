@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { 
   Menu, 
   X, 
@@ -835,7 +835,7 @@ const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) =
 };
 
 // --- Home View ---
-cconst HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
+const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
   useEffect(() => { setTimeout(() => setIsHeroVisible(true), 100); }, []);
 
