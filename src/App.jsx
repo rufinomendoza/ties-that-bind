@@ -973,11 +973,11 @@ const AgendaView = ({ navigateTo, openEvent }) => (
               </div>
               <div className="md:col-span-7">
                 <span className="inline-block mb-6 text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">{event.type}</span>
-                <h3 className="text-5xl md:text-7xl font-serif mb-6 text-[#041E42] leading-[0.85] tracking-tight group-hover:italic transition-all duration-500 [text-wrap:balance]">{typeset(event.title)}</h3>
+                <h3 className="text-5xl md:text-7xl font-serif mb-6 text-[#041E42] leading-[1.25] tracking-tight group-hover:italic transition-all duration-500 [text-wrap:balance]">{typeset(event.title)}</h3>
                 <p className="text-[#041E42] font-serif text-lg md:text-xl max-w-xl leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700">{Array.isArray(event.description) ? typeset(event.description[0]) : typeset(event.description)}</p>
               </div>
               <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8">
-                <div className="text-right">
+                <div className="text-left mb:text-right">
                     <span className="block text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] mb-1">{event.time}</span>
                     <span className="block text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60">{event.location}</span>
                 </div>
@@ -1039,7 +1039,7 @@ const EventDetailView = ({ event, navigateTo }) => {
           </div>
           <div className="lg:col-span-8">
             <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">{event.eyebrow || event.type}</span>
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif mb-12 text-[#041E42] leading-[0.85] tracking-tighter [text-wrap:balance]">{typeset(event.title)}</h1>
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif mb-12 text-[#041E42] leading-[1.25] tracking-tighter [text-wrap:balance]">{typeset(event.title)}</h1>
             <div className="text-xl md:text-3xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-[65ch] space-y-8 pl-6 border-l-2 border-[#041E42]/10">
                 {Array.isArray(event.description) ? event.description.map((para, i) => <p key={i}>{typeset(para)}</p>) : <p>{typeset(event.description)}</p>}
             </div>
@@ -1187,7 +1187,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
           {/* Content */}
           <div className="lg:col-span-8">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[0.85] tracking-tighter mb-16 antialiased text-[#041E42] [text-wrap:balance] pt-2">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[1.25] tracking-tighter mb-16 antialiased text-[#041E42] [text-wrap:balance] pt-2">
                 {typeset(selectedAlbum.title)}
             </h1>
             
