@@ -778,105 +778,130 @@ const DONOR_TIERS = [
   }
 ];
 
-// --- Components ---
+// --- Typographic Helper: The Typesetter ---
+// Applies Bringhurst's rules: Smart quotes, proper dashes, and micro-typography.
+const typeset = (text) => {
+  if (!text) return text;
+  if (Array.isArray(text)) return text.map(t => typeset(t));
+  return text
+    .replace(/(\W|^)"/g, '$1“').replace(/"/g, '”') // Smart Quotes
+    .replace(/'/g, '’') // Smart Apostrophes
+    .replace(/(\d)-(\d)/g, '$1–$2') // En-dashes for ranges
+    .replace(/ - /g, ' — '); // Em-dashes for breaks
+};
 
+// --- Shared Components ---
 const SectionHeader = ({ title, number }) => (
-  <div className="flex flex-col md:flex-row md:items-end justify-between border-b border-[#041E42]/10 pb-8 mb-32 fade-in-element gap-4">
-    <h2 className="text-6xl md:text-9xl font-serif text-[#041E42] tracking-tight leading-none">{title}</h2>
-    <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase md:mb-4">{number}</span>
+  <div className="flex flex-col md:flex-row md:items-end justify-between border-b-2 border-[#041E42] pb-8 mb-32 fade-in-element gap-4">
+    <h2 className="text-6xl md:text-9xl font-serif text-[#041E42] tracking-tight leading-none [text-wrap:balance]">
+      {typeset(title)}
+    </h2>
+    <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/60 uppercase md:mb-4">
+      {number}
+    </span>
   </div>
 );
 
-
-// --- Home View ---
+// --- Home View (Swiss Directory) ---
+// --- Home View (Swiss Directory) ---
 const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
-  // State to trigger the fade-in animation
   const [isHeroVisible, setIsHeroVisible] = useState(false);
-
-  useEffect(() => {
-    // Trigger the opacity change after mount
-    const timer = setTimeout(() => {
-      setIsHeroVisible(true);
-    }, 100); 
-    return () => clearTimeout(timer);
-  }, []);
+  useEffect(() => { setTimeout(() => setIsHeroVisible(true), 100); }, []);
 
   return (
     <>
-      {/* Hero */}
-      <div 
-        className="relative min-h-screen flex flex-col justify-center px-8 md:px-16 border-b border-[#041E42]/10 bg-[#F4F4F3]"
-      >
-        {/* Subtle texture or color wash */}
-        <div className="absolute inset-0 bg-[#F4F4F3] z-0"></div>
-
-        {/* Background Image Layer */}
+      <div className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 border-b-2 border-[#041E42] bg-[#F4F4F3] overflow-hidden antialiased selection:bg-[#D50032] selection:text-white">
         <div 
-          className={`absolute inset-0 z-0 w-full h-full bg-cover bg-center grayscale bg-[#041E42] bg-blend-screen mix-blend-multiply pointer-events-none transition-opacity duration-[3000ms] ease-in-out ${isHeroVisible ? 'opacity-15' : 'opacity-0'}`}
-          style={{ 
-            backgroundImage: `url(${IMG_CHERRY_TREE})`
-          }}
-          aria-hidden="true"
+          className={`absolute inset-0 z-0 w-full h-full bg-cover bg-center grayscale bg-[#041E42] bg-blend-screen mix-blend-multiply pointer-events-none transition-opacity duration-[2000ms] ease-in-out ${isHeroVisible ? 'opacity-15' : 'opacity-0'}`}
+          style={{ backgroundImage: `url(${IMG_CHERRY_TREE})` }}
         />
-
-        {/* Content Container */}
-        <div 
-          className={`max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 py-32 transition-all duration-[3000ms] ease-in-out ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-        >
-           {/* Architectural Title Stack */}
-          <div className="text-center space-y-0 mb-24 select-none" aria-label="Values: Fellowship, Harmony, Legacy">
-            <h1 className="text-[14vw] font-serif leading-[0.8] tracking-tighter text-[#041E42] block">
-              FELLOWSHIP
-            </h1>
-            <h1 className="text-[14vw] font-serif leading-[0.8] tracking-tighter text-[#041E42] block opacity-40 italic">
-              HARMONY
-            </h1>
-            <h1 className="text-[14vw] font-serif leading-[0.8] tracking-tighter text-[#041E42] block">
-              LEGACY
-            </h1>
+        <div className={`max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 py-12 transition-all duration-[2000ms] ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
+           <div className="flex flex-col items-center justify-center text-center select-none mb-24 leading-none text-[#041E42]">
+            <h1 className="text-[12.5vw] font-serif leading-[0.75] tracking-tighter relative z-10">BROTHERHOOD</h1>
+            <h1 className="text-[19vw] font-serif leading-[0.75] tracking-tighter opacity-40 italic -mt-[4vw] relative z-0 px-[0.2em]">HARMONY</h1>
+            <h1 className="text-[18vw] font-serif leading-[0.75] tracking-tighter block -mt-[4.5vw] relative z-10">HISTORY</h1>
           </div>
-
-          {/* Minimalist CTAs */}
-          <div className="flex flex-col md:flex-row gap-12 items-center">
-             <button 
-                onClick={() => openAlbumBySlug('desperate-chimes-desperate-measures')}
-                className="group relative pb-1 text-xs font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-             >
-                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
+          <div className="flex flex-col md:flex-row gap-12 md:gap-24 items-center z-20">
+             <button onClick={() => openAlbumBySlug('desperate-chimes-desperate-measures')} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors">
                 Stream “And So It Goes”
+                <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
              </button>
-             <button 
-                onClick={() => openEvent(EVENTS_DATA[1])}
-                className="group relative pb-1 text-xs font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-             >
-                <span className="absolute bottom-0 left-0 w-full h-[1px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
+             {/* HERO LINK: Direct to CTM II */}
+             <button onClick={() => openEvent(EVENTS_DATA[1])} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors">
                 Book Cherry Tree Tickets
+                <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
              </button>
           </div>
         </div>
       </div>
 
-      {/* Featured Event Teaser */}
-      <section className="min-h-screen flex flex-col md:flex-row border-b border-[#041E42]/10 bg-[#F4F4F3]">
-        <div className="md:w-5/12 p-12 md:p-24 flex flex-col justify-end bg-[#E5E5E4] fade-in-element relative overflow-hidden group">
-             <div className="absolute inset-0 z-0">
-                 <img 
-                 src={IMG_CTM_BOND}
-                 alt="The Cherry Tree Massacre Event Poster" 
-                 className="w-full h-full object-cover grayscale opacity-90 group-hover:scale-105 transition-transform duration-[2s] ease-out"
-               />
+      <section className="py-32 px-6 md:px-12 bg-[#F4F4F3] text-[#041E42] antialiased">
+        <div className="max-w-[1920px] mx-auto border-t-2 border-[#041E42] pt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
+             <div className="lg:col-span-4 flex flex-col justify-between">
+                <div>
+                    <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">01 — The Directory</span>
+                    <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[0.9] tracking-tighter mb-12">
+                      Welcome the time, my boys: <span className="italic">we meet again.</span>
+                    </h2>
+                    <div className="w-12 h-[2px] bg-[#041E42]"></div>
+                </div>
+                <div className="hidden lg:block pt-24">
+                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/40 hover:text-[#041E42] transition-colors flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
+                        Authorized Access
+                    </button>
+                </div>
+             </div>
+             <div className="lg:col-span-8 flex flex-col">
+                {[
+                  { sub: "Tickets & Gatherings", room: "Box Office", slug: 'agenda', id: "01" },
+                  { sub: "The Recorded Archive", room: "Listening Room", slug: 'discography', id: "02" },
+                  { sub: "Specially Commissioned", room: "Haberdashery", slug: 'store', id: "03" },
+                  { sub: "Fund the Brotherhood", room: "Patronage", slug: 'philanthropy', id: "04" },
+                ].map((item) => (
+                  <div key={item.id} onClick={() => navigateTo(item.slug)} className="group flex flex-row items-baseline justify-between py-12 border-b border-[#041E42]/20 transition-all duration-500 hover:bg-white hover:pl-6 -ml-6 pl-6 pr-6 cursor-pointer">
+                    <div className="flex items-baseline gap-12 md:gap-16">
+                      <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 group-hover:text-[#D50032] transition-colors uppercase">{item.id}</span>
+                      <span className="text-5xl md:text-6xl font-serif text-[#041E42] italic leading-none">{item.room}</span>
+                    </div>
+                    <div className="flex items-center gap-8">
+                       <span className="hidden md:block text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40">{item.sub}</span>
+                       <span className="text-xl font-light text-[#041E42] group-hover:translate-x-2 transition-transform">→</span>
+                    </div>
+                  </div>
+                ))}
+                <div className="lg:hidden pt-12 flex justify-center">
+                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/40 hover:text-[#041E42] transition-colors flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
+                        Authorized Access
+                    </button>
+                </div>
              </div>
         </div>
-        
-        <div className="md:w-7/12 p-12 md:p-32 flex flex-col justify-center bg-[#F4F4F3] fade-in-element">
-            <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] mb-12 block uppercase">Upcoming Gathering</span>
-            <h3 className="text-7xl md:text-9xl font-serif mb-12 text-[#041E42] leading-[0.9] -ml-2">The Cherry Tree Massacre</h3>
-            <div className="w-24 h-[1px] bg-[#041E42]/20 mb-12"></div>
-            <p className="text-[#041E42] mb-16 max-w-lg text-xl font-serif italic leading-relaxed text-left">
-                In 1974, we sang for solvency. In 2026, we sing for the legacy. Most traditions fade. This one just gets louder. Two nights. One historic setlist.
-            </p>
-            <button onClick={() => navigateTo('agenda')} className="w-fit text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
-                View the Full 2026 Season <ArrowRight size={14} />
+      </section>
+
+      {/* FEATURED EVENT */}
+      <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 border-t-2 border-[#041E42]">
+        <div className="relative bg-[#E5E5E4] overflow-hidden group min-h-[50vh] md:min-h-auto">
+             <div className="absolute inset-0 z-0">
+                 <img src={IMG_CTM_BOND} alt="The Cherry Tree Massacre Event Poster" className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal opacity-90 group-hover:scale-105 transition-all duration-[2s] ease-out" />
+             </div>
+             <div className="absolute top-6 left-6 md:hidden">
+                <span className="bg-[#041E42] text-white px-3 py-1 text-[9px] font-sans font-bold tracking-[0.1em] uppercase">Upcoming</span>
+             </div>
+        </div>
+        <div className="bg-[#F4F4F3] p-12 md:p-24 flex flex-col justify-center border-l-0 md:border-l border-[#041E42]">
+            <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">02 — Upcoming Concert</span>
+            <h3 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-[0.85] tracking-tighter -ml-1">The Cherry Tree Massacre</h3>
+            <div className="w-24 h-[2px] bg-[#041E42]/10 mb-12"></div>
+            <div className="mb-16 max-w-md text-[#041E42]">
+                <h4 className="text-2xl font-serif font-bold leading-tight mb-6">Most traditions fade. <br/> This one just gets louder.</h4>
+                <p className="text-lg font-serif italic leading-relaxed opacity-80">In 1974, we sang for survival. In 2026, we sing for the legacy. Two nights. One historic setlist.</p>
+            </div>
+            {/* FEATURE LINK: Direct to CTM II instead of generic Agenda */}
+            <button onClick={() => openEvent(EVENTS_DATA[1])} className="w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#041E42] md:border-0 hover:pl-4 transition-all duration-300 group/btn">
+                <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">Event Details & Tickets</span>
+                <span className="text-xl font-light group-hover/btn:translate-x-2 transition-transform">→</span>
             </button>
         </div>
       </section>
@@ -884,341 +909,156 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
   );
 };
 
-// --- Detail View ---
-const EventDetailView = ({ event, navigateTo }) => {
-    if (!event) return (
-      <div className="min-h-screen pt-48 px-16 flex flex-col items-center justify-center bg-[#F4F4F3]">
-        <h2 className="text-4xl font-serif italic text-[#041E42] mb-8">Event Not Found</h2>
-        <button onClick={() => navigateTo('agenda')} className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">Return to the Box Office</button>
-      </div>
-    );
-    
-    return (
-    <div className="min-h-screen pt-32 md:pt-48 px-6 md:px-16 pb-32 bg-[#F4F4F3]">
-      <div className="max-w-[1920px] mx-auto">
-        <button
-          onClick={() => navigateTo('agenda')}
-          className="mb-16 md:mb-24 text-[10px] font-bold tracking-[0.3em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-        >
-          <ChevronLeft size={10} /> Return to the Box Office
-        </button>
-
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-48 mb-32 fade-in-element">
-          {/* Sticky Sidebar Area */}
-          <div className="lg:w-4/12">
-             <div className="lg:sticky lg:top-32">
-                <div className="aspect-[3/4] w-full bg-[#E5E5E4] mb-12 md:mb-16 relative overflow-hidden shadow-lg md:shadow-none">
-                    {event.image ? (
-                        <img
-                            src={event.image}
-                            alt={`${event.title} Event Poster`}
-                            className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-[2s]"
-                        />
-                    ) : (
-                        <div className="w-full h-full bg-[#041E42]/5 flex items-center justify-center">
-                            <img src={IMG_LOGO} className="w-1/2 opacity-20" alt="Chimes Logo Placeholder" />
-                        </div>
-                    )}
-                </div>
-
-                <div className="space-y-6 md:space-y-8 font-serif text-[#041E42]">
-                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-1 md:px-3">
-                      <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Date</span>
-                      <span className="text-xl md:text-2xl italic">{event.date}</span>
-                    </div>
-
-                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-1 md:px-3">
-                      <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Time</span>
-                      <span className="text-xl md:text-2xl italic">{event.time}</span>
-                    </div>
-
-                    <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 px-1 md:px-3">
-                      <span className="text-[10px] font-sans font-bold tracking-[0.3em] text-[#595959] uppercase">Venue</span>
-                      <span className="text-xl md:text-2xl italic text-right pl-4">{event.location}</span>
-                    </div>
-                </div>
-
-                {/* Actions: Clean Text Links */}
-                <div className="mt-12 md:mt-16 space-y-4 md:space-y-6">
-                {event.actions ? (
-                      event.actions.map((action, idx) => (
-                         <a 
-                             key={idx}
-                             href={action.link}
-                             target="_blank" 
-                             rel="noopener noreferrer"
-                             className={`block w-full py-4 text-[10px] font-bold tracking-[0.3em] uppercase transition-colors text-center border focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 ${
-                               action.primary 
-                                 ? "border-[#041E42] bg-[#041E42] text-[#F4F4F3] hover:bg-[#D50032] hover:border-[#D50032]" 
-                                 : "border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-[#F4F4F3]"
-                             }`}
-                           >
-                             {action.label} <span className="sr-only">(opens in new tab)</span>
-                           </a>
-                      ))
-                ) : (
-                   event.link && (
-                      <a
-                          href={event.link}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="block w-full py-4 text-[10px] font-bold tracking-[0.3em] uppercase transition-colors text-center border border-[#041E42] bg-[#041E42] text-[#F4F4F3] hover:bg-[#D50032] hover:border-[#D50032] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-                      >
-                          {event.type === 'CONCERT' ? 'Purchase Tickets' : 'Event Info'} <span className="sr-only">(opens in new tab)</span>
-                      </a>
-                   )
-                )}
-                </div>
-
-                {event.priceInfo && (
-                   <p className="text-center text-[10px] text-[#63666A] uppercase tracking-[0.3em] font-bold mt-8">
-                      {event.priceInfo}
-                   </p>
-                )}
-             </div>
-          </div>
-
-          {/* Scrollable Content */}
-          <div className="lg:w-7/12 pt-0 md:pt-8">
-            <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] mb-8 md:mb-12 block uppercase">
-              {event.eyebrow || event.type}
-            </span>
-            
-            <h1 className="text-5xl md:text-9xl font-serif mb-8 md:mb-16 text-[#041E42] leading-[1.0] ml-0 md:-ml-6 px-0 md:px-4">
-                {event.title}
-            </h1>
-
-            <div className="text-lg md:text-2xl font-serif italic text-[#041E42] mb-16 md:mb-24 leading-relaxed max-w-prose space-y-8 md:space-y-12 text-left pl-2 -ml-2">
-                {Array.isArray(event.description) ? (
-                   event.description.map((para, i) => <p key={i}>{para}</p>)
-                ) : (
-                   <p>{event.description}</p>
-                )}
-            </div>
-
-            {/* Guest Groups Section */}
-            {event.guestGroups && (
-                <div className="mb-32 md:mb-48 border-t border-[#041E42]/10 pt-16 md:pt-24">
-                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-12 md:mb-16 block uppercase">Guest Groups</span>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-12 md:gap-y-16">
-                        {event.guestGroups.map((group, idx) => (
-                           <div key={idx} className="">
-                               <h4 className="text-3xl font-serif text-[#041E42]">{group}</h4>
-                           </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {/* Schedule / Sub-Events Section */}
-            {event.schedule && (
-              <div className="mb-32 fade-in-element border-t border-[#041E42]/10 pt-16 md:pt-24">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-16 block uppercase">
-                  Itinerary
-                </span>
-                <div className="space-y-16 md:space-y-24">
-                  {event.schedule.map((item, idx) => (
-                    <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12">
-                      <div className="md:col-span-4 text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase space-y-4">
-                          {item.time && <div className="block">{item.time}</div>}
-                          {item.location && <div className="block text-[#041E42] whitespace-pre-line">{item.location}</div>}
-                      </div>
-                      <div className="md:col-span-8">
-                        <h4 className="text-3xl md:text-4xl font-serif text-[#041E42] mb-6 italic">{item.title}</h4>
-                        <p className="text-[#63666A] text-lg font-serif leading-relaxed max-w-md">
-                            {item.description}
-                        </p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-
-          </div>
-        </div>
-      </div>
-    </div>
-    );
-};
-
-// --- Agenda View ---
+// --- Agenda View (Focus List) ---
 const AgendaView = ({ navigateTo, openEvent }) => (
-    <div className="min-h-screen pt-32 md:pt-48 px-6 md:px-16 pb-32 bg-[#F4F4F3]">
+    <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="The 2026 Season" number="Tickets & Gatherings" />
-        
-        <div className="flex flex-col fade-in-element">
+        <div className="hidden md:grid grid-cols-12 gap-12 pb-4 mb-4 border-b-2 border-[#041E42] opacity-100">
+            <span className="col-span-2 text-[10px] font-sans font-bold tracking-[0.1em] uppercase">Date</span>
+            <span className="col-span-7 text-[10px] font-sans font-bold tracking-[0.1em] uppercase">Program</span>
+            <span className="col-span-3 text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-right">Logistics</span>
+        </div>
+        <div className="flex flex-col group/list border-t-2 md:border-t-0 border-[#041E42]">
           {EVENTS_DATA.map((event) => (
-            <div 
-              key={event.id} 
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openEvent(event);
-                }
-              }}
-              className="group border-t border-[#041E42]/10 py-16 md:py-24 px-4 md:px-12 hover:bg-white transition-colors duration-1000 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
-              onClick={() => openEvent(event)}
-              aria-label={`View details for ${event.title} on ${event.date}`}
-            >
-              <div className="md:col-span-2 flex flex-col md:pl-2">
-                 <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-2 md:mb-4">{event.date.split(' ')[0]}</span>
-                 <span className="text-5xl md:text-6xl font-serif text-[#041E42] italic">{event.date.split(' ')[1].replace(',', '')}</span>
+            <div key={event.id} role="button" tabIndex={0} onClick={() => openEvent(event)} className="group border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer transition-all duration-500 hover:pl-4 -ml-4 pl-4 pr-4 group-hover/list:opacity-30 hover:!opacity-100 focus-visible:opacity-100 focus-visible:outline-none">
+              <div className="md:col-span-2 flex flex-col">
+                 <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/60 uppercase mb-2">{event.date.split(' ')[0]}</span>
+                 <span className="text-4xl font-serif text-[#041E42] italic">{event.date.split(' ')[1].replace(',', '')}</span>
               </div>
-              
-              <div className="md:col-span-7 pr-0 md:pr-12">
-                <span className="inline-block mb-6 md:mb-8 text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032] px-0 md:px-2">
-                    {event.type}
-                </span>
-                
-                <h3 className="text-4xl md:text-7xl font-serif mb-6 md:mb-8 text-[#041E42] leading-[1.0] px-0 md:px-4">
-                    {event.title}
-                </h3>
-                
-                <p className="text-[#041E42] font-serif italic text-lg md:text-xl max-w-lg leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700 pl-1 -ml-1 md:ml-0 md:px-4">
-                   {Array.isArray(event.description) ? event.description[0] : event.description}
-                </p>
+              <div className="md:col-span-7">
+                {/* CHANGED: mb-6 creates an equal 24px vertical rhythm */}
+                <span className="inline-block mb-6 text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">{event.type}</span>
+                <h3 className="text-5xl md:text-7xl font-serif mb-6 text-[#041E42] leading-[0.85] tracking-tight group-hover:italic transition-all duration-500 [text-wrap:balance]">{typeset(event.title)}</h3>
+                <p className="text-[#041E42] font-serif text-lg md:text-xl max-w-xl leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700">{Array.isArray(event.description) ? typeset(event.description[0]) : typeset(event.description)}</p>
               </div>
-
-              <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8 md:gap-12 mt-4 md:mt-0">
-                <div className="text-[10px] tracking-[0.3em] text-[#041E42] uppercase flex flex-col items-start md:items-end gap-2 md:gap-4 text-left md:text-right">
-                   <span className="block">{event.time}</span>
-                   <span className="block">{event.location}</span>
+              <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8">
+                <div className="text-right">
+                    <span className="block text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] mb-1">{event.time}</span>
+                    <span className="block text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60">{event.location}</span>
                 </div>
-                
-                <span 
-                  className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors"
-                  aria-hidden="true"
-                >
-                  View Details &rarr;
-                </span>
+                <span className="flex items-center gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors"><span>Details</span><span className="text-lg font-light translate-y-[-1px]">→</span></span>
               </div>
             </div>
           ))}
-          <div className="border-t border-[#041E42]/10"></div>
         </div>
       </div>
     </div>
 );
 
+// --- Event Detail View ---
+const EventDetailView = ({ event, navigateTo }) => {
+  if (!event) return null;
+  return (
+    <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
+      <div className="max-w-[1920px] mx-auto">
+        <div className="flex justify-between items-end mb-12">
+            <button onClick={() => navigateTo('agenda')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group">
+            <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to Box Office
+            </button>
+        </div>
+        <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
+          <div className="lg:col-span-4">
+             <div className="sticky top-32">
+                 <div className="aspect-[3/4] w-full bg-[#E5E5E4] mb-12 relative overflow-hidden shadow-2xl shadow-[#041E42]/5">
+                    {event.image ? (
+                        <img src={event.image} alt={event.title} className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal hover:grayscale-0 transition-all duration-[1.5s]" />
+                    ) : <div className="w-full h-full bg-[#041E42]/5" />}
+                </div>
+                <div className="space-y-0 border-t border-[#041E42]">
+                    <div className="flex justify-between items-baseline py-4 border-b border-[#041E42]/20"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032]">Date</span><span className="text-lg font-sans font-bold tracking-tight">{event.date}</span></div>
+                    <div className="flex justify-between items-baseline py-4 border-b border-[#041E42]/20"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/60">Time</span><span className="text-lg font-sans font-bold tracking-tight">{event.time}</span></div>
+                    <div className="flex justify-between items-baseline py-4 border-b border-[#041E42]/20"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/60">Venue</span><span className="text-lg font-sans font-bold tracking-tight text-right max-w-[60%]">{event.location}</span></div>
+                </div>
+                <div className="mt-12 space-y-4">
+                {event.actions ? event.actions.map((action, idx) => (
+                    <a key={idx} href={action.link} target="_blank" rel="noopener noreferrer" className={`group w-full flex items-center justify-between border-t border-b py-5 px-6 transition-all duration-300 ${action.primary ? "border-[#041E42] bg-[#041E42] text-[#F4F4F3] hover:bg-[#D50032] hover:border-[#D50032]" : "border-[#041E42]/20 text-[#041E42] hover:bg-[#041E42] hover:text-[#F4F4F3] hover:border-[#041E42]"}`}><span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase">{action.label}</span><span className="text-lg font-light group-hover:translate-x-2 transition-transform">→</span></a>
+                )) : event.link && (
+                    <a href={event.link} target="_blank" rel="noopener noreferrer" className="group w-full flex items-center justify-between border-t border-b border-[#041E42] bg-[#041E42] text-[#F4F4F3] py-5 px-6 hover:bg-[#D50032] hover:border-[#D50032] transition-colors"><span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase">{event.type === 'CONCERT' ? 'Purchase Tickets' : 'Event Info'}</span><span className="text-lg font-light group-hover:translate-x-2 transition-transform">→</span></a>
+                )}
+                </div>
+             </div>
+          </div>
+          <div className="lg:col-span-8">
+            <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">{event.eyebrow || event.type}</span>
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif mb-12 text-[#041E42] leading-[0.85] tracking-tighter [text-wrap:balance]">{typeset(event.title)}</h1>
+            <div className="text-xl md:text-3xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-[65ch] space-y-8 pl-6 border-l-2 border-[#041E42]/10">
+                {Array.isArray(event.description) ? event.description.map((para, i) => <p key={i}>{typeset(para)}</p>) : <p>{typeset(event.description)}</p>}
+            </div>
+            {event.guestGroups && (
+                <div className="mb-32 border-t-2 border-[#041E42] pt-12">
+                    <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-12 block uppercase">Guest Groups</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                        {event.guestGroups.map((group, idx) => (
+                           <div key={idx} className="border-b border-[#041E42]/10 pb-4"><h4 className="text-3xl font-serif text-[#041E42]">{typeset(group)}</h4></div>
+                        ))}
+                    </div>
+                </div>
+            )}
+            {event.schedule && (
+              <div className="mb-32 border-t-2 border-[#041E42] pt-12">
+                <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-12 block uppercase">Itinerary</span>
+                {event.schedule.map((item, idx) => (
+                    <div key={idx} className="grid grid-cols-1 md:grid-cols-12 gap-8 border-b border-[#041E42]/20 py-8 items-baseline">
+                      <div className="md:col-span-3 text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42] uppercase">{item.time && <div className="block mb-2">{item.time}</div>}{item.location && <div className="block opacity-60 whitespace-pre-line">{item.location}</div>}</div>
+                      <div className="md:col-span-9"><h4 className="text-3xl md:text-4xl font-serif text-[#041E42] mb-4 italic">{typeset(item.title)}</h4><p className="text-[#041E42] text-lg font-serif leading-relaxed max-w-xl opacity-80">{typeset(item.description)}</p></div>
+                    </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-// --- Discography View ---
-
+// --- Discography & Album Details ---
 const DiscographyView = ({ openAlbum, navigateTo }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [triggerAnim, setTriggerAnim] = useState(false);
-
   useEffect(() => {
-    const preloadImages = async () => {
-      const promises = ALBUMS_DATA.map((album) => {
+    const promises = ALBUMS_DATA.map((album) => {
         if (!album.image) return Promise.resolve();
-        return new Promise((resolve) => {
-          const img = new Image();
-          img.src = album.image;
-          img.onload = resolve;
-          img.onerror = resolve; 
-        });
-      });
-
-      await Promise.all(promises);
-      setImagesLoaded(true);
-      setTimeout(() => setTriggerAnim(true), 100);
-    };
-
-    preloadImages();
+        return new Promise((resolve) => { const img = new Image(); img.src = album.image; img.onload = resolve; img.onerror = resolve; });
+    });
+    Promise.all(promises).then(() => { setImagesLoaded(true); setTimeout(() => setTriggerAnim(true), 100); });
   }, []);
 
-  if (!imagesLoaded) {
-    return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-[#F4F4F3]">
-        <div className="animate-pulse flex flex-col items-center gap-4">
-           <span className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42]">Loading Albums</span>
-        </div>
-      </div>
-    );
-  }
+  if (!imagesLoaded) return <div className="min-h-screen bg-[#F4F4F3]" />;
 
   return (
-    <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
+    <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="The Listening Room" number="Recorded Works" />
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-16 gap-y-32 mb-48">
-          {ALBUMS_DATA.map((album, index) => (
-            <div 
-              key={album.id} 
-              role="button"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                  e.preventDefault();
-                  openAlbum(album);
-                }
-              }}
-              onClick={() => openAlbum(album)}
-              // Container Entry Animation Only
-              // Removed all hover transforms from here
-              className={`group cursor-pointer flex flex-col gap-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-8 transition-all duration-[2000ms] ease-[cubic-bezier(0.25,1,0.5,1)] ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-              style={{ transitionDelay: `${index * 150}ms` }}
-              aria-label={`View details for album ${album.title}`}
-            >
-              <div className="relative aspect-square bg-[#E5E5E4] overflow-hidden">
-                 {album.image ? (
-                    <img 
-                      src={album.image} 
-                      alt={album.title} 
-                      className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105 filter grayscale hover:grayscale-0"
-                    />
-                 ) : (
-                    <div className={`w-full h-full ${album.cover} transition-transform duration-[2s] ease-out group-hover:scale-105`}></div>
-                 )}
-                 
-                 {album.badge && (
-                    <div className="absolute top-4 left-4 bg-[#D50032] text-[#F4F4F3] px-4 py-2 text-[10px] font-bold tracking-[0.3em] uppercase">
-                      {album.badge}
+        <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
+            <div className="lg:col-span-4"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span></div>
+            <div className="lg:col-span-8">
+                <h3 className="text-5xl md:text-7xl font-serif leading-[0.9] text-[#041E42] tracking-tighter mb-12">A living record, currently undergoing restoration.</h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
+                    <p className="text-xl text-[#041E42] font-serif leading-relaxed">Our preservationists are currently digitizing master tapes from the 1960s and ’70s to high-fidelity standards.</p>
+                    <div className="flex flex-col items-start gap-4">
+                        <button onClick={() => window.open('https://thechimes.notion.site', '_blank')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1">Explore the Rough Cuts ↗</button>
+                        <button onClick={() => navigateTo('philanthropy')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1">Support Digitization</button>
                     </div>
-                  )}
-              </div>
-
-              <div className="flex flex-col items-start pl-2 border-l border-[#041E42]/10 group-hover:border-[#D50032] transition-colors duration-500">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-4 block uppercase ml-4">
-                  {album.year}
-                </span>
-                <h3 className="font-serif text-3xl text-[#041E42] group-hover:text-[#D50032] transition-colors duration-500 ml-4 leading-tight">
-                  {album.title}
-                </h3>
-              </div>
+                </div>
             </div>
-          ))}
         </div>
-
-        <div 
-            className={`border-t border-[#041E42]/10 pt-32 flex flex-col items-center text-center transition-all duration-[2000ms] ease-out ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}
-            style={{ transitionDelay: '800ms' }}
-        >
-            <h3 className="text-5xl font-serif text-[#041E42] mb-12 italic">The Listening Room is Incomplete.</h3>
-            <p className="text-[#041E42] text-xl font-serif leading-relaxed max-w-prose mb-16">
-                The digitization of the Chimes catalogue is an ongoing preservation project. We are restoring master tapes for future high-fidelity release.
-            </p>
-            
-            <div className="flex flex-col items-center gap-8">
-                <a 
-                    href="https://thechimes.notion.site" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-                >
-                    Explore the Rough Cuts <span className="sr-only">(opens in new tab)</span>
-                </a>
-                <button 
-                    onClick={() => navigateTo && navigateTo('philanthropy')} 
-                    className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-                >
-                    Support Digitization
-                </button>
+        <div className="mb-48">
+            <div className="flex items-end justify-between border-b-2 border-[#041E42] pb-4 mb-12"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">02 — The Discography</span></div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
+            {ALBUMS_DATA.map((album, index) => (
+                <div key={album.id} onClick={() => openAlbum(album)} className={`group cursor-pointer flex flex-col gap-6 transition-all duration-[1000ms] ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${index * 50}ms` }}>
+                <div className="relative aspect-square w-full bg-[#E5E5E4] overflow-hidden shadow-xl shadow-[#041E42]/5">
+                    {album.image ? <img src={album.image} alt={album.title} className="w-full h-full object-cover transition-all duration-[2s] grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 group-hover:scale-105" /> : <div className={`w-full h-full ${album.cover}`}></div>}
+                    {album.badge && <div className="absolute top-0 right-0 bg-[#D50032] text-[#F4F4F3] px-4 py-2 text-[10px] font-sans font-bold tracking-[0.1em] uppercase">{album.badge}</div>}
+                </div>
+                <div className="flex flex-col items-start border-t border-[#041E42]/20 pt-4">
+                    <div className="flex justify-between w-full items-baseline mb-2"><span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 uppercase tabular-nums">Issue {album.year}</span></div>
+                    <h3 className="font-serif text-3xl md:text-4xl text-[#041E42] leading-[0.9] group-hover:italic transition-all duration-500">{typeset(album.title)}</h3>
+                </div>
+                </div>
+            ))}
             </div>
         </div>
       </div>
@@ -1227,156 +1067,112 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
 };
 
 const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
-    if (!selectedAlbum) return (
-      <div className="min-h-screen pt-48 px-16 flex flex-col items-center justify-center bg-[#F4F4F3]">
-        <h2 className="text-4xl font-serif italic text-[#041E42] mb-8">Album Not Found</h2>
-        <button onClick={() => navigateTo('discography')} className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032]">Return to Discography</button>
-      </div>
-    );
-    
-    return (
-    <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
+  if (!selectedAlbum) return null;
+  return (
+    <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <div className="max-w-[1920px] mx-auto">
-        <button 
-          onClick={() => navigateTo('discography')}
-          className="mb-24 text-[10px] font-bold tracking-[0.3em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors text-[#595959] fade-in-element focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-        >
-          <ChevronLeft size={10} /> Return to the Listening Room
-        </button>
-
-        <div className="flex flex-col lg:flex-row gap-24 lg:gap-48 mb-32 fade-in-element">
-          {/* Sticky Sidebar Area */}
-          <div className="lg:w-4/12">
+        <div className="flex justify-between items-end mb-12">
+            <button onClick={() => navigateTo('discography')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group">
+                <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to Archive
+            </button>
+        </div>
+        
+        <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
+          
+          {/* Sidebar */}
+          <div className="lg:col-span-4">
              <div className="sticky top-32">
-                {/* Conditionally render Image or CSS Background */}
-                {selectedAlbum?.image ? (
-                   <img 
-                     src={selectedAlbum.image} 
-                     alt={`Album cover for ${selectedAlbum.title}`}
-                     className="aspect-square w-full object-cover mb-16 shadow-xl shadow-[#041E42]/5 grayscale hover:grayscale-0 transition-all duration-[1.5s]"
-                   />
-                ) : (
-                   <div className={`aspect-square w-full ${selectedAlbum?.cover || 'bg-[#E5E5E4]'} mb-16 shadow-xl shadow-[#041E42]/5`}></div>
-                )}
-                
-                <div className="flex justify-between items-baseline border-b border-[#041E42]/10 pb-4 mb-8">
-                  <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase">Issued</span>
-                  <span className="text-3xl font-serif text-[#041E42] italic">{selectedAlbum?.year}</span>
+                <div className="aspect-square w-full overflow-hidden bg-[#E5E5E4] mb-12 shadow-2xl shadow-[#041E42]/5">
+                  {selectedAlbum.image ? (
+                    <img src={selectedAlbum.image} alt={selectedAlbum.title} className="w-full h-full object-cover grayscale mix-blend-multiply transition-all duration-[2s] hover:grayscale-0 hover:mix-blend-normal" />
+                  ) : (
+                    <div className={`aspect-square w-full ${selectedAlbum.cover}`}></div>
+                  )}
                 </div>
-                
-                {selectedAlbum?.link && (
-                    <button 
-                        onClick={() => window.open(selectedAlbum.link, '_blank')}
-                        className="w-full py-4 border border-[#041E42] bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] hover:border-[#D50032] transition-colors flex items-center justify-center gap-4 mb-12 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-                    >
-                         {selectedAlbum.ctaText || "Listen on Streaming"}
+                <div className="space-y-0 border-t border-[#041E42]">
+                   <div className="flex justify-between items-baseline py-4 border-b border-[#041E42]/20">
+                        <span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032]">Issue</span>
+                        <span className="text-xl font-serif italic tabular-nums">{selectedAlbum.year}</span>
+                   </div>
+                </div>
+                {selectedAlbum.link && (
+                    <button onClick={() => window.open(selectedAlbum.link, '_blank', 'noopener,noreferrer')} className="mt-12 w-full py-5 border border-[#041E42] bg-[#041E42] text-[#F4F4F3] text-[11px] font-sans font-bold tracking-[0.1em] uppercase hover:bg-[#D50032] hover:border-[#D50032] transition-all">
+                        {selectedAlbum.ctaText || "Listen on Streaming"}
                     </button>
                 )}
-                
-                {selectedAlbum?.dedication && (
-                      <div className="mt-12">
-                          <p className="text-[10px] text-[#595959] uppercase tracking-[0.3em] font-bold mb-6">Dedication</p>
-                          <p className="text-sm font-serif italic text-[#041E42] leading-loose">{selectedAlbum.dedication}</p>
-                      </div>
+                {selectedAlbum.dedication && (
+                    <div className="mt-12 pt-8 border-t border-[#041E42]/20 space-y-4">
+                        <p className="text-[10px] opacity-60 uppercase tracking-[0.1em] font-sans font-bold text-[#041E42]">Dedication</p>
+                        <p className="text-lg font-serif italic leading-relaxed text-[#041E42] opacity-90">{typeset(selectedAlbum.dedication)}</p>
+                    </div>
                 )}
              </div>
           </div>
 
-          {/* Scrollable Content */}
-          <div className="lg:w-7/12 pt-8">
-            <h1 className="text-7xl md:text-9xl font-serif mb-16 text-[#041E42] leading-[1.0] -ml-2">{selectedAlbum?.title}</h1>
+          {/* Content */}
+          <div className="lg:col-span-8">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[0.85] tracking-tighter mb-16 antialiased text-[#041E42] [text-wrap:balance]">
+                {typeset(selectedAlbum.title)}
+            </h1>
             
-            {selectedAlbum?.description && (
-                <p className="text-2xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-prose">
-                    {selectedAlbum.description}
+            {selectedAlbum.description && (
+                <p className="text-xl md:text-3xl font-serif italic mb-24 leading-relaxed pl-8 border-l-2 border-[#D50032] text-[#041E42] max-w-[65ch]">
+                    {typeset(selectedAlbum.description)}
                 </p>
             )}
-            
-            {selectedAlbum?.leadSingle && (
-                <div className="bg-white p-12 mb-32 border border-[#041E42]/5 shadow-sm">
-                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] uppercase mb-6 block">Featured Track</span>
-                    <h3 className="text-5xl font-serif text-[#041E42] mb-2 italic">{selectedAlbum.leadSingle.title}</h3>
-                    <p className="text-[10px] text-[#595959] uppercase tracking-[0.2em]">{selectedAlbum.leadSingle.composer}</p>
-                    {selectedAlbum.leadSingle.soloist && (
-                    <p className="text-[10px] text-[#595959] uppercase tracking-[0.2em]">Feat. {selectedAlbum.leadSingle.soloist}</p>
-                    )}
-                    {selectedAlbum.leadSingle.link && (
-                        <a 
-                            href={selectedAlbum.leadSingle.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] border-b border-[#041E42] pb-1 hover:border-[#D50032] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 mt-12"
-                        >
-                            Play Track <span className="sr-only">(opens in new tab)</span>
-                        </a>
-                    )}
-                </div>
+
+            {selectedAlbum.leadSingle && (
+              <div className="border border-[#041E42]/10 p-12 mb-32 relative group/single bg-white shadow-sm">
+                 <div className="absolute top-0 right-0 w-1 h-full bg-[#D50032] opacity-0 group-hover/single:opacity-100 transition-opacity"></div>
+                 <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase mb-8 block">Featured Track</span>
+                 <h3 className="text-5xl md:text-6xl font-serif text-[#041E42] mb-6 italic leading-none">{typeset(selectedAlbum.leadSingle.title)}</h3>
+                 <div className="flex flex-col gap-2 mb-8">
+                    {selectedAlbum.leadSingle.composer && <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60">{selectedAlbum.leadSingle.composer}</span>}
+                    {selectedAlbum.leadSingle.soloist && <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">Feat. {selectedAlbum.leadSingle.soloist}</span>}
+                 </div>
+                 {selectedAlbum.leadSingle.link && <button onClick={() => window.open(selectedAlbum.leadSingle.link, '_blank', 'noopener,noreferrer')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42] pb-1 hover:text-[#D50032] hover:border-[#D50032] transition-all">Play Track ↗</button>}
+              </div>
             )}
 
-            <div className="flex flex-col mb-48">
-              <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-16 block border-b border-[#041E42]/10 pb-4 uppercase">Tracklist</span>
-              {selectedAlbum?.tracks.map((track, idx) => (
-                <a 
-                  key={idx} 
-                  href={track.link || selectedAlbum?.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group flex items-baseline justify-between py-6 border-b border-[#041E42]/5 hover:pl-4 transition-all duration-500 cursor-pointer text-[#041E42] block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset"
-                >
-                  <div className="flex items-baseline gap-12 w-full">
-                    <span className="text-[10px] font-bold text-[#595959] w-8">{String(idx + 1).padStart(2, '0')}</span>
-                    <div className="flex flex-col w-full">
-                        <span className="font-serif text-3xl group-hover:italic group-hover:text-[#D50032] transition-colors">{track.title}</span>
-                         <div className="flex flex-col md:flex-row md:items-baseline gap-4 mt-2 opacity-0 group-hover:opacity-100 transition-opacity duration-700">
-                           {track.composer && (
-                               <span className="text-[10px] text-[#595959] font-sans uppercase tracking-widest">
-                                  {track.composer}
-                               </span>
-                           )}
-                           {(track.group || track.soloist) && (
-                               <span className="text-[10px] text-[#595959] font-sans uppercase tracking-widest">
-                                  {track.group && track.group}
-                                  {track.group && track.soloist && " / "}
-                                  {track.soloist && `Feat. ${track.soloist}`}
-                               </span>
-                           )}
+            {/* REPERTOIRE SECTION */}
+            <div className="mb-32 border-t-2 border-[#041E42] pt-12">
+                <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-12 block uppercase">Repertoire</span>
+                <div>
+                    {selectedAlbum.tracks.map((track, idx) => (
+                        <div key={idx} className="group flex items-baseline justify-between py-6 border-b border-[#041E42]/10 hover:bg-white hover:pl-4 -ml-4 pl-4 pr-4 transition-all duration-300">
+                            <div className="flex items-baseline gap-8">
+                                <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 tabular-nums w-8">{String(idx + 1).padStart(2, '0')}</span>
+                                <div>
+                                    <span className="font-serif text-2xl md:text-3xl text-[#041E42] group-hover:italic transition-all leading-none">{typeset(track.title)}</span>
+                                </div>
+                            </div>
+                            {/* UPDATED LOGIC: Join array to prevent dangling bullets */}
+                            <div className="hidden md:block text-right opacity-40 group-hover:opacity-100 transition-opacity">
+                                <span className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">
+                                    {[
+                                        track.composer, 
+                                        track.group, 
+                                        track.soloist ? `Feat. ${track.soloist}` : null
+                                    ].filter(Boolean).join(" • ")}
+                                </span>
+                            </div>
                         </div>
-                    </div>
-                  </div>
-                </a>
-              ))}
+                    ))}
+                </div>
             </div>
 
-            {/* Liner Notes Section */}
-            {selectedAlbum?.linerNotes && (
-                <div className="mb-48">
-                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-24 block border-b border-[#041E42]/10 pb-4 uppercase">Album Notes</span>
-                    <div className="space-y-32">
-                        {selectedAlbum.linerNotes.map((note, idx) => (
-                            <div key={idx} className="">
-                                {note.author && <h4 className="font-serif text-4xl mb-8 italic text-[#041E42]">{note.author}</h4>}
-                                <p className="text-[#041E42] leading-loose font-serif text-xl text-left hyphens-auto max-w-prose">
-                                    {note.text}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {/* Credits Section - Three Column for density */}
-            {selectedAlbum?.credits && (
-                <div className="mb-32">
-                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] mb-24 block border-b border-[#041E42]/10 pb-4 uppercase">Production Credits</span>
-                    <div className="grid grid-cols-1 gap-y-24">
+            {selectedAlbum.credits && (
+                <div className="mb-32 border-t-2 border-[#041E42] pt-12">
+                    <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-12 block uppercase">Technical Specifications</span>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                         {Object.entries(selectedAlbum.credits).map(([section, roles]) => (
-                            <div key={section} className="grid grid-cols-1 md:grid-cols-4 gap-8 border-t border-[#041E42]/5 pt-8">
-                                <h5 className="font-bold text-[10px] uppercase tracking-[0.3em] text-[#041E42] col-span-1">{section}</h5>
-                                <div className="col-span-3 grid grid-cols-1 md:grid-cols-2 gap-12">
+                            <div key={section}>
+                                <h5 className="font-sans font-bold text-[11px] uppercase tracking-[0.1em] text-[#041E42] mb-8 border-b border-[#041E42]/20 pb-2">{section}</h5>
+                                <div className="space-y-6">
                                     {roles.map((role, idx) => (
                                         <div key={idx} className="flex flex-col">
-                                            <span className="text-[#595959] text-[9px] uppercase tracking-[0.2em] mb-2">{role.role}</span>
-                                            <span className="font-serif text-lg leading-snug text-[#041E42]">{role.name}</span>
+                                            <span className="text-[9px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/40 mb-1">{role.role}</span>
+                                            <span className="font-serif text-xl text-[#041E42] leading-tight">{role.name}</span>
                                         </div>
                                     ))}
                                 </div>
@@ -1385,101 +1181,294 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                     </div>
                 </div>
             )}
-            
-            {/* Acknowledgements */}
-            {selectedAlbum?.acknowledgements && (
-                <div className="py-32 border-t border-b border-[#041E42]/10">
-                      <h5 className="font-bold text-[10px] uppercase tracking-[0.3em] mb-16 text-[#041E42] text-center">Acknowledgements</h5>
-                      <div className="flex flex-wrap justify-center gap-x-12 gap-y-8 max-w-4xl mx-auto">
-                        {selectedAlbum.acknowledgements.map((name, i) => (
-                            <span key={i} className="text-xl text-[#041E42] font-serif italic opacity-70">{name}</span>
+
+            {selectedAlbum.linerNotes && (
+                <div className="mb-32 border-t-2 border-[#041E42] pt-12">
+                    <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-12 block uppercase">Album Notes</span>
+                    <div className="space-y-16">
+                        {selectedAlbum.linerNotes.map((note, idx) => (
+                            <div key={idx} className="max-w-2xl">
+                                {note.author && <h4 className="font-serif text-3xl mb-6 italic">{typeset(note.author)}</h4>}
+                                <p className="leading-loose font-serif text-lg opacity-90 antialiased">{typeset(note.text)}</p>
+                            </div>
                         ))}
-                      </div>
+                    </div>
                 </div>
             )}
 
+            {selectedAlbum.acknowledgements && (
+                <div className="py-24 border-t border-[#041E42]/10 mb-24">
+                    <h5 className="font-sans font-bold text-[11px] uppercase tracking-[0.1em] mb-12 text-[#041E42]/40">Acknowledgements</h5>
+                    <div className="flex flex-wrap gap-x-8 gap-y-4 max-w-4xl">
+                        {selectedAlbum.acknowledgements.map((name, i) => (
+                            <span key={i} className="text-xl text-[#041E42] font-serif italic opacity-60 hover:opacity-100 transition-opacity cursor-default">{typeset(name)}</span>
+                        ))}
+                    </div>
+                </div>
+            )}
+
+            <div className="pt-24 border-t border-[#041E42] opacity-40 text-left">
+                <p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase">Transcribed from the Physical Liner Notes</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    );
+  );
 };
 
+
+
+const StoreView = () => (
+  <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] antialiased text-[#041E42] selection:bg-[#D50032] selection:text-white">
+    <div className="max-w-[1920px] mx-auto">
+      <SectionHeader title="The Haberdashery" number="Specially Commissioned" />
+
+      {/* MANIFESTO: The Big Statement (Heavy Top Border) */}
+      <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12">
+        <div className="lg:col-span-4">
+          <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#d50032] uppercase block mb-4">
+            01 — Battle Gear
+          </span>
+        </div>
+        <div className="lg:col-span-8">
+          <h3 className="text-5xl md:text-7xl font-serif leading-[0.9] text-[#041E42] tracking-tighter mb-12">
+            Standard Issue.
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
+            <p className="text-xl text-[#041E42] font-serif leading-relaxed">
+              Commissioned for the Active group and curated for the Alumni. Woven in pure silk, these pieces are designed to replace the lost, the stained, and the borrowed.
+            </p>
+            <div>
+              <p className="text-[#041E42] text-[10px] leading-relaxed font-sans font-bold uppercase tracking-[0.05em] opacity-60">
+                 Provenance: A Drew Poling original, produced in collaboration with our master weavers in the United Kingdom.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* THE CATALOG: Vignelli List Layout */}
+      <div className="mb-48">
+        {/* Header Row */}
+        <div className="flex items-end justify-between border-b-2 border-[#041E42] pb-4 mb-0">
+            <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">
+                02 — The Collection
+            </span>
+
+        </div>
+
+        {[
+            {
+              id: "01",
+              name: "The Silk Necktie",
+              price: "75",
+              img: IMG_NECKTIE,
+              link: "https://buy.stripe.com/14k6si2EpcWQemQ3co",
+              desc: "Traditional cut. 100% woven silk."
+            },
+            {
+              id: "02",
+              name: "The Silk Bow Tie",
+              price: "75",
+              img: IMG_BOWTIE,
+              link: "https://buy.stripe.com/eVacQGceZ2icceI28l",
+              desc: "Self-tie. Adjustable sizing. 100% woven silk."
+            }
+          ].map((item) => (
+            <div key={item.id} className="group relative border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-8 items-start transition-colors duration-500 hover:bg-white hover:pl-4 -ml-4 pl-4 pr-4">
+                
+                {/* Col 1: REF ID */}
+                <div className="md:col-span-2 pt-2">
+                    <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 uppercase group-hover:text-[#D50032] transition-colors">
+                        Ref. {item.id}
+                    </span>
+                </div>
+
+                {/* Col 2: THE IMAGE (The Artifact) */}
+                <div className="md:col-span-3">
+                    <div className="aspect-[4/5] bg-[#E5E5E4] overflow-hidden w-full max-w-[240px]">
+                        <img 
+                            src={item.img} 
+                            alt={item.name} 
+                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                        />
+                    </div>
+                </div>
+
+                {/* Col 3: TITLE & DETAILS */}
+                <div className="md:col-span-5 flex flex-col justify-between h-full py-2">
+                    <div>
+                        <h4 className="text-5xl md:text-6xl font-serif text-[#041E42] italic leading-[0.85] mb-6">
+                            {item.name}
+                        </h4>
+                        <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60">
+                            {item.desc}
+                        </p>
+                    </div>
+                </div>
+
+                {/* Col 4: PRICE & ACTION */}
+                <div className="md:col-span-2 flex flex-col justify-between h-full py-2 items-start md:items-end">
+                    <span className="text-xl font-sans font-bold text-[#041E42] tracking-wide tabular-nums block opacity-80">
+                        ${item.price}
+                    </span>
+                    
+                    <a 
+                        href={item.link} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors mt-8 md:mt-0"
+                    >
+                        <span>Acquire</span>
+                        <span className="text-lg font-light translate-y-[-1px]">→</span>
+                    </a>
+                </div>
+            </div>
+        ))}
+      </div>
+
+      {/* Archive Stamp: Left Aligned */}
+      <div className="mt-48 pt-4 border-t border-[#041E42] flex justify-start opacity-40">
+        <p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase antialiased">
+          Official Battle Gear of the Georgetown Chimes
+        </p>
+      </div>
+
+    </div>
+  </div>
+);
+
 const PhilanthropyView = () => (
-    <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-48 px-8 md:px-16 pb-32">
+    <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-40 px-6 md:px-12 pb-32 antialiased selection:bg-[#D50032] selection:text-white">
        <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Patronage" number="Fund the Brotherhood" />
         
-        {/* Intro */}
-        <div className="flex flex-col lg:flex-row gap-16 lg:gap-32 mb-32 fade-in-element items-end">
-            <div className="lg:w-5/12">
-                <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] uppercase block mb-8">01. The Donor Guild</span>
-                <h3 className="text-5xl md:text-6xl font-serif leading-[1.1] text-[#041E42]">
+        {/* MANIFESTO: The Big Statement */}
+        <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
+            <div className="lg:col-span-4">
+                <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">
+                    01 — The Mission
+                </span>
+            </div>
+            <div className="lg:col-span-8">
+                <h3 className="text-5xl md:text-7xl font-serif leading-[0.9] text-[#041E42] tracking-tighter mb-12">
                     The heartbeat of the Association.
                 </h3>
-            </div>
-            <div className="lg:w-7/12 pb-2">
-                <p className="text-xl text-[#041E42] font-serif italic max-w-prose leading-relaxed opacity-80">
-                    By subscribing, you ensure the tradition remains uninterrupted: the history documented, the reunions funded, and the legacy secured.
-                </p>
-                 <p className="text-[#041E42] text-[9px] leading-loose font-bold uppercase tracking-widest mt-8 opacity-60">
-                   Note: Contributions to the Georgetown Chimes Alumni Association 501(c)(7) are not tax deductible.
-                </p>
-            </div>
-        </div>
-
-        {/* Guild Tiers Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-24 mb-64 fade-in-element">
-            {DONOR_TIERS.map((tier, idx) => (
-                <div key={idx} className="flex flex-col justify-between group">
-                    <div className="border-t border-[#041E42]/10 pt-6 group-hover:border-[#D50032] transition-colors duration-500">
-                        <div className="flex justify-between items-baseline mb-6">
-                             <h4 className="text-3xl font-serif text-[#041E42] italic">{tier.title}</h4>
-                             <span className="text-[10px] font-bold tracking-[0.2em] text-[#595959] uppercase">{tier.price}</span>
-                        </div>
-                        <p className="text-[#041E42] text-lg leading-relaxed font-serif opacity-80">
-                            {tier.description}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
+                    <p className="text-xl text-[#041E42] font-serif leading-relaxed">
+                        By subscribing, you ensure the tradition remains uninterrupted: the history documented, the reunions funded, and the legacy secured.
+                    </p>
+                    <div>
+                        <p className="text-[#041E42] text-[10px] leading-relaxed font-sans font-bold uppercase tracking-[0.05em] opacity-60">
+                           Legal Notice: Contributions to the Georgetown Chimes Alumni Association 501(c)(7) are not tax deductible.
                         </p>
                     </div>
-                    <a 
-                        href={tier.link} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="w-full text-left py-4 text-[#041E42] text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors mt-8 flex items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-                    >
-                        {tier.cta} <ArrowRight size={12} aria-hidden="true" />
-                    </a>
                 </div>
-            ))}
+            </div>
         </div>
 
-        {/* One Time Gift - Editorial Style */}
-        <div className="border-t border-[#041E42]/10 pt-32 fade-in-element">
-             <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
+        {/* THE GUILD LIST: Vignelli Data Table */}
+        <div className="mb-48">
+            {/* Header Row */}
+            <div className="flex items-end justify-between border-b-2 border-[#041E42] pb-4 mb-0">
+                 <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">
+                    02 — The Donor Guild
+                </span>
+            </div>
+
+            {DONOR_TIERS.map((tier, idx) => {
+                const [amount, frequency] = tier.price.includes('/') 
+                    ? tier.price.split('/') 
+                    : [tier.price, 'annually'];
+
+                return (
+                    <div key={idx} className="group relative border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-y-6 gap-x-4 items-start transition-colors duration-500 hover:bg-white hover:pl-4 -ml-4 pl-4 pr-4">
+                        
+                        {/* Col 1: Level ID (Technical) */}
+                        <div className="md:col-span-2 pt-2">
+                            <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 uppercase group-hover:text-[#D50032] transition-colors">
+                                Level 0{idx + 1}
+                            </span>
+                        </div>
+
+                        {/* Col 2: The Title & Description (The Narrative) */}
+                        <div className="md:col-span-6 pr-8">
+                            <h4 className="text-5xl font-serif text-[#041E42] italic leading-[0.85] mb-6">
+                                {tier.title}
+                            </h4>
+                            <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60 max-w-md">
+                                {tier.description}
+                            </p>
+                        </div>
+
+                        {/* Col 3: The Price (The Data) */}
+                        <div className="md:col-span-2 pt-3">
+                             <span className="text-lg font-sans font-bold text-[#041E42] tracking-wide tabular-nums block opacity-100">
+                                    {amount}
+                            </span>
+                            <span className="text-[9px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 uppercase">
+                                    per {frequency}
+                            </span>
+                        </div>
+
+                        {/* Col 4: Action (The Input) */}
+                        <div className="md:col-span-2 flex md:justify-end items-start pt-3">
+                             <a 
+                                href={tier.link} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="flex items-center gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors"
+                             >
+                                <span>Join</span>
+                                <span className="text-lg font-light translate-y-[-1px]">→</span>
+                             </a>
+                        </div>
+                    </div>
+                );
+            })}
+        </div>
+
+        {/* ONE TIME GIFT: Heavy Divider */}
+        <div className="border-t-2 border-[#041E42] pt-12">
+             <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
                  <div className="lg:col-span-4">
-                    <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] uppercase block mb-8">02. Single Contribution</span>
-                    <h3 className="text-6xl font-serif text-[#041E42] leading-none mb-8">Legacy &<br/>Capital.</h3>
+                    <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">
+                        03 — Capital Projects
+                    </span>
                  </div>
-                 <div className="lg:col-span-8 flex flex-col justify-end items-start pl-0 lg:pl-32">
-                    <p className="text-[#041E42] text-2xl font-serif italic leading-relaxed mb-12 max-w-xl">
-                        While the Guild sustains our rhythm, Single Contributions drive our evolution. These gifts fund the archival restoration and capital projects that define our future.
-                    </p>
-                    <a 
-                        href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4"
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-block px-12 py-5 bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-                    >
-                        Make a Contribution
-                    </a>
+                 <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-12">
+                     <h3 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[0.9] tracking-tighter">
+                        Legacy &<br/><span className="italic">Restoration.</span>
+                    </h3>
+                    <div className="flex flex-col justify-between h-full">
+                        <p className="text-[#041E42] text-xl font-serif leading-relaxed mb-12">
+                            Single contributions fund the archival restoration of our master tapes and the capital projects that define our future infrastructure.
+                        </p>
+                        
+                        {/* The Indented Action Block */}
+                        <a 
+                            href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4"
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="group w-full flex items-center justify-between border-t border-b border-[#041E42] py-6 px-8 hover:bg-[#041E42] hover:text-white transition-all duration-500"
+                        >
+                            <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase">
+                                Make a Contribution
+                            </span>
+                            <span className="text-xl font-light group-hover:translate-x-2 transition-transform">
+                                →
+                            </span>
+                        </a>
+                    </div>
                  </div>
              </div>
         </div>
 
-        {/* Management */}
-        <div className="mt-48 pt-12 border-t border-[#041E42]/5 flex justify-center fade-in-element">
-            <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[#595959] text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors">
-                Manage Subscription
+        {/* Footer: Left Aligned */}
+        <div className="mt-48 pt-4 border-t border-[#041E42] flex justify-start opacity-40 hover:opacity-100 transition-opacity">
+            <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[#041E42] text-[10px] font-sans font-bold tracking-[0.1em] uppercase hover:text-[#D50032] transition-colors">
+                Manage Existing Subscription →
             </a>
         </div>
 
@@ -1487,405 +1476,306 @@ const PhilanthropyView = () => (
     </div>
 );
 
-const StoreView = () => (
-    <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
-      <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="The Haberdashery" number="Specially Commissioned" />
-
-        <div className="flex flex-col lg:flex-row gap-24 lg:gap-48 mb-32 fade-in-element">
-          {/* Editorial Copy */}
-          <div className="lg:w-4/12 pt-4">
-             <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase block mb-8">Uniform & Regalia</span>
-             <h3 className="text-5xl font-serif mb-12 text-[#041E42] leading-tight italic">
-               Standard Issue.
-             </h3>
-             <div className="text-[#041E42] text-lg font-serif leading-relaxed space-y-8 text-left max-w-sm opacity-90">
-                <p>Commissioned for the Active group and available to the Alumni. Woven in silk, these pieces are designed to replace the lost, the stained, and the borrowed.</p>
-                <p>A Drew Poling original, produced in collaboration with our partners in the UK.</p>
-             </div>
-          </div>
-
-          {/* Product Grid */}
-          <div className="lg:w-8/12 grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-32">
-            
-            {/* Necktie */}
-            <div className="group cursor-pointer">
-               <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
-                  <a href="https://buy.stripe.com/14k6si2EpcWQemQ3co" target="_blank" rel="noopener noreferrer">
-                    <img 
-                      src={IMG_NECKTIE} 
-                      alt="The Silk Necktie"
-                      className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
-                    />
-                    <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 flex items-center">
-                        <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75</span>
-                    </div>
-                  </a>
-               </div>
-               <div className="flex flex-col items-start">
-                  <a href="https://buy.stripe.com/14k6si2EpcWQemQ3co" target="_blank" rel="noopener noreferrer">
-                    <h4 className="text-3xl font-serif text-[#041E42] italic mb-2">The Silk Necktie</h4>
-                  </a>
-                  <a 
-                     href="https://buy.stripe.com/14k6si2EpcWQemQ3co"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032] hover:text-[#041E42] transition-colors mt-4"
-                    >
-                     Acquire &rarr;
-                   </a>
-               </div>
-            </div>
-
-             {/* Bow Tie */}
-             <div className="group cursor-pointer">
-               <div className="bg-[#E5E5E4] aspect-[4/5] mb-8 relative overflow-hidden">
-                  <a href="https://buy.stripe.com/eVacQGceZ2icceI28l" target="_blank" rel="noopener noreferrer">
-                    <img 
-                       src={IMG_BOWTIE}
-                       alt="The Silk Bow Tie"
-                       className="w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-105"
-                     />
-                     <div className="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-2 flex items-center">
-                        <span className="text-[9px] font-bold tracking-[0.2em] text-[#041E42] uppercase">$75</span>
-                    </div>
-                  </a>
-               </div>
-               <div className="flex flex-col items-start">
-                  <a href="https://buy.stripe.com/eVacQGceZ2icceI28l" target="_blank" rel="noopener noreferrer">
-                    <h4 className="text-3xl font-serif text-[#041E42] italic mb-2">The Silk Bow Tie</h4>
-                  </a>
-                  <a 
-                     href="https://buy.stripe.com/eVacQGceZ2icceI28l"
-                     target="_blank"
-                     rel="noopener noreferrer"
-                     className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#D50032] hover:text-[#041E42] transition-colors mt-4"
-                    >
-                     Acquire &rarr;
-                   </a>
-               </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-);
-
 const BackstageView = () => (
-    <div className="min-h-screen pt-48 px-8 md:px-16 pb-32 bg-[#F4F4F3]">
+    <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] antialiased text-[#041E42] selection:bg-[#D50032] selection:text-white">
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Backstage" number="Authorized Access" />
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-32 fade-in-element">
-            {/* GleeManager Section */}
-            <div className="p-8 md:p-24 border border-[#041E42]/10 bg-white hover:border-[#041E42] transition-colors duration-1000 flex flex-col justify-between h-full">
-                <div>
-                  <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-12 block">
-                    Database
-                  </span>
-                  <h3 className="text-4xl md:text-5xl font-serif mb-8 text-[#041E42] italic">GleeManager on Notion</h3>
-                  <p className="text-[#041E42] text-l md:text-xl font-serif leading-relaxed mb-16">
-                      Our central repository for historical data, part tapes, and archival recordings. 
-                  </p>
-                </div>
-                <div className="flex flex-col gap-6">
-                      <a href="https://thechimes.notion.site" target="_blank" rel="noopener noreferrer" className="w-full text-center py-5 bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] transition-colors flex justify-center items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
-                        Launch Notion <ExternalLink size={12} aria-hidden="true" /> <span className="sr-only">(opens in new tab)</span>
-                      </a>
-                      <a href="https://drive.google.com/uc?export=download&id=1s9YI3af7Y17OpptSKo4LRAsM15QCyOlp" className="text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#041E42] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
-                        Download Manual <ArrowRight size={12} aria-hidden="true" />
-                      </a>
-                </div>
-            </div>
+        {/* Heavy Anchor Line */}
+        <div className="border-t-2 border-[#041E42] pt-0">
+             <div className="grid grid-cols-1 md:grid-cols-2">
+                 
+                 {/* SYSTEM 01: GLEEMANAGER */}
+                 <div className="group flex flex-col h-full justify-between border-b md:border-b-0 md:border-r border-[#041E42] py-12 md:pr-12">
+                     <div>
+                         <div className="border-b border-[#041E42] pb-4 mb-12">
+                             <span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032]">
+                                 System 01 — Database
+                             </span>
+                         </div>
+                         
+                         <h3 className="text-7xl font-serif text-[#041E42] italic mb-4 leading-[0.8] -ml-1">
+                             GleeManager
+                         </h3>
+                         
+                         {/* THE FIX: Notion as a Technical Spec */}
+                         <div className="flex items-center gap-4 mb-12 opacity-60">
+                             <span className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase">
+                                Platform: Notion
+                             </span>
+                         </div>
 
-            {/* Slack Section */}
-            <div className="p-8 md:p-24 border border-[#041E42]/10 bg-white hover:border-[#041E42] transition-colors duration-1000 flex flex-col justify-between h-full">
-                <div>
-                  <span className="text-[10px] font-bold tracking-[0.3em] text-[#595959] uppercase mb-12 block">
-                    Messaging
-                  </span>
-                  <h3 className="text-4xl md:text-5xl font-serif mb-8 text-[#041E42] italic">Slack Workspace</h3>
-                  <p className="text-[#041E42] text-l md:text-xl font-serif leading-relaxed mb-16">
-                    Instant messaging for the Active and Alumni community.
-                  </p>
-                </div>
-                <div className="flex flex-col gap-6">
-                      <a href="https://thechimes.slack.com" target="_blank" rel="noopener noreferrer" className="w-full text-center py-5 bg-[#041E42] text-[#F4F4F3] text-[10px] font-bold tracking-[0.3em] uppercase hover:bg-[#D50032] transition-colors flex justify-center items-center gap-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
-                        Launch Slack <ExternalLink size={12} aria-hidden="true" /> <span className="sr-only">(opens in new tab)</span>
-                      </a>
-                      <a href="https://drive.google.com/uc?export=download&id=1AeangbSpDCNOv-sHq5yqaz5Djk0YmesR" className="text-[10px] font-bold tracking-[0.3em] uppercase hover:text-[#D50032] transition-colors flex items-center justify-center gap-2 text-[#041E42] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">
-                        Download Manual <ArrowRight size={12} aria-hidden="true" />
-                      </a>
-                </div>
-            </div>
+                         <p className="text-xl font-serif leading-relaxed opacity-80 max-w-sm mb-24">
+                             Central Archive: Historical data, part tapes, and repertoire management.
+                         </p>
+                     </div>
+
+                     <div className="space-y-0 border-t border-[#041E42]">
+                          <a 
+                            href="https://thechimes.notion.site" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
+                          >
+                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase">Initialize Session</span>
+                             <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">↗</span>
+                          </a>
+                          <a 
+                            href="https://drive.google.com/uc?export=download&id=1s9YI3af7Y17OpptSKo4LRAsM15QCyOlp" 
+                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
+                          >
+                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">Download Manual</span>
+                             <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">↓</span>
+                          </a>
+                     </div>
+                 </div>
+
+                 {/* SYSTEM 02: SLACK */}
+                 <div className="group flex flex-col h-full justify-between py-12 md:pl-12">
+                     <div>
+                         <div className="border-b border-[#041E42] pb-4 mb-12">
+                             <span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032]">
+                                 System 02 — Comms
+                             </span>
+                         </div>
+                         
+                         <h3 className="text-7xl font-serif text-[#041E42] italic mb-4 leading-[0.8] -ml-1">
+                             Slack
+                         </h3>
+
+                         {/* Slack as a Technical Spec */}
+                         <div className="flex items-center gap-4 mb-12 opacity-60">
+                             <span className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase">
+                                Platform: Slack
+                             </span>
+                         </div>
+
+                         <p className="text-xl font-serif leading-relaxed opacity-80 max-w-sm mb-24">
+                             Encrypted Channel: Real-time messaging for Active and Alumni units.
+                         </p>
+                     </div>
+
+                     <div className="space-y-0 border-t border-[#041E42]">
+                          <a 
+                            href="https://thechimes.slack.com" 
+                            target="_blank" 
+                            rel="noopener noreferrer" 
+                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
+                          >
+                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase">Launch App</span>
+                             <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">↗</span>
+                          </a>
+                          <a 
+                            href="https://drive.google.com/uc?export=download&id=1AeangbSpDCNOv-sHq5yqaz5Djk0YmesR" 
+                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
+                          >
+                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">Download Manual</span>
+                             <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">↓</span>
+                          </a>
+                     </div>
+                 </div>
+
+             </div>
         </div>
+
+        {/* Security Stamp: Left Aligned */}
+        <div className="mt-12 text-left opacity-30">
+            <p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase">
+                Restricted Access — Chimes Alumni Only
+            </p>
+        </div>
+
       </div>
     </div>
 );
 
 const NotFoundView = ({ navigateTo }) => (
-    <div className="min-h-screen pt-48 px-8 md:px-16 flex flex-col items-center justify-center bg-[#F4F4F3] text-center fade-in-element">
-        <span className="text-[10px] font-bold tracking-[0.3em] text-[#D50032] uppercase mb-8">Error 404</span>
-        <h1 className="text-6xl md:text-9xl font-serif text-[#041E42] mb-8 italic leading-none">
-            Discordant Note.
-        </h1>
-        <div className="w-24 h-[1px] bg-[#041E42]/20 mb-8"></div>
-        <p className="text-[#041E42] text-xl font-serif leading-relaxed mb-16 max-w-lg">
-            The page you requested cannot be found in our repertoire. It may have been moved, deleted, or never existed at all.
-        </p>
-        <button 
-            onClick={() => navigateTo('home')} 
-            className="text-[10px] font-bold tracking-[0.3em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 border-b border-[#041E42] pb-1 hover:border-[#D50032]"
-        >
-            Return to Harmony
-        </button>
+    <div className="min-h-screen pt-40 px-6 md:px-12 flex flex-col items-center justify-center bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
+        <div className="w-full max-w-3xl border-t-2 border-[#041E42] pt-12">
+            
+            {/* 1. Meta Label */}
+            <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">
+                Error 404 — Missing Record
+            </span>
+            
+            {/* 2. Massive Serif Headline */}
+            <h1 className="text-6xl md:text-9xl font-serif text-[#041E42] mb-12 italic leading-[0.85] tracking-tighter [text-wrap:balance]">
+                Discordant note.
+            </h1>
+            
+            {/* 3. The Explanation (Indented) */}
+            <p className="text-xl md:text-2xl font-serif text-[#041E42] leading-relaxed mb-16 max-w-lg pl-8 border-l-2 border-[#041E42]/10">
+                The page you requested cannot be found in our repertoire. It may have been moved, deleted, or never existed at all.
+            </p>
+            
+            {/* 4. Primary Action */}
+            <div className="flex flex-col items-start gap-8">
+                <button 
+                    onClick={() => navigateTo('home')} 
+                    className="group flex items-center gap-4 text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]"
+                >
+                    <span>Return to Harmony</span>
+                    <span className="text-lg font-light group-hover:translate-x-2 transition-transform">→</span>
+                </button>
+
+                {/* 5. Optional: "Did you mean?" Links (The 'Concierge' Touch) */}
+                <div className="flex gap-6 pt-8 border-t border-[#041E42]/10 w-full max-w-md opacity-60">
+                    <button onClick={() => navigateTo('agenda')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Box Office</button>
+                    <button onClick={() => navigateTo('discography')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Archive</button>
+                </div>
+            </div>
+
+        </div>
     </div>
 );
 
-// --- Main App ---
+// --- Swiss System NavBar ---
+const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) => {
+  const NavButton = ({ page, children, mobile = false }) => (
+    <button onClick={() => { navigateTo(page); if (mobile) setMobileMenuOpen(false); }} className={`${mobile ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42] border-b border-[#041E42]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset' : `h-full flex items-center text-[10px] font-bold tracking-[0.25em] uppercase transition-all duration-500 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 ${activePage === page ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`}`}>
+      {children}
+      {!mobile && <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#041E42] transform origin-left transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${activePage === page ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>}
+    </button>
+  );
+  return (
+    <>
+      <nav className="fixed top-0 left-0 w-full z-50 bg-[#F4F4F3] border-b-2 border-[#041E42] h-20 md:h-24 px-6 md:px-12 transition-all duration-500">
+        <div className="max-w-[1920px] mx-auto h-full flex justify-between items-center">
+          <button className="flex items-center gap-4 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4" onClick={() => navigateTo('home')}>
+            <img src={IMG_LOGO} alt="Georgetown Chimes" className="h-6 w-auto grayscale mix-blend-multiply opacity-100 transition-opacity" />
+          </button>
+          <div className="hidden lg:flex items-stretch h-full gap-12">
+            {[{ id: 'agenda', label: 'Box Office' }, { id: 'discography', label: 'Listening Room' }, { id: 'store', label: 'Haberdasher' }, { id: 'philanthropy', label: 'Patronage' }, { id: 'backstage', label: 'Backstage' }].map((link) => (<NavButton key={link.id} page={link.id}>{link.label}</NavButton>))}
+          </div>
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 -mr-2 text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]" aria-label="Toggle Menu">{mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}</button>
+        </div>
+      </nav>
+      <div className={`fixed inset-0 z-40 bg-[#F4F4F3] px-6 md:px-12 pt-32 pb-12 overflow-y-auto transition-transform duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className="max-w-[1920px] mx-auto flex flex-col h-full justify-between">
+          <div className="flex flex-col"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase border-b border-[#041E42]/20 pb-4">Directory</span>{[{ id: 'home', label: 'Home' }, { id: 'agenda', label: 'Box Office' }, { id: 'discography', label: 'Listening Room' }, { id: 'store', label: 'Haberdasher' }, { id: 'philanthropy', label: 'Patronage' }, { id: 'backstage', label: 'Backstage' }].map((link) => (<NavButton key={link.id} page={link.id} mobile={true}>{link.label}</NavButton>))}</div>
+          <div className="mt-12 space-y-8"><div className="grid grid-cols-2 gap-8"><div><span className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/40 uppercase block mb-4">External</span><div className="flex flex-col gap-4"><a href="https://georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The Actives ↗</a><a href="https://3611.georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The House ↗</a></div></div></div><p className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/20 uppercase">© {new Date().getFullYear()} GCAA, Inc.</p></div>
+        </div>
+      </div>
+    </>
+  );
+};
 
 export default function App() {
-  // --- CUSTOM ROUTER LOGIC ---
   const getRouteFromPath = () => {
     const path = window.location.pathname;
-    // Normalize path (remove trailing slash for consistency, though root remains '/')
     const cleanPath = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
-    
     if (cleanPath === '/his-successes') return { view: 'external-redirect', slug: null };
-
     if (cleanPath === '/' || cleanPath === '') return { view: 'home', slug: null };
     if (cleanPath === '/events') return { view: 'agenda', slug: null };
     if (cleanPath === '/albums') return { view: 'discography', slug: null };
-    if (cleanPath === '/give') return { view: 'philanthropy', slug: null };
     if (cleanPath === '/store') return { view: 'store', slug: null };
+    if (cleanPath === '/give') return { view: 'philanthropy', slug: null };
     if (cleanPath === '/comms') return { view: 'backstage', slug: null };
-    
-    // Dynamic Routes
     const eventMatch = cleanPath.match(/^\/event\/([\w-]+)$/);
     if (eventMatch) return { view: 'event', slug: eventMatch[1] };
-    
     const albumMatch = cleanPath.match(/^\/album\/([\w-]+)$/);
     if (albumMatch) return { view: 'album', slug: albumMatch[1] };
-    
-    // Default fallback to 404 for unknown routes
     return { view: '404', slug: null };
   };
 
   const [route, setRoute] = useState(getRouteFromPath());
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
 
-  // Listen for browser navigation (back/forward)
   useEffect(() => {
-    const handlePopState = () => {
-      setRoute(getRouteFromPath());
-      setIsMenuOpen(false);
-      window.scrollTo(0, 0);
-    };
-
+    const handlePopState = () => { setRoute(getRouteFromPath()); setIsMenuOpen(false); window.scrollTo(0, 0); };
     window.addEventListener('popstate', handlePopState);
-    
-    const handleScroll = () => {
-        setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('popstate', handlePopState);
-      window.removeEventListener('scroll', handleScroll);
-    };
+    return () => { window.removeEventListener('popstate', handlePopState); };
   }, []);
 
-  // Handle External Redirects
   useEffect(() => {
-    if (route.view === 'external-redirect') {
-      window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLScYnADpitsc31nvqlJvj7f5tnMfS0uArn-PnsGJnj_cSNBqWA/viewform";
-    }
+    if (route.view === 'external-redirect') { window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLScYnADpitsc31nvqlJvj7f5tnMfS0uArn-PnsGJnj_cSNBqWA/viewform"; }
   }, [route]);
 
-  // Update URL to navigate
   const navigateTo = (view, slug = null) => {
     let path = '/';
-    // Map internal views to clean URLs
     switch(view) {
         case 'home': path = '/'; break;
         case 'agenda': path = '/events'; break;
         case 'discography': path = '/albums'; break;
-        case 'philanthropy': path = '/give'; break;
         case 'store': path = '/store'; break;
+        case 'philanthropy': path = '/give'; break;
         case 'backstage': path = '/comms'; break;
         case 'event': path = `/event/${slug}`; break;
         case 'album': path = `/album/${slug}`; break;
         default: path = '/';
     }
-    
-    try {
-      window.history.pushState({}, '', path);
-    } catch (err) {
-      // In sandboxed environments (like the code preview), pushState might fail.
-      // We catch this to allow the app to function using internal state navigation only.
-      console.log('History API not available, falling back to state navigation');
-    }
+    try { window.history.pushState({}, '', path); } catch (err) { console.log('History API not available'); }
     setRoute({ view, slug });
     setIsMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
-  // Helper wrappers for child components
   const openAlbumBySlug = (slug) => navigateTo('album', slug);
   const openAlbum = (album) => navigateTo('album', album.slug);
   const openEvent = (event) => navigateTo('event', event.slug);
 
-  // --- Derived State from URL ---
   const activePage = route.view;
-  const selectedEvent = activePage === 'event' && route.slug 
-    ? EVENTS_DATA.find(e => e.slug === route.slug) 
-    : null;
-  const selectedAlbum = activePage === 'album' && route.slug 
-    ? ALBUMS_DATA.find(a => a.slug === route.slug) 
-    : null;
+  const selectedEvent = activePage === 'event' && route.slug ? EVENTS_DATA.find(e => e.slug === route.slug) : null;
+  const selectedAlbum = activePage === 'album' && route.slug ? ALBUMS_DATA.find(a => a.slug === route.slug) : null;
 
-  // Load Adobe Fonts and Google Fonts
   useEffect(() => {
-    const typekitLink = document.createElement('link');
-    typekitLink.href = 'https://use.typekit.net/uzl4kqy.css';
-    typekitLink.rel = 'stylesheet';
-    document.head.appendChild(typekitLink);
-
-    const googleLink = document.createElement('link');
-    googleLink.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;700&display=swap';
-    googleLink.rel = 'stylesheet';
-    document.head.appendChild(googleLink);
-
-    return () => {
-      if (document.head.contains(typekitLink)) document.head.removeChild(typekitLink);
-      if (document.head.contains(googleLink)) document.head.removeChild(googleLink);
-    };
+    const typekitLink = document.createElement('link'); typekitLink.href = 'https://use.typekit.net/uzl4kqy.css'; typekitLink.rel = 'stylesheet'; document.head.appendChild(typekitLink);
+    const googleLink = document.createElement('link'); googleLink.href = 'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Montserrat:wght@300;400;500;700&display=swap'; googleLink.rel = 'stylesheet'; document.head.appendChild(googleLink);
+    return () => { if (document.head.contains(typekitLink)) document.head.removeChild(typekitLink); if (document.head.contains(googleLink)) document.head.removeChild(googleLink); };
   }, []);
-
-  // Logic for dynamic Navbar styling
-  const isHome = activePage === 'home';
-  const navTextColor = 'text-[#041E42]'; 
-  const currentLogo = IMG_LOGO; 
-
-  const NavLink = ({ page, children, mobile }) => (
-    <button
-      onClick={() => navigateTo(page)}
-      className={`${
-        mobile 
-          ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42] border-b border-[#041E42]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset' 
-          : `text-[10px] font-bold tracking-[0.25em] uppercase transition-all duration-500 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 ${activePage === page ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`
-      }`}
-    >
-      {children}
-      {!mobile && (
-          <span className={`absolute -bottom-2 left-0 w-full h-[1px] bg-[#041E42] transform origin-left transition-transform duration-500 ${activePage === page ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
-      )}
-    </button>
-  );
 
   return (
     <div className="font-sans text-[#041E42] bg-[#F4F4F3] selection:bg-[#D50032] selection:text-[#F4F4F3]">
-      {/* Global CSS Overrides */}
-      <style>{`
-        :root {
-          color-scheme: light;
-          --font-sans: "neue-haas-unica", sans-serif;
-          --font-serif: "adobe-caslon-pro", serif;
-        }
-        body {
-          margin: 0;
-          padding: 0;
-          background-color: #F4F4F3;
-          overflow-x: hidden;
-          font-family: "neue-haas-unica", sans-serif !important;
-        }
-        .font-serif {
-          font-family: "adobe-caslon-pro", "Cormorant Garamond", serif !important;
-        }
-        .font-sans {
-          font-family: "neue-haas-unica", "Montserrat", sans-serif !important;
-        }
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        .fade-in-element {
-          animation: fadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
-        }
-      `}</style>
-
-      {/* Skip to Content for Accessibility */}
-      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] px-6 py-4 bg-[#041E42] text-[#F4F4F3] text-xs font-bold uppercase tracking-widest border border-[#D50032]">
-        Skip to main content
-      </a>
-
-      {/* Navigation - High End Minimal */}
-      <nav 
-        className={`fixed top-0 w-full z-50 transition-all duration-700 ease-out ${
-          scrolled || isMenuOpen 
-            ? 'bg-[#F4F4F3] py-6 border-b border-[#041E42]/5' 
-            : 'bg-transparent py-12'
-        }`}
-        aria-label="Main Navigation"
-      >
-        <div className="max-w-[1920px] mx-auto px-8 md:px-16">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <button 
-              className={`cursor-pointer z-50 transition-all duration-500 hover:opacity-70 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4`}
-              onClick={() => navigateTo('home')}
-              aria-label="Go to Homepage"
-            >
-              <img 
-                src={currentLogo}
-                alt="Chimes Wordmark" 
-                className={`h-6 w-auto`}
-              />
-            </button>
-            
-            {/* Desktop Menu - Spaced Out */}
-            <div className={`hidden md:flex items-center gap-16`}>
-              <NavLink page="agenda">Box Office</NavLink>
-              <NavLink page="discography">Listening Room</NavLink>
-              <NavLink page="philanthropy">Patronage</NavLink>
-              <NavLink page="store">Haberdasher</NavLink>
-              <NavLink page="backstage">Backstage</NavLink>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className={`md:hidden z-50 p-2 text-[#041E42] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]`}
-              aria-label={isMenuOpen ? "Close Menu" : "Open Menu"}
-              aria-expanded={isMenuOpen}
-              aria-controls="mobile-menu"
-            >
-              {isMenuOpen ? <X size={20} strokeWidth={1} /> : <Menu size={20} strokeWidth={1} />}
-            </button>
-          </div>
-        </div>
-
-        {/* Mobile Fullscreen Menu - Elegant Overlay */}
-        <div 
-          id="mobile-menu"
-          className={`fixed inset-0 bg-[#F4F4F3] z-40 transition-all duration-[800ms] cubic-bezier(0.86, 0, 0.07, 1) ${isMenuOpen ? 'opacity-100 translate-y-0 visible' : 'opacity-0 -translate-y-full invisible'} flex flex-col`}
-          aria-hidden={!isMenuOpen}
-        >
-          <div className="flex-1 w-full flex flex-col justify-center items-center px-8 text-[#041E42] space-y-4">
-             <div className="w-full max-w-sm border-t border-[#041E42]/10"></div>
-            <NavLink page="agenda" mobile>Box Office</NavLink>
-            <NavLink page="discography" mobile>Listening Room</NavLink>
-            <NavLink page="philanthropy" mobile>Patronage</NavLink>
-            <NavLink page="store" mobile>Haberdasher</NavLink>
-            <NavLink page="backstage" mobile>Backstage</NavLink>
-            <div className="w-full max-w-sm border-t border-[#041E42]/10"></div>
-          </div>
-        </div>
-      </nav>
-
+    <style>{`
+      :root {
+        color-scheme: light;
+        --font-sans: "neue-haas-unica", sans-serif;
+        --font-serif: "adobe-caslon-pro", serif;
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #F4F4F3;
+        overflow-x: hidden;
+        font-family: "neue-haas-unica", sans-serif !important;
+        
+        /* LUXURY RENDERING SETTINGS */
+        text-rendering: optimizeLegibility;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      .font-serif {
+        font-family: "adobe-caslon-pro", "Cormorant Garamond", serif !important;
+      }
+      .font-sans {
+        font-family: "neue-haas-unica", "Montserrat", sans-serif !important;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .fade-in-element {
+        animation: fadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+      }
+      .bg-texture {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        
+        /* CHANGE: Lower Z-Index so Navbar (z-50) sits on top */
+        z-index: 40; 
+        
+        opacity: 0.4;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+      }
+    `}</style>
+    
+    <div className="bg-texture"></div>
+      <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] px-6 py-4 bg-[#041E42] text-[#F4F4F3] text-xs font-bold uppercase tracking-widest border border-[#D50032]">Skip to main content</a>
+      <NavBar activePage={activePage} navigateTo={navigateTo} mobileMenuOpen={isMenuOpen} setMobileMenuOpen={setIsMenuOpen} />
       <main id="main-content" className="min-h-screen">
         {activePage === 'home' && <HomeView navigateTo={navigateTo} openAlbumBySlug={openAlbumBySlug} openEvent={openEvent} />}
         {activePage === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
@@ -1896,55 +1786,21 @@ export default function App() {
         {activePage === 'store' && <StoreView />}
         {activePage === 'backstage' && <BackstageView />}
         {activePage === '404' && <NotFoundView navigateTo={navigateTo} />}
-        {activePage === 'external-redirect' && (
-            <div className="min-h-screen bg-[#F4F4F3] flex items-center justify-center">
-                <p className="text-[#041E42] font-serif italic text-xl animate-pulse">Redirecting...</p>
-            </div>
-        )}
+        {activePage === 'external-redirect' && <div className="min-h-screen bg-[#F4F4F3] flex items-center justify-center"><p className="text-[#041E42] font-serif italic text-xl animate-pulse">Redirecting...</p></div>}
       </main>
-
-      {/* Footer - Minimalist & Archival */}
-      <footer className="bg-[#F4F4F3] text-[#041E42] border-t border-[#041E42]/5 py-48 px-8 md:px-16">
-        <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
-          <div className="md:col-span-4 flex flex-col justify-between items-start h-full">
-            <img 
-              src={IMG_LOGO} 
-              alt="Chimes Wordmark" 
-              className="h-6 w-auto mb-12 opacity-80" 
-            />
-            <p className="text-[10px] uppercase tracking-[0.25em] leading-loose text-[#595959]">
-                Incorporated in Delaware &middot; 501(c)(7)<br/>
-                Kindly be advised that contributions are not tax-deductible
-            </p>
-          </div>
-          
-          <div className="md:col-span-8 flex flex-wrap justify-start md:justify-end gap-32">
-            <div className="flex flex-col gap-8">
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#595959]">Index</span>
-              <button onClick={() => navigateTo('agenda')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Box Office</button>
-              <button onClick={() => navigateTo('discography')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Listening Room</button>
-              <button onClick={() => navigateTo('philanthropy')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Patronage</button>
-              <button onClick={() => navigateTo('store')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Haberdasher</button>
-            </div>
-            
-             <div className="flex flex-col gap-8">
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-[#595959]">Backstage</span>
-              <button onClick={() => navigateTo('backstage')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Database</button>
-              <button onClick={() => navigateTo('backstage')} className="text-left text-lg font-serif italic hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4">Messaging</button>
+      <footer className="bg-[#F4F4F3] text-[#041E42] pt-32 pb-12 px-6 md:px-12 antialiased selection:bg-[#D50032] selection:text-white">
+        <div className="max-w-[1920px] mx-auto">
+          <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-x-12">
+            <div className="md:col-span-4 flex flex-col justify-between h-full"><div><img src={IMG_LOGO} alt="Chimes Wordmark" className="h-8 w-auto mb-12 opacity-80 mix-blend-multiply grayscale" /><div className="space-y-6 max-w-xs"><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/60">Incorporated in Delaware<br/>501(c)(7) Non-Profit</p><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/40">Kindly be advised that contributions are not tax-deductible.</p></div></div></div>
+            <div className="md:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
+              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032] border-b border-[#041E42]/20 pb-4 block">Index</span>{[{ name: 'Box Office', slug: 'agenda' }, { name: 'Listening Room', slug: 'discography' }, { name: 'Haberdasher', slug: 'store' }, { name: 'Patronage', slug: 'philanthropy' }].map((item) => (<button key={item.name} onClick={() => navigateTo(item.slug)} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">{item.name}</button>))}</div>
+              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40 border-b border-[#041E42]/20 pb-4 block">Backstage</span><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">Database</button><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">Messaging</button></div>
+              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40 border-b border-[#041E42]/20 pb-4 block">External</span>{[{ name: 'The House', url: 'https://3611.georgetownchimes.org' }, { name: 'The Actives', url: 'https://georgetownchimes.org' }].map((site) => (<button key={site.name} onClick={() => window.open(site.url, '_blank', 'noopener,noreferrer')} className="group flex items-center gap-2 text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">{site.name}<span className="text-lg font-light leading-none opacity-0 group-hover:opacity-100 transition-opacity translate-y-[-1px]">↗</span></button>))}</div>
             </div>
           </div>
         </div>
-        
-        <div className="max-w-[1920px] mx-auto mt-32 pt-12 border-t border-[#041E42]/5 flex flex-col md:flex-row justify-between items-center text-[9px] text-[#595959] uppercase tracking-[0.3em] gap-8">
-          <span>© {new Date().getFullYear()} Georgetown Chimes Alumni Association, Inc.</span>
-          <button 
-                onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-                className="flex items-center gap-2 group hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4"
-              >
-                Return to Top <ChevronDown className="rotate-180" size={10} aria-hidden="true" />
-          </button>
-        </div>
+        <div className="max-w-[1920px] mx-auto mt-24 pt-6 border-t border-[#041E42]/10 flex flex-col md:flex-row justify-between items-center text-[9px] font-sans font-bold text-[#041E42]/40 uppercase tracking-[0.2em] gap-8"><span>© {new Date().getFullYear()} Georgetown Chimes Alumni Association, Inc.</span><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 group hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">Return to Top <span className="text-lg font-light leading-none rotate-180">↓</span></button></div>
       </footer>
     </div>
   );
-};
+}
