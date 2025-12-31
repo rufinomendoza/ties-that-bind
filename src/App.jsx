@@ -779,7 +779,6 @@ const DONOR_TIERS = [
 ];
 
 // --- Typographic Helper: The Typesetter ---
-// Applies Bringhurst's rules: Smart quotes, proper dashes, and micro-typography.
 const typeset = (text) => {
   if (!text) return text;
   if (Array.isArray(text)) return text.map(t => typeset(t));
@@ -802,8 +801,38 @@ const SectionHeader = ({ title, number }) => (
   </div>
 );
 
-// --- Home View (Swiss Directory) ---
-// --- Home View (Swiss Directory) ---
+// --- Swiss System NavBar ---
+const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) => {
+  const NavButton = ({ page, children, mobile = false }) => (
+    <button onClick={() => { navigateTo(page); if (mobile) setMobileMenuOpen(false); }} className={`${mobile ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42] border-b border-[#041E42]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset' : `h-full flex items-center text-[10px] font-bold tracking-[0.25em] uppercase transition-all duration-500 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 ${activePage === page ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`}`}>
+      {children}
+      {!mobile && <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#041E42] transform origin-left transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${activePage === page ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>}
+    </button>
+  );
+  return (
+    <>
+      <nav className="fixed top-0 left-0 w-full z-50 bg-[#F4F4F3] border-b-2 border-[#041E42] h-20 md:h-24 px-6 md:px-12 transition-all duration-500">
+        <div className="max-w-[1920px] mx-auto h-full flex justify-between items-center">
+          <button className="flex items-center gap-4 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4" onClick={() => navigateTo('home')}>
+            <img src={IMG_LOGO} alt="Georgetown Chimes" className="h-6 w-auto grayscale mix-blend-multiply opacity-100 transition-opacity" />
+          </button>
+          <div className="hidden lg:flex items-stretch h-full gap-12">
+            {[{ id: 'agenda', label: 'Box Office' }, { id: 'discography', label: 'Listening Room' }, { id: 'store', label: 'Haberdasher' }, { id: 'philanthropy', label: 'Patronage' }, { id: 'backstage', label: 'Backstage' }].map((link) => (<NavButton key={link.id} page={link.id}>{link.label}</NavButton>))}
+          </div>
+          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-3 -mr-3 text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]" aria-label="Toggle Menu">{mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}</button>
+        </div>
+      </nav>
+      <div className={`fixed inset-0 z-40 bg-[#F4F4F3] px-6 md:px-12 pt-32 pb-12 overflow-y-auto transition-transform duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className="max-w-[1920px] mx-auto flex flex-col h-full justify-between">
+          <div className="flex flex-col"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase border-b border-[#041E42]/20 pb-4">Directory</span>{[{ id: 'home', label: 'Home' }, { id: 'agenda', label: 'Box Office' }, { id: 'discography', label: 'Listening Room' }, { id: 'store', label: 'Haberdasher' }, { id: 'philanthropy', label: 'Patronage' }, { id: 'backstage', label: 'Backstage' }].map((link) => (<NavButton key={link.id} page={link.id} mobile={true}>{link.label}</NavButton>))}</div>
+          <div className="mt-12 space-y-8"><div className="grid grid-cols-2 gap-8"><div><span className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/40 uppercase block mb-4">External</span><div className="flex flex-col gap-4"><a href="https://georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The Actives ↗</a><a href="https://3611.georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The House ↗</a></div></div></div><p className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/20 uppercase">© {new Date().getFullYear()} GCAA, Inc.</p></div>
+        </div>
+      </div>
+    </>
+  );
+};
+
+// --- Home View ---
 const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
   useEffect(() => { setTimeout(() => setIsHeroVisible(true), 100); }, []);
@@ -826,7 +855,6 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 Stream “And So It Goes”
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
              </button>
-             {/* HERO LINK: Direct to CTM II */}
              <button onClick={() => openEvent(EVENTS_DATA[1])} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors">
                 Book Cherry Tree Tickets
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
@@ -854,8 +882,8 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
              </div>
              <div className="lg:col-span-8 flex flex-col">
                 {[
-                  { sub: "Tickets & Gatherings", room: "Box Office", slug: 'agenda', id: "01" },
-                  { sub: "The Recorded Archive", room: "Listening Room", slug: 'discography', id: "02" },
+                  { sub: "Tickets & Gatherings", room: "Box Office", slug: 'events', id: "01" },
+                  { sub: "The Recorded Archive", room: "Listening Room", slug: 'albums', id: "02" },
                   { sub: "Specially Commissioned", room: "Haberdashery", slug: 'store', id: "03" },
                   { sub: "Fund the Brotherhood", room: "Patronage", slug: 'philanthropy', id: "04" },
                 ].map((item) => (
@@ -909,7 +937,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
   );
 };
 
-// --- Agenda View (Focus List) ---
+// --- Agenda View ---
 const AgendaView = ({ navigateTo, openEvent }) => (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <div className="max-w-[1920px] mx-auto">
@@ -927,7 +955,6 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                  <span className="text-4xl font-serif text-[#041E42] italic">{event.date.split(' ')[1].replace(',', '')}</span>
               </div>
               <div className="md:col-span-7">
-                {/* CHANGED: mb-6 creates an equal 24px vertical rhythm */}
                 <span className="inline-block mb-6 text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">{event.type}</span>
                 <h3 className="text-5xl md:text-7xl font-serif mb-6 text-[#041E42] leading-[0.85] tracking-tight group-hover:italic transition-all duration-500 [text-wrap:balance]">{typeset(event.title)}</h3>
                 <p className="text-[#041E42] font-serif text-lg md:text-xl max-w-xl leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700">{Array.isArray(event.description) ? typeset(event.description[0]) : typeset(event.description)}</p>
@@ -953,7 +980,7 @@ const EventDetailView = ({ event, navigateTo }) => {
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-between items-end mb-12">
-            <button onClick={() => navigateTo('agenda')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group">
+            <button onClick={() => navigateTo('agenda')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4">
             <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to Box Office
             </button>
         </div>
@@ -1013,7 +1040,7 @@ const EventDetailView = ({ event, navigateTo }) => {
   );
 };
 
-// --- Discography & Album Details ---
+// --- Discography View ---
 const DiscographyView = ({ openAlbum, navigateTo }) => {
   const [imagesLoaded, setImagesLoaded] = useState(false);
   const [triggerAnim, setTriggerAnim] = useState(false);
@@ -1066,13 +1093,14 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
   );
 };
 
+// --- Album Detail View ---
 const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
   if (!selectedAlbum) return null;
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-between items-end mb-12">
-            <button onClick={() => navigateTo('discography')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group">
+            <button onClick={() => navigateTo('discography')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4">
                 <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to Archive
             </button>
         </div>
@@ -1217,8 +1245,6 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
   );
 };
 
-
-
 const StoreView = () => (
   <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] antialiased text-[#041E42] selection:bg-[#D50032] selection:text-white">
     <div className="max-w-[1920px] mx-auto">
@@ -1291,7 +1317,7 @@ const StoreView = () => (
                         <img 
                             src={item.img} 
                             alt={item.name} 
-                            className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
+                            className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 transition-all duration-700"
                         />
                     </div>
                 </div>
@@ -1618,47 +1644,18 @@ const NotFoundView = ({ navigateTo }) => (
                     <span className="text-lg font-light group-hover:translate-x-2 transition-transform">→</span>
                 </button>
 
-                {/* 5. Optional: "Did you mean?" Links (The 'Concierge' Touch) */}
-                <div className="flex gap-6 pt-8 border-t border-[#041E42]/10 w-full max-w-md opacity-60">
+                {/* 5. Concierge Links: Added Patronage */}
+                <div className="flex flex-wrap gap-6 pt-8 border-t border-[#041E42]/10 w-full max-w-md opacity-60">
                     <button onClick={() => navigateTo('agenda')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Box Office</button>
-                    <button onClick={() => navigateTo('discography')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Archive</button>
+                    <button onClick={() => navigateTo('discography')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Listening Room</button>
+                    <button onClick={() => navigateTo('store')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Haberdasher</button>
+                    <button onClick={() => navigateTo('philanthropy')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Patronage</button>
                 </div>
             </div>
 
         </div>
     </div>
 );
-
-// --- Swiss System NavBar ---
-const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) => {
-  const NavButton = ({ page, children, mobile = false }) => (
-    <button onClick={() => { navigateTo(page); if (mobile) setMobileMenuOpen(false); }} className={`${mobile ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42] border-b border-[#041E42]/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-inset' : `h-full flex items-center text-[10px] font-bold tracking-[0.25em] uppercase transition-all duration-500 relative group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 ${activePage === page ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`}`}>
-      {children}
-      {!mobile && <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#041E42] transform origin-left transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${activePage === page ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>}
-    </button>
-  );
-  return (
-    <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-[#F4F4F3] border-b-2 border-[#041E42] h-20 md:h-24 px-6 md:px-12 transition-all duration-500">
-        <div className="max-w-[1920px] mx-auto h-full flex justify-between items-center">
-          <button className="flex items-center gap-4 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4" onClick={() => navigateTo('home')}>
-            <img src={IMG_LOGO} alt="Georgetown Chimes" className="h-6 w-auto grayscale mix-blend-multiply opacity-100 transition-opacity" />
-          </button>
-          <div className="hidden lg:flex items-stretch h-full gap-12">
-            {[{ id: 'agenda', label: 'Box Office' }, { id: 'discography', label: 'Listening Room' }, { id: 'store', label: 'Haberdasher' }, { id: 'philanthropy', label: 'Patronage' }, { id: 'backstage', label: 'Backstage' }].map((link) => (<NavButton key={link.id} page={link.id}>{link.label}</NavButton>))}
-          </div>
-          <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-2 -mr-2 text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]" aria-label="Toggle Menu">{mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}</button>
-        </div>
-      </nav>
-      <div className={`fixed inset-0 z-40 bg-[#F4F4F3] px-6 md:px-12 pt-32 pb-12 overflow-y-auto transition-transform duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="max-w-[1920px] mx-auto flex flex-col h-full justify-between">
-          <div className="flex flex-col"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase border-b border-[#041E42]/20 pb-4">Directory</span>{[{ id: 'home', label: 'Home' }, { id: 'agenda', label: 'Box Office' }, { id: 'discography', label: 'Listening Room' }, { id: 'store', label: 'Haberdasher' }, { id: 'philanthropy', label: 'Patronage' }, { id: 'backstage', label: 'Backstage' }].map((link) => (<NavButton key={link.id} page={link.id} mobile={true}>{link.label}</NavButton>))}</div>
-          <div className="mt-12 space-y-8"><div className="grid grid-cols-2 gap-8"><div><span className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/40 uppercase block mb-4">External</span><div className="flex flex-col gap-4"><a href="https://georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The Actives ↗</a><a href="https://3611.georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The House ↗</a></div></div></div><p className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/20 uppercase">© {new Date().getFullYear()} GCAA, Inc.</p></div>
-        </div>
-      </div>
-    </>
-  );
-};
 
 export default function App() {
   const getRouteFromPath = () => {
@@ -1793,9 +1790,9 @@ export default function App() {
           <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-x-12">
             <div className="md:col-span-4 flex flex-col justify-between h-full"><div><img src={IMG_LOGO} alt="Chimes Wordmark" className="h-8 w-auto mb-12 opacity-80 mix-blend-multiply grayscale" /><div className="space-y-6 max-w-xs"><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/60">Incorporated in Delaware<br/>501(c)(7) Non-Profit</p><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/40">Kindly be advised that contributions are not tax-deductible.</p></div></div></div>
             <div className="md:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
-              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032] border-b border-[#041E42]/20 pb-4 block">Index</span>{[{ name: 'Box Office', slug: 'agenda' }, { name: 'Listening Room', slug: 'discography' }, { name: 'Haberdasher', slug: 'store' }, { name: 'Patronage', slug: 'philanthropy' }].map((item) => (<button key={item.name} onClick={() => navigateTo(item.slug)} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">{item.name}</button>))}</div>
-              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40 border-b border-[#041E42]/20 pb-4 block">Backstage</span><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">Database</button><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">Messaging</button></div>
-              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40 border-b border-[#041E42]/20 pb-4 block">External</span>{[{ name: 'The House', url: 'https://3611.georgetownchimes.org' }, { name: 'The Actives', url: 'https://georgetownchimes.org' }].map((site) => (<button key={site.name} onClick={() => window.open(site.url, '_blank', 'noopener,noreferrer')} className="group flex items-center gap-2 text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">{site.name}<span className="text-lg font-light leading-none opacity-0 group-hover:opacity-100 transition-opacity translate-y-[-1px]">↗</span></button>))}</div>
+              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032] border-b border-[#041E42]/20 pb-4 block">Index</span>{[{ name: 'Box Office', slug: 'agenda' }, { name: 'Listening Room', slug: 'discography' }, { name: 'Haberdasher', slug: 'store' }, { name: 'Patronage', slug: 'philanthropy' }].map((item) => (<button key={item.name} onClick={() => navigateTo(item.slug)} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">{item.name}</button>))}</div>
+              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40 border-b border-[#041E42]/20 pb-4 block">Backstage</span><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">Database</button><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">Messaging</button></div>
+              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40 border-b border-[#041E42]/20 pb-4 block">External</span>{[{ name: 'The House', url: 'https://3611.georgetownchimes.org' }, { name: 'The Actives', url: 'https://georgetownchimes.org' }].map((site) => (<button key={site.name} onClick={() => window.open(site.url, '_blank', 'noopener,noreferrer')} className="group flex items-center gap-2 text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">{site.name}<span className="text-lg font-light leading-none opacity-0 group-hover:opacity-100 transition-opacity translate-y-[-1px]">↗</span></button>))}</div>
             </div>
           </div>
         </div>
