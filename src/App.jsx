@@ -235,11 +235,11 @@ const ALBUMS_DATA = [
       { title: "We Meet (Live)" }, 
       { title: "Little Bitty Pretty One", soloist: "Matthew Demartini" },
       { title: "Friends for Now", soloist: "Peter Fanone" },
-      { title: "Wayfaring Stanger", soloist: "Jaewoo Kim" },
+      { title: "Wayfaring Stranger", soloist: "Jaewoo Kim" },
       { title: "Bridge Over Troubled Water", soloist: "Junho Lee" },
       { title: "It’s a Beautiful Day (Live)", soloist: "Connor Joseph" },
       { title: "Telephone Line", soloist: "Peter Fanone" },
-      { title: "Runaways / When We Were Young", soloist:"Peter Fanone, Jeff Kemp" },
+      { title: "Runaways · When We Were Young", soloist:"Peter Fanone, Jeff Kemp" },
       { title: "How Deep Is Your Love? (Live)", soloist: "Charlie Plissner"},
       { title: "Sixteen Tons", soloist: "Michael Luckey" },
       { title: "Don’t Worry Baby (Live)", soloist: "Charlie Plissner" },
@@ -266,7 +266,7 @@ const ALBUMS_DATA = [
       { title: "Georgetown Guy" },
       { title: "Georgetown Girl" },
       { title: "Moondance" },
-      { title: "A Beatles Medley: All You Need Is Love / Blackbird / All My Loving / Here Comes the Sun / Hey Jude" },
+      { title: "A Beatles Medley: All You Need Is Love · Blackbird · All My Loving · Here Comes the Sun · Hey Jude" },
       { title: "Jessie’s Girl" },
       { title: "Hold the Line" },
       { title: "So Much in Love" },
@@ -325,7 +325,7 @@ const ALBUMS_DATA = [
       { title: "Just a Gigolo", composer: "Louis Prima", soloist: "Jeff Civillico #193", group:"2004 Group" },
       { title: "Something Tells Me", composer: "Herman’s Hermits (arr. Jeff Gordon #192)", soloist: "Jeff Carlson #206", group:"2006 Group" },
       { title: "Glory of Love", composer: "Sam Sanders #204", soloist: "Sam Sanders #204", group:"2007 Group" },
-      { title: "Cartoon Theme Medley: Duck Tales / Fraggle Rock / Chip ’n’ Dale Rescure Rangers / Inspector Gadget / Gummi Bears", composer: "Various (arr. Gerard Yun)", soloist: "Various", group:"2005 Group" },
+      { title: "Cartoon Theme Medley: Duck Tales · Fraggle Rock · Chip ’n’ Dale Rescue Rangers · Inspector Gadget · Gummi Bears", composer: "Various (arr. Gerard Yun)", soloist: "Various", group:"2005 Group" },
       { title: "Maggie", composer: "Traditional Barbershop", group:"2007 Group" },
       { title: "King of Spain", composer: "Moxy Fruvous", soloist: "Jeff Civillico #193", group:"2004 Group" },
       { title: "Come Go with Me", composer: "The Del-Vikings (arr. Jeff Gordon #192)", soloist: "Jeff Gordon #192", group:"2004 Group" },
@@ -427,7 +427,7 @@ const ALBUMS_DATA = [
       { title: "All of Me (Live)", composer: "Simmons & Marks (arr. Laird, Patton)", soloist: "Stubbe" },
       { title: "Running to Stand Still (Live)", composer: "Bono (arr. Hall)", soloist: "Pritchard" },
       { title: "Loch Lomond", composer: "Traditional (arr. Mattimore ’92)", soloist: "Kay" },
-      { title: "Kiss the Brown Eyed Girl", composer: "Menkin & Ashman / Morrison (arr. Amatuzzi)", soloist: "Amatuzzi & Neustaetter" },
+      { title: "Kiss the Brown Eyed Girl", composer: "Menkin & Ashman · Morrison (arr. Amatuzzi)", soloist: "Amatuzzi & Neustaetter" },
       { title: "Medley: Just a Gigolo / I Ain’t Got Nobody", composer: "Casucci & Caesar / Williams & Graham (arr. Manassee)", soloist: "Pritchard" },
       { title: "And So It Goes", composer: "Joel (arr. King’s Singers", soloist: "Walsh" },
       { title: "Hold Me Tight", composer: "Rand (’86)", soloist: "Stubbe" },
@@ -723,7 +723,7 @@ const ALBUMS_DATA = [
       { title: "Some of These Days" },
       { title: "I Love Paris", soloist:"Reardon" },
       { title: "Roguish Eyes" },
-      { title: "Greensleves", soloist:"Kelly" },
+      { title: "Greensleeves", soloist:"Kelly" },
       { title: "Coney Island Washboard" },
       { title: "Summertime", soloist:"Walsh" },
       { title: "Donegal", soloist:"Walsh" },
@@ -786,7 +786,8 @@ const typeset = (text) => {
     .replace(/(\W|^)"/g, '$1“').replace(/"/g, '”') // Smart Quotes
     .replace(/'/g, '’') // Smart Apostrophes
     .replace(/(\d)-(\d)/g, '$1–$2') // En-dashes for ranges
-    .replace(/ - /g, ' — '); // Em-dashes for breaks
+    .replace(/ - /g, ' — ') // Em-dashes for breaks
+    .replace(/ \/ /g, ' · '); // ADDED: Slashes to Interpuncts
 };
 
 // --- Shared Components ---
@@ -1057,7 +1058,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="The Listening Room" number="Recorded Works" />
+        <SectionHeader title="The Listening Room" number="The Recorded Archive" />
         <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
             <div className="lg:col-span-4"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span></div>
             <div className="lg:col-span-8">
@@ -1181,7 +1182,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                                         track.composer, 
                                         track.group, 
                                         track.soloist ? `Feat. ${track.soloist}` : null
-                                    ].filter(Boolean).join(" • ")}
+                                    ].filter(Boolean).join(" · ")}
                                 </span>
                             </div>
                         </div>
@@ -1550,7 +1551,7 @@ const BackstageView = () => (
                             href="https://drive.google.com/uc?export=download&id=1s9YI3af7Y17OpptSKo4LRAsM15QCyOlp" 
                             className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
                           >
-                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">Download Manual</span>
+                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">System Protocol</span>
                              <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">↓</span>
                           </a>
                      </div>
@@ -1595,7 +1596,7 @@ const BackstageView = () => (
                             href="https://drive.google.com/uc?export=download&id=1AeangbSpDCNOv-sHq5yqaz5Djk0YmesR" 
                             className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
                           >
-                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">Download Manual</span>
+                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">System Protocol Only</span>
                              <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">↓</span>
                           </a>
                      </div>
@@ -1607,7 +1608,7 @@ const BackstageView = () => (
         {/* Security Stamp: Left Aligned */}
         <div className="mt-12 text-left opacity-30">
             <p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase">
-                Restricted Access — Chimes Alumni Only
+                Restricted Access — Alumni Personnel Only
             </p>
         </div>
 
