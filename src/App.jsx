@@ -372,22 +372,22 @@ const ALBUMS_DATA = [
     ],
     tracks: [
       { title: "We Meet", composer: "Traditional" },
-      { title: "I’ve Just Seen a Face", composer: "John Lennon · Paul McCartney (arr. Evan Seiler ’02)", soloist: "Ryan Ramagosa ’03" },
+      { title: "I’ve Just Seen a Face", composer: "John Lennon/Paul McCartney (arr. Evan Seiler ’02)", soloist: "Ryan Ramagosa ’03" },
       { title: "Peaceful Easy Feeling", composer: "Jack Tempchin (arr. Jeff Gordon ’04)", soloist: "Dan Phillips ’03" },
       { title: "Apeman", composer: "Ray Davies (arr. Andy Neustaetter ’02)", soloist: "Andy Neustaetter ’02" },
-      { title: "Tempted", composer: "Chris Difford · Glenn Tilbrook (arr. Nick Amatuzzi ’00)", soloist: "Nick Giannotti ’02",},
+      { title: "Tempted", composer: "Chris Difford/Glenn Tilbrook (arr. Nick Amatuzzi ’00)", soloist: "Nick Giannotti ’02",},
       { title: "Danny Boy", composer: "Traditional (arr. Jay Spadone)" },
       { title: "I’m Beginning to See the Light", composer: "Duke Ellington (arr. Andrew Cranin)" },
-      { title: "Just You, Just Me", composer: "Raymond Klarges · Jesse Greer (arr. Sean Altman · Elliott Kerman; bass line by Barry Carl)", soloist: "O’Brien (Bass), Phillips (Baritone), Gordon (Lead), Ramagosa (Tenor)" },
+      { title: "Just You, Just Me", composer: "Raymond Klarges/Jesse Greer (arr. Sean Altman/Elliott Kerman; bass line by Barry Carl)", soloist: "O’Brien (Bass), Phillips (Baritone), Gordon (Lead), Ramagosa (Tenor)" },
       { title: "Prodigal Son", composer: "Luke 15:11–32 (arr. Nashville Bluegrass Band)" },
-      { title: "Kiss Him Goodbye", composer: "Dale Frashuer · Gary Decarlo · Paul Leko (arr. Bill Henderson · The Nylons)", soloist: "Ryan Ramagosa ’03" },
-      { title: "They Can’t Take That Away from Me", composer: "George Gershwin & Ira Gershwin (arr. Sean Collins ’83)", soloist: "Evan Seiler ’02" },
+      { title: "Kiss Him Goodbye", composer: "Dale Frashuer/Gary Decarlo/Paul Leko (arr. Bill Henderson/The Nylons)", soloist: "Ryan Ramagosa ’03" },
+      { title: "They Can’t Take That Away from Me", composer: "George Gershwin/Ira Gershwin (arr. Sean Collins ’83)", soloist: "Evan Seiler ’02" },
       { title: "Crazy Little Thing Called Love", composer: "Freddie Mercury (arr. Jeff Gordon ’04)", soloist: "Jeff Gordon ’04" },
       { title: "Poor Heart", composer: "Michael Gordon (arr. FRED)", soloist: "Quartet: Beaton (Bass), Seiler (Baritone), Giannotti (Lead), Neustaetter (Tenor)" },
       { title: "California Dreamin’", composer: "John and Michelle Phillips (arr. Mike Taylor)" },
       { title: "Sixty Minute Man", composer: "by: William “Billy” Ward, a.p.b. the Persuasions and Rockapella", soloist: "Sean O’Brien ’04" },
       { title: "Jet Airliner", composer: "Paul Pena (arr. Evan Seiler ’02)", soloist: "Nick Giannotti ’02" },
-      { title: "When I’m 64", composer: "John Lennon · Paul McCartney (arr. Andrew Cranin)", soloist: "Ryan Ramagosa ’03" },
+      { title: "When I’m 64", composer: "John Lennon/Paul McCartney (arr. Andrew Cranin)", soloist: "Ryan Ramagosa ’03" },
       { title: "Georgetown University Fight Song", composer: "Traditional" },
       { title: "My Comrades", composer: "Traditional" }
     ]
@@ -423,7 +423,7 @@ const ALBUMS_DATA = [
       { title: "Donne", composer: "Zuchero, a.p.b. Neri Per Caso (arr. Patton ’97)", soloist: "Pritchard & Stubbe" },
       { title: "Another Saturday Night", composer: "Cooke (arr. Lockart)", soloist: "Bedoya" },
       { title: "My Love Is Like a Red, Red Rose", composer: "Traditional (arr. King’s Singers)", soloist: "Kay, Coslov, and Hoy" },
-      { title: "Soul to Soul", composer: "Carter · Nevada", soloist: "Patel" },
+      { title: "Soul to Soul", composer: "Carter / Nevada", soloist: "Patel" },
       { title: "All of Me (Live)", composer: "Simmons & Marks (arr. Laird, Patton)", soloist: "Stubbe" },
       { title: "Running to Stand Still (Live)", composer: "Bono (arr. Hall)", soloist: "Pritchard" },
       { title: "Loch Lomond", composer: "Traditional (arr. Mattimore ’92)", soloist: "Kay" },
@@ -1058,7 +1058,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <div className="max-w-[1920px] mx-auto">
-        <SectionHeader title="The Listening Room" number="The Recorded Archive" />
+        <SectionHeader title="The Listening Room" number="Recorded Works" />
         <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
             <div className="lg:col-span-4"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span></div>
             <div className="lg:col-span-8">
@@ -1140,8 +1140,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
           {/* Content */}
           <div className="lg:col-span-8">
-            {/* ADDED: pt-2 to push the Cap Height down to align with the image top */}
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[0.85] tracking-tighter mb-16 antialiased text-[#041E42] [text-wrap:balance] pt-5">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[0.85] tracking-tighter mb-16 antialiased text-[#041E42] [text-wrap:balance] pt-2">
                 {typeset(selectedAlbum.title)}
             </h1>
             
@@ -1323,7 +1322,8 @@ const StoreView = () => (
 
                 {/* Col 2: THE IMAGE (The Artifact) */}
                 <div className="md:col-span-3">
-                    <div className="aspect-[4/5] bg-[#E5E5E4] overflow-hidden w-full max-w-[240px]">
+                    {/* CHANGED: aspect-[4/5] -> aspect-[3/4] for stricter geometry */}
+                    <div className="aspect-[3/4] bg-[#E5E5E4] overflow-hidden w-full max-w-[240px]">
                         <img 
                             src={item.img} 
                             alt={item.name} 
@@ -1338,8 +1338,9 @@ const StoreView = () => (
                         <h4 className="text-5xl md:text-6xl font-serif text-[#041E42] italic leading-[0.85] mb-6">
                             {item.name}
                         </h4>
-                        <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60">
-                            {item.desc}
+                        {/* CHANGED: Added typeset() and [text-wrap:balance] */}
+                        <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60 [text-wrap:balance]">
+                            {typeset(item.desc)}
                         </p>
                     </div>
                 </div>
@@ -1433,8 +1434,9 @@ const PhilanthropyView = () => (
                             <h4 className="text-5xl font-serif text-[#041E42] italic leading-[0.85] mb-6">
                                 {tier.title}
                             </h4>
-                            <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60 max-w-md">
-                                {tier.description}
+                            {/* CHANGED: Added typeset() and [text-wrap:balance] */}
+                            <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60 max-w-md [text-wrap:balance]">
+                                {typeset(tier.description)}
                             </p>
                         </div>
 
@@ -1605,7 +1607,7 @@ const BackstageView = () => (
                             href="https://drive.google.com/uc?export=download&id=1AeangbSpDCNOv-sHq5yqaz5Djk0YmesR" 
                             className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
                           >
-                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">System Protocol Only</span>
+                             <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">System Protocol</span>
                              <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">↓</span>
                           </a>
                      </div>
@@ -1657,8 +1659,7 @@ const NotFoundView = ({ navigateTo }) => (
                 {/* 5. Concierge Links: Added Patronage */}
                 <div className="flex flex-wrap gap-6 pt-8 border-t border-[#041E42]/10 w-full max-w-md opacity-60">
                     <button onClick={() => navigateTo('agenda')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Box Office</button>
-                    <button onClick={() => navigateTo('discography')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Listening Room</button>
-                    <button onClick={() => navigateTo('store')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Haberdasher</button>
+                    <button onClick={() => navigateTo('discography')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Archive</button>
                     <button onClick={() => navigateTo('philanthropy')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Patronage</button>
                 </div>
             </div>
