@@ -4,7 +4,7 @@ import { typeset, isPast } from '../utils/formatters';
 import { EVENTS_DATA } from '../data';
 
 // Asset imports
-import IMG_CHERRY_TREE from '../assets/composite-set-compressed.jpg';
+import IMG_CHERRY_TREE from '../assets/composite-set.jpg';
 import IMG_CTM_BOND from '../assets/ctm-bond.jpeg';
 
 const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
