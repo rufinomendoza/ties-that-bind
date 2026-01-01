@@ -52,6 +52,61 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
 }
 
+/* --- High-Performance Page Transitions --- */
+
+/* The wrapper needs to stay stable to prevent layout jumps */
+.page-wrapper {
+  width: 100%;
+  will-change: opacity, transform;
+  /* Hardware acceleration for the "engine" */
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 1. Incoming Page (The Entry) */
+.page-enter {
+  opacity: 0;
+  /* Micro-scale: feels like the page is "snapping" into focus */
+  transform: scale(0.995);
+}
+
+.page-enter-active {
+  opacity: 1;
+  transform: scale(1);
+  /* The "Ferrari" Easing: Ultra-fast start, smooth finish */
+  transition: 
+    opacity 300ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* 2. Outgoing Page (The Exit) */
+.page-exit {
+  opacity: 1;
+  transform: scale(1);
+  /* Absolute position is REQUIRED so the new page doesn't jump to the bottom */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.page-exit-active {
+  opacity: 0;
+  transform: scale(1.005);
+  /* Exit slightly faster (250ms) to clear the stage for the new content */
+  transition: 
+    opacity 250ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* --- Layout Stability --- */
+/* Ensure the main container doesn't collapse during the absolute-positioned exit */
+main#main-content {
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+}
+
 @media print {
   nav, footer, button, .bg-texture { display: none !important; }
   body, main, div { background-color: white !important; color: black !important; }
