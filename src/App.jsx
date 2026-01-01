@@ -378,18 +378,17 @@ const EventDetailView = ({ event, navigateTo }) => {
 };
 
 // --- Discography View ---
+// --- Discography View ---
 const DiscographyView = ({ openAlbum, navigateTo }) => {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  // 1. Simplified State: We only need the animation trigger now
   const [triggerAnim, setTriggerAnim] = useState(false);
+
+  // 2. Trigger animation on mount (no waiting for images)
   useEffect(() => {
-    const promises = ALBUMS_DATA.map((album) => {
-        if (!album.image) return Promise.resolve();
-        return new Promise((resolve) => { const img = new Image(); img.src = album.image; img.onload = resolve; img.onerror = resolve; });
-    });
-    Promise.all(promises).then(() => { setImagesLoaded(true); setTimeout(() => setTriggerAnim(true), 100); });
+    setTimeout(() => setTriggerAnim(true), 100);
   }, []);
 
-  if (!imagesLoaded) return <div className="min-h-screen bg-[#F4F4F3]" />;
+  // 3. Removed the "if (!imagesLoaded) return" block entirely
 
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
@@ -402,7 +401,8 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
 
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="The Listening Room" number="Recorded Works" />
-        {/* ... (Rest of DiscographyView Logic remains unchanged) ... */}
+        
+        {/* Preservation Section */}
         <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
             <div className="lg:col-span-4"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span></div>
             <div className="lg:col-span-8">
@@ -416,13 +416,24 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                 </div>
             </div>
         </div>
+
+        {/* The Grid */}
         <div className="mb-48">
             <div className="flex items-end justify-between border-b-2 border-[#041E42] pb-4 mb-12"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">02 — The Discography</span></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
             {ALBUMS_DATA.map((album, index) => (
                 <div key={album.id} onClick={() => openAlbum(album)} className={`group cursor-pointer flex flex-col gap-6 transition-all duration-[1000ms] ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${index * 50}ms` }}>
                 <div className="relative aspect-square w-full bg-[#E5E5E4] overflow-hidden shadow-xl shadow-[#041E42]/5">
-                    {album.image ? <img src={album.image} alt={album.title} className="w-full h-full object-cover transition-all duration-[2s] grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 group-hover:scale-105" /> : <div className={`w-full h-full ${album.cover}`}></div>}
+                    {album.image ? (
+                        <img 
+                            src={album.image} 
+                            alt={album.title} 
+                            loading="lazy" 
+                            className="w-full h-full object-cover transition-all duration-[2s] grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 group-hover:scale-105" 
+                        />
+                    ) : (
+                        <div className={`w-full h-full ${album.cover}`}></div>
+                    )}
                     {album.badge && <div className="absolute top-0 right-0 bg-[#D50032] text-[#F4F4F3] px-4 py-2 text-[10px] font-sans font-bold tracking-[0.1em] uppercase">{album.badge}</div>}
                 </div>
                 <div className="flex flex-col items-start border-t border-[#041E42]/20 pt-4">
@@ -718,6 +729,7 @@ const StoreView = () => (
     </div>
   </div>
 );
+
 
 const PhilanthropyView = () => (
     <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-40 px-6 md:px-12 pb-32 antialiased selection:bg-[#D50032] selection:text-white">
@@ -1079,6 +1091,19 @@ export default function App() {
     window.scrollTo(0, 0);
   };
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        document.title = "We meet again soon...";
+      } else {
+        document.title = "Georgetown Chimes Alumni Association";
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
   const openAlbumBySlug = (slug) => navigateTo('album', slug);
   const openAlbum = (album) => navigateTo('album', album.slug);
   const openEvent = (event) => navigateTo('event', event.slug);
@@ -1139,6 +1164,29 @@ export default function App() {
         
         opacity: 0.4;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+      }
+      @media print {
+        /* Hide Navigation and UI */
+        nav, footer, button, .bg-texture { 
+          display: none !important; 
+        }
+        
+        /* Reset Colors for Ink Saving */
+        body, main, div { 
+          background-color: white !important; 
+          color: black !important; 
+        }
+
+        /* Expand Layouts */
+        .grid-cols-12 { display: block !important; }
+        .col-span-8 { width: 100% !important; }
+        
+        /* Show Links */
+        a[href]:after {
+          content: " (" attr(href) ")";
+          font-size: 0.8em;
+          font-weight: normal;
+        }
       }
     `}</style>
     
