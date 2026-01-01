@@ -1011,7 +1011,7 @@ const EventDetailView = ({ event, navigateTo }) => {
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-between items-end mb-12">
             <button onClick={() => navigateTo('agenda')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4">
-            <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to Box Office
+            <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to the Box Office
             </button>
         </div>
         {/* ... (Rest of EventDetailView Logic remains unchanged) ... */}
@@ -1147,7 +1147,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-between items-end mb-12">
             <button onClick={() => navigateTo('discography')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4">
-                <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to Archive
+                <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to the Listening Room
             </button>
         </div>
         
@@ -1179,7 +1179,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                 {selectedAlbum.dedication && (
                     <div className="mt-12 pt-8 border-t border-[#041E42]/20 space-y-4">
                         <p className="text-[10px] opacity-60 uppercase tracking-[0.1em] font-sans font-bold text-[#041E42]">Dedication</p>
-                        <p className="text-lg font-serif italic leading-relaxed text-[#041E42] opacity-90">{typeset(selectedAlbum.dedication)}</p>
+                        <p className="text-lg font-serif italic leading-relaxed text-[#041E42] opacity-90 pl-2 -ml-2">{typeset(selectedAlbum.dedication)}</p>
                     </div>
                 )}
              </div>
@@ -1285,7 +1285,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                     <h5 className="font-sans font-bold text-[11px] uppercase tracking-[0.1em] mb-12 text-[#041E42]/40">Acknowledgements</h5>
                     <div className="flex flex-wrap gap-x-8 gap-y-4 max-w-4xl">
                         {selectedAlbum.acknowledgements.map((name, i) => (
-                            <span key={i} className="text-xl text-[#041E42] font-serif italic opacity-60 hover:opacity-100 transition-opacity cursor-default">{typeset(name)}</span>
+                            <span key={i} className="text-xl text-[#041E42] font-serif italic opacity-60 hover:opacity-100 transition-opacity cursor-default pl-2 -ml-2">{typeset(name)}</span>
                         ))}
                     </div>
                 </div>
