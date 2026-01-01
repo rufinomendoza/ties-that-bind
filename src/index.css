@@ -1,52 +1,61 @@
 @import "tailwindcss";
-
-/* src/index.css - Global Page Resets */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  font-family: "neue-haas-unica", "Montserrat", system-ui, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  /* Force light mode base to match the "Paper" theme */
   color-scheme: light;
-  color: #041E42; /* Navy base */
-  background-color: #F4F4F3; /* Paper base */
+  /* CHANGED: Removed "Montserrat", added system sans stack */
+  --font-sans: "neue-haas-unica", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  
+  /* CHANGED: Removed "Cormorant Garamond", added system serif stack */
+  --font-serif: "adobe-caslon-pro", "Times New Roman", Times, serif;
+}
 
-  font-synthesis: none;
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #F4F4F3;
+  overflow-x: hidden;
+  font-family: var(--font-sans) !important;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Remove the default body centering and background */
-body {
-  margin: 0;
-  padding: 0;
-  display: block; 
-  min-width: 320px;
-  min-height: 100vh;
-  background-color: #F4F4F3;
-  overflow-x: hidden;
+.font-serif {
+  font-family: var(--font-serif) !important;
 }
 
-/* Ensure React root takes full height */
-#root {
-  min-height: 100vh;
+.font-sans {
+  font-family: var(--font-sans) !important;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.fade-in-element {
+  animation: fadeIn 1.5s cubic-bezier(0.19, 1, 0.22, 1) forwards;
+}
+
+.bg-texture {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  isolation: isolate;
+  height: 100%;
+  pointer-events: none;
+  z-index: 40; 
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
 }
 
-/* Global scrollbar styling - minimal and thin */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: #F4F4F3;
-}
-::-webkit-scrollbar-thumb {
-  background: #BBBCBC;
-  border-radius: 0px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #041E42;
+@media print {
+  nav, footer, button, .bg-texture { display: none !important; }
+  body, main, div { background-color: white !important; color: black !important; }
+  .grid-cols-12 { display: block !important; }
+  .col-span-8 { width: 100% !important; }
+  a[href]:after { content: " (" attr(href) ")"; font-size: 0.8em; font-weight: normal; }
 }
