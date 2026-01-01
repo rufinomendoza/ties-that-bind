@@ -54,36 +54,33 @@ body {
 
 /* --- High-Performance Page Transitions --- */
 
-/* The wrapper needs to stay stable to prevent layout jumps */
+/* --- Synchronized Ferrari Transitions --- */
+
 .page-wrapper {
   width: 100%;
   will-change: opacity, transform;
-  /* Hardware acceleration for the "engine" */
   backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
 }
 
-/* 1. Incoming Page (The Entry) */
+/* 1. Incoming Page */
 .page-enter {
   opacity: 0;
-  /* Micro-scale: feels like the page is "snapping" into focus */
-  transform: scale(0.995);
+  transform: scale(0.99);
 }
 
 .page-enter-active {
   opacity: 1;
   transform: scale(1);
-  /* The "Ferrari" Easing: Ultra-fast start, smooth finish */
+  /* Sync to 800ms to match the hamburger drawer */
   transition: 
-    opacity 300ms cubic-bezier(0.19, 1, 0.22, 1),
-    transform 300ms cubic-bezier(0.19, 1, 0.22, 1);
+    opacity 800ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
-/* 2. Outgoing Page (The Exit) */
+/* 2. Outgoing Page */
 .page-exit {
   opacity: 1;
   transform: scale(1);
-  /* Absolute position is REQUIRED so the new page doesn't jump to the bottom */
   position: absolute;
   top: 0;
   left: 0;
@@ -92,11 +89,11 @@ body {
 
 .page-exit-active {
   opacity: 0;
-  transform: scale(1.005);
-  /* Exit slightly faster (250ms) to clear the stage for the new content */
+  transform: scale(1.01);
+  /* Outgoing can be slightly shorter to avoid overlap mud */
   transition: 
-    opacity 250ms cubic-bezier(0.19, 1, 0.22, 1),
-    transform 250ms cubic-bezier(0.19, 1, 0.22, 1);
+    opacity 600ms cubic-bezier(0.19, 1, 0.22, 1),
+    transform 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* --- Layout Stability --- */
