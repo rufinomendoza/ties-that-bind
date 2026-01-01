@@ -158,14 +158,14 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 Stream “And So It Goes”
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
              </button>
-             <button 
-                  onClick={() => openEvent(EVENTS_DATA[1])} 
-                  disabled={isPast(EVENTS_DATA[1].date)}
-                  className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isPast(EVENTS_DATA[1].date) ? 'text-[#041E42]/40 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
-             >
-                  {isPast(EVENTS_DATA[1].date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
-                  {!isPast(EVENTS_DATA[1].date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
-             </button>
+            <button 
+                onClick={() => openEvent(ctmAlumni)} 
+                disabled={isPast(ctmAlumni.date)}
+                className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isPast(ctmAlumni.date) ? 'text-[#041E42]/40 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
+            >
+                {isPast(ctmAlumni.date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
+                {!isPast(ctmAlumni.date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
+            </button>
           </div>
         </div>
       </div>
@@ -1092,7 +1092,7 @@ export default function App() {
   useEffect(() => {
     const handleVisibilityChange = () => {
       if (document.hidden) {
-        document.title = "We meet again soon...";
+        document.title = "We meet again soon…";
       } else {
         document.title = "Georgetown Chimes Alumni Association";
       }

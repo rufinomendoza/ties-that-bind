@@ -1,3 +1,5 @@
+import React from 'react';
+
 const Logo = ({ className = "" }) => (
 <svg
   viewBox="0 0 262 113.91" fill="currentColor"   // CRITICAL: This allows Tailwind text-color to control the fill
