@@ -56,32 +56,29 @@ body {
 
 /* --- Synchronized Ferrari Transitions --- */
 
+/* --- Synchronized Pure Crossfade --- */
+
 .page-wrapper {
   width: 100%;
-  will-change: opacity, transform;
+  will-change: opacity; /* Removed transform from will-change */
   backface-visibility: hidden;
 }
 
 /* 1. Incoming Page */
 .page-enter {
   opacity: 0;
-  transform: scale(0.99);
 }
 
 .page-enter-active {
   opacity: 1;
-  transform: scale(1);
-  /* Sync to 800ms to match the hamburger drawer */
-  transition: 
-    opacity 800ms cubic-bezier(0.19, 1, 0.22, 1),
-    transform 800ms cubic-bezier(0.19, 1, 0.22, 1);
+  /* 800ms Duration with Ferrari Easing */
+  transition: opacity 800ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* 2. Outgoing Page */
 .page-exit {
   opacity: 1;
-  transform: scale(1);
-  position: absolute;
+  position: absolute; /* Essential for overlapping during the crossfade */
   top: 0;
   left: 0;
   width: 100%;
@@ -89,11 +86,8 @@ body {
 
 .page-exit-active {
   opacity: 0;
-  transform: scale(1.01);
-  /* Outgoing can be slightly shorter to avoid overlap mud */
-  transition: 
-    opacity 600ms cubic-bezier(0.19, 1, 0.22, 1),
-    transform 600ms cubic-bezier(0.19, 1, 0.22, 1);
+  /* Exit slightly faster so the new page becomes the focus sooner */
+  transition: opacity 600ms cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 /* --- Layout Stability --- */
@@ -102,6 +96,16 @@ main#main-content {
   position: relative;
   overflow-x: hidden;
   width: 100%;
+}
+
+/* Targeted opacity control: only hide images that haven't loaded yet */
+.aspect-square img:not(.is-loaded) {
+  opacity: 0;
+}
+
+/* Once loaded, or if the parent has the class, show it */
+.is-loaded img {
+  opacity: 1 !important;
 }
 
 @media print {

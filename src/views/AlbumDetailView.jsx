@@ -27,9 +27,24 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
           {/* Sidebar */}
           <div className="lg:col-span-4">
              <div className="sticky top-32">
-                <div className="aspect-square w-full overflow-hidden bg-[#E5E5E4] mb-12 shadow-2xl shadow-[#041E42]/5">
+                <div className="aspect-square w-full overflow-hidden bg-[#E5E5E4] mb-12 shadow-2xl shadow-[#041E42]/5 group relative">
                   {selectedAlbum.image ? (
-                    <img src={selectedAlbum.image} alt={selectedAlbum.title} className="w-full h-full object-cover grayscale mix-blend-multiply transition-all duration-[2s] hover:grayscale-0 hover:mix-blend-normal" />
+                    <>
+                      <img 
+                        src={selectedAlbum.image} 
+                        alt={selectedAlbum.title} 
+                        // ⚡ Priority load for the main detail image
+                        fetchPriority="high"
+                        // ⚡ Attach the class to the PARENT 'group'
+                        onLoad={(e) => e.currentTarget.parentElement.classList.add('is-loaded')}
+                        ref={(img) => {
+                          if (img && img.complete) img.parentElement.classList.add('is-loaded');
+                        }}
+                        className="w-full h-full object-cover grayscale mix-blend-multiply transition-all duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] hover:grayscale-0 hover:mix-blend-normal opacity-0 [.is-loaded_&]:opacity-100" 
+                      />
+                      {/* 🏁 The "Ferrari" curtain: vanishes once the engine (image) is ready */}
+                      <div className="absolute inset-0 bg-[#E5E5E4] transition-opacity duration-800 ease-[cubic-bezier(0.19,1,0.22,1)] pointer-events-none [.is-loaded_&]:opacity-0" />
+                    </>
                   ) : (
                     <div className={`aspect-square w-full ${selectedAlbum.cover}`}></div>
                   )}
