@@ -1752,7 +1752,6 @@ export default function App() {
   const getRouteFromPath = () => {
     const path = window.location.pathname;
     const cleanPath = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
-    if (cleanPath === '/his-successes') return { view: 'external-redirect', slug: null };
     if (cleanPath === '/' || cleanPath === '') return { view: 'home', slug: null };
     if (cleanPath === '/events') return { view: 'agenda', slug: null };
     if (cleanPath === '/albums') return { view: 'discography', slug: null };
@@ -1774,10 +1773,6 @@ export default function App() {
     window.addEventListener('popstate', handlePopState);
     return () => { window.removeEventListener('popstate', handlePopState); };
   }, []);
-
-  useEffect(() => {
-    if (route.view === 'external-redirect') { window.location.href = "https://docs.google.com/forms/d/e/1FAIpQLScYnADpitsc31nvqlJvj7f5tnMfS0uArn-PnsGJnj_cSNBqWA/viewform"; }
-  }, [route]);
 
   const navigateTo = (view, slug = null) => {
     let path = '/';
@@ -1874,7 +1869,6 @@ export default function App() {
         {activePage === 'store' && <StoreView />}
         {activePage === 'backstage' && <BackstageView />}
         {activePage === '404' && <NotFoundView navigateTo={navigateTo} />}
-        {activePage === 'external-redirect' && <div className="min-h-screen bg-[#F4F4F3] flex items-center justify-center"><p className="text-[#041E42] font-serif italic text-xl animate-pulse">Redirecting...</p></div>}
       </main>
       <footer className="bg-[#F4F4F3] text-[#041E42] pt-32 pb-12 px-6 md:px-12 antialiased selection:bg-[#D50032] selection:text-white">
         <div className="max-w-[1920px] mx-auto">
