@@ -1232,11 +1232,13 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                             {/* Right Col: Metadata (Spans 5 Cols) */}
                             <div className="hidden md:block md:col-span-5 text-right opacity-40 group-hover:opacity-100 transition-opacity">
                                 <span className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] leading-tight block [text-wrap:balance]">
-                                    {[
-                                        track.composer, 
-                                        track.group, 
-                                        track.soloist ? `Feat. ${track.soloist}` : null
-                                    ].filter(Boolean).join(" · ")}
+                                    {typeset(
+                                        [
+                                            track.composer, 
+                                            track.group, 
+                                            track.soloist ? `Feat. ${track.soloist}` : null
+                                        ].filter(Boolean).join(" · ")
+                                    )}
                                 </span>
                             </div>
 
@@ -1256,7 +1258,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                                     {roles.map((role, idx) => (
                                         <div key={idx} className="flex flex-col">
                                             <span className="text-[9px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/40 mb-1">{role.role}</span>
-                                            <span className="font-serif text-xl text-[#041E42] leading-tight [text-wrap:balance]">{role.name}</span>
+                                            <span className="font-serif text-xl text-[#041E42] leading-tight [text-wrap:balance]">{typeset(role.name)}</span>
                                         </div>
                                     ))}
                                 </div>
