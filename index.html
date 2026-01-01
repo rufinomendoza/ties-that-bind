@@ -14,6 +14,17 @@
     </noscript>
 
     <title>Georgetown Chimes Alumni Association</title>
+    <script>
+      // Check if the user is currently on the Homepage ("/" or just the domain)
+      if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+        var link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = '/images/og-image.jpg'; // Make sure image is in public folder
+        link.fetchPriority = 'high';
+        document.head.appendChild(link);
+      }
+    </script>
     <meta name="description" content="Brotherhood, Harmony, History. The official home of the Georgetown Chimes Alumni Association." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://alumni.georgetownchimes.org/" /> 
