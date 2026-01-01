@@ -877,7 +877,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
              <div className="lg:col-span-4 flex flex-col justify-between">
                 <div>
                     <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">01 — The Directory</span>
-                    <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[1.25] md:leading-[0.9] tracking-tighter mb-12">
+                    <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[1.15] md:leading-[0.9] tracking-tighter mb-12">
                       Welcome the time, my boys: <span className="italic">we meet again.</span>
                     </h2>
                     <div className="w-12 h-[2px] bg-[#041E42]"></div>
@@ -929,7 +929,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
         </div>
         <div className="bg-[#F4F4F3] p-12 md:p-24 flex flex-col justify-center border-l-0 md:border-l border-[#041E42]">
             <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">02 — Upcoming Concert</span>
-            <h3 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-[1.25] md:leading-[0.85] tracking-tighter -ml-1">The Cherry Tree Massacre</h3>
+            <h3 className="text-6xl md:text-8xl font-serif mb-12 text-[#041E42] leading-[1.15] md:leading-[0.9] tracking-tighter -ml-1">The Cherry Tree Massacre</h3>
             <div className="w-24 h-[2px] bg-[#041E42]/10 mb-12"></div>
             <div className="mb-16 max-w-md text-[#041E42]">
                 <h4 className="text-2xl font-serif font-bold leading-tight mb-6">Most traditions fade. <br/> This one just gets louder.</h4>
@@ -973,7 +973,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
               </div>
               <div className="md:col-span-7">
                 <span className="inline-block mb-6 text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">{event.type}</span>
-                <h3 className="text-5xl md:text-7xl font-serif mb-6 text-[#041E42] leading-[1.25] tracking-tight group-hover:italic transition-all duration-500 [text-wrap:balance]">{typeset(event.title)}</h3>
+                <h3 className="text-5xl md:text-7xl font-serif mb-6 text-[#041E42] leading-[1.15] md:leading-[0.9] tracking-tight group-hover:italic transition-all duration-500 [text-wrap:balance]">{typeset(event.title)}</h3>
                 <p className="text-[#041E42] font-serif text-lg md:text-xl max-w-xl leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700">{Array.isArray(event.description) ? typeset(event.description[0]) : typeset(event.description)}</p>
               </div>
               <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8">
@@ -1039,7 +1039,7 @@ const EventDetailView = ({ event, navigateTo }) => {
           </div>
           <div className="lg:col-span-8">
             <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">{event.eyebrow || event.type}</span>
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif mb-12 text-[#041E42] leading-[1.25] tracking-tighter [text-wrap:balance]">{typeset(event.title)}</h1>
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif mb-12 text-[#041E42] leading-[1.15] md:leading-[0.9] tracking-tighter [text-wrap:balance]">{typeset(event.title)}</h1>
             <div className="text-xl md:text-3xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-[65ch] space-y-8 pl-6 border-l-2 border-[#041E42]/10">
                 {Array.isArray(event.description) ? event.description.map((para, i) => <p key={i}>{typeset(para)}</p>) : <p>{typeset(event.description)}</p>}
             </div>
@@ -1100,7 +1100,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
         <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
             <div className="lg:col-span-4"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span></div>
             <div className="lg:col-span-8">
-                <h3 className="text-5xl md:text-7xl font-serif leading-[1.25] md:leading-[0.85] text-[#041E42] tracking-tighter mb-12">A living record, currently undergoing restoration.</h3>
+                <h3 className="text-5xl md:text-7xl font-serif leading-[1.15] md:leading-[0.9] text-[#041E42] tracking-tighter mb-12">A living record, currently undergoing restoration.</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
                     <p className="text-xl text-[#041E42] font-serif leading-relaxed">Our preservationists are currently digitizing master tapes from the 1960s and ’70s to high-fidelity standards.</p>
                     <div className="flex flex-col items-start gap-4">
@@ -1121,7 +1121,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                 </div>
                 <div className="flex flex-col items-start border-t border-[#041E42]/20 pt-4">
                     <div className="flex justify-between w-full items-baseline mb-2"><span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 uppercase tabular-nums">Issue {album.year}</span></div>
-                    <h3 className="font-serif text-3xl md:text-4xl text-[#041E42] leading-[1.25] md:leading-[0.85] group-hover:italic transition-all duration-500">{typeset(album.title)}</h3>
+                    <h3 className="font-serif text-3xl md:text-4xl text-[#041E42] leading-[1.15] md:leading-[0.9] group-hover:italic transition-all duration-500">{typeset(album.title)}</h3>
                 </div>
                 </div>
             ))}
@@ -1187,7 +1187,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
           {/* Content */}
           <div className="lg:col-span-8">
-            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[1.25] tracking-tighter mb-16 antialiased text-[#041E42] [text-wrap:balance] pt-2">
+            <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif leading-[1.15] md:leading-[0.9] tracking-tighter mb-16 antialiased text-[#041E42] [text-wrap:balance] pt-2">
                 {typeset(selectedAlbum.title)}
             </h1>
             
@@ -1322,7 +1322,7 @@ const StoreView = () => (
           </span>
         </div>
         <div className="lg:col-span-8">
-          <h3 className="text-5xl md:text-7xl font-serif leading-[1.25] md:leading-[0.85] text-[#041E42] tracking-tighter mb-12">
+          <h3 className="text-5xl md:text-7xl font-serif leading-[1.15] md:leading-[0.9] text-[#041E42] tracking-tighter mb-12">
             Standard Issue.
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
@@ -1390,7 +1390,7 @@ const StoreView = () => (
                 {/* Col 3: TITLE & DETAILS */}
                 <div className="md:col-span-5 flex flex-col justify-between h-full py-2">
                     <div>
-                        <h4 className="text-5xl md:text-6xl font-serif text-[#041E42] italic leading-[1.25] md:leading-[0.85] mb-6">
+                        <h4 className="text-5xl md:text-6xl font-serif text-[#041E42] italic leading-[1.15] md:leading-[0.9] mb-6">
                             {item.name}
                         </h4>
                         {/* CHANGED: Added typeset() and [text-wrap:balance] */}
@@ -1452,7 +1452,7 @@ const PhilanthropyView = () => (
                 </span>
             </div>
             <div className="lg:col-span-8">
-                <h3 className="text-5xl md:text-7xl font-serif leading-[1.25] md:leading-[0.85] text-[#041E42] tracking-tighter mb-12">
+                <h3 className="text-5xl md:text-7xl font-serif leading-[1.15] md:leading-[0.9] text-[#041E42] tracking-tighter mb-12">
                     The heartbeat of the Association.
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
@@ -1494,7 +1494,7 @@ const PhilanthropyView = () => (
 
                         {/* Col 2: The Title & Description (The Narrative) */}
                         <div className="md:col-span-6 pr-8">
-                            <h4 className="text-5xl font-serif text-[#041E42] italic leading-[1.25] md:leading-[0.85] mb-6">
+                            <h4 className="text-5xl font-serif text-[#041E42] italic leading-[1.15] md:leading-[0.9] mb-6">
                                 {tier.title}
                             </h4>
                             {/* CHANGED: Added typeset() and [text-wrap:balance] */}
@@ -1539,7 +1539,7 @@ const PhilanthropyView = () => (
                     </span>
                  </div>
                  <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-12">
-                     <h3 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[1.25] md:leading-[0.85] tracking-tighter">
+                     <h3 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[1.15] md:leading-[0.9] tracking-tighter">
                         Legacy &<br/><span className="italic">Restoration.</span>
                     </h3>
                     <div className="flex flex-col justify-between h-full">
@@ -1603,7 +1603,7 @@ const BackstageView = () => (
                              </span>
                          </div>
                          
-                         <h3 className="text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.25] md:leading-[0.85] -ml-1">
+                         <h3 className="text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.15] md:leading-[0.9] -ml-1">
                              GleeManager
                          </h3>
                          
@@ -1648,7 +1648,7 @@ const BackstageView = () => (
                              </span>
                          </div>
                          
-                         <h3 className="text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.25] md:leading-[0.85] -ml-1">
+                         <h3 className="text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.15] md:leading-[0.9] -ml-1">
                              Slack
                          </h3>
 
@@ -1715,7 +1715,7 @@ const NotFoundView = ({ navigateTo }) => (
             </span>
             
             {/* 2. Massive Serif Headline */}
-            <h1 className="text-6xl md:text-9xl font-serif text-[#041E42] mb-12 italic leading-[1.25] md:leading-[0.85] tracking-tighter [text-wrap:balance]">
+            <h1 className="text-6xl md:text-9xl font-serif text-[#041E42] mb-12 italic leading-[1.15] md:leading-[0.9] tracking-tighter [text-wrap:balance]">
                 Discordant note.
             </h1>
             
