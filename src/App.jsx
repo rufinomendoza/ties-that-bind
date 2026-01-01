@@ -133,9 +133,8 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
   
         {/* Open Graph / Social */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Georgetown Chimes Alumni Association" />
-        <meta property="og:description" content="Brotherhood, Harmony, History. Since 1946." />
-        <meta property="og:image" content={IMG_CHERRY_TREE} />
+        <meta property="og:title" content="Georgetown Chimes Alumni Association, Inc." />
+        <meta property="og:description" content="Brotherhood, Harmony, History." />
 
         <link rel="preload" as="image" href={IMG_CHERRY_TREE} />
 
