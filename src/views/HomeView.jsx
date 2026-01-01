@@ -4,7 +4,6 @@ import { typeset, isPast } from '../utils/formatters';
 import { EVENTS_DATA } from '../data';
 
 // Asset imports
-import IMG_CHERRY_TREE from '../assets/composite-set.jpg';
 import IMG_CTM_BOND from '../assets/ctm-bond.jpeg';
 
 const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
@@ -31,7 +30,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
         {/* Added fetchPriority="high" and loading="eager" for LCP boost */}
         {/* Removed opacity transition so it paints immediately */}
         <img 
-            src={IMG_CHERRY_TREE}
+            src="/images/og-image.jpg" // Reference from public folder
             alt="Alumni singing Good Fellow The Cherry Tree Massacre"
             fetchPriority="high"
             loading="eager"
