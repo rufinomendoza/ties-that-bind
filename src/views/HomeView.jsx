@@ -13,16 +13,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
     <>
       {/* --- SEO INTEGRATION (HomeView) --- */}
       <Helmet>
-        {/* 1. Browser Tab Title (User Facing) */}
-        {/* This overrides the default title from index.html for the active user */}
         <title>Georgetown Chimes Alumni Association, Inc.</title>
-        
-        {/* 2. Performance: Preload the Hero Image */}
-        {/* This tells the browser to fetch the big background image immediately, preventing "pop-in" */}
-        <link rel="preload" as="image" href={IMG_CHERRY_TREE} />
-
-        {/* NOTE: All Open Graph (og:) tags have been removed. */}
-        {/* They are now handled globally in public/index.html to prevent duplication glitches. */}
       </Helmet>
 
       <div className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 border-b-2 border-[#041E42] bg-[#F4F4F3] overflow-hidden antialiased selection:bg-[#D50032] selection:text-white">
@@ -30,7 +21,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
         {/* Added fetchPriority="high" and loading="eager" for LCP boost */}
         {/* Removed opacity transition so it paints immediately */}
         <img 
-            src="/images/og-image.jpg" // Reference from public folder
+            src="/og-image.jpg" // Reference from public folder
             alt="Alumni singing Good Fellow The Cherry Tree Massacre"
             fetchPriority="high"
             loading="eager"
@@ -133,10 +124,10 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 disabled={isPast(ctmAlumni.date)}
                 className={`w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#041E42] md:border-0 transition-all duration-300 group/btn ${isPast(ctmAlumni.date) ? 'opacity-50 cursor-default' : 'hover:pl-4'}`}
             >
-                <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">
+                <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">
                     {isPast(ctmAlumni.date) ? 'View Archived Event' : 'Event Details & Tickets'}
                 </span>
-                <span className="text-xl font-light group-hover/btn:translate-x-2 transition-transform">→</span>
+                <span className="text-xl font-light group-hover/btn:translate-x-2 transition-transform text-[#D50032]">→</span>
             </button>
         </div>
       </section>

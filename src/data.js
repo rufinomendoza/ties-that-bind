@@ -79,7 +79,7 @@ export const EVENTS_DATA = [
             time: "To Be Announced",
         },
     ],
-    image: IMG_CHERRY_TREE
+    image: "/og-image.jpg"
   },
   { 
     id: 3, 
