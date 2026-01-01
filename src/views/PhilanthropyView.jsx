@@ -54,7 +54,6 @@ const PhilanthropyView = () => (
                 const [amount, frequency] = tier.price.includes('/') 
                     ? tier.price.split('/') 
                     : [tier.price, 'annually'];
-                const isFeatured = tier.title === "";
 
                 return (
                     <div key={idx} className="group relative border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-y-6 gap-x-4 items-start transition-colors duration-500 hover:bg-white hover:pl-4 -ml-4 pl-4 pr-4">
@@ -93,19 +92,15 @@ const PhilanthropyView = () => (
                                 href={tier.link} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className={`flex items-center gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase transition-all duration-300 px-6 py-3 border
-                                    ${isFeatured 
-                                        ? 'bg-[#D50032] border-[#D50032] text-white hover:bg-[#A51C30]' 
-                                        : 'bg-transparent border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-white'
-                                    }`}
+                                className="flex items-center gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors"
                              >
-                                <span>{isFeatured ? 'Most Impactful' : 'Join'}</span>
+                                <span>Join</span>
                                 <span className="text-lg font-light translate-y-[-1px]">→</span>
                              </a>
                         </div>
                     </div>
                 );
-    })}
+            })}
         </div>
 
         {/* ONE TIME GIFT: Heavy Divider */}
