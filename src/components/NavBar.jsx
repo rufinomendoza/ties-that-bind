@@ -98,7 +98,7 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
           ))}
           
           {/* Optional: Add the external links here too for mobile completeness */}
-          <div className="mt-auto pb-12 opacity-60">
+          <div className="mt-auto pt-6 pb-12 opacity-60">
              <p className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase">© {new Date().getFullYear()} GCAA, Inc.</p>
           </div>
         </div>
