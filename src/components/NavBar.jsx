@@ -10,9 +10,8 @@ const NAV_LINKS = [
   { id: 'backstage', label: 'Backstage' }
 ];
 
-// 1. Create a map of your lazy imports
 const viewPrefetchMap = {
-  home: () => import('../views/HomeView'), // Added home prefetch
+  home: () => import('../views/HomeView'),
   agenda: () => import('../views/AgendaView'),
   discography: () => import('../views/DiscographyView'),
   philanthropy: () => import('../views/PhilanthropyView'),
@@ -20,7 +19,6 @@ const viewPrefetchMap = {
   backstage: () => import('../views/BackstageView'),
 };
 
-// --- Swiss System NavBar ---
 export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) => {
   
   const NavButton = ({ page, children, mobile = false, isLogo = false }) => {
@@ -29,6 +27,8 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
       if (prefetch) prefetch();
     };
 
+    const isActive = activePage === page;
+
     return (
       <button 
         onClick={() => { 
@@ -36,14 +36,18 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
           if (mobile) setMobileMenuOpen(false); 
         }} 
         onMouseEnter={!mobile ? handlePrefetch : undefined}
+        // ✅ ACCESSIBILITY ADDITION 1: Indicate active page
+        aria-current={isActive ? 'page' : undefined}
+        // ✅ ACCESSIBILITY ADDITION 2: Explicit label for the Logo button
+        aria-label={isLogo ? 'Go to Home Page' : undefined} 
         className={mobile 
           ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42] border-b border-[#041E42]/5' 
-          : `h-full flex items-center transition-all duration-500 relative group ${isLogo ? '' : 'text-[10px] font-bold tracking-[0.25em] uppercase'} ${activePage === page ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`
+          : `h-full flex items-center transition-all duration-500 relative group ${isLogo ? '' : 'text-[10px] font-bold tracking-[0.25em] uppercase'} ${isActive ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`
         }
       >
         {children}
         {!mobile && !isLogo && (
-          <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#041E42] transform origin-left transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${activePage === page ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
+          <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#041E42] transform origin-left transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
         )}
       </button>
     );
@@ -51,12 +55,17 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-[#F4F4F3] border-b-2 border-[#041E42] h-20 md:h-24 px-6 md:px-12">
+      <nav 
+        className="fixed top-0 left-0 w-full z-50 bg-[#F4F4F3] border-b-2 border-[#041E42] h-20 md:h-24 px-6 md:px-12"
+        role="navigation" 
+        aria-label="Main Navigation"
+      >
         <div className="max-w-[1920px] mx-auto h-full flex justify-between items-center">
           
           {/* Logo / Home Button */}
           <NavButton page="home" isLogo={true}>
-            <Logo className="h-6 w-auto text-[#041E42] group-hover:text-[#D50032] transition-colors duration-300" />
+            {/* Note: aria-hidden here ensures screen readers ignore the graphic and read the button label instead */}
+            <Logo className="h-6 w-auto text-[#041E42] group-hover:text-[#D50032] transition-colors duration-300" aria-hidden="true" />
           </NavButton>
 
           {/* Desktop Links */}
@@ -68,13 +77,16 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
             ))}
           </div>
 
-          {/* Hamburger / Toggle Button - RESTORED HERE */}
+          {/* Hamburger / Toggle Button */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
             className="lg:hidden p-3 -mr-3 text-[#041E42] hover:text-[#D50032] transition-colors focus:outline-none"
-            aria-label="Toggle Menu"
+            aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
+            // ✅ ACCESSIBILITY ADDITION 3: Tell user state of menu
+            aria-expanded={mobileMenuOpen} 
+            aria-controls="mobile-menu"
           >
-            {mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
+            {mobileMenuOpen ? <X size={24} strokeWidth={1.5} aria-hidden="true" /> : <Menu size={24} strokeWidth={1.5} aria-hidden="true" />}
           </button>
 
         </div>
@@ -82,6 +94,7 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
 
       {/* Mobile Drawer */}
       <div 
+        id="mobile-menu" // Matches aria-controls above
         aria-hidden={!mobileMenuOpen}
         className={`fixed inset-0 z-40 bg-[#F4F4F3] px-6 pt-32 transition-all duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] 
           ${mobileMenuOpen 
@@ -97,7 +110,6 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
             </NavButton>
           ))}
           
-          {/* Optional: Add the external links here too for mobile completeness */}
           <div className="mt-auto pt-6 pb-12 opacity-60">
              <p className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase">© {new Date().getFullYear()} GCAA, Inc.</p>
           </div>
