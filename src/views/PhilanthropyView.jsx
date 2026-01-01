@@ -51,50 +51,61 @@ const PhilanthropyView = () => (
             </div>
 
             {DONOR_TIERS.map((tier, idx) => {
+                // 1. Identify the 'Hero' tier for the Red Strike
+                const isHero = tier.title === "The 1946 Society";
+
+                // 2. Logic for splitting price (already in your code)
                 const [amount, frequency] = tier.price.includes('/') 
                     ? tier.price.split('/') 
                     : [tier.price, 'annually'];
 
                 return (
-                    <div key={idx} className="group relative border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-y-6 gap-x-4 items-start transition-colors duration-500 hover:bg-white hover:pl-4 -ml-4 pl-4 pr-4">
-                        
-                        {/* Col 1: Level ID (Technical) */}
+                    <div 
+                        key={idx} 
+                        className={`group relative border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-y-6 gap-x-4 items-start transition-all duration-500 
+                            hover:bg-white hover:pl-6 -ml-6 pl-6 pr-6 
+                            ${isHero ? 'bg-[#041E42]/5' : ''}`} // Subtle tint for the hero row
+                    >
+                        {/* Level ID */}
                         <div className="md:col-span-2 pt-2">
-                            <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 uppercase group-hover:text-[#D50032] transition-colors">
-                                Level 0{idx + 1}
+                            <span className={`text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors
+                                ${isHero ? 'text-[#D50032]' : 'text-[#041E42]/70 group-hover:text-[#D50032]'}`}>
+                                {isHero ? "★ Recommended" : `Level 0${idx + 1}`}
                             </span>
                         </div>
 
-                        {/* Col 2: The Title & Description (The Narrative) */}
+                        {/* Title & Description */}
                         <div className="md:col-span-6 pr-8">
-                            <h4 className="text-5xl font-serif text-[#041E42] italic leading-[1.15] md:leading-[1.0] mb-6">
+                            <h4 className="text-5xl font-serif text-[#041E42] italic leading-none mb-6">
                                 {tier.title}
                             </h4>
-                            {/* CHANGED: Added typeset() and [text-wrap:balance] */}
                             <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60 max-w-md [text-wrap:balance]">
                                 {typeset(tier.description)}
                             </p>
                         </div>
 
-                        {/* Col 3: The Price (The Data) */}
+                        {/* Price Data */}
                         <div className="md:col-span-2 pt-3">
-                             <span className="text-lg font-sans font-bold text-[#041E42] tracking-wide tabular-nums block opacity-100">
-                                    {amount}
+                             <span className="text-lg font-sans font-bold text-[#041E42] tracking-wide tabular-nums block">
+                                {amount}
                             </span>
                             <span className="text-[9px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 uppercase">
-                                    per {frequency}
+                                per {frequency}
                             </span>
                         </div>
 
-                        {/* Col 4: Action (The Input) */}
-                        <div className="md:col-span-2 flex md:justify-end items-start pt-3">
+                        {/* THE RED STRIKE ACTION */}
+                        <div className="md:col-span-2 flex md:justify-end items-start pt-2">
                              <a 
                                 href={tier.link} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
-                                className="flex items-center gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors"
+                                className={`flex items-center justify-between w-full md:w-auto gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase transition-all duration-300 px-6 py-4 border
+                                    ${isHero 
+                                        ? 'bg-[#D50032] border-[#D50032] text-white hover:bg-[#A51C30]' 
+                                        : 'border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-white'}`}
                              >
-                                <span>Join</span>
+                                <span>{isHero ? "Join the Society" : "Join"}</span>
                                 <span className="text-lg font-light translate-y-[-1px]">→</span>
                              </a>
                         </div>

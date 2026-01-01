@@ -31,9 +31,9 @@ export const EVENTS_DATA = [
     priceInfo: "General Admission $26.04",
     link: "https://buytickets.at/chimes/1998396/r/gcaa-site",
     description: [
-      "For 52 years, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. What began as a fundraiser to pay off a bar tab has evolved into a showcase of premier a cappella talent.",
-      "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Senior Parents & Families Weekend 2026.",
-      "Doors open at 6:30."
+        "Fifty-two years ago, we sang for survival. This February, we sing for the legacy.",
+        "The Cherry Tree Massacre remains a testament to the Chimes spirit: turning a night at the pub into a half-century of musical excellence. We invite you back to Gaston Hall to witness the latest chapter of a tradition that has defined the Georgetown experience since 1974.",
+        "Doors open at 6:30 p.m."
       ],
     guestGroups: [
         "The GraceNotes",
@@ -59,9 +59,9 @@ export const EVENTS_DATA = [
         { label: "Buy Concert Tickets", link: "https://buytickets.at/chimes/1998443/r/gcaa-site", primary: true},
     ],
     description: [
-        "For 52 years, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. What began as a fundraiser to pay off a bar tab has evolved into a showcase of premier a cappella talent.",
-        "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Alumni Weekend 2026.",
-        "Doors open at 6:30."
+        "Fifty-two years ago, we sang for survival. This February, we sing for the legacy.",
+        "The Cherry Tree Massacre remains a testament to the Chimes spirit: turning a night at the pub into a half-century of musical excellence. We invite you back to Gaston Hall to witness the latest chapter of a tradition that has defined the Georgetown experience since 1974.",
+        "Doors open at 6:30 p.m."
     ],
     guestGroups: [
         "The Saxatones",
@@ -698,43 +698,37 @@ export const DONOR_TIERS = [
     title: "The Ictus",
     price: "$19.46/year",
     link: "https://buy.stripe.com/dR67wmceZ3mgdiM9AS",
-    description: "In conducting, the ictus is the precise moment the beat occurs. It is the pulse that holds the ensemble together. For $19.46 a year, you provide that pulse, ensuring the beat goes on.",
-    cta: "Join the Guild"
+    description: "The pulse that holds the ensemble together. In conducting, the ictus is the precise moment the beat occurs. It’s what defines the rhythm. For $19.46 a year, you provide that pulse, ensuring the beat goes on.",
   },
   {
     title: "The Tonic",
     price: "$10/month",
     link: "https://buy.stripe.com/28o3g692N6ysa6AaEJ",
-    description: "Ten bucks a month. It funds the casual hospitality that defines the Chimes, ensuring that when we meet again, the green tea with honey (and other beverages) is always flowing.",
-    cta: "Join The Guild"
+    description: "The price of a pint at The Tombs. This tier funds the casual hospitality that defines our gatherings, ensuring the green tea with honey is always flowing.",
   },
   {
     title: "The 1946 Society",
     price: "$19.46/month",
     link: "https://buy.stripe.com/6oEbMC7YJf4YbaE5kt",
-    description: "The definitive commitment. By matching the year of our founding every month, you cover the operational essentials. You are the backbone of the day-to-day.",
-    cta: "Join the Guild"
+    description: "The definitive commitment. By matching the year of our founding every month, you become the backbone of our operations. This is the the foundation of our sustainability.",
   },
   {
     title: "The Social Chair",
     price: "$27.80/month",
     link: "https://buy.stripe.com/aEUaIy7YJaOI5QkcMW",
-    description: "The Chimes are nothing without the gathering. This tier is dedicated to the experience. You are ensuring that when we get together, we can afford to do it right.",
-    cta: "Join the Guild"
+    description: "Dedicated to the experience. The Chimes are nothing without the gathering. You ensure that when we meet again, we can afford to do it right.",
   },
   {
     title: "The Founder’s League",
     price: "$46/month",
     link: "https://buy.stripe.com/aEUeYO2EpaOI0w04gv",
-    description: "At this level, you aren’t just paying dues; you are subsidizing the future. You fund the archival work that keeps our history from fading.",
-    cta: "Join the Guild"
+    description: "A commitment to the future. Beyond dues, this level subsidizes our long-term initiatives, specifically funding the archival restoration of master tapes and the preservation of our digital history.",
   },
   {
     title: "The Good Fellow",
     price: "$100/month",
     link: "https://buy.stripe.com/5kA17Y92N6ysguYbIY",
-    description: "This is the bedrock of the Alumni Association. Your contribution carries the heavy lifting for our most ambitious projects, ensuring the Chimes legacy is secure for decades to come.",
-    cta: "Join the Guild"
+    description: "The bedrock of the Association. This does the heavy lifting for our most ambitious projects. Because some traditions are too important to be left to chance, you ensure the Chimes legacy is secure for decades to come.",
   }
 ];
 
