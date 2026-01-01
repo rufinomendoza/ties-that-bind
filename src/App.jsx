@@ -126,24 +126,23 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
 
   return (
     <>
-      {/* --- SEO INTEGRATION --- */}
+      {/* --- SEO INTEGRATION (HomeView) --- */}
       <Helmet>
-        <title>Georgetown Chimes Alumni Association</title>
-        <meta name="description" content="Brotherhood, Harmony, History. The official home of the Georgetown Chimes Alumni Association." />
-  
-        {/* Open Graph / Social */}
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Georgetown Chimes Alumni Association, Inc." />
-        <meta property="og:description" content="Brotherhood, Harmony, History." />
-
+        {/* 1. Browser Tab Title (User Facing) */}
+        {/* This overrides the default title from index.html for the active user */}
+        <title>Georgetown Chimes Alumni Association, Inc.</title>
+        
+        {/* 2. Performance: Preload the Hero Image */}
+        {/* This tells the browser to fetch the big background image immediately, preventing "pop-in" */}
         <link rel="preload" as="image" href={IMG_CHERRY_TREE} />
 
+        {/* NOTE: All Open Graph (og:) tags have been removed. */}
+        {/* They are now handled globally in public/index.html to prevent duplication glitches. */}
       </Helmet>
-      {/* ----------------------- */}
 
       <div className="relative min-h-screen flex flex-col justify-center px-6 md:px-12 border-b-2 border-[#041E42] bg-[#F4F4F3] overflow-hidden antialiased selection:bg-[#D50032] selection:text-white">
         <div 
-          className={`absolute inset-0 z-0 w-full h-full bg-cover bg-center grayscale bg-[#041E42] bg-blend-screen mix-blend-multiply pointer-events-none transition-opacity duration-[2000ms] ease-in-out ${isHeroVisible ? 'opacity-15' : 'opacity-0'}`}
+          className={`absolute inset-0 z-0 w-full h-full bg-cover bg-center grayscale bg-[#041E42] bg-blend-screen mix-blend-multiply pointer-events-none transition-opacity duration-[2000ms] ease-in-out ${isHeroVisible ? 'opacity-20' : 'opacity-0'}`}
           style={{ backgroundImage: `url(${IMG_CHERRY_TREE})` }}
         />
         <div className={`max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 py-12 transition-all duration-[2000ms] ${isHeroVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'}`}>
