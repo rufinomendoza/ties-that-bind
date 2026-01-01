@@ -1,15 +1,15 @@
 {
-  "rewrites": [
-    {
-      "source": "/(.*)",
-      "destination": "/404.html"
-    }
-  ],
   "redirects": [
     {
       "source": "/his-successes",
       "destination": "https://docs.google.com/forms/d/e/1FAIpQLScYnADpitsc31nvqlJvj7f5tnMfS0uArn-PnsGJnj_cSNBqWA/viewform",
       "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/((?!assets/|favicon.ico|logo.png|manifest.json|robots.txt).*)",
+      "destination": "/index.html"
     }
   ]
 }
