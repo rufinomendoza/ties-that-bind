@@ -1,7 +1,7 @@
 // --- Local Imports (Uncomment for Production) ---
-import IMG_CHERRY_TREE from './assets/composite-set-compressed.jpg';
+import IMG_CHERRY_TREE from './assets/composite-set.jpg';
 import IMG_CTM_BOND from './assets/ctm-bond.jpeg';
-import IMG_PUERTO_RICO from './assets/nils-huenerfuerst-SrYs4XxTRfk-unsplash.jpeg';
+import IMG_PUERTO_RICO from './assets/nils-huenerfuerst-SrYs4XxTRfk-unsplash.jpg';
 import IMG_NECKTIE from './assets/necktie.jpg';
 import IMG_BOWTIE from './assets/bowtie.jpg';
 
