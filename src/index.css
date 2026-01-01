@@ -12,10 +12,18 @@
   --font-serif: "adobe-caslon-pro", "Times New Roman", Times, serif;
 }
 
+html {
+  /* Forces the scrollbar gutter to always exist, preventing the horizontal snap */
+  overflow-y: scroll;
+  /* Modern browsers: keeps the layout stable without a gray bar */
+  scrollbar-gutter: stable;
+}
+
 body {
   margin: 0;
   padding: 0;
   background-color: #F4F4F3;
+  width: 100vw;
   overflow-x: hidden;
   font-family: var(--font-sans) !important;
   text-rendering: optimizeLegibility;
@@ -60,9 +68,12 @@ body {
 
 .page-wrapper {
   width: 100%;
-  will-change: opacity; /* Removed transform from will-change */
+  /* Fixes sub-pixel rendering issues during the 800ms fade */
+  transform: translateZ(0); 
   backface-visibility: hidden;
 }
+
+
 
 /* 1. Incoming Page */
 .page-enter {
@@ -78,10 +89,13 @@ body {
 /* 2. Outgoing Page */
 .page-exit {
   opacity: 1;
-  position: absolute; /* Essential for overlapping during the crossfade */
+  position: absolute;
   top: 0;
   left: 0;
+  /* Force it to match the width of the parent exactly */
   width: 100%;
+  height: auto;
+  pointer-events: none; /* Prevents clicking the old page while it's fading out */
 }
 
 .page-exit-active {
@@ -106,6 +120,23 @@ main#main-content {
 /* Once loaded, or if the parent has the class, show it */
 .is-loaded img {
   opacity: 1 !important;
+}
+
+/* Fix for mobile browser "ghost" elements */
+.invisible {
+  visibility: hidden !important;
+}
+
+/* Ensure the fixed nav stays on top of the drawer */
+nav.fixed {
+  z-index: 50;
+  /* Fixes flickering on mobile scroll */
+  -webkit-transform: translateZ(0);
+}
+
+/* Ensure the drawer stays below the nav but above the page */
+div.fixed.z-40 {
+  z-index: 40;
 }
 
 @media print {

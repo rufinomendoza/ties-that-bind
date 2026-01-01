@@ -81,14 +81,26 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
       </nav>
 
       {/* Mobile Drawer */}
-      <div className={`fixed inset-0 z-40 bg-[#F4F4F3] px-6 pt-32 transition-transform duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="flex flex-col">
+      <div 
+        aria-hidden={!mobileMenuOpen}
+        className={`fixed inset-0 z-40 bg-[#F4F4F3] px-6 pt-32 transition-all duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] 
+          ${mobileMenuOpen 
+            ? 'translate-y-0 opacity-100 visible' 
+            : '-translate-y-full opacity-0 invisible pointer-events-none'
+          }`}
+      >
+        <div className="flex flex-col h-full overflow-y-auto">
           <NavButton page="home" mobile={true}>Home</NavButton>
           {NAV_LINKS.map((link) => (
             <NavButton key={link.id} page={link.id} mobile={true}>
               {link.label}
             </NavButton>
           ))}
+          
+          {/* Optional: Add the external links here too for mobile completeness */}
+          <div className="mt-auto pb-12 opacity-60">
+             <p className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase">© {new Date().getFullYear()} GCAA, Inc.</p>
+          </div>
         </div>
       </div>
     </>
