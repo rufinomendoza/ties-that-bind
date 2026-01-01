@@ -1,42 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { 
-  Menu, 
-  X, 
-  ArrowRight, 
-  ChevronDown,
-  ExternalLink,
-  ChevronLeft,
-  Play,
-  Ticket
-} from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
-// --- Assets Configuration ---
-// NOTE: The local imports are commented out to ensure the preview runs without build errors.
-// When running this code locally with your assets folder, uncomment the "Local Imports" block
-// and comment out the "Preview Placeholders" block.
+// Import Data
+import { EVENTS_DATA, ALBUMS_DATA, DONOR_TIERS, STORE_DATA } from './data';
+import Logo from './components/Logo';
 
-// --- Local Imports (Uncomment for Production) ---
+// We ONLY need images used directly in the App.jsx layout (Hero & Feature)
 import IMG_CHERRY_TREE from './assets/composite-set-compressed.jpg';
 import IMG_CTM_BOND from './assets/ctm-bond.jpeg';
-import IMG_PUERTO_RICO from './assets/nils-huenerfuerst-SrYs4XxTRfk-unsplash.jpeg';
-import IMG_NECKTIE from './assets/necktie.jpg';
-import IMG_BOWTIE from './assets/bowtie.jpg';
-
-// --- Album Covers ---
-import IMG_DCDM from './assets/dcdm.jpeg';
-import IMG_PARTNERS from './assets/partners.jpg';
-import IMG_THREE_STRIPES from './assets/three-stripes.jpg';
-import IMG_PROSPECT from './assets/36th-prospect.jpg';
-import IMG_BATTLE_GEAR from './assets/battle-gear.jpg';
-import IMG_PSRC from './assets/psrc.jpg';
-import IMG_LTGCR from './assets/ltgcr.jpg';
-import IMG_HOYA_SAXA from './assets/hoya-saxa.jpg';
-import IMG_CHIMES_75 from './assets/chimes-75.jpg';
-import IMG_CHIMES_66 from './assets/chimes-66.jpg';
-import IMG_1959 from './assets/1959.jpg';
-import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
-
 
 // --- Preview Placeholders (Comment out for Production) ---
 // const IMG_CHERRY_TREE = "https://placehold.co/1920x1080/0A0A0A/FFFFFF?text=The+Classic";
@@ -58,765 +30,20 @@ import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
 // const IMG_PUERTO_RICO = "https://placehold.co/1200x800/111111/EEEEEE?text=Puerto+Rico";
 
 
-// --- Data ---
-const Logo = ({ className = "" }) => (
-<svg
-  viewBox="0 0 262 113.91" fill="currentColor"   // CRITICAL: This allows Tailwind text-color to control the fill
-  xmlns="http://www.w3.org/2000/svg"
-  className={className}>
-  <g>
-    <path class="cls-1" d="M32.97,85.34c2.08,0,3.98.55,6.08,1.22.34-.16.57-.26.75-.34.81-.34.94-.39,1.17-.39.29,0,.39.1.39.6v4.86c0,.23-.13.39-.31.39s-.39-.29-.55-.78c-.78-2.55-4.34-4.6-7.36-4.6-1.51,0-3.15.29-4.29,1.3-1.69,1.48-2.39,3.67-2.39,7.38s1.85,8.35,6.47,8.35c1.3,0,2.7-.44,3.74-1.2.47-.36.86-.73.86-1.09v-2.39c0-1.79-.52-2.16-1.43-2.16h-.34c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h7.05c.1,0,.13.03.13.1v.68c0,.1-.03.13-.13.13h-.34c-.91,0-1.43.36-1.43,2.16s.05,3.33.1,3.61c-2.42,1.27-5.23,1.82-8.5,1.82-6.11,0-10.53-3.64-10.53-9.18,0-3.2.81-5.15,2.91-7.02,1.85-1.64,4.63-2.55,7.93-2.55Z"/>
-    <path class="cls-1" d="M50.6,101.88c0,.68.78.99,2.73.99,4.13,0,5.25-.62,6.89-2.94.62-.86.91-1.33,1.22-1.33.1,0,.18.13.18.34,0,.1-.03.34-.13.65l-1.17,3.85c-.08.23-.16.34-.52.34h-15c-.1,0-.13-.03-.13-.1v-.68c0-.1.03-.13.13-.13h.34c1.43,0,1.95-.36,1.95-2.16v-12.06c0-1.79-.52-2.16-1.95-2.16h-.34c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h14.59c.47,0,.49.03.65.36l1.48,3.43c.1.23.16.47.16.6,0,.21-.1.34-.26.34-.26,0-.6-.39-1.07-1.04-1.59-2.16-4.32-2.81-7.02-2.81-2.55,0-2.73.36-2.73,2.5v4.94h3.85c1.79,0,2.94-1.69,2.94-3.12v-.34c0-.1.03-.13.13-.13h.68c.08,0,.1.03.1.13v8.09c0,.1-.03.13-.1.13h-.68c-.1,0-.13-.03-.13-.13v-.34c0-1.43-1.14-3.12-2.94-3.12h-3.85v6.81Z"/>
-    <path class="cls-1" d="M73.58,85.22c5.43,0,9.75,3.43,9.75,9.59,0,5.3-4.16,9.31-9.67,9.31-5.85,0-9.85-3.8-9.85-9.33,0-5.12,3.25-9.57,9.78-9.57ZM73.63,103.42c4.84,0,5.62-4.45,5.62-8.66,0-3.9-.36-8.84-5.64-8.84-4.11,0-5.82,2.55-5.82,8.76,0,3.95.52,8.74,5.85,8.74Z"/>
-    <path class="cls-1" d="M102.26,90.21c0,2.08-1.3,3.43-3.85,4.03-.18.03-.26.08-.26.13s.08.13.21.26c.86.83,1.4,1.74,2.31,3.51,1.07,2.08,1.3,2.94,1.82,3.69.47.73,1.22,1.04,1.98,1.04h.47c.1,0,.13.03.13.13v.68c0,.08-.03.1-.13.1h-5.41c-.18,0-.23-.05-.29-.18-1.07-2.7-2.05-4.78-2.94-6.5-.73-1.38-1.01-1.82-1.66-2.29h-2.44v5.9c0,1.79.52,2.16,1.95,2.16h.34c.1,0,.13.03.13.13v.68c0,.08-.03.1-.13.1h-8.14c-.1,0-.13-.03-.13-.1v-.68c0-.1.03-.13.13-.13h.34c1.43,0,1.95-.36,1.95-2.16v-12.06c0-1.79-.52-2.16-1.95-2.16h-.34c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h8.63c4.55,0,7.28,1.77,7.28,4.63ZM93.52,94.11c3.25,0,5.36-1.69,5.36-4.32,0-2.37-1.56-3.56-4.76-3.56-1.51,0-1.92.29-1.92,2.03v5.8c.6.05,1.01.05,1.33.05Z"/>
-    <path class="cls-1" d="M117.6,85.34c2.08,0,3.98.55,6.08,1.22.34-.16.57-.26.75-.34.81-.34.94-.39,1.17-.39.29,0,.39.1.39.6v4.86c0,.23-.13.39-.31.39s-.39-.29-.55-.78c-.78-2.55-4.34-4.6-7.36-4.6-1.51,0-3.15.29-4.29,1.3-1.69,1.48-2.39,3.67-2.39,7.38s1.85,8.35,6.47,8.35c1.3,0,2.7-.44,3.74-1.2.47-.36.86-.73.86-1.09v-2.39c0-1.79-.52-2.16-1.43-2.16h-.34c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h7.05c.1,0,.13.03.13.1v.68c0,.1-.03.13-.13.13h-.34c-.91,0-1.43.36-1.43,2.16s.05,3.33.1,3.61c-2.42,1.27-5.23,1.82-8.5,1.82-6.11,0-10.53-3.64-10.53-9.18,0-3.2.81-5.15,2.91-7.02,1.85-1.64,4.63-2.55,7.93-2.55Z"/>
-    <path class="cls-1" d="M135.23,101.88c0,.68.78.99,2.73.99,4.13,0,5.25-.62,6.89-2.94.62-.86.91-1.33,1.22-1.33.1,0,.18.13.18.34,0,.1-.03.34-.13.65l-1.17,3.85c-.08.23-.16.34-.52.34h-15c-.1,0-.13-.03-.13-.1v-.68c0-.1.03-.13.13-.13h.34c1.43,0,1.95-.36,1.95-2.16v-12.06c0-1.79-.52-2.16-1.95-2.16h-.34c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h14.59c.47,0,.49.03.65.36l1.48,3.43c.1.23.16.47.16.6,0,.21-.1.34-.26.34-.26,0-.6-.39-1.07-1.04-1.59-2.16-4.32-2.81-7.02-2.81-2.55,0-2.73.36-2.73,2.5v4.94h3.85c1.79,0,2.94-1.69,2.94-3.12v-.34c0-.1.03-.13.13-.13h.68c.08,0,.1.03.1.13v8.09c0,.1-.03.13-.1.13h-.68c-.1,0-.13-.03-.13-.13v-.34c0-1.43-1.14-3.12-2.94-3.12h-3.85v6.81Z"/>
-    <path class="cls-1" d="M158.16,100.71c0,1.79.52,2.16,1.95,2.16h.34c.1,0,.13.03.13.13v.68c0,.08-.03.1-.13.1h-8.09c-.1,0-.13-.03-.13-.1v-.68c0-.1.03-.13.13-.13h.34c1.43,0,1.95-.36,1.95-2.16v-12.06c0-1.59-.42-2.13-1.51-2.13-2.39,0-3.48.81-5.07,2.91-.26.34-.47.68-.62.68-.13,0-.26-.13-.26-.23,0-.55.57-2.03.99-4.34.05-.31.16-.62.39-.62.1,0,.21.03.65.31.31.21.91.36,2.63.36h9.13c1.72,0,2.31-.16,2.63-.36.44-.29.55-.31.65-.31.23,0,.34.31.39.62.42,2.31.99,3.8.99,4.34,0,.1-.13.23-.26.23-.16,0-.36-.34-.62-.68-1.59-2.11-2.68-2.91-5.07-2.91-1.09,0-1.51.55-1.51,2.13v12.06Z"/>
-    <path class="cls-1" d="M177.03,85.22c5.43,0,9.75,3.43,9.75,9.59,0,5.3-4.16,9.31-9.67,9.31-5.85,0-9.85-3.8-9.85-9.33,0-5.12,3.25-9.57,9.78-9.57ZM177.08,103.42c4.84,0,5.62-4.45,5.62-8.66,0-3.9-.36-8.84-5.64-8.84-4.11,0-5.82,2.55-5.82,8.76,0,3.95.52,8.74,5.85,8.74Z"/>
-    <path class="cls-1" d="M201.92,91.82l-1.56-4.06c-.31-.78-.78-1.27-1.56-1.27h-.34c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h8.03c.1,0,.13.03.13.1v.68c0,.1-.03.13-.13.13h-.34c-1.25.03-1.82.31-1.82.96,0,.21.08.47.21.73l4.26,9.88,3.98-10.06c.08-.18.13-.39.13-.68,0-.47-.26-.83-1.09-.83h-.34c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h5.33c.1,0,.13.03.13.1v.68c0,.1-.03.13-.13.13h-.34c-1.56.13-2.11.55-2.76,2.24l-5.9,15.05c-.08.18-.26.34-.39.34s-.29-.16-.36-.34l-4.55-10.48-4.63,10.48c-.08.18-.26.34-.42.34s-.31-.16-.39-.34l-6.16-16.02c-.23-.73-.94-1.27-1.87-1.27h-.34c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h8.16c.1,0,.13.03.13.1v.68c0,.1-.03.13-.13.13h-.34c-1.43,0-1.72.31-1.72.81,0,.13.1.44.21.75l3.95,9.98,2.94-6.21Z"/>
-    <path class="cls-1" d="M237.28,103.94c0,.21-.03.21-.1.21-.1,0-.13-.03-.23-.13l-14.59-15.42c-.21-.21-.31-.31-.39-.31s-.08.18-.08.47v11.96c0,1.79.6,2.16,2.03,2.16h.21c.1,0,.13.03.13.13v.68c0,.08-.03.1-.13.1h-5.43c-.1,0-.13-.03-.13-.1v-.68c0-.1.03-.13.13-.13h.21c1.43,0,2.21-.36,2.21-2.16v-10.97c0-1.98-.03-2.18-.57-2.7-.42-.39-.73-.55-1.64-.55h-.21c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h5.38c.31,0,.52.08.73.31l11.7,12.35v-9.59c0-1.79-.6-2.16-2.03-2.16h-.21c-.1,0-.13-.03-.13-.13v-.68c0-.08.03-.1.13-.1h5.43c.1,0,.13.03.13.1v.68c0,.1-.03.13-.13.13h-.21c-1.43,0-2.21.36-2.21,2.16v15.29Z"/>
-  </g>
-  <g>
-    <g>
-      <g>
-        <path class="cls-1" d="M158.43,42.99c0,.24.12.36.24.36.24,0,.6-.36.9-.66,3.54-3.66,7.02-5.1,9.54-5.1,2.04,0,3.84,1.5,3.84,3.3,0,2.22-2.04,6.06-3.54,9.54-2.16,4.98-3.36,7.5-3.36,8.52,0,.78.54,1.38,1.2,1.38.9,0,2.1-1.08,4.02-3,.3-.3.54-.42.66-.42.42,0,.72.3.72.72,0,.18-.12.6-.3.78-2.88,2.88-6.06,4.8-9.3,4.8-1.08,0-1.98-.78-1.98-1.74,0-1.26,2.82-7.02,4.86-12.12,1.14-2.82,2.46-5.28,2.46-7.26,0-1.08-.72-1.86-2.04-1.86-3.24,0-11.1,7.26-15.48,19.44-1.08,2.94-1.32,3.12-3,3.12-.96,0-1.62-.3-1.62-1.08,0-1.08,3.48-8.28,4.98-11.7,1.98-4.44,9.06-19.86,10.8-24.12.72-1.8.96-2.46.96-3.24,0-.72-.9-1.2-2.64-1.56-.36-.06-.66-.48-.66-.78,0-.42.3-.78.66-.78,2.1,0,2.52,0,3.9-.06,1.5-.06,2.52-.24,3.12-.24.9,0,1.08.18,1.08.84,0,.9-.72,1.98-1.2,3.06-1.92,4.2-5.88,12.84-8.7,19.14-.06.3-.12.54-.12.72Z"/>
-        <path class="cls-1" d="M185.73,37.53c1.26,0,1.8.72,1.8,1.74,0,.96-.42,2.22-.78,2.94-4.26,9.18-7.62,14.46-7.62,16.5,0,.36.24,1.08.6,1.08.9,0,3.06-2.22,5.22-4.74.3-.3.54-.42.66-.42.42,0,.72.3.72.72,0,.18-.06.42-.24.6-.9.9-2.28,2.88-5.4,5.28-1.26.96-2.94,1.98-4.44,1.98-1.08,0-1.98-1.02-1.98-2.22,0-2.82,6.12-13.74,7.08-15.6.9-1.74,1.44-2.4,1.44-3.18,0-.48-.3-.9-.72-.9-.9,0-2.22,1.32-4.38,3.3-.24.18-.42.36-.72.36-.36,0-.78-.36-.78-.66,0-.36.18-.54.42-.78,3.24-2.76,3.66-3.18,6.06-4.98,1.02-.78,2.1-1.02,3.06-1.02ZM192.09,23.25c0,1.8-1.02,3-2.58,3-1.68,0-2.7-.96-2.7-2.7s.96-2.82,2.7-2.82c1.38,0,2.58.9,2.58,2.52Z"/>
-        <path class="cls-1" d="M218.12,59.37c0,.36.18.66.54.66.9,0,3-2.16,4.68-4.32.24-.36.54-.42.66-.42.42,0,.72.3.72.72,0,.18-.18.6-.3.78-2.1,3-6.18,6.42-9.84,6.42-1.08,0-1.92-.84-1.92-1.92,0-2.46,8.76-16.02,8.76-19.68,0-.78-.42-1.38-1.08-1.38-4.02,0-10.86,10.74-15.12,19.44-1.38,2.82-1.56,3.12-3.24,3.12-1.86,0-2.22-.3-2.22-1.08,0-1.08,4.5-8.88,6-12.3.78-1.8,2.76-6.42,2.76-7.2,0-.96-.24-1.74-.9-1.74-2.64,0-11.88,11.4-14.82,19.02-1.14,2.94-2.1,3.3-3.78,3.3-.96,0-1.62-.3-1.62-1.08,0-1.08,4.2-8.88,5.7-12.3.78-1.8,3.3-7.38,3.3-8.16,0-.54-.3-.78-.78-.78-.9,0-2.94,1.86-4.98,4.2-.18.24-.36.42-.66.42-.36,0-.66-.24-.66-.54,0-.24.18-.66.42-.9,1.92-2.22,6-6.12,9.3-6.12,1.5,0,1.98.72,1.98,1.74,0,1.5-1.14,3.66-1.8,4.74-.3.48-.36.66-.36.9,0,.18.18.3.3.3.18,0,.48-.24.96-.78,4.38-4.62,7.62-6.9,10.5-6.9,1.68,0,2.22,1.02,2.22,2.34,0,1.62-.84,3.66-1.38,4.92-.12.24-.12.42-.12.54,0,.18.06.24.18.24.3,0,.6-.24.78-.42,4.26-5.16,6.72-7.38,10.68-7.38,1.38,0,2.94.78,2.94,2.04,0,5.46-7.8,16.44-7.8,19.56Z"/>
-        <path class="cls-1" d="M237.92,57.87c.24-.24.36-.36.6-.36.3,0,.72.48.72.78,0,.12-.06.24-.36.66-1.74,2.46-5.52,4.5-8.64,4.5s-4.8-2.4-4.8-5.58c0-9.9,9.12-20.46,16.56-20.46,2.22,0,3.06.96,3.06,3.24,0,4.92-5.16,9.18-13.26,10.08-.72.06-.9.18-1.2,1.2-.42,1.44-.84,3.72-.84,5.4,0,2.46.72,3.9,2.94,3.9,1.92,0,3.6-1.44,5.22-3.36ZM233.61,44.19c-1.02,1.68-1.74,3.9-1.74,4.8,0,.24.12.42.36.42s.54-.06,1.02-.18c5.28-1.5,8.04-4.98,8.04-7.44,0-1.44-.9-2.4-2.22-2.4-1.68,0-3.54,1.62-5.46,4.8Z"/>
-        <path class="cls-1" d="M260.48,40.35c0,1.08-.84,1.98-1.92,1.98-1.98,0-2.64-2.88-4.68-2.88-1.08,0-1.98,1.02-1.98,3.66,0,4.08,2.04,7.92,2.04,11.64,0,4.74-3.66,8.58-8.16,8.58-3.48,0-6.3-1.56-6.3-3.48,0-1.44,1.02-2.64,2.28-2.64,2.7,0,2.52,4.92,4.92,4.92,1.86,0,3.42-1.74,3.42-3.84,0-4.02-1.74-8.34-1.74-11.64,0-4.8,3.42-8.88,7.62-9.06,2.46,0,4.5,1.26,4.5,2.76Z"/>
-      </g>
-      <path class="cls-1" d="M147.27,23.26c.36.29,1.08.65,1.44.65,1.22,0,2.16-1.8,3.17-1.8.5,0,.72.36.72.79,0,.29-.07.72-.22,1.22l-3.38,11.74c-.22.79-.65,1.15-1.22,1.15-.5,0-.72-.22-.72-1.15,0-8.71-4.25-15.05-10.58-15.05-11.45,0-29.52,18-29.52,36.94,0,9.94,4.75,16.42,12.53,16.42,11.59,0,21.03-9,21.03-20.09,0-5.83-3.02-9.29-7.56-9.29s-8.21,3.02-8.21,6.7c0,1.73.58,2.16,1.3,2.16.65,0,1.15-.58,1.87-.58.94,0,1.66,1.15,1.66,2.59,0,2.09-1.58,3.74-3.6,3.74-2.81,0-5.11-2.45-5.11-5.47,0-6.05,5.33-10.95,11.95-10.95s10.15,4.25,10.15,10.73c0,12.67-11.02,22.9-24.63,22.9-9.79,0-17.79-7.7-17.79-17.21,0-20.02,18.51-40.4,36.22-40.4,5.11,0,7.06,1.37,10.51,4.25Z"/>
-    </g>
-    <g>
-      <g>
-        <path class="cls-1" d="M49.12,42.99c0,.24.12.36.24.36.24,0,.6-.36.9-.66,3.54-3.66,7.02-5.1,9.54-5.1,2.04,0,3.84,1.5,3.84,3.3,0,2.22-2.04,6.06-3.54,9.54-2.16,4.98-3.36,7.5-3.36,8.52,0,.78.54,1.38,1.2,1.38.9,0,2.1-1.08,4.02-3,.3-.3.54-.42.66-.42.42,0,.72.3.72.72,0,.18-.12.6-.3.78-2.88,2.88-6.06,4.8-9.3,4.8-1.08,0-1.98-.78-1.98-1.74,0-1.26,2.82-7.02,4.86-12.12,1.14-2.82,2.46-5.28,2.46-7.26,0-1.08-.72-1.86-2.04-1.86-3.24,0-11.1,7.26-15.48,19.44-1.08,2.94-1.32,3.12-3,3.12-.96,0-1.62-.3-1.62-1.08,0-1.08,3.48-8.28,4.98-11.7,1.98-4.44,9.06-19.86,10.8-24.12.72-1.8.96-2.46.96-3.24,0-.72-.9-1.2-2.64-1.56-.36-.06-.66-.48-.66-.78,0-.42.3-.78.66-.78,2.1,0,2.52,0,3.9-.06,1.5-.06,2.52-.24,3.12-.24.9,0,1.08.18,1.08.84,0,.9-.72,1.98-1.2,3.06-1.92,4.2-5.88,12.84-8.7,19.14-.06.3-.12.54-.12.72Z"/>
-        <path class="cls-1" d="M77.44,57.87c.24-.24.36-.36.6-.36.3,0,.72.48.72.78,0,.12-.06.24-.36.66-1.74,2.46-5.52,4.5-8.64,4.5s-4.8-2.4-4.8-5.58c0-9.9,9.12-20.46,16.56-20.46,2.22,0,3.06.96,3.06,3.24,0,4.92-5.16,9.18-13.26,10.08-.72.06-.9.18-1.2,1.2-.42,1.44-.84,3.72-.84,5.4,0,2.46.72,3.9,2.94,3.9,1.92,0,3.6-1.44,5.22-3.36ZM73.12,44.19c-1.02,1.68-1.74,3.9-1.74,4.8,0,.24.12.42.36.42s.54-.06,1.02-.18c5.28-1.5,8.04-4.98,8.04-7.44,0-1.44-.9-2.4-2.22-2.4-1.68,0-3.54,1.62-5.46,4.8Z"/>
-      </g>
-      <path class="cls-1" d="M22.25,16.43c-9.43,0-16.27,2.88-16.27,9.29,0,1.73.94,3.74,2.3,3.74.79,0,1.22-.58,2.23-.58,2.09,0,3.74,1.58,3.74,3.6,0,1.87-1.51,3.38-3.31,3.38-3.82,0-6.91-4.18-6.91-9.29,0-9.36,8.21-14.26,22.61-14.26,3.6,0,11.67.5,19.37,1.01,2.52.14,5.69.36,6.41.36,1.87,0,2.95-.43,2.95-1.51s-.36-1.22-.36-2.02.72-1.44,1.66-1.44c1.08,0,1.94.94,1.94,2.02,0,3.82-5.04,6.91-11.31,6.91-2.74,0-3.02-.22-6.05-.22-2.74,0-4.75,1.44-5.47,3.96l-10.22,35.57c-.14.5-.22,1.01-.22,1.44,0,1.58.94,2.52,2.66,2.52h3.67c.5,0,.79.22.79.94s-.29.86-.79.86H9.87c-.5,0-.65-.29-.65-.86,0-.72.14-.94.65-.94h3.1c2.45,0,4.75-1.58,5.4-3.96l10.44-36.44c.14-.58.22-1.08.22-1.51,0-1.51-.86-2.3-2.66-2.45-1.44-.14-2.81-.14-4.1-.14Z"/>
-    </g>
-  </g>
-</svg>
-);
-
-// --- Data ---
-const EVENTS_DATA = [
-  { 
-    id: 1, 
-    slug: "cherry-tree-seniors",
-    title: "Cherry Tree Massacre I", 
-    date: "February 6, 2026", 
-    time: "7:00 p.m.",
-    location: "Gaston Hall", 
-    type: "Senior Parents & Families Weekend",
-    priceInfo: "General Admission $26.04",
-    link: "https://buytickets.at/chimes/1998396/r/gcaa-site",
-    description: [
-      "For 52 years, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. What began as a fundraiser to pay off a bar tab has evolved into a showcase of premier a cappella talent.",
-      "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Senior Parents & Families Weekend 2026.",
-      "Doors open at 6:30."
-      ],
-    guestGroups: [
-        "The GraceNotes",
-        "The Phantoms",
-        "Superfood",
-        "The Capitol Gs",
-        "The Virginia Belles",
-        "CUA Take Note",
-        "AU Treble in Paradise"
-    ],
-    image: IMG_CTM_BOND 
-  },
-  { 
-    id: 2, 
-    slug: "cherry-tree-alumni",
-    title: "Cherry Tree Massacre II", 
-    date: "February 21, 2026", 
-    time: "7:00 p.m.",
-    location: "Gaston Hall", 
-    type: "Alumni Weekend", // kept for listing, overridden by eyebrow in detail view
-    priceInfo: "General Admission $26.04",
-    actions: [
-        { label: "Buy Concert Tickets", link: "https://buytickets.at/chimes/1998443/r/gcaa-site", primary: true, icon: Ticket },
-    ],
-    description: [
-        "For 52 years, the Cherry Tree Massacre has stood as one of Georgetown’s most enduring musical traditions. What began as a fundraiser to pay off a bar tab has evolved into a showcase of premier a cappella talent.",
-        "Join the Chimes as we return to the stage of Gaston Hall for a night of history, harmony, and celebration during Alumni Weekend 2026.",
-        "Doors open at 6:30."
-    ],
-    guestGroups: [
-        "The Saxatones",
-        "The GraceNotes",
-        "GU Chamber Singers",
-        "GW Troubadours",
-        "UVA Sil’hooettes",
-        "UVA AcHOOstics",
-        "AU Pitches be Trippin’",
-        "CUA Redline"
-    ],
-    schedule: [
-        {
-            title: "Welcome Reception & Afterglow",
-            time: "To Be Announced",
-        },
-    ],
-    image: IMG_CHERRY_TREE
-  },
-  { 
-    id: 3, 
-    slug: "john-carroll-weekend",
-    title: "John Carroll Weekend", 
-    date: "April 16–19, 2026", 
-    time: "Four Days of Celebration",
-    location: "Puerto Rico", 
-    type: "Puerto Rico",
-        actions: [
-        { label: "Chimes Survey", link: "https://www.surveymonkey.com/r/BJ93CBF", primary: true },
-        { label: "More Information", link: "https://jcw.georgetown.edu/", primary: false }
-    ],
-    link: "",
-    description: [
-        "Experience an unforgettable Caribbean gathering April 16–19 as we honor Federico Stubbe #177 during John Carroll Weekend 2026.",
-        "Set against the vibrant backdrop of Puerto Rico, this weekend blends cultural immersion with exceptional celebration, culminating in the John Carroll Awards Gala. Please refer to Slack announcements or your email to secure your accommodations within our private block."
-      ],
-      schedule: [
-        {
-            title: "Welcome Reception",
-            description: "Commence the weekend with an evening of historical elegance at the Antiguo Casino, set within the timeless colonial architecture of Old San Juan, the oldest city in the Western Hemisphere.",
-            time: "Thursday Evening",
-            location: "Antiguo Casino de Puerto Rico"
-        },
-        {
-            title: "Chimes Night",
-            description: "Immediately following the reception, adjourn to Arena Medalla for a vibrant celebration blending spirited camaraderie with the distinctive energy of the Chimes.",
-            time: "Thursday Night",
-            location: "Arena Medalla"
-        },
-        {
-            title: "A Day of Leisure",
-            description: "Immerse yourself in a day of relaxation at the legendary Dorado Beach. Enjoy championship Robert Trent Jones golf courses, seven miles of scenic nature trails, and pristine coastlines.",
-            time: "Friday",
-            location: "Dorado Beach"
-        },
-        {
-            title: "Private Rum Tasting",
-            description: "An exclusive tasting journey showcasing the finest heritage spirits of Puerto Rico. (Event confirmation contingent upon interest.)",
-            time: "Friday",
-            location: "To Be Announced"
-        },
-        {
-            title: "The John Carroll Awards Gala",
-            description: "The weekend’s premier event. Join us at the Coca-Cola Music Hall to honor Federico Stubbe #177. The ceremony will be followed by a spectacular after-party in the heart of the plaza.",
-            time: "Saturday",
-            location: "Coca-Cola Music Hall\nDistrito T-Mobile"
-        }
-
-    ],
-      image: IMG_PUERTO_RICO
-  },
+const NAV_LINKS = [
+  { id: 'agenda', label: 'Box Office' },
+  { id: 'discography', label: 'Listening Room' },
+  { id: 'store', label: 'Haberdasher' },
+  { id: 'philanthropy', label: 'Patronage' },
+  { id: 'backstage', label: 'Backstage' }
 ];
 
-const ALBUMS_DATA = [
-  { 
-    id: 1, 
-    slug: "desperate-chimes-desperate-measures",
-    title: "Desperate Chimes, Desperate Measures", 
-    year: "2026", 
-    cover: "bg-[#2A3B55]", 
-    image: IMG_DCDM,
-    badge: "PRE-ORDER",
-    link: "https://bio.to/ChimesAA",
-    ctaText: "Vinyl Early Access",
-    description: "Experience the Georgetown Chimes in uncompromising high fidelity. Arriving later this year, Desperate Chimes, Desperate Measures presents the group’s latest arrangements on a premium, 180g double LP. Stream the lead single now and join the waitlist for priority access to the First Pressing.",
-    leadSingle: { 
-      title: "And So It Goes", 
-      composer: "Billy Joel (arr. Bob Chilcott)",
-      soloist: "Aidan Metz",
-      link: "https://thechimes.lnk.to/AndSoItGoesAA"
-    },
-    credits: {
-      "Production": [
-        { role: "Producer", name: "The Georgetown Chimes" },
-        { role: "Executive Producer", name: "Michael Luckey" },
-        { role: "Musical Direction", name: "Christian Kim" },
-        { role: "Artistic Direction", name: "Aidan Metz" },
-        { role: "Co-Producers", name: "Robert Della Bernarda, Ben Fosnocht, Aidan Metz, Arjun Singh, Youngsung Sim, and Rufino A. Mendoza II" },
-        { role: "Album Sequencing", name: "Aidan Metz" }
-      ],
-      "Engineering": [
-        { role: "Recording Engineer", name: "Blaine Misner at Cue Recording, Falls Church, VA" },
-        { role: "Mixing", name: "Blaine Misner at Cue Recording" },
-        { role: "Editing", name: "Blaine Misner at Cue Recording" },
-        { role: "Mastering", name: "Geoff Pesche at Abbey Road Studios" }
-      ],
-      "Art & Design": [
-        { role: "Cover Art", name: "Caleb Morris" },
-        { role: "Art Direction & Design", name: "Rufino A. Mendoza II" }
-      ],
-      "Administration": [
-        { role: "Production Coordinators", name: "Ben Fosnocht, Robert Della Bernarda, and Rufino A. Mendoza II" },
-        { role: "Licensing & Clearance", name: "Easy Song" },
-        { role: "Licensing Coordinator", name: "Robert Della Bernarda" },
-        { role: "Liner Notes & Metadata", name: "Rufino A. Mendoza II and Robert Della Bernarda" }
-      ]
-    },
-    tracks: [
-      { title: "And So It Goes", composer: "Billy Joel (arr. Bob Chilcott)", soloist: "Aidan Metz" },
-    ]
-  },
-  { 
-    id: 2, 
-    slug: "partners-in-chime",
-    title: "Partners in Chime", 
-    year: "2016", 
-    cover: "bg-[#4A5B75]",
-    image: IMG_PARTNERS,
-    link: "https://thechimes.lnk.to/partners-in-chimeAA",
-    tracks: [
-      { title: "We Meet (Live)" }, 
-      { title: "Little Bitty Pretty One", soloist: "Matthew Demartini" },
-      { title: "Friends for Now", soloist: "Peter Fanone" },
-      { title: "Wayfaring Stranger", soloist: "Jaewoo Kim" },
-      { title: "Bridge Over Troubled Water", soloist: "Junho Lee" },
-      { title: "It’s a Beautiful Day (Live)", soloist: "Connor Joseph" },
-      { title: "Telephone Line", soloist: "Peter Fanone" },
-      { title: "Runaways · When We Were Young", soloist:"Peter Fanone, Jeff Kemp" },
-      { title: "How Deep Is Your Love? (Live)", soloist: "Charlie Plissner"},
-      { title: "Sixteen Tons", soloist: "Michael Luckey" },
-      { title: "Don’t Worry Baby (Live)", soloist: "Charlie Plissner" },
-      { title: "Who Put the Bomp (in the Bomp, Bomp, Bomp)?", soloist: "Peter Hu" },
-      { title: "It’s All Right", soloist: "Justin McCarthy" },
-      { title: "How Great Thou Art", soloist: "Jack Sheridan" },
-      { title: "My Comrades", soloist: "Phil Hah" },
-      { title: "Georgetown Fight Song"},
-    ]
-  },
-  { 
-    id: 3, 
-    slug: "three-stripes",
-    title: "Three Stripes", 
-    year: "2012", 
-    cover: "bg-[#6A7B95]",
-    image: IMG_THREE_STRIPES,
-    link: "https://thechimes.lnk.to/three-stripesAA",
-    tracks: [
-      { title: "We Meet" },
-      { title: "Blue & Grey Strut" },
-      { title: "Runaround Sue" },
-      { title: "My Girl" },
-      { title: "Georgetown Guy" },
-      { title: "Georgetown Girl" },
-      { title: "Moondance" },
-      { title: "A Beatles Medley: All You Need Is Love · Blackbird · All My Loving · Here Comes the Sun · Hey Jude" },
-      { title: "Jessie’s Girl" },
-      { title: "Hold the Line" },
-      { title: "So Much in Love" },
-      { title: "Loch Lomond" },
-      { title: "Ave Maria" },
-      { title: "Thank You" },
-      { title: "Wagon Wheel" },
-      { title: "Lullabye" },
-      { title: "Fight Song" },
-      { title: "A Message from Our Founder" },
-      { title: "My Comrades" },
-      { title: "Wazoo" }
-    ]
-  },
-  { 
-    id: 4, 
-    slug: "36th-and-prospect",
-    title: "36th & Prospect", 
-    year: "2009", 
-    cover: "bg-[#8A9BB5]",
-    image: IMG_PROSPECT,
-    link: "https://thechimes.lnk.to/36th-prospectAA",
-    linerNotes: [
-      {
-        author: "James P.M. Walsh, S.J. #119",
-        text: "Twenty-seven years of involvement with The Chimes, a quarter century as the Active Chime who will never graduate… Each group is different and yet somehow the same as all the others. It’s like Commedia dell’arte: the same cast of characters, but played by different actors each year; the same basic script, but with interesting variants. Or maybe it’s more like South Park. As Celestial Chime, it’s been my privilege to preside at Chimes weddings and funerals, and to baptize Chimes children. I seem to have been given this “parish” comprising generations and continents. It’s a pastoral gig I never envisioned when I got ordained in 1970. But half my life as a Jesuit has been with The Chimes. It has been a privilege and, on the whole, joy, Deo gratias. And to think that Frank Jones planned the whole thing, right from the outset!"
-      },
-      {
-        author: "Tim Naughton #95",
-        text: "Even after 33 years, I have not finished learning about the Chimes. The Chimes share a common love of music and of the group. The tradition is entrusted from one Chime to the next. With singing in harmony as a foundation for their friendship, the Chimes are a community within Georgetown that spans generations, devoted to the University and one another."
-      },
-      {
-        author: "Justin Douds #202",
-        text: "60 years is a long time for any organization to last, but considering the wealth and breadth of opportunities for Georgetown students that exists today, the Chimes’ continued success is all the more astounding. What makes the Chimes unique is that its path has been shaped by all two hundred and eleven members, who contribute to its development long after their college days are over. As a recent alum, I aspire to continue my involvement with the Chimes in my new role. While our musical style and song selection has changed over the three generations, it is the basic tenets of song, harmony, fellowship, and brotherhood that ensure the existence of the Chimes sixty years from now."
-      },
-      {
-        author: "Mark Rossetti #211",
-        text: "Two hundred and ten Chimes later, it’s all one elaborate story to which we each contribute our own personalities and anecdotes. Sometimes our personalities are the anecdotes. And still it all begins with the music—the group’s history in the Glee Club, learning songs as a neophyte, and quartets at every gathering of Chimes. For me, it is a sort of thread that runs through my life. It defines who I know, how I spend my time at school, and what I do during my summers. I need simply open my wallet to see in my Chaz card a little reminder of friendship, generosity, and music. Over sixty years after it all began, it remains a great thing to be a Chime, and I am confident that the fellowship and harmony will only become richer and fuller as the years pass."
-      }
-    ],
-    acknowledgements: [
-      "Tim Naughton #97",
-      "Brother Joe Ritzman",
-      "Dave Walsh #33",
-      "Les Lentz",
-      "Gabriel Lebec",
-      "Tracy Foust",
-      "Georgetown University Center for Student Programs",
-      "The Tombs and 1789 Management"
-    ],
-    tracks: [
-      { title: "We Meet", composer: "Traditional", group:"2006 Group"},
-      { title: "Eight Days a Week", composer: "The Beatles (arr. Deke Sharon)", soloist: "Steve Alleva #195", group:"2004 Group" },
-      { title: "Soul to Soul", composer: "The Beatles (arr. Deke Sharon)", soloist: "Justin Douds #202", group:"2007 Group" },
-      { title: "In the Still of the Night", composer: "The Five Satins (arr. Boyz II Men)", soloist: "Tom Nicholas #203", group:"2006 Group" },
-      { title: "Just a Gigolo", composer: "Louis Prima", soloist: "Jeff Civillico #193", group:"2004 Group" },
-      { title: "Something Tells Me", composer: "Herman’s Hermits (arr. Jeff Gordon #192)", soloist: "Jeff Carlson #206", group:"2006 Group" },
-      { title: "Glory of Love", composer: "Sam Sanders #204", soloist: "Sam Sanders #204", group:"2007 Group" },
-      { title: "Cartoon Theme Medley: Duck Tales · Fraggle Rock · Chip ’n’ Dale Rescue Rangers · Inspector Gadget · Gummi Bears", composer: "Various (arr. Gerard Yun)", soloist: "Various", group:"2005 Group" },
-      { title: "Maggie", composer: "Traditional Barbershop", group:"2007 Group" },
-      { title: "King of Spain", composer: "Moxy Fruvous", soloist: "Jeff Civillico #193", group:"2004 Group" },
-      { title: "Come Go with Me", composer: "The Del-Vikings (arr. Jeff Gordon #192)", soloist: "Jeff Gordon #192", group:"2004 Group" },
-      { title: "Bright Morning Stars", composer: "The King’s Singers (arr. Stanley Brothers)", soloist: "Father J.P.M. Walsh #119", group:"2004 Group" },
-      { title: "Runaway", composer: "Del Shannon (arr. Deke Sharon)", soloist: "Sam Sanders #204", group:"2005 Group" },
-      { title: "Change the World", composer: "Eric Clapton (arr. Mark Patton #166)", soloist: "Eddie Keels #198", group:"2006 Group" },
-      { title: "Up the Ladder", composer: "The Supremes (arr. Jeff Carlson #206 & Eddie Keels #198)", soloist: "Justin Douds #202", group:"2007 Group" },
-      { title: "King of Wishful Thinking", composer: "Go West (arr. Deke Sharon)", soloist: "Pat McKegney #199", group:"2006 Group" },
-      { title: "Georgetown University Fight Song", composer: "The Georgetown Chimes", group:"2006 Group" },
-      { title: "My Comrades",composer: "Traditional",  soloist: "Eddie Keels #198", group:"2006 Group" }
-    ]
-  },
-  { 
-    id: 5, 
-    slug: "battle-gear",
-    title: "Battle Gear", 
-    year: "2003", 
-    cover: "bg-[#9AABCA]", 
-    image: IMG_BATTLE_GEAR,
-    link: "https://thechimes.lnk.to/battle-gearAA",
-    credits: {
-      "Production": [
-        { role: "Recording & Production", name: "Les Lentz at LSP Studios, Annapolis, MD" },
-        { role: "Live Recording", name: "Tracy Foust (Gaston Hall)" },
-        { role: "Producers", name: "Andy Neustaetter and Jeff Gordon" },
-        { role: "Photos", name: "Andy Neustaetter" },
-        { role: "Design", name: "Amanda Reid" }
-      ],
-      "Groups": [
-        { role: "2001 Group", name: "#119 Jim Walsh, S.J., #182 Rick Bedoya, #183 Max Coslov (Ephus), #184 John Hoy, #185 Andy Neustaetter, #187 Andrew Beaton, #188 Evan Seiler, #189 Nick Giannotti, #190 Ryan Ramagosa, #191 Dan Phillips" },
-        { role: "2002 Group", name: "#119 Jim Walsh, S.J., #184 John Hoy, #185 Andy Neustaetter (Ephus), #187 Andrew Beaton, #188 Evan Seiler, #189 Nick Giannotti, #190 Ryan Ramagosa, #191 Dan Phillips, #192 Jeff Gordon, #193 Jeff Civillico, #194 Sean O’Brien" },
-        { role: "2003 Group", name: "#119 Jim Walsh, S.J., #190 Ryan Ramagosa, #191 Dan Phillips, #192 Jeff Gordon (Ephus), #193 Jeff Civillico, #194 Sean O’Brien, #195 Steve Alleva, #196 David Foldvary, #197 Jim Helmink, #198 Eddie Keels, #199 Patrick McKegney" }
-      ]
-    },
-    acknowledgements: [
-      "Georgetown University",
-      "Fr. Leo O’Donovan",
-      "President John DeGioia",
-      "Ron Lignelli and the Program in Performing Arts",
-      "Les Lentz",
-      "Tracy Foust",
-      "Amanda Reid",
-      "Our friends, families, neophytes, and alumni"
-    ],
-    tracks: [
-      { title: "We Meet", composer: "Traditional" },
-      { title: "I’ve Just Seen a Face", composer: "John Lennon/Paul McCartney (arr. Evan Seiler ’02)", soloist: "Ryan Ramagosa ’03" },
-      { title: "Peaceful Easy Feeling", composer: "Jack Tempchin (arr. Jeff Gordon ’04)", soloist: "Dan Phillips ’03" },
-      { title: "Apeman", composer: "Ray Davies (arr. Andy Neustaetter ’02)", soloist: "Andy Neustaetter ’02" },
-      { title: "Tempted", composer: "Chris Difford/Glenn Tilbrook (arr. Nick Amatuzzi ’00)", soloist: "Nick Giannotti ’02",},
-      { title: "Danny Boy", composer: "Traditional (arr. Jay Spadone)" },
-      { title: "I’m Beginning to See the Light", composer: "Duke Ellington (arr. Andrew Cranin)" },
-      { title: "Just You, Just Me", composer: "Raymond Klarges/Jesse Greer (arr. Sean Altman/Elliott Kerman; bass line by Barry Carl)", soloist: "O’Brien (Bass), Phillips (Baritone), Gordon (Lead), Ramagosa (Tenor)" },
-      { title: "Prodigal Son", composer: "Luke 15:11–32 (arr. Nashville Bluegrass Band)" },
-      { title: "Kiss Him Goodbye", composer: "Dale Frashuer/Gary Decarlo/Paul Leko (arr. Bill Henderson/The Nylons)", soloist: "Ryan Ramagosa ’03" },
-      { title: "They Can’t Take That Away from Me", composer: "George Gershwin/Ira Gershwin (arr. Sean Collins ’83)", soloist: "Evan Seiler ’02" },
-      { title: "Crazy Little Thing Called Love", composer: "Freddie Mercury (arr. Jeff Gordon ’04)", soloist: "Jeff Gordon ’04" },
-      { title: "Poor Heart", composer: "Michael Gordon (arr. FRED)", soloist: "Quartet: Beaton (Bass), Seiler (Baritone), Giannotti (Lead), Neustaetter (Tenor)" },
-      { title: "California Dreamin’", composer: "John and Michelle Phillips (arr. Mike Taylor)" },
-      { title: "Sixty Minute Man", composer: "by: William “Billy” Ward, a.p.b. the Persuasions and Rockapella", soloist: "Sean O’Brien ’04" },
-      { title: "Jet Airliner", composer: "Paul Pena (arr. Evan Seiler ’02)", soloist: "Nick Giannotti ’02" },
-      { title: "When I’m 64", composer: "John Lennon/Paul McCartney (arr. Andrew Cranin)", soloist: "Ryan Ramagosa ’03" },
-      { title: "Georgetown University Fight Song", composer: "Traditional" },
-      { title: "My Comrades", composer: "Traditional" }
-    ]
-  },
-  { 
-    id: 6, 
-    slug: "parsley-sage-rosemary-chime",
-    title: "Parsley, Sage, Rosemary, & Chime", 
-    year: "2002", 
-    cover: "bg-[#B0BCCF]", 
-    image: IMG_PSRC,
-    link: "https://thechimes.lnk.to/parsley-sage-rosemary-chimeAA",
-    dedication: "This album is dedicated to Fr. Jim Walsh, S.J., our teacher, mentor, and true friend, celebrating his twentieth year as the Celestial Chime.",
-    credits: {
-      "Groups": [
-        { role: "1998 Group", name: "#119 Jim Walsh S.J., #174 Sameer Patel (Ephus), #170 Greg Lourie, #171 Peter Manice, #172 Dustin King, #173 Nolan Bolduc, #175 Colin Pritchard, #176 Aaron Davis, #177 Federico Stubbe, #178 Charlie Schilling, #179 Nick Amatuzzi, #180 Diego de Soto" },
-        { role: "1999 Group", name: "#119 Jim Walsh S.J., #175 Colin Pritchard (Ephus), #176 Aaron Davis, #178 Charlie Schilling, #179 Nick Amatuzzi, #180 Diego de Soto, #181 Justin Kay, #182 Rick Bedoya, #183 Max Coslov, #184 John Hoy, #185 Andy Neustaetter, #186 Mike Pacella" },
-        { role: "2000 Group", name: "#119 Jim Walsh S.J., #183 Max Coslov (Ephus), #178 Charlie Schilling, #179 Nick Amatuzzi, #180 Diego de Soto, #181 Justin Kay, #182 Rick Bedoya, #184 John Hoy, #185 Andy Neustaetter, #186 Mike Pacella, #187 Andrew Beaton, #188 Evan Seiler" }
-      ]
-    },
-    acknowledgements: [
-      "Georgetown University and Fr. Leo O’Donovan",
-      "The Gracenotes, Phantoms, and superfood",
-      "Jessica Vippolis, RozLilia Salgado, and Dorigen Horlivy",
-      "Les Lentz of LSP Studios",
-      "Tracy Foust of Sound Resolution",
-      "Derek Hena and Kevin McAfee",
-      "Our alumni, friends, girlfriends, and families"
-    ],
-    tracks: [
-      { title: "We Meet" },
-      { title: "All Night Long", composer: "Richie (arr. Ryan)", soloist: "Giannotti" },
-      { title: "Donne", composer: "Zuchero, a.p.b. Neri Per Caso (arr. Patton ’97)", soloist: "Pritchard & Stubbe" },
-      { title: "Another Saturday Night", composer: "Cooke (arr. Lockart)", soloist: "Bedoya" },
-      { title: "My Love Is Like a Red, Red Rose", composer: "Traditional (arr. King’s Singers)", soloist: "Kay, Coslov, and Hoy" },
-      { title: "Soul to Soul", composer: "Carter / Nevada", soloist: "Patel" },
-      { title: "All of Me (Live)", composer: "Simmons & Marks (arr. Laird, Patton)", soloist: "Stubbe" },
-      { title: "Running to Stand Still (Live)", composer: "Bono (arr. Hall)", soloist: "Pritchard" },
-      { title: "Loch Lomond", composer: "Traditional (arr. Mattimore ’92)", soloist: "Kay" },
-      { title: "Kiss the Brown Eyed Girl", composer: "Menkin & Ashman · Morrison (arr. Amatuzzi)", soloist: "Amatuzzi & Neustaetter" },
-      { title: "Medley: Just a Gigolo · I Ain’t Got Nobody", composer: "Casucci & Caesar · Williams & Graham (arr. Manassee)", soloist: "Pritchard" },
-      { title: "And So It Goes", composer: "Joel (arr. King’s Singers", soloist: "Walsh" },
-      { title: "Hold Me Tight", composer: "Rand (’86)", soloist: "Stubbe" },
-      { title: "Don’t Blame Me", composer: "Traditional, a.p.b. Boston Common" },
-      { title: "Viva La Mamma", composer: "a.p.b. Neri Per Caso (arr. Patton ’97)" },
-      { title: "The Georgetown University Fight Song" },
-      { title: "My Comrades" }
-    ]
-  },
-  { 
-    id: 7, 
-    slug: "let-the-good-chimes-roll",
-    title: "Let the Good Chimes Roll", 
-    year: "1997", 
-    cover: "bg-[#C4CDDC]", 
-    image: IMG_LTGCR,
-    link: "https://thechimes.lnk.to/let-the-good-chimes-rollAA",
-    linerNotes: [
-      {
-        
-        text: "This album marks two important milestones for the Georgetown Chimes: our 21st official recording and 50 years at the Hilltop. Over this half century the Chimes have become a fixture on the Georgetown campus; Chimes Nights at the Tombs, and Cherry Tree Massacre, have, for many become unique parts of the Georgetown experience. From its barbershop roots the group has expanded over the years into ’50s and ’60s standards, old English and Irish traditionals, jazz, and most recently, pop. It is often taken as a point of pride that every Chime can sing the “old” songs that pre-date him, some of which come from the group’s founding in 1946. As a result, the repertory of the group does not so much change and revolve as it does grow and evolve in new directions. Today the active repertory consists of well over 200 songs, all still sung in the closest of harmony and by the closest of friends. It is in this context that we hope this album will be a commemoration—a tribute to our past—as well as a celebration of and statement about our future."
-      }
-    ],
-    credits: {
-      "Groups": [
-        { role: "1995 Group", name: "#119 Jim Walsh, S.J., #156 Ryan Johnson, #157 Michael Sucsy, #159 Sean O’Brien, #160 Andy Laird, #161 Zach Glaser, #162 Brian Mullally, #164 Jake Robards, #165 Matt Dexter, #166 Mark Patton, #167 Aaron Klein, #168 M.G. Lemley, #163 Will Longwitz (ephus)" },
-        { role: "1996 Group", name: "#119 Jim Walsh S.J., #161 Zach Glaser, #164 Jake Robards, #165 Matt Dexter, #166 Mark Patton, #167 Aaron Klein, #168 M.G. Lemley, #169 Dick Hillenbrand, #170 R. Greg Lourie, #171 Peter Manice, #172 Dustin King, #173 Nolan Bolduc, #174 Sameer Patel, #160 Andy Laird (ephus)" },
-        { role: "1997 Group", name: "#119 Jim Walsh, S.J., #164 Jake Robards, #166 Mark Patton, #167 Aaron Klein, #168 M.G. Lemley, #169 Dick Hillenbrand, #170 R Greg Lourie, #171 Peter Manice, #172 Dustin King, #173 Nolan Bolduc, #174 Sameer Patel, #175 Colin Pritchard, #176 Aaron Davis, #177 Federico Stubbe, #165 Matt Dexter (ephus)" }
-      ],
-      "Production": [
-        { role: "Recording & Engineering", name: "Les Lentz at LSP Studios, Annapolis MD" },
-        { role: "Live Recording", name: "Tracy Foust (Gonzaga Chapel & Gaston Hall)" },
-        { role: "Producer", name: "The Georgetown Chimes" },
-        { role: "Graphic Design", name: "Scott Powell" }
-      ]
-    },
-    acknowledgements: [
-      "Les Lentz, Tracy Foust, and Brian Johnson",
-      "Dorothea Johnson and Sean Redmond",
-      "#172 Dustin King and #175 Colin Pritchard",
-      "William Watts, the Tombs, and the Clydes Group",
-      "The Phantoms and The Gracenotes",
-      "Matt Donaghue"
-    ],
-    tracks: [
-      { title: "We Meet (Live)", composer: "Traditional" },
-      { title: "L.O.V.E.", composer: "B. Kaempfert/M. Gabler (arr. Patton ’97)", soloist: "Robards ’97" },
-      { title: "Operator", composer: "Spivery (arr. Collins ’83)", soloist: "Lemley ’97" },
-      { title: "Loch Lomond", composer: "Traditional (arr. Mattimore ’92)", soloist: "Laird ’96" },
-      { title: "Every Little Kiss", composer: "Hornsby (arr. Lemley ’97, based on Prindle/Amherst Zumbyes)", soloist: "Hillenbrand ’97" },
-      { title: "Bring Him Home", composer: "Webber (arr. Mattimore ’92)", soloist: "Patel ’98" },
-      { title: "Naturally (Live)", composer: "Lewis (arr. Collins ’83)", soloist: "O’Brien ’95" },
-      { title: "Qui Belles Amours A", composer: "Josquin des Prez" },
-      { title: "Georgia on My Mind", composer: "Gorrell/Carmichael (arr. Patton ’97)", soloist: "Patton" },
-      { title: "Since I Fell for You", composer: "Johnson (arr. Grannis ’85)", soloist: "Laird" },
-      { title: "Danny Boy", composer: "Traditional (arr. Patton ’97, based on King’s Singers)", soloist: "Glaser ’96" },
-      { title: "What’ll I Do", soloist: "Hillenbrand" },
-      { title: "Shape of My Heart (Live)", composer: "Sting (arr. Patton ’97)", soloist: "Robards" },
-      { title: "And So It Goes", composer: "Joel (arr. King’s Singers)", soloist: "Glaser" },
-      { title: "All of Me", composer: "S. Simons/G. Marks (arr. Laird/Patton, based on Prindle/Amherst Zumbyes)", soloist: "Laird" },
-      { title: "Some Folks’ Lives Roll Easy", composer: "Simon (arr. Patton ’97)", soloist: "Lemley, Patel" },
-      { title: "MLK", composer: "Evans, Hewson, Clayton, Mullen Jr. (arr. Hall)", soloist: "Hillenbrand" },
-      { title: "Zombie Jamboree (Live)", composer: "Mauge (arr. Sharon/Raugh)", soloist: "Klein ’97" },
-      { title: "Georgetown University Fight Song", composer: "Georgetown Traditional" },
-      { title: "My Comrades", composer: "Traditional" }
-    ]
-  },
-  { 
-    id: 8, 
-    slug: "hoya-saxa",
-    title: "Hoya Saxa", 
-    year: "1984", 
-    cover: "bg-[#D8DDE6]", 
-    image: IMG_HOYA_SAXA,
-    link: "https://thechimes.lnk.to/hoya-saxaAA",
-    dedication: "This album is dedicated to three groups: our alumni Chimes, the Georgetown Hoyas, and those in France sans clue.",
-    linerNotes: [
-        {
-            author: "Lie Down, Forever, Lie Down",
-            text: "The Georgetown Chimes treasure their tradition. It is for this reason that several of our seventeen albums are musical anthologies. In a way, this too is an anthology, but unlike the others, we didn’t use tapes of soloists with their own active group, but rather, called them back to sing the songs with our group. Perhaps the most active of our alums is Kevin O’Brien. Throughout the year he has sung “So Much in Love” to the delight of Chimes’ audiences everywhere. He was also M.C. for this year’s Cherry Tree Massacre and was responsible for our appearance on “P.M. Magazine.” Steve Mohyla solos “Great Historical Bum” and helped on many of the baritone parts. Tim Naughton was called in to sing “Good Fellow,” despite his voice, and Bob Gaylord, specialist, was brought in for the final bell chord. Another alumnus we’d like to thank is Mark Ganz. Although he has no solos on this album, he too helped with many of the baritone parts and was part of last year’s active group. He was our only loss this year, but he helped to develop the sound we have now; for that we are grateful. “St. Louis Blues,” with its three solos, posed a particular problem. We had to try to synchronize the schedules of Mark Williams (’59), Dave Walsh (’58), and John Sheridan (’59). Not only that, but we had to put up with them for the recording weekend. In spite of the logistical difficulties of getting all these alumni together for the album, it has been a lot of fun, and it has reminded us once again what the group really means to each one of us. We realize that this camaraderie cannot be conveyed on a 12-inch disc of vinyl; nonetheless, we hope you enjoy this album as much as we enjoyed singing it for you."
-        }
-    ],
-    credits: {
-      "Production": [
-            { role: "Front Cover", name: "Felix T. Cat" },
-            { role: "Producer and Engineer", name: "John Burr" },
-            { role: "Photography", name: "Cristina Del Sesto" },
-            { role: "Translation of “Bomp”", name: "Brian Freeman" },
-            { role: "Layout", name: "George J. Peacock" }
-        ]
-    },
-    acknowledgements: [
-      "Father Timothy Healy S.J.",
-      "R.J. McCooey",
-      "Kevin O'Brien",
-      "David J. Walsh",
-      "Brian Freeman",
-      "The Boston Common"
-    ],
-    tracks: [
-      { title: "We Meet" },
-      { title: "I’ve Been Feelin’ Blue" },
-      { title: "Somebody Loves Me", composer: "arr. Sean Collins", soloist: "Sean Collins SFS ’83" },
-      { title: "It’s A Good Day" },
-      { title: "I’m Gonna Sit Right Down and Write Myself a Letter", soloist: "Sean Collins" },
-      { title: "Great Historical Bum", soloist: "Steve Mohyla SBA ’79" },
-      { title: "Sh-Boom (Life Could Be a Dream)", composer: "arr. Sean Collins", soloist: "Sean Collins" },
-      { title: "Temptation", soloist: "Kevin Laborde SBA ’78 and Ed Robinson CAS ’74" },
-      { title: "Georgetown Fight Song", soloist: "Tim Naughton SBA ’77" },
-      { title: "Good Fellow", soloist: "Tim Naughton SBA ’77" },
-      { title: "Who Put The Bomp (In The Bomp, Bomp, Bomp)", composer: "arr. Mark Grannis", soloist: "Kevin O’Brien CAS ’65 and Mark Grannis CAS ’85" },
-      { title: "So Much in Love", composer: "arr. Mark Grannis", soloist: "Kevin O’Brien CAS ’65" },
-      { title: "Chattanooga Shoe Shine Boy", soloist: "Sean Collins" },
-      { title: "Ten Feet Off the Ground" },
-      { title: "I Got Rhythm", soloist: "Sean Collins", composer: "arr. Mark Grannis" },
-      { title: "Come Go With Me", composer: "arr. Mark Grannis", soloist: "Mark Grannis" },
-      { title: "St. Louis Blues", soloist: "David J. Walsh CAS ’58" },
-      { title: "At the Moving Picture Ball" },
-      { title: "Sons of Georgetown" },
-      { title: "Yes Sir, That’s My Baby" },
-      { title: "My Comrades", soloist: "George Peacock CAS ’84" },
-      { title: "Wazoo" }
-    ]
-  },
-  {
-    id: 9,
-    slug: "chimes-75",
-    title: "Chimes ’75",
-    year: "1975",
-    cover: "bg-[#2A3B55]",
-    image: IMG_CHIMES_75,
-    link: "https://thechimes.lnk.to/chimes-75AA",
-    dedication: "This album dedicated to Gerard F. Yates, S.J.—our Coney Island Baby, a Curbstone Cutie Visiting Professor from Upper Peabody Tech Priest, confidant, friend—just “Yatsie.”",
-    linerNotes: [
-        {
-            author: "Featuring",
-            text: "Left-to-right on album cover: Tim Naughton; Father Yates; Ken Quinn; John P. Dearie, Jr., ephus; Cliffe Laborde; Kevin O’Neill; Bob Kingsland; and Mark O’Connor."
-        },
-        {
-            author: "Recorded Live",
-            text: "This record sung live February 5, 1975 in the heart of the Georgetown University community at 1789."
-        },
-        {
-            author: "Le Figaro de Paris (September 1974) by Yann de L’Écotais",
-            text: "The bistro is called The Tombs, in Georgetown—the chic, artistic, intellectual neighborhood of Northwest Washington, and it is mainly patronized by students. From the stairway which leads to the basement. there rise the voices of a choral group and the fragrance of beer. Nothing of the boozy, wanton student scene that is dear to Europeans. Down below, a young waiter has his finger to his lips: you have to parley, in a whisper, in order to slip into the great, darkened, crowded room that hangs enthralled by fifteen young men sitting around a large table with three microphones. The Georgetown University Chimes are giving their monthly concert—the house is packed without any advance publicity. “No—there’s no service while they’re singing”—out of respect, so as not to disturb. Everyone has taken his precautions in advance: the beer mugs hold one liter. This choral group has existed for 28 years; it is almost an institution. Students who belong pass on but remain members for life. They present American folklore tunes to which they adapt improvised words and texts in the singing style of “barber shop songs,” after the manner of barber shop customers of a century ago. After each number the room explodes: Glasses are lifted and clinked together, and everyone sits down again. The Chimes would have an assured professional career if they wanted it. They rehearse about three times a week, but they are also students on the side, mostly in political science. There is a professor there, too, the Reverend Gerard F. Yates, S.J., 67 years old, clear-voiced and bright-eyed, and believe me, he doesn’t balk at a pint. Perhaps I began to understand, in that atmosphere which was at once good-natured, very free, and at the same time polite, what it is that makes Americans “tick,” what it is that gives them—all politics aside—that spirit which we so lack on the other side of the Atlantic: confidence confidence which comes from the certainty of not being the prisoner of a past, of being able to choose one’s future and prepare for it, of doing one day what one wants to do—it is that which allows one to laugh. It is midnight, and Washington’s weather is mild. Boys and girls flirt on the campus. Mad pop music floats out from a few wide-open student windows. A party is in progress. America as we don’t know it."
-        }
-    ],
-    credits: {
-      "Production": [
-            { role: "Layout", name: "R. J. McCooey" },
-            { role: "Art Work", name: "Susan Lee" },
-            { role: "Photography", name: "Rosemary Suozzi" },
-            { role: "Engineering", name: "John Frey" },
-            { role: "Recorded By", name: "Omega Recording Studios, Kensington, Maryland" }
-        ]
-    },
-    tracks: [
-      { title: "We Meet (Live)" },
-      { title: "Hoya Saxa Joe (Live)" },
-      { title: "More I Cannot Wish You", soloist: "Dearie, O’Connor; Kingsland" },
-      { title: "My Cutie’s Due (Live)", soloist: "O’Neill" },
-      { title: "Mood Indigo (Live)", soloist: "Kingsland" },
-      { title: "Lady Is a Tramp (Live)", soloist: "Naughton" },
-      { title: "Sons Of", soloist: "Kingsland" },
-      { title: "Piano Roll Blues (Live)" },
-      { title: "I’ll Fly Away (Live)" },
-      { title: "Hey Boys (Live)" },
-      { title: "Canadian Railroad Trilogy", soloist: "Cosco" },
-      { title: "Sitting on Top of the World (Live)" },
-      { title: "Big Babaloo (Live)", soloist: "Dearie" },
-      { title: "Georgetown Fight Song (Live)" },
-      { title: "Upper Peabody Tech (Live)", soloist: "Yates" },
-      { title: "My Comrades (Live)" },
-      { title: "Wazoo (Live)" }
-    ]
-  },
-  {
-    id: 10,
-    slug: "chimes-66",
-    title: "Chimes ’66",
-    year: "1966",
-    cover: "bg-[#4A5B75]",
-    image: IMG_CHIMES_66,
-    link: "https://thechimes.lnk.to/chimes-66AA",
-    linerNotes: [
-        {
-            author: "On the Album",
-            text: "Tim Mattimore; Fred Cosco, Ephus; Bill Casey; John Reed; Dave Cosco; Bob Flanagan; Bill Edgerton; and Jerry Casey."
-        },
-        {
-            author: "A Chimes “Buff” (1966, Washington, D.C.)",
-            text: "For twenty years, a voice of Georgetown has brought to our community as consistent a professional quality of singing as could be found anywhere. As that voice has come down to us over the years little has changed; to hear the Chimes today is to know how they were then. This consistency, this quality is not accidental. It was part of the very design and discipline of the original group whose strength and character are the first things inherited by any would-be Chime or “neophyte.” A voice, yes, but a Chime first. It is this sense of the past—this permanency, this tradition, if you will—that has brought to Alma Mater a distinction few have been able to achieve. And to think that Frank Jones planned the whole thing, right from the outset!"
-        }
-    ],
-    credits: {
-      "Production": [
-            { role: "Cover Design and Layout", name: "R. McCooey and F. Cosco Ltd." },
-            { role: "Cover Photo", name: "Peter Carter" },
-            { role: "Art Work", name: "Commercial Art Studios" }
-        ]
-    },
-    tracks: [
-      { title: "We Meet" },
-      { title: "Roguish Eyes" },
-      { title: "Betty Coed", composer: "arr. D. Colleton" },
-      { title: "The Mountains O’Mourne", soloist: "J. Reed" },
-      { title: "Mandy" },
-      { title: "Wouldn’t It Be Loverly", composer: "arr. D. Colleton" },
-      { title: "Barefoot Days and Hey There Boys", soloist: "F. Cosco" },
-      { title: "The Hunter", composer: "arr. D. Colleton", soloist: "B. Casey and F. Cosco" },
-      { title: "Good Fellow" },
-      { title: "Old Grey Bonnet", composer: "arr. B. Casey and F. Cosco", soloist: "B. Casey" },
-      { title: "Our Strong Band", soloist: "B. Edgerton" },
-      { title: "Rimsky-Korsakov Concerto for Violin and Chorus in E Flat, Opus 16", soloist: "F. Cosco", composer: "arr. B. Casey and F. Cosco" },
-      { title: "The Patriot Game", composer: "arr. B. Casey and F. Cosco", soloist: "J. Reed" },
-      { title: "The Great Historical Bum", composer: "arr. B. Casey and F. Cosco", soloist: "F. Cosco" },
-      { title: "Come Along Home", composer: "arr. D. Colleton" },
-      { title: "Wazoo" }
-    ]
-  },
-  {
-    id: 11,
-    slug: "1958-1959",
-    title: "1958–1959",
-    year: "1959",
-    cover: "bg-[#6A7B95]",
-    image: IMG_1959,
-    link: "https://thechimes.lnk.to/1958-1959AA",
-    linerNotes: [
-        {
-            text: "To characterize The Chimes as merely another college singing group would be to overlook much of what has made them one of the most popular and respected organizations, not only on the Georgetown campus, but throughout the East Coast. Since their founding in 1946 by Frank “Ephus” Jones, they have provided countless hours of entertainment for lovers of barbershop harmony. From the original quartet which gave the group its initial impetus, the annual number of Chimes has gradually swelled till the present when the full complement of ten may be heard rendering many of the old favorites as well as an occasional contemporary arrangement. Though their main interest and support are centered in the Washington area, the Chimes are well-known for their weekend safaris up and down the East Coast. In addition to several radio and television engagements, they have appeared at the Ivy Jazz Band Ball in New York. But the highlight of every year’s activities is the Reunion held at Manasquan, New Jersey on Labor Day Weekend when the “actives” join in song and camaraderie with the Chimes of the past. Anyone who has accompanied the Chimes during one of their frequent “hums” at Mac’s Pub or Gusti’s Restaurant soon realizes that the mutual love of singing is not the only bond uniting them. For their common interests, extending to every sphere of Georgetown life, have given rise to a deep and unifying friendship, which has been nurtured by their close and willing association during many hours of rehearsal, travel and extra-curricular sociability. It is hoped that this recording will reflect the musical ability and friendliness of style which has made The Chimes a part of the tradition of Georgetown."
-        }
-    ],
-    tracks: [
-      { title: "We Meet" },
-      { title: "Here She Comes" },
-      { title: "Love Walked In", composer:"arr. O’Neill ’61", soloist:"Kelly" },
-      { title: "Hearts Win" },
-      { title: "Katie Malone", soloist: "Murphy" },
-      { title: "Down the Old Ox Road", composer:"arr. O’Neill ’61" },
-      { title: "Skinnamarink" },
-      { title: "Mood Indigo", soloist:"Kelly" },
-      { title: "Zingy Wing", soloist:"Williams" },
-      { title: "Temptation", composer:"arr. O’Neill ’61", soloist:"Reardon, Scannell" },
-      { title: "Good Fellow" },
-      { title: "The Georgetown Chimes", soloist:"Kelly" },
-      { title: "Let’s Get Away From It All", composer:"arr. Cramsie ’54", soloist:"Kelly" },
-      { title: "I Love the Ladies" },
-      { title: "A Foggy Day in London Town", composer:"arr. O’Neill ’61" },
-      { title: "Wait Till the Sun Shines Nellie" },
-      { title: "Sweet Roses of Morn" },
-      { title: "Hoya Saxa Joe" },
-      { title: "The Three Bells", composer:"arr. O’Neill ’61", soloist:"Scannell" },
-      { title: "Mandy" },
-      { title: "Serenade", soloist:"Kelly" },
-      { title: "Wazoo" }
-    ]
-  },
-  {
-    id: 12,
-    slug: "under-the-tree",
-    title: "Under the Tree",
-    year: "1958",
-    cover: "bg-[#8A9BB5]",
-    image: IMG_UNDER_THE_TREE,
-    link: "https://thechimes.lnk.to/UnderTheTreeAA",
-    linerNotes: [
-        {
-            author: "Paul Hume (Music Critic of The Washington Post)",
-            text: "The Georgetown Chimes are far too lively to be discussed as any kind of an “Institution.” Nevertheless, they are now a respectable twelve years old, having been brought into corporate existence by Frank Jones back in 1946. During their years of singing, the Chimes have become one of the most popular facets of life around this campus, and many female campuses; they also appear with the Glee Club, whose programs they customarily brighten. The Chimes function autonomously, musically speaking. Their repertoire is chosen by the leader, the Ephus, and is prepared and sung entirely at the impulse of the members of the group. The membership changes from year to year as faces disappear after Commencement and October tryouts bring new faces and voices to their ranks. As I watch and listen to them from concert to concert I often marvel at the easy friendliness of style and the smooth way they toss off their numbers. That the obvious camaraderies of the Chimes pays dividends in the blend of their voices, the unanimity with which they take on a song and the knowledgeable manner they show on stage is a fact more college groups could study. They have found a way of selling whatever they sing to an audience by the way they sing it, and that is the secret of good choral singing any day."
-        }
-    ],
-    credits: {
-      "Production": [
-            { role: "Pictures", name: "Stan Sitnik" },
-            { role: "Recorded and Pressed by", name: "RCA Custom Records" },
-            { role: "Cover and Liner Printed by", name: "MacMurray Press, N.Y." }
-        ]
-    },
-    tracks: [
-      { title: "We Meet" },
-      { title: "Alabamy Bound" },
-      { title: "Lullaby of Birdland", soloist:"Tanger" },
-      { title: "Wimoweh", soloist:"Walsh" },
-      { title: "Blue Skies", soloist:"Kelly" },
-      { title: "Sugar Blues" },
-      { title: "Mountain Greenery", soloist:"Scannell" },
-      { title: "Somebody Loves Me & Tea Leaves", soloist:"Tanger" },
-      { title: "Aloha Medley" },
-      { title: "Oh By Jingo" },
-      { title: "Magazine Cover & Police Gazette" },
-      { title: "Georgetown Medley" },
-      { title: "Some of These Days" },
-      { title: "I Love Paris", soloist:"Reardon" },
-      { title: "Roguish Eyes" },
-      { title: "Greensleeves", soloist:"Kelly" },
-      { title: "Coney Island Washboard" },
-      { title: "Summertime", soloist:"Walsh" },
-      { title: "Donegal", soloist:"Walsh" },
-      { title: "St. Louis Blues", soloist:"Tanger" },
-      { title: "Wazoo" }
-    ]
-  }
-];
-
-const DONOR_TIERS = [
-  {
-    title: "The Ictus",
-    price: "$19.46/year",
-    link: "https://buy.stripe.com/dR67wmceZ3mgdiM9AS",
-    description: "In conducting, the ictus is the precise moment the beat occurs. It is the pulse that holds the ensemble together. For $19.46 a year, you provide that pulse, ensuring the beat goes on.",
-    cta: "Join the Guild"
-  },
-  {
-    title: "The Tonic",
-    price: "$10/month",
-    link: "https://buy.stripe.com/28o3g692N6ysa6AaEJ",
-    description: "Ten bucks a month. It funds the casual hospitality that defines the Chimes, ensuring that when we meet again, the green tea with honey (and other beverages) is always flowing.",
-    cta: "Join The Guild"
-  },
-  {
-    title: "The 1946 Society",
-    price: "$19.46/month",
-    link: "https://buy.stripe.com/6oEbMC7YJf4YbaE5kt",
-    description: "The definitive commitment. By matching the year of our founding every month, you cover the operational essentials. You are the backbone of the day-to-day.",
-    cta: "Join the Guild"
-  },
-  {
-    title: "The Social Chair",
-    price: "$27.80/month",
-    link: "https://buy.stripe.com/aEUaIy7YJaOI5QkcMW",
-    description: "The Chimes are nothing without the gathering. This tier is dedicated to the experience. You are ensuring that when we get together, we can afford to do it right.",
-    cta: "Join the Guild"
-  },
-  {
-    title: "The Founder’s League",
-    price: "$46/month",
-    link: "https://buy.stripe.com/aEUeYO2EpaOI0w04gv",
-    description: "At this level, you aren’t just paying dues; you are subsidizing the future. You fund the archival work that keeps our history from fading.",
-    cta: "Join the Guild"
-  },
-  {
-    title: "The Good Fellow",
-    price: "$100/month",
-    link: "https://buy.stripe.com/5kA17Y92N6ysguYbIY",
-    description: "This is the bedrock of the Alumni Association. Your contribution carries the heavy lifting for our most ambitious projects, ensuring the Chimes legacy is secure for decades to come.",
-    cta: "Join the Guild"
-  }
-];
+// Helper: Check if an event date has passed
+const isPast = (dateStr) => {
+  const eventDate = new Date(dateStr);
+  const today = new Date();
+  return eventDate < today;
+};
 
 // --- Typographic Helper: The Typesetter ---
 const typeset = (text) => {
@@ -858,15 +85,33 @@ const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) =
             <Logo className="h-6 w-auto text-[#041E42] group-hover:text-[#D50032] transition-colors duration-300" />
           </button>
           <div className="hidden lg:flex items-stretch h-full gap-12">
-            {[{ id: 'agenda', label: 'Box Office' }, { id: 'discography', label: 'Listening Room' }, { id: 'store', label: 'Haberdasher' }, { id: 'philanthropy', label: 'Patronage' }, { id: 'backstage', label: 'Backstage' }].map((link) => (<NavButton key={link.id} page={link.id}>{link.label}</NavButton>))}
+            {NAV_LINKS.map((link) => (
+              <NavButton key={link.id} page={link.id}>
+                {link.label}
+              </NavButton>
+            ))}
           </div>
           <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} className="lg:hidden p-3 -mr-3 text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]" aria-label="Toggle Menu">{mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}</button>
         </div>
       </nav>
        <div className={`fixed inset-0 z-40 bg-[#F4F4F3] px-6 md:px-12 pt-32 pb-12 overflow-y-auto transition-transform duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
          <div className="max-w-[1920px] mx-auto flex flex-col h-full justify-between">
-           <div className="flex flex-col"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase border-b border-[#041E42]/20 pb-4">Directory</span>{[{ id: 'home', label: 'Home' }, { id: 'agenda', label: 'Box Office' }, { id: 'discography', label: 'Listening Room' }, { id: 'store', label: 'Haberdasher' }, { id: 'philanthropy', label: 'Patronage' }, { id: 'backstage', label: 'Backstage' }].map((link) => (<NavButton key={link.id} page={link.id} mobile={true}>{link.label}</NavButton>))}</div>
-          <div className="mt-12 space-y-8"><div className="grid grid-cols-2 gap-8"><div><span className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/40 uppercase block mb-4">External</span><div className="flex flex-col gap-4"><a href="https://georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The Actives &#x2197;&#xFE0E;</a><a href="https://3611.georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The House &#x2197;&#xFE0E;</a></div></div></div><p className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/20 uppercase mb-12">© {new Date().getFullYear()} GCAA, Inc.</p></div>
+           <div className="flex flex-col">
+              <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase border-b border-[#041E42]/20 pb-4">
+                Directory
+              </span>
+              
+              {/* Explicit "Home" link for Mobile Only */}
+              <NavButton page="home" mobile={true}>Home</NavButton>
+              
+              {/* The rest of the links from your configuration */}
+              {NAV_LINKS.map((link) => (
+                <NavButton key={link.id} page={link.id} mobile={true}>
+                  {link.label}
+                </NavButton>
+              ))}
+            </div>
+        <div className="mt-12 space-y-8"><div className="grid grid-cols-2 gap-8"><div><span className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/40 uppercase block mb-4">External</span><div className="flex flex-col gap-4"><a href="https://georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The Actives &#x2197;&#xFE0E;</a><a href="https://3611.georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The House &#x2197;&#xFE0E;</a></div></div></div><p className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/20 uppercase mb-12">© {new Date().getFullYear()} GCAA, Inc.</p></div>
         </div>
       </div>
     </>
@@ -874,6 +119,7 @@ const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) =
 };
 
 // --- Home View ---
+const ctmAlumni = EVENTS_DATA.find(e => e.slug === 'cherry-tree-alumni');
 const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
   const [isHeroVisible, setIsHeroVisible] = useState(false);
   useEffect(() => { setTimeout(() => setIsHeroVisible(true), 100); }, []);
@@ -884,6 +130,15 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
       <Helmet>
         <title>Georgetown Chimes Alumni Association</title>
         <meta name="description" content="Brotherhood, Harmony, History. The official home of the Georgetown Chimes Alumni Association." />
+  
+        {/* Open Graph / Social */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Georgetown Chimes Alumni Association" />
+        <meta property="og:description" content="Brotherhood, Harmony, History. Since 1946." />
+        <meta property="og:image" content={IMG_CHERRY_TREE} />
+
+        <link rel="preload" as="image" href={IMG_CHERRY_TREE} />
+
       </Helmet>
       {/* ----------------------- */}
 
@@ -903,10 +158,14 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 Stream “And So It Goes”
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
              </button>
-             <button onClick={() => openEvent(EVENTS_DATA[1])} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors">
-                Book Cherry Tree Tickets
-                <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
-             </button>
+            <button 
+                onClick={() => openEvent(ctmAlumni)} 
+                disabled={isPast(ctmAlumni.date)}
+                className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isPast(ctmAlumni.date) ? 'text-[#041E42]/40 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
+            >
+                {isPast(ctmAlumni.date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
+                {!isPast(ctmAlumni.date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
+            </button>
           </div>
         </div>
       </div>
@@ -975,8 +234,14 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 <p className="text-lg font-serif italic leading-relaxed opacity-80">In 1974, we sang for survival. In 2026, we sing for the legacy. Two nights. One historic setlist.</p>
             </div>
             {/* FEATURE LINK: Direct to CTM II instead of generic Agenda */}
-            <button onClick={() => openEvent(EVENTS_DATA[1])} className="w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#041E42] md:border-0 hover:pl-4 transition-all duration-300 group/btn">
-                <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">Event Details & Tickets</span>
+            <button 
+                onClick={() => openEvent(ctmAlumni)} 
+                disabled={isPast(ctmAlumni.date)}
+                className={`w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#041E42] md:border-0 transition-all duration-300 group/btn ${isPast(ctmAlumni.date) ? 'opacity-50 cursor-default' : 'hover:pl-4'}`}
+            >
+                <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">
+                    {isPast(ctmAlumni.date) ? 'View Archived Event' : 'Event Details & Tickets'}
+                </span>
                 <span className="text-xl font-light group-hover/btn:translate-x-2 transition-transform">→</span>
             </button>
         </div>
@@ -1111,18 +376,17 @@ const EventDetailView = ({ event, navigateTo }) => {
 };
 
 // --- Discography View ---
+// --- Discography View ---
 const DiscographyView = ({ openAlbum, navigateTo }) => {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
+  // 1. Simplified State: We only need the animation trigger now
   const [triggerAnim, setTriggerAnim] = useState(false);
+
+  // 2. Trigger animation on mount (no waiting for images)
   useEffect(() => {
-    const promises = ALBUMS_DATA.map((album) => {
-        if (!album.image) return Promise.resolve();
-        return new Promise((resolve) => { const img = new Image(); img.src = album.image; img.onload = resolve; img.onerror = resolve; });
-    });
-    Promise.all(promises).then(() => { setImagesLoaded(true); setTimeout(() => setTriggerAnim(true), 100); });
+    setTimeout(() => setTriggerAnim(true), 100);
   }, []);
 
-  if (!imagesLoaded) return <div className="min-h-screen bg-[#F4F4F3]" />;
+  // 3. Removed the "if (!imagesLoaded) return" block entirely
 
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
@@ -1135,7 +399,8 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
 
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="The Listening Room" number="Recorded Works" />
-        {/* ... (Rest of DiscographyView Logic remains unchanged) ... */}
+        
+        {/* Preservation Section */}
         <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
             <div className="lg:col-span-4"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span></div>
             <div className="lg:col-span-8">
@@ -1149,13 +414,24 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                 </div>
             </div>
         </div>
+
+        {/* The Grid */}
         <div className="mb-48">
             <div className="flex items-end justify-between border-b-2 border-[#041E42] pb-4 mb-12"><span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">02 — The Discography</span></div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
             {ALBUMS_DATA.map((album, index) => (
                 <div key={album.id} onClick={() => openAlbum(album)} className={`group cursor-pointer flex flex-col gap-6 transition-all duration-[1000ms] ${triggerAnim ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`} style={{ transitionDelay: `${index * 50}ms` }}>
                 <div className="relative aspect-square w-full bg-[#E5E5E4] overflow-hidden shadow-xl shadow-[#041E42]/5">
-                    {album.image ? <img src={album.image} alt={album.title} className="w-full h-full object-cover transition-all duration-[2s] grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 group-hover:scale-105" /> : <div className={`w-full h-full ${album.cover}`}></div>}
+                    {album.image ? (
+                        <img 
+                            src={album.image} 
+                            alt={album.title} 
+                            loading="lazy" 
+                            className="w-full h-full object-cover transition-all duration-[2s] grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 group-hover:scale-105" 
+                        />
+                    ) : (
+                        <div className={`w-full h-full ${album.cover}`}></div>
+                    )}
                     {album.badge && <div className="absolute top-0 right-0 bg-[#D50032] text-[#F4F4F3] px-4 py-2 text-[10px] font-sans font-bold tracking-[0.1em] uppercase">{album.badge}</div>}
                 </div>
                 <div className="flex flex-col items-start border-t border-[#041E42]/20 pt-4">
@@ -1356,7 +632,6 @@ const StoreView = () => (
 
       {/* MANIFESTO: The Big Statement (Heavy Top Border) */}
       <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12">
-        {/* ... (Rest of StoreView Logic remains unchanged) ... */}
         <div className="lg:col-span-4">
           <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#d50032] uppercase block mb-4">
             01 — Battle Gear
@@ -1386,27 +661,10 @@ const StoreView = () => (
             <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">
                 02 — The Collection
             </span>
-
         </div>
 
-        {[
-            {
-              id: "01",
-              name: "The Silk Necktie",
-              price: "75",
-              img: IMG_NECKTIE,
-              link: "https://buy.stripe.com/14k6si2EpcWQemQ3co",
-              desc: "Traditional cut. 100% woven silk."
-            },
-            {
-              id: "02",
-              name: "The Silk Bow Tie",
-              price: "75",
-              img: IMG_BOWTIE,
-              link: "https://buy.stripe.com/eVacQGceZ2icceI28l",
-              desc: "Self-tie. Adjustable sizing. 100% woven silk."
-            }
-          ].map((item) => (
+        {/* USE THE IMPORTED DATA */}
+        {STORE_DATA.map((item) => (
             <div key={item.id} className="group relative border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-8 items-start transition-colors duration-500 hover:bg-white hover:pl-4 -ml-4 pl-4 pr-4">
                 
                 {/* Col 1: REF ID */}
@@ -1418,10 +676,9 @@ const StoreView = () => (
 
                 {/* Col 2: THE IMAGE (The Artifact) */}
                 <div className="md:col-span-3">
-                    {/* CHANGED: aspect-[4/5] -> aspect-[3/4] for stricter geometry */}
                     <div className="aspect-[3/4] bg-[#E5E5E4] overflow-hidden w-full max-w-[240px]">
                         <img 
-                            src={item.img} 
+                            src={item.image} 
                             alt={item.name} 
                             className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 transition-all duration-700"
                         />
@@ -1434,7 +691,6 @@ const StoreView = () => (
                         <h4 className="text-5xl md:text-6xl font-serif text-[#041E42] italic leading-[1.15] md:leading-[1.0] mb-6">
                             {item.name}
                         </h4>
-                        {/* CHANGED: Added typeset() and [text-wrap:balance] */}
                         <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60 [text-wrap:balance]">
                             {typeset(item.desc)}
                         </p>
@@ -1471,6 +727,7 @@ const StoreView = () => (
     </div>
   </div>
 );
+
 
 const PhilanthropyView = () => (
     <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-40 px-6 md:px-12 pb-32 antialiased selection:bg-[#D50032] selection:text-white">
@@ -1832,6 +1089,19 @@ export default function App() {
     window.scrollTo(0, 0);
   };
 
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        document.title = "We meet again soon…";
+      } else {
+        document.title = "Georgetown Chimes Alumni Association";
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
+  }, []);
+
   const openAlbumBySlug = (slug) => navigateTo('album', slug);
   const openAlbum = (album) => navigateTo('album', album.slug);
   const openEvent = (event) => navigateTo('event', event.slug);
@@ -1892,6 +1162,29 @@ export default function App() {
         
         opacity: 0.4;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+      }
+      @media print {
+        /* Hide Navigation and UI */
+        nav, footer, button, .bg-texture { 
+          display: none !important; 
+        }
+        
+        /* Reset Colors for Ink Saving */
+        body, main, div { 
+          background-color: white !important; 
+          color: black !important; 
+        }
+
+        /* Expand Layouts */
+        .grid-cols-12 { display: block !important; }
+        .col-span-8 { width: 100% !important; }
+        
+        /* Show Links */
+        a[href]:after {
+          content: " (" attr(href) ")";
+          font-size: 0.8em;
+          font-weight: normal;
+        }
       }
     `}</style>
     
