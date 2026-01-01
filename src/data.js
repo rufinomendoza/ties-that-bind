@@ -722,7 +722,7 @@ export const DONOR_TIERS = [
     title: "The Founder’s League",
     price: "$46/month",
     link: "https://buy.stripe.com/aEUeYO2EpaOI0w04gv",
-    description: "A commitment to the future. Beyond dues, this level subsidizes our long-term initiatives, specifically funding the archival restoration of master tapes and the preservation of our digital history.",
+    description: "A commitment to the future. This level subsidizes our long-term initiatives, such as funding the archival restoration of master tapes and the preservation of our digital history.",
   },
   {
     title: "The Good Fellow",
