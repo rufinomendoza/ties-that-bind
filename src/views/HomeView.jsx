@@ -122,7 +122,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
             <button 
                 onClick={() => openEvent(ctmAlumni)} 
                 disabled={isPast(ctmAlumni.date)}
-                className={`w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#041E42] md:border-0 transition-all duration-300 group/btn ${isPast(ctmAlumni.date) ? 'opacity-50 cursor-default' : 'hover:pl-4'}`}
+                className={`w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#D50032] md:border-0 transition-all duration-300 group/btn ${isPast(ctmAlumni.date) ? 'opacity-50 cursor-default' : 'hover:pl-4'}`}
             >
                 <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">
                     {isPast(ctmAlumni.date) ? 'View Archived Event' : 'Event Details & Tickets'}
