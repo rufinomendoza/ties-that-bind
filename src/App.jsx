@@ -1,28 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { 
-  Menu, 
-  X, 
-  ArrowRight, 
-  ChevronDown,
-  ExternalLink,
-  ChevronLeft,
-  Play,
-  Ticket
-} from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
-// Import Data (Added STORE_DATA)
+// Import Data
 import { EVENTS_DATA, ALBUMS_DATA, DONOR_TIERS, STORE_DATA } from './data';
 import Logo from './components/Logo';
 
-// --- Local Imports ---
 // We ONLY need images used directly in the App.jsx layout (Hero & Feature)
 import IMG_CHERRY_TREE from './assets/composite-set-compressed.jpg';
 import IMG_CTM_BOND from './assets/ctm-bond.jpeg';
-
-// NOTE: All Album, Store, and Logo PNG imports have been removed 
-// because they are now handled by data.js or the SVG component.
-
 
 // --- Preview Placeholders (Comment out for Production) ---
 // const IMG_CHERRY_TREE = "https://placehold.co/1920x1080/0A0A0A/FFFFFF?text=The+Classic";
@@ -51,6 +37,13 @@ const NAV_LINKS = [
   { id: 'philanthropy', label: 'Patronage' },
   { id: 'backstage', label: 'Backstage' }
 ];
+
+// Helper: Check if an event date has passed
+const isPast = (dateStr) => {
+  const eventDate = new Date(dateStr);
+  const today = new Date();
+  return eventDate < today;
+};
 
 // --- Typographic Helper: The Typesetter ---
 const typeset = (text) => {
@@ -137,7 +130,15 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
       <Helmet>
         <title>Georgetown Chimes Alumni Association</title>
         <meta name="description" content="Brotherhood, Harmony, History. The official home of the Georgetown Chimes Alumni Association." />
+  
+        {/* Open Graph / Social */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Georgetown Chimes Alumni Association" />
+        <meta property="og:description" content="Brotherhood, Harmony, History. Since 1946." />
+        <meta property="og:image" content={IMG_CHERRY_TREE} />
+
         <link rel="preload" as="image" href={IMG_CHERRY_TREE} />
+
       </Helmet>
       {/* ----------------------- */}
 
@@ -157,9 +158,13 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 Stream “And So It Goes”
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
              </button>
-             <button onClick={() => openEvent(EVENTS_DATA[1])} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors">
-                Book Cherry Tree Tickets
-                <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
+             <button 
+                  onClick={() => openEvent(EVENTS_DATA[1])} 
+                  disabled={isPast(EVENTS_DATA[1].date)}
+                  className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isPast(EVENTS_DATA[1].date) ? 'text-[#041E42]/40 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
+             >
+                  {isPast(EVENTS_DATA[1].date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
+                  {!isPast(EVENTS_DATA[1].date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
              </button>
           </div>
         </div>
@@ -229,8 +234,14 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 <p className="text-lg font-serif italic leading-relaxed opacity-80">In 1974, we sang for survival. In 2026, we sing for the legacy. Two nights. One historic setlist.</p>
             </div>
             {/* FEATURE LINK: Direct to CTM II instead of generic Agenda */}
-            <button onClick={() => openEvent(ctmAlumni)} className="w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#041E42] md:border-0 hover:pl-4 transition-all duration-300 group/btn">
-                <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">Event Details & Tickets</span>
+            <button 
+                onClick={() => openEvent(ctmAlumni)} 
+                disabled={isPast(ctmAlumni.date)}
+                className={`w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#041E42] md:border-0 transition-all duration-300 group/btn ${isPast(ctmAlumni.date) ? 'opacity-50 cursor-default' : 'hover:pl-4'}`}
+            >
+                <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">
+                    {isPast(ctmAlumni.date) ? 'View Archived Event' : 'Event Details & Tickets'}
+                </span>
                 <span className="text-xl font-light group-hover/btn:translate-x-2 transition-transform">→</span>
             </button>
         </div>
@@ -667,7 +678,7 @@ const StoreView = () => (
                 <div className="md:col-span-3">
                     <div className="aspect-[3/4] bg-[#E5E5E4] overflow-hidden w-full max-w-[240px]">
                         <img 
-                            src={item.img} 
+                            src={item.image} 
                             alt={item.name} 
                             className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 transition-all duration-700"
                         />

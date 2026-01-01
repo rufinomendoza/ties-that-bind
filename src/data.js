@@ -744,7 +744,7 @@ export const STORE_DATA = [
     id: "01",
     name: "The Silk Necktie",
     price: "75",
-    img: IMG_NECKTIE,
+    image: IMG_NECKTIE,
     link: "https://buy.stripe.com/14k6si2EpcWQemQ3co",
     desc: "Traditional cut. 100% woven silk."
   },
@@ -752,7 +752,7 @@ export const STORE_DATA = [
     id: "02",
     name: "The Silk Bow Tie",
     price: "75",
-    img: IMG_BOWTIE,
+    image: IMG_BOWTIE,
     link: "https://buy.stripe.com/eVacQGceZ2icceI28l",
     desc: "Self-tie. Adjustable sizing. 100% woven silk."
   }
