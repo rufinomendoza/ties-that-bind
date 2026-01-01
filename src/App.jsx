@@ -81,7 +81,7 @@ const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) =
     <>
       <nav className="fixed top-0 left-0 w-full z-50 bg-[#F4F4F3] border-b-2 border-[#041E42] h-20 md:h-24 px-6 md:px-12 transition-all duration-500">
         <div className="max-w-[1920px] mx-auto h-full flex justify-between items-center">
-          <button className="flex items-center gap-4 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4" onClick={() => navigateTo('home')}>
+          <button className="flex items-center gap-4 cursor-pointer group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4" onClick={() => navigateTo('home')} aria-label="Home">
             <Logo className="h-6 w-auto text-[#041E42] group-hover:text-[#D50032] transition-colors duration-300" />
           </button>
           <div className="hidden lg:flex items-stretch h-full gap-12">
@@ -111,7 +111,7 @@ const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) =
                 </NavButton>
               ))}
             </div>
-        <div className="mt-12 space-y-8"><div className="grid grid-cols-2 gap-8"><div><span className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/40 uppercase block mb-4">External</span><div className="flex flex-col gap-4"><a href="https://georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The Actives &#x2197;&#xFE0E;</a><a href="https://3611.georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The House &#x2197;&#xFE0E;</a></div></div></div><p className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/20 uppercase mb-12">© {new Date().getFullYear()} GCAA, Inc.</p></div>
+        <div className="mt-12 space-y-8"><div className="grid grid-cols-2 gap-8"><div><span className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/60 uppercase block mb-4">External</span><div className="flex flex-col gap-4"><a href="https://georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The Actives &#x2197;&#xFE0E;</a><a href="https://3611.georgetownchimes.org" target="_blank" rel="noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">The House &#x2197;&#xFE0E;</a></div></div></div><p className="text-[9px] font-sans font-bold tracking-[0.2em] text-[#041E42]/60 uppercase mb-12">© {new Date().getFullYear()} GCAA, Inc.</p></div>
         </div>
       </div>
     </>
@@ -159,7 +159,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
             <button 
                 onClick={() => openEvent(ctmAlumni)} 
                 disabled={isPast(ctmAlumni.date)}
-                className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isPast(ctmAlumni.date) ? 'text-[#041E42]/40 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
+                className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isPast(ctmAlumni.date) ? 'text-[#041E42]/60 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
             >
                 {isPast(ctmAlumni.date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
                 {!isPast(ctmAlumni.date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
@@ -179,7 +179,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                     <div className="w-12 h-[2px] bg-[#041E42]"></div>
                 </div>
                 <div className="hidden lg:block pt-24">
-                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/40 hover:text-[#041E42] transition-colors flex items-center gap-2">
+                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60 hover:text-[#041E42] transition-colors flex items-center gap-2">
                         <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
                         Authorized Access
                     </button>
@@ -194,17 +194,17 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 ].map((item) => (
                   <div key={item.id} onClick={() => navigateTo(item.slug)} className="group flex flex-row items-baseline justify-between py-12 border-b border-[#041E42]/20 transition-all duration-500 hover:bg-white hover:pl-6 -ml-6 pl-6 pr-6 cursor-pointer">
                     <div className="flex items-baseline gap-12 md:gap-16">
-                      <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 group-hover:text-[#D50032] transition-colors uppercase">{item.id}</span>
+                      <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/60 group-hover:text-[#D50032] transition-colors uppercase">{item.id}</span>
                       <span className="text-5xl md:text-6xl font-serif text-[#041E42] italic leading-none">{item.room}</span>
                     </div>
                     <div className="flex items-center gap-8">
-                       <span className="hidden md:block text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40">{item.sub}</span>
+                       <span className="hidden md:block text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/60">{item.sub}</span>
                        <span className="text-xl font-light text-[#041E42] group-hover:translate-x-2 transition-transform">→</span>
                     </div>
                   </div>
                 ))}
                 <div className="lg:hidden pt-12 flex justify-center">
-                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/40 hover:text-[#041E42] transition-colors flex items-center gap-2">
+                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60 hover:text-[#041E42] transition-colors flex items-center gap-2">
                         <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
                         Authorized Access
                     </button>
@@ -433,7 +433,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                     {album.badge && <div className="absolute top-0 right-0 bg-[#D50032] text-[#F4F4F3] px-4 py-2 text-[10px] font-sans font-bold tracking-[0.1em] uppercase">{album.badge}</div>}
                 </div>
                 <div className="flex flex-col items-start border-t border-[#041E42]/20 pt-4">
-                    <div className="flex justify-between w-full items-baseline mb-2"><span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 uppercase tabular-nums">Issue {album.year}</span></div>
+                    <div className="flex justify-between w-full items-baseline mb-2"><span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/60 uppercase tabular-nums">Issue {album.year}</span></div>
                     <h3 className="font-serif text-3xl md:text-4xl text-[#041E42] leading-[1.15] md:leading-[1.0] group-hover:italic transition-all duration-500">{typeset(album.title)}</h3>
                 </div>
                 </div>
@@ -532,7 +532,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                             
                             {/* Left Col: Index & Title (Spans 7 Cols) */}
                             <div className="md:col-span-7 flex items-baseline gap-8">
-                                <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 tabular-nums w-8 flex-shrink-0">
+                                <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/60 tabular-nums w-8 flex-shrink-0">
                                     {String(idx + 1).padStart(2, '0')}
                                 </span>
                                 <div>
@@ -570,7 +570,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                                 <div className="space-y-6">
                                     {roles.map((role, idx) => (
                                         <div key={idx} className="flex flex-col">
-                                            <span className="text-[9px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/40 mb-1">{role.role}</span>
+                                            <span className="text-[9px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60 mb-1">{role.role}</span>
                                             <span className="font-serif text-xl text-[#041E42] leading-tight [text-wrap:balance]">{typeset(role.name)}</span>
                                         </div>
                                     ))}
@@ -597,7 +597,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
             {selectedAlbum.acknowledgements && (
                 <div className="py-24 border-t border-[#041E42]/10 mb-24">
-                    <h5 className="font-sans font-bold text-[11px] uppercase tracking-[0.1em] mb-12 text-[#041E42]/40">Acknowledgements</h5>
+                    <h5 className="font-sans font-bold text-[11px] uppercase tracking-[0.1em] mb-12 text-[#041E42]/60">Acknowledgements</h5>
                     <div className="flex flex-wrap gap-x-8 gap-y-4 max-w-4xl">
                         {selectedAlbum.acknowledgements.map((name, i) => (
                             <span key={i} className="text-xl text-[#041E42] font-serif italic opacity-60 hover:opacity-100 transition-opacity cursor-default pl-2 -ml-2">{typeset(name)}</span>
@@ -667,7 +667,7 @@ const StoreView = () => (
                 
                 {/* Col 1: REF ID */}
                 <div className="md:col-span-2 pt-2">
-                    <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 uppercase group-hover:text-[#D50032] transition-colors">
+                    <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/60 uppercase group-hover:text-[#D50032] transition-colors">
                         Ref. {item.id}
                     </span>
                 </div>
@@ -783,7 +783,7 @@ const PhilanthropyView = () => (
                         
                         {/* Col 1: Level ID (Technical) */}
                         <div className="md:col-span-2 pt-2">
-                            <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 uppercase group-hover:text-[#D50032] transition-colors">
+                            <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/60 uppercase group-hover:text-[#D50032] transition-colors">
                                 Level 0{idx + 1}
                             </span>
                         </div>
@@ -804,7 +804,7 @@ const PhilanthropyView = () => (
                              <span className="text-lg font-sans font-bold text-[#041E42] tracking-wide tabular-nums block opacity-100">
                                     {amount}
                             </span>
-                            <span className="text-[9px] font-sans font-bold tracking-[0.1em] text-[#041E42]/40 uppercase">
+                            <span className="text-[9px] font-sans font-bold tracking-[0.1em] text-[#041E42]/60 uppercase">
                                     per {frequency}
                             </span>
                         </div>
@@ -1025,6 +1025,7 @@ const NotFoundView = ({ navigateTo }) => (
                 <button 
                     onClick={() => navigateTo('home')} 
                     className="group flex items-center gap-4 text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]"
+                    aria-label="Home"
                 >
                     <span>Return to Harmony</span>
                     <span className="text-lg font-light group-hover:translate-x-2 transition-transform">→</span>
@@ -1203,15 +1204,15 @@ export default function App() {
       <footer className="bg-[#F4F4F3] text-[#041E42] pt-32 pb-12 px-6 md:px-12 antialiased selection:bg-[#D50032] selection:text-white">
         <div className="max-w-[1920px] mx-auto">
           <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-x-12">
-            <div className="md:col-span-4 flex flex-col justify-between h-full"><div><Logo className="h-8 w-auto mb-12 text-[#041E42] opacity-80" /><div className="space-y-6 max-w-xs"><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/60">Incorporated in Delaware<br/>501(c)(7) Non-Profit</p><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/40">Kindly be advised that contributions are not tax-deductible.</p></div></div></div>
+            <div className="md:col-span-4 flex flex-col justify-between h-full"><div><Logo className="h-8 w-auto mb-12 text-[#041E42] opacity-80" /><div className="space-y-6 max-w-xs"><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/60">Incorporated in Delaware<br/>501(c)(7) Non-Profit</p><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/60">Kindly be advised that contributions are not tax-deductible.</p></div></div></div>
             <div className="md:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
               <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032] border-b border-[#041E42]/20 pb-4 block">Index</span>{[{ name: 'Box Office', slug: 'agenda' }, { name: 'Listening Room', slug: 'discography' }, { name: 'Haberdasher', slug: 'store' }, { name: 'Patronage', slug: 'philanthropy' }].map((item) => (<button key={item.name} onClick={() => navigateTo(item.slug)} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">{item.name}</button>))}</div>
-              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40 border-b border-[#041E42]/20 pb-4 block">Backstage</span><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">Database</button><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">Messaging</button></div>
-              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/40 border-b border-[#041E42]/20 pb-4 block">External</span>{[{ name: 'The House', url: 'https://3611.georgetownchimes.org' }, { name: 'The Actives', url: 'https://georgetownchimes.org' }].map((site) => (<button key={site.name} onClick={() => window.open(site.url, '_blank', 'noopener,noreferrer')} className="group flex items-center gap-2 text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">{site.name}<span className="text-lg font-light leading-none opacity-0 group-hover:opacity-100 transition-opacity translate-y-[-1px]">&#x2197;&#xFE0E;</span></button>))}</div>
+              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/60 border-b border-[#041E42]/20 pb-4 block">Backstage</span><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">Database</button><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">Messaging</button></div>
+              <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/60 border-b border-[#041E42]/20 pb-4 block">External</span>{[{ name: 'The House', url: 'https://3611.georgetownchimes.org' }, { name: 'The Actives', url: 'https://georgetownchimes.org' }].map((site) => (<button key={site.name} onClick={() => window.open(site.url, '_blank', 'noopener,noreferrer')} className="group flex items-center gap-2 text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">{site.name}<span className="text-lg font-light leading-none opacity-0 group-hover:opacity-100 transition-opacity translate-y-[-1px]">&#x2197;&#xFE0E;</span></button>))}</div>
             </div>
           </div>
         </div>
-        <div className="max-w-[1920px] mx-auto mt-24 pt-6 border-t border-[#041E42]/10 flex flex-col md:flex-row justify-between items-center text-[9px] font-sans font-bold text-[#041E42]/40 uppercase tracking-[0.2em] gap-8"><span>© {new Date().getFullYear()} Georgetown Chimes Alumni Association, Inc.</span><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 group hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">Return to Top <span className="text-lg font-light leading-none rotate-180">↓</span></button></div>
+        <div className="max-w-[1920px] mx-auto mt-24 pt-6 border-t border-[#041E42]/10 flex flex-col md:flex-row justify-between items-center text-[9px] font-sans font-bold text-[#041E42]/60 uppercase tracking-[0.2em] gap-8"><span>© {new Date().getFullYear()} Georgetown Chimes Alumni Association, Inc.</span><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 group hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">Return to Top <span className="text-lg font-light leading-none rotate-180">↓</span></button></div>
       </footer>
     </div>
   );
