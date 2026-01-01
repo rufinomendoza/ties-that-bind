@@ -23,15 +23,10 @@ const viewPrefetchMap = {
 // --- Swiss System NavBar ---
 export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) => {
   
-  // Refactored NavButton to handle its own prefetching
-  const NavButton = ({ page, children, mobile = false }) => {
-    
+  const NavButton = ({ page, children, mobile = false, isLogo = false }) => {
     const handlePrefetch = () => {
       const prefetch = viewPrefetchMap[page];
-      if (prefetch) {
-        prefetch();
-        // console.log(`⚡ Prefetching: ${page}`);
-      }
+      if (prefetch) prefetch();
     };
 
     return (
@@ -40,11 +35,14 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
           navigateTo(page); 
           if (mobile) setMobileMenuOpen(false); 
         }} 
-        onMouseEnter={!mobile ? handlePrefetch : undefined} // Trigger on hover (desktop only)
-        className={`${mobile ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42] border-b border-[#041E42]/5' : `h-full flex items-center text-[10px] font-bold tracking-[0.25em] uppercase transition-all duration-500 relative group ${activePage === page ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`}`}
+        onMouseEnter={!mobile ? handlePrefetch : undefined}
+        className={mobile 
+          ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42] border-b border-[#041E42]/5' 
+          : `h-full flex items-center transition-all duration-500 relative group ${isLogo ? '' : 'text-[10px] font-bold tracking-[0.25em] uppercase'} ${activePage === page ? 'text-[#041E42]' : 'text-[#595959] hover:text-[#041E42]'}`
+        }
       >
         {children}
-        {!mobile && (
+        {!mobile && !isLogo && (
           <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#041E42] transform origin-left transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${activePage === page ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
         )}
       </button>
@@ -53,13 +51,15 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-50 bg-[#F4F4F3] border-b-2 border-[#041E42] h-20 md:h-24 px-6 md:px-12 transition-all duration-500">
+      <nav className="fixed top-0 left-0 w-full z-50 bg-[#F4F4F3] border-b-2 border-[#041E42] h-20 md:h-24 px-6 md:px-12">
         <div className="max-w-[1920px] mx-auto h-full flex justify-between items-center">
-          {/* Use NavButton for Home too to benefit from prefetching */}
-          <NavButton page="home">
+          
+          {/* Logo / Home Button */}
+          <NavButton page="home" isLogo={true}>
             <Logo className="h-6 w-auto text-[#041E42] group-hover:text-[#D50032] transition-colors duration-300" />
           </NavButton>
 
+          {/* Desktop Links */}
           <div className="hidden lg:flex items-stretch h-full gap-12">
             {NAV_LINKS.map((link) => (
               <NavButton key={link.id} page={link.id}>
@@ -67,10 +67,30 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
               </NavButton>
             ))}
           </div>
-          {/* ... mobile toggle button ... */}
+
+          {/* Hamburger / Toggle Button - RESTORED HERE */}
+          <button 
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
+            className="lg:hidden p-3 -mr-3 text-[#041E42] hover:text-[#D50032] transition-colors focus:outline-none"
+            aria-label="Toggle Menu"
+          >
+            {mobileMenuOpen ? <X size={24} strokeWidth={1.5} /> : <Menu size={24} strokeWidth={1.5} />}
+          </button>
+
         </div>
       </nav>
-      {/* ... mobile menu drawer ... */}
+
+      {/* Mobile Drawer */}
+      <div className={`fixed inset-0 z-40 bg-[#F4F4F3] px-6 pt-32 transition-transform duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] ${mobileMenuOpen ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className="flex flex-col">
+          <NavButton page="home" mobile={true}>Home</NavButton>
+          {NAV_LINKS.map((link) => (
+            <NavButton key={link.id} page={link.id} mobile={true}>
+              {link.label}
+            </NavButton>
+          ))}
+        </div>
+      </div>
     </>
   );
 };
