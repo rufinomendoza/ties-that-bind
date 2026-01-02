@@ -71,12 +71,19 @@ export default function App() {
     window.scrollTo(0, 0);
   };
 
+  // FIX: SEO / Metadata Bug
+  // Correctly saves the current dynamic title before hiding, and restores it on return.
   useEffect(() => {
+    let previousTitle = document.title;
+
     const handleVisibilityChange = () => {
       if (document.hidden) {
+        // Capture the specific page title (set by Helmet) before we overwrite it
+        previousTitle = document.title;
         document.title = "We meet again soon…";
       } else {
-        document.title = "Georgetown Chimes Alumni Association";
+        // Restore the specific title (e.g., "Box Office | ...") instead of a generic reset
+        document.title = previousTitle;
       }
     };
 
@@ -104,7 +111,6 @@ export default function App() {
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] px-6 py-4 bg-[#041E42] text-[#F4F4F3] text-xs font-bold uppercase tracking-widest border border-[#D50032]">Skip to main content</a>
       <NavBar activePage={activePage} navigateTo={navigateTo} mobileMenuOpen={isMenuOpen} setMobileMenuOpen={setIsMenuOpen} />
       <main id="main-content" className="min-h-screen">
-        {/* FIX: Add class 'page-wrapper' to TransitionGroup to enable CSS Grid stacking */}
         <TransitionGroup className="page-wrapper">
           <CSSTransition
             key={route.view + (route.slug || '')}
