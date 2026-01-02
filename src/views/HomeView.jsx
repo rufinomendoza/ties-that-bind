@@ -79,8 +79,8 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
              </div>
              <div className="lg:col-span-8 flex flex-col">
                 {[
-                  { sub: "Tickets & Gatherings", room: "Box Office", slug: 'events', id: "01" },
-                  { sub: "The Recorded Archive", room: "Listening Room", slug: 'albums', id: "02" },
+                  { sub: "Tickets & Gatherings", room: "Box Office", slug: 'agenda', id: "01" },
+                  { sub: "The Recorded Archive", room: "Listening Room", slug: 'discography', id: "02" },
                   { sub: "Specially Commissioned", room: "Haberdashery", slug: 'store', id: "03" },
                   { sub: "Fund the Brotherhood", room: "Patronage", slug: 'philanthropy', id: "04" },
                 ].map((item) => (
