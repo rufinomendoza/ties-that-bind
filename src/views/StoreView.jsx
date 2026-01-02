@@ -50,50 +50,62 @@ const StoreView = () => (
         </div>
 
         {/* USE THE IMPORTED DATA */}
-        {STORE_DATA.map((item) => (
-            <div key={item.id} className="group relative border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-y-8 gap-x-8 items-start transition-colors duration-500 hover:bg-white hover:pl-4 -ml-4 pl-4 pr-4">
-                
-                {/* Col 1: REF ID */}
-                <div className="md:col-span-2 pt-2">
-                    <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 uppercase group-hover:text-[#D50032] transition-colors">
-                        Ref. {item.id}
+        {STORE_DATA.map((item, idx) => (
+            <div 
+                key={item.id} 
+                className="group relative border-b border-[#041E42]/20 py-16 grid grid-cols-1 md:grid-cols-12 gap-y-12 gap-x-8 items-start transition-all duration-500 hover:bg-white hover:pl-6 -ml-6 pl-6 pr-6 cursor-default"
+            >
+                {/* Col 1: THE SPEC (Ref & Origin) */}
+                <div className="md:col-span-2 flex flex-col gap-1">
+                    <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#D50032] uppercase">
+                        Ref. 0{idx + 1}
+                    </span>
+                    <span className="text-[9px] font-sans font-bold tracking-[0.05em] text-[#041E42]/40 uppercase">
+                        Pure Silk · UK Woven
                     </span>
                 </div>
 
-                {/* Col 2: THE IMAGE (The Artifact) */}
+                {/* Col 2: THE ARTIFACT (Image) */}
                 <div className="md:col-span-3">
-                    <div className="aspect-[3/4] bg-[#E5E5E4] overflow-hidden w-full max-w-[240px]">
+                    <div className="aspect-[3/4] bg-[#E5E5E4] overflow-hidden w-full shadow-2xl shadow-[#041E42]/5">
                         <img 
                             src={item.image} 
                             alt={item.name} 
-                            className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 transition-all duration-700"
+                            className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 transition-all duration-1000 ease-in-out scale-105 group-hover:scale-100"
                         />
                     </div>
                 </div>
 
-                {/* Col 3: TITLE & DETAILS */}
-                <div className="md:col-span-5 flex flex-col justify-between h-full py-2">
-                    <div>
-                        <h4 className="text-5xl md:text-6xl font-serif text-[#041E42] italic leading-[1.15] md:leading-[1.0] mb-6">
-                            {item.name}
-                        </h4>
-                        <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60 [text-wrap:balance]">
-                            {typeset(item.desc)}
-                        </p>
-                    </div>
+                {/* Col 3: THE NARRATIVE (Title & Desc) */}
+                <div className="md:col-span-5 flex flex-col justify-start pt-2">
+                    <h4 className="text-5xl md:text-6xl font-serif text-[#041E42] italic leading-none mb-8">
+                        {item.name}
+                    </h4>
+                    <p className="text-[#041E42] text-xl font-serif leading-relaxed opacity-80 max-w-md [text-wrap:balance]">
+                        {typeset(item.desc)}
+                    </p>
+                    {/* Added: Specific detail for the "A+" feel */}
+                    <p className="mt-6 text-[10px] font-sans font-bold uppercase tracking-widest text-[#041E42]/40">
+                        Standard Issue Battle Gear
+                    </p>
                 </div>
 
-                {/* Col 4: PRICE & ACTION */}
-                <div className="md:col-span-2 flex flex-col justify-between h-full py-2 items-start md:items-end">
-                    <span className="text-xl font-sans font-bold text-[#041E42] tracking-wide tabular-nums block opacity-80">
-                        ${item.price}
-                    </span>
+                {/* Col 4: THE ACQUISITION (Price & CTA) */}
+                <div className="md:col-span-2 flex flex-col justify-between h-full pt-2 items-start md:items-end gap-12">
+                    <div className="text-left md:text-right">
+                        <span className="text-3xl font-sans font-bold text-[#041E42] tracking-tight tabular-nums block">
+                            ${item.price}
+                        </span>
+                        <span className="text-[9px] font-sans font-bold tracking-[0.1em] text-[#041E42]/50 uppercase">
+                            Plus Shipping
+                        </span>
+                    </div>
                     
                     <a 
                         href={item.link} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="flex items-center gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] group-hover:text-[#D50032] transition-colors mt-8 md:mt-0"
+                        className="w-full md:w-auto flex items-center justify-center gap-4 px-8 py-4 border border-[#041E42] text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] hover:bg-[#041E42] hover:text-white transition-all duration-300"
                     >
                         <span>Acquire</span>
                         <span className="text-lg font-light translate-y-[-1px]">→</span>
