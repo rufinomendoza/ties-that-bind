@@ -722,7 +722,7 @@ export const DONOR_TIERS = [
     title: "The 1946 Society",
     price: "$19.46/month",
     link: "https://buy.stripe.com/6oEbMC7YJf4YbaE5kt",
-    description: "The definitive commitment. By matching the year of our founding every month, you become the backbone of our operations. This is the the foundation of our sustainability.",
+    description: "The definitive commitment. By matching the year of our founding every month, you become the backbone of our operations. This is the foundation of our sustainability.",
   },
   {
     title: "The Social Chair",

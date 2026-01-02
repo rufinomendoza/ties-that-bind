@@ -20,7 +20,7 @@
         var link = document.createElement('link');
         link.rel = 'preload';
         link.as = 'image';
-        link.href = '/images/og-image.jpg'; // Make sure image is in public folder
+        link.href = '/og-image.jpg'; // Remove '/images' prefix to match the file's actual location in public/
         link.fetchPriority = 'high';
         document.head.appendChild(link);
       }
