@@ -108,7 +108,8 @@ export default function App() {
           <CSSTransition
             key={route.view + (route.slug || '')}
             classNames="page"
-            timeout={300} // Changed from 500 to 300
+            // FIX: Match the CSS transition duration (800ms) defined in index.css
+            timeout={800} 
             unmountOnExit
           >
             <Suspense fallback={<div className="h-screen flex items-center justify-center font-bold tracking-widest uppercase text-[10px]">Loading...</div>}>
