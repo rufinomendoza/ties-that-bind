@@ -43,14 +43,17 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 Stream “And So It Goes”
                 <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
              </button>
-            <button 
-                onClick={() => openEvent(ctmAlumni)} 
-                disabled={isPast(ctmAlumni.date)}
-                className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isPast(ctmAlumni.date) ? 'text-[#041E42]/70 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
-            >
-                {isPast(ctmAlumni.date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
-                {!isPast(ctmAlumni.date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
-            </button>
+            {ctmAlumni && (
+              <button 
+                  onClick={() => openEvent(ctmAlumni)} 
+                  // Use optional chaining (?.) just to be safe, though the wrapper handles it
+                  disabled={isPast(ctmAlumni?.date)}
+                  className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isPast(ctmAlumni?.date) ? 'text-[#041E42]/70 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
+              >
+                  {isPast(ctmAlumni?.date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
+                  {!isPast(ctmAlumni?.date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
+              </button>
+            )}
           </div>
         </div>
       </div>
@@ -119,16 +122,29 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 <p className="text-lg font-serif italic leading-relaxed opacity-80">In 1974, we sang for survival. In 2026, we sing for the legacy. Two nights. One historic setlist.</p>
             </div>
             {/* FEATURE LINK: Direct to CTM II instead of generic Agenda */}
-            <button 
-                onClick={() => openEvent(ctmAlumni)} 
-                disabled={isPast(ctmAlumni.date)}
-                className={`w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#D50032] md:border-0 transition-all duration-300 group/btn ${isPast(ctmAlumni.date) ? 'opacity-50 cursor-default' : 'hover:pl-4'}`}
-            >
-                <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">
-                    {isPast(ctmAlumni.date) ? 'View Archived Event' : 'Event Details & Tickets'}
-                </span>
-                <span className="text-xl font-light group-hover/btn:translate-x-2 transition-transform text-[#D50032]">→</span>
-            </button>
+            {ctmAlumni ? (
+                <button 
+                    onClick={() => openEvent(ctmAlumni)} 
+                    disabled={isPast(ctmAlumni.date)}
+                    className={`w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#D50032] md:border-0 transition-all duration-300 group/btn ${isPast(ctmAlumni.date) ? 'opacity-50 cursor-default' : 'hover:pl-4'}`}
+                >
+                    <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">
+                        {isPast(ctmAlumni.date) ? 'View Archived Event' : 'Event Details & Tickets'}
+                    </span>
+                    <span className="text-xl font-light group-hover/btn:translate-x-2 transition-transform text-[#D50032]">→</span>
+                </button>
+            ) : (
+                // Fallback if the specific event is missing: Link to the general Agenda
+                <button 
+                    onClick={() => navigateTo('agenda')} 
+                    className="w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#D50032] md:border-0 transition-all duration-300 group/btn hover:pl-4"
+                >
+                    <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">
+                        View All Events
+                    </span>
+                    <span className="text-xl font-light group-hover/btn:translate-x-2 transition-transform text-[#D50032]">→</span>
+                </button>
+            )}
         </div>
       </section>
     </>
