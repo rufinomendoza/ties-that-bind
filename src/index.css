@@ -64,16 +64,25 @@ body {
 
 /* --- High-Performance Page Transitions --- */
 
+/* FIX: CSS Grid Overlay for Transitions */
 .page-wrapper {
+  display: grid;
+  grid-template-areas: "content";
   width: 100%;
-  /* Fixes sub-pixel rendering issues during the 800ms fade */
   transform: translateZ(0); 
   backface-visibility: hidden;
+}
+
+/* Ensure both entering and exiting pages overlap perfectly */
+.page-wrapper > * {
+  grid-area: content;
+  width: 100%;
 }
 
 /* 1. Incoming Page */
 .page-enter {
   opacity: 0;
+  z-index: 10; /* Keep new content on top */
 }
 
 .page-enter-active {
@@ -85,13 +94,8 @@ body {
 /* 2. Outgoing Page */
 .page-exit {
   opacity: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* Force it to match the width of the parent exactly */
-  width: 100%;
-  height: auto;
   pointer-events: none; /* Prevents clicking the old page while it's fading out */
+  z-index: 0;
 }
 
 .page-exit-active {

@@ -26,6 +26,7 @@ export default function App() {
   const getRouteFromPath = () => {
     const path = window.location.pathname;
     const cleanPath = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+    
     if (cleanPath === '/' || cleanPath === '') return { view: 'home', slug: null };
     if (cleanPath === '/events') return { view: 'agenda', slug: null };
     if (cleanPath === '/albums') return { view: 'discography', slug: null };
@@ -47,7 +48,6 @@ export default function App() {
 
   useEffect(() => {
     const handlePopState = () => { setRoute(getRouteFromPath()); setIsMenuOpen(false); };
-    // FIX: Removed window.scrollTo(0, 0) to allow browser's native scroll restoration 
     window.addEventListener('popstate', handlePopState);
     return () => { window.removeEventListener('popstate', handlePopState); };
   }, []);
@@ -92,12 +92,10 @@ export default function App() {
   const selectedEvent = activePage === 'event' && route.slug ? EVENTS_DATA.find(e => e.slug === route.slug) : null;
   const selectedAlbum = activePage === 'album' && route.slug ? ALBUMS_DATA.find(a => a.slug === route.slug) : null;
 
-  // Check if we are on a detail view but the data lookup failed
   const isMissingData = 
     (activePage === 'event' && !selectedEvent) || 
     (activePage === 'album' && !selectedAlbum);
 
-  // If missing data, override the view to '404'
   const effectiveView = isMissingData ? '404' : activePage;
 
   return (
@@ -106,12 +104,11 @@ export default function App() {
       <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] px-6 py-4 bg-[#041E42] text-[#F4F4F3] text-xs font-bold uppercase tracking-widest border border-[#D50032]">Skip to main content</a>
       <NavBar activePage={activePage} navigateTo={navigateTo} mobileMenuOpen={isMenuOpen} setMobileMenuOpen={setIsMenuOpen} />
       <main id="main-content" className="min-h-screen">
-        <TransitionGroup>
-        {/* 2. CSSTransition needs a unique key to know when to trigger */}
+        {/* FIX: Add class 'page-wrapper' to TransitionGroup to enable CSS Grid stacking */}
+        <TransitionGroup className="page-wrapper">
           <CSSTransition
             key={route.view + (route.slug || '')}
             classNames="page"
-            // FIX: Match the CSS transition duration (800ms) defined in index.css
             timeout={800} 
             unmountOnExit
           >
@@ -119,16 +116,11 @@ export default function App() {
               {effectiveView === 'home' && <HomeView navigateTo={navigateTo} openAlbumBySlug={openAlbumBySlug} openEvent={openEvent} />}
               {effectiveView === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
               {effectiveView === 'discography' && <DiscographyView openAlbum={openAlbum} navigateTo={navigateTo} />}
-              
-              {/* Note: We use effectiveView here, but pass the safely found data */}
               {effectiveView === 'album' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
               {effectiveView === 'event' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
-              
               {effectiveView === 'philanthropy' && <PhilanthropyView />}
               {effectiveView === 'store' && <StoreView />}
               {effectiveView === 'backstage' && <BackstageView />}
-              
-              {/* This will now trigger if the URL was bad */}
               {effectiveView === '404' && <NotFoundView navigateTo={navigateTo} />}
             </Suspense>
           </CSSTransition>
