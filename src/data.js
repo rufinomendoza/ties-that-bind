@@ -74,7 +74,7 @@ export const EVENTS_DATA = [
     description: [
         "Fifty-two years ago, we sang for survival. This February, we sing for the legacy.",
         "The Cherry Tree Massacre remains a testament to the Chimes spirit: turning a night at the pub into a half-century of musical excellence. We invite you back to Gaston Hall to witness the latest chapter of a tradition that has defined the Georgetown experience since 1974.",
-        "Doors open at 6:30 p.m."
+        "Doors open at 6:30 p.m. Get your tickets."
       ],
     actions: [
         { label: "Buy Concert Tickets", link: "https://www.tickettailor.com/checkout/view-event/id/7391851/chk/a085/?ref=gcaa-site&modal_widget=true&widget=true", primary: true},
@@ -106,7 +106,7 @@ export const EVENTS_DATA = [
     description: [
         "Fifty-two years ago, we sang for survival. This February, we sing for the legacy.",
         "The Cherry Tree Massacre remains a testament to the Chimes spirit: turning a night at the pub into a half-century of musical excellence. We invite you back to Gaston Hall to witness the latest chapter of a tradition that has defined the Georgetown experience since 1974.",
-        "Doors open at 6:30 p.m."
+        "Doors open at 6:30 p.m. Get your tickets."
     ],
     guestGroups: [
         "The Saxatones",
