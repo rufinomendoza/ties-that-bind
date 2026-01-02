@@ -94,7 +94,7 @@ const RestorationPlayer = () => {
                 </div>
                 <div className="flex flex-col overflow-hidden text-left min-w-0">
                     <span className="text-[8px] md:text-[9px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] mb-1 truncate">
-                        {sourceMode === 'reference' ? 'Unfiltered Archival' : '2025 Reel-to-Reel'}
+                        {sourceMode === 'reference' ? 'Unfiltered Archival Recording' : '2025 Reel-to-Reel Digital Transfer'}
                     </span>
                     <span className="text-lg md:text-2xl font-serif text-[#F4F4F3] truncate leading-tight">
                         {currentTrack.title}
