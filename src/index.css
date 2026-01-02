@@ -5,6 +5,8 @@
 
 :root {
   color-scheme: light;
+  --font-sans: "neue-haas-unica", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: "adobe-caslon-pro", "Times New Roman", Times, serif;
 }
 
 html {
@@ -12,6 +14,7 @@ html {
   overflow-y: scroll;
   /* Modern browsers: keeps the layout stable without a gray bar */
   scrollbar-gutter: stable;
+  font-family: var(--font-sans);
 }
 
 body {
