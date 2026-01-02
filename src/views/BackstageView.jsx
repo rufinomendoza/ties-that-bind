@@ -3,17 +3,15 @@ import { Helmet } from 'react-helmet-async';
 import SectionHeader from '../components/SectionHeader';
 
 const BackstageView = () => (
-    <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] antialiased text-[#041E42] selection:bg-[#D50032] selection:text-white">
-      {/* --- SEO INTEGRATION --- */}
+    /* Added overflow-x-hidden as a safety wrapper */
+    <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] antialiased text-[#041E42] selection:bg-[#D50032] selection:text-white overflow-x-hidden">
       <Helmet>
         <title>Backstage | Georgetown Chimes Alumni Association</title>
         <meta name="description" content="Authorized Access Only. Internal tools and database management for Alumni." />
       </Helmet>
-      {/* ----------------------- */}
 
       <div className="max-w-[1920px] mx-auto">
         <SectionHeader title="Backstage" number="Authorized Access" />
-        {/* ... (Rest of BackstageView Logic remains unchanged) ... */}
         
         {/* Heavy Anchor Line */}
         <div className="border-t-2 border-[#041E42] pt-0">
@@ -28,11 +26,11 @@ const BackstageView = () => (
                              </span>
                          </div>
                          
-                         <h3 className="text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.15] md:leading-[1.0] -ml-1">
+                         {/* Swash Protection: Added px-1 and adjusted mobile font size for narrow screens */}
+                         <h3 className="text-6xl md:text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.1] md:leading-[1.0] -ml-1 px-1">
                              GleeManager
                          </h3>
                          
-                         {/* THE FIX: Notion as a Technical Spec */}
                          <div className="flex items-center gap-4 mb-12 opacity-60">
                              <span className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase">
                                 Platform: Notion
@@ -49,14 +47,15 @@ const BackstageView = () => (
                             href="https://thechimes.notion.site" 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
+                            /* FIXED: Removed -ml-2 on mobile; pop-out effect only on desktop (md:) */
+                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white md:hover:pl-4 md:-ml-2 pl-2 pr-6 transition-all duration-300 group/link"
                           >
                              <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase">Initialize Session</span>
                              <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">&#x2197;&#xFE0E;</span>
                           </a>
                           <a 
                             href="https://drive.google.com/uc?export=download&id=1s9YI3af7Y17OpptSKo4LRAsM15QCyOlp" 
-                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
+                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white md:hover:pl-4 md:-ml-2 pl-2 pr-6 transition-all duration-300 group/link"
                           >
                              <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">System Protocol</span>
                              <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">↓</span>
@@ -73,11 +72,11 @@ const BackstageView = () => (
                              </span>
                          </div>
                          
-                         <h3 className="text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.15] md:leading-[1.0] -ml-1">
+                         {/* Swash Protection: px-1 */}
+                         <h3 className="text-6xl md:text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.1] md:leading-[1.0] -ml-1 px-1">
                              Slack
                          </h3>
 
-                         {/* Slack as a Technical Spec */}
                          <div className="flex items-center gap-4 mb-12 opacity-60">
                              <span className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase">
                                 Platform: Slack
@@ -94,14 +93,15 @@ const BackstageView = () => (
                             href="https://thechimes.slack.com" 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
+                            /* FIXED: Responsive margins */
+                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white md:hover:pl-4 md:-ml-2 pl-2 pr-6 transition-all duration-300 group/link"
                           >
                              <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase">Launch App</span>
                              <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">&#x2197;&#xFE0E;</span>
                           </a>
                           <a 
                             href="https://drive.google.com/uc?export=download&id=1AeangbSpDCNOv-sHq5yqaz5Djk0YmesR" 
-                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white hover:pl-4 -ml-2 pl-2 pr-6 transition-all duration-300 group/link"
+                            className="flex items-center justify-between py-6 border-b border-[#041E42]/20 hover:bg-white md:hover:pl-4 md:-ml-2 pl-2 pr-6 transition-all duration-300 group/link"
                           >
                              <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase opacity-50 group-hover/link:opacity-100">System Protocol</span>
                              <span className="text-lg opacity-0 group-hover/link:opacity-100 transition-opacity pl-4">↓</span>
@@ -112,8 +112,8 @@ const BackstageView = () => (
              </div>
         </div>
 
-        {/* Security Stamp: Left Aligned */}
-        <div className="mt-12 text-left opacity-30">
+        {/* Security Stamp */}
+        <div className="mt-12 text-left opacity-30 px-1">
             <p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase">
                 Restricted Access — Alumni Personnel Only
             </p>
