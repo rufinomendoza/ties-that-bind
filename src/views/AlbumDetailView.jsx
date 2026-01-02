@@ -44,7 +44,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                 <div className="space-y-0 border-t border-[#041E42]">
                    <div className="flex justify-between items-baseline py-4 border-b border-[#041E42]/20">
                         <span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032]">Issue</span>
-                        <span className="text-xl font-serif italic tabular-nums">{selectedAlbum.year}</span>
+                        <span className="text-l font-mono font-normal tabular-nums">{selectedAlbum.year}</span>
                    </div>
                 </div>
                 {selectedAlbum.link && (
@@ -54,7 +54,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                 )}
                 {selectedAlbum.dedication && (
                     <div className="mt-12 pt-8 border-t border-[#041E42]/20 space-y-4">
-                        <p className="text-[10px] opacity-60 uppercase tracking-[0.1em] font-sans font-bold text-[#041E42]">Dedication</p>
+                        <p className="text-[10px] opacity-60 uppercase tracking-[0.1em] font-mono font-bold text-[#041E42]">Dedication</p>
                         <p className="text-lg font-serif italic leading-relaxed text-[#041E42] opacity-90 pl-2 -ml-2">{typeset(selectedAlbum.dedication)}</p>
                     </div>
                 )}
@@ -95,7 +95,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                             
                             {/* Left Col: Index & Title (Spans 7 Cols) */}
                             <div className="md:col-span-7 flex items-baseline gap-8">
-                                <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 tabular-nums w-8 flex-shrink-0">
+                                <span className="text-[11px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 tabular-nums w-8 flex-shrink-0">
                                     {String(idx + 1).padStart(2, '0')}
                                 </span>
                                 <div>

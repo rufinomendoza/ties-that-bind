@@ -10,6 +10,7 @@ export default {
         // Tailwind references the CSS variables
         sans: ['var(--font-sans)', 'sans-serif'], 
         serif: ['var(--font-serif)', 'serif'],
+        mono: ['var(--font-mono)', 'monospace'],
       },
       colors: {
         navy: '#041E42',

@@ -7,6 +7,7 @@
   color-scheme: light;
   --font-sans: "neue-haas-unica", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-serif: "adobe-caslon-pro", "Times New Roman", Times, serif;
+  --font-mono: "ibm-plex-mono", "Menlo", "Consolas", monospace;
 }
 
 html {
@@ -15,6 +16,21 @@ html {
   /* Modern browsers: keeps the layout stable without a gray bar */
   scrollbar-gutter: stable;
   font-family: var(--font-sans);
+}
+
+/* --- ADDITION: TAILORED SCROLLBAR --- */
+::-webkit-scrollbar {
+  width: 4px; /* Ultra-thin */
+}
+::-webkit-scrollbar-track {
+  background: #F4F4F3; /* Blends with the paper background */
+}
+::-webkit-scrollbar-thumb {
+  background-color: #041E42; /* Navy contrast */
+  border-radius: 0px; /* No rounded corners. Sharp edges only. */
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #D50032; /* The "Red Alert" hover state */
 }
 
 body {

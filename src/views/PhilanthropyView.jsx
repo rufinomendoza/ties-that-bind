@@ -15,7 +15,7 @@ const RestorationProgress = ({ phases }) => {
           <div key={phase.id} className="w-full pt-8 border-t border-[#041E42]/10">
             <div className="flex justify-between items-end mb-4">
               <div className="flex flex-col text-left">
-                <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] pb-2">
+                <span className="text-[10px] font-mono font-bold tracking-[0.2em] uppercase text-[#D50032] pb-2">
                   Phase {phase.id} Status
                 </span>
                 <span className="text-2xl font-serif italic text-[#041E42]">
@@ -36,10 +36,10 @@ const RestorationProgress = ({ phases }) => {
             </div>
 
             <div className="flex justify-between mt-4">
-               <span className="text-[10px] font-sans font-bold opacity-40 uppercase tracking-tighter">
+               <span className="text-[10px] font-mono font-bold opacity-40 uppercase tracking-tighter">
                  Source: {phase.source}
                </span>
-               <span className="text-[10px] font-sans font-bold opacity-40 uppercase tracking-tighter tabular-nums">
+               <span className="text-[10px] font-mono font-bold opacity-40 uppercase tracking-tighter tabular-nums">
                  Goal: {`$${phase.goal.toLocaleString()}`}
                </span>
             </div>
@@ -105,7 +105,7 @@ const PhilanthropyView = () => {
                         className={`group relative border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-y-6 gap-x-4 items-start transition-all duration-500 md:hover:bg-white md:-mx-6 md:px-6 ${isHero ? 'bg-[#041E42]/5 px-4 md:px-6' : ''}`}
                       >
                           <div className="md:col-span-2 pt-2">
-                              <span className={`text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isHero ? 'text-[#D50032]' : 'text-[#041E42]/70 group-hover:text-[#D50032]'}`}>
+                              <span className={`text-[11px] font-mono font-bold tracking-[0.1em] uppercase transition-colors ${isHero ? 'text-[#D50032]' : 'text-[#041E42]/70 group-hover:text-[#D50032]'}`}>
                                   {isHero ? "★ Recommended" : `Level 0${idx + 1}`}
                               </span>
                           </div>
@@ -114,8 +114,8 @@ const PhilanthropyView = () => {
                               <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60 max-w-md">{typeset(tier.description)}</p>
                           </div>
                           <div className="md:col-span-2 pt-3 text-left">
-                               <span className="text-lg font-sans font-bold text-[#041E42] tracking-wide tabular-nums block">{amount}</span>
-                               <span className="text-[9px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 uppercase">per {frequency}</span>
+                               <span className="text-lg font-mono font-bold text-[#041E42] tracking-wide tabular-nums block">{amount}</span>
+                               <span className="text-[9px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 uppercase">per {frequency}</span>
                           </div>
                           <div className="md:col-span-2 flex md:justify-end items-start pt-2">
                                <a href={tier.link} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-between w-full md:w-auto gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase transition-all duration-300 px-6 py-4 border ${isHero ? 'bg-[#D50032] border-[#D50032] text-white hover:bg-[#A51C30]' : 'border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-white'}`}>
@@ -195,7 +195,7 @@ const PhilanthropyView = () => {
                 {demoTrack && (
                   <div className="relative bg-white border border-[#041E42]/10 p-8 md:p-12 mb-20 shadow-sm overflow-hidden group">
                     {/* Archival Utility Tag */}
-                    <div className="absolute top-0 right-0 bg-[#041E42] text-white px-4 py-1 text-[9px] font-sans font-black uppercase tracking-[0.2em] select-none">
+                    <div className="absolute top-0 right-0 bg-[#041E42] text-white px-4 py-1 text-[9px] font-mono font-black uppercase tracking-[0.2em] select-none">
                       Log: Item #R-011
                     </div>
                     

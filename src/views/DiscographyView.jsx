@@ -42,7 +42,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
 {demoTrack && (
   <div className="relative bg-white border border-[#041E42]/10 p-8 md:p-12 mb-20 shadow-sm overflow-hidden group">
     {/* Archival Utility Tag */}
-    <div className="absolute top-0 right-0 bg-[#041E42] text-white px-4 py-1 text-[9px] font-sans font-black uppercase tracking-[0.2em] select-none">
+    <div className="absolute top-0 right-0 bg-[#041E42] text-white px-4 py-1 text-[9px] font-mono font-black uppercase tracking-[0.2em] select-none">
         Log: Item #R-011
     </div>
     
@@ -109,7 +109,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                   </div>
                   <div className="flex flex-col items-start border-t border-[#041E42]/20 pt-4">
                       <div className="flex justify-between w-full items-baseline mb-2">
-                        <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 uppercase tabular-nums">Issue {album.year}</span>
+                        <span className="text-[11px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 uppercase tabular-nums">Issue {album.year}</span>
                       </div>
                       <h3 className="font-serif text-3xl md:text-4xl text-[#041E42] leading-[1.15] md:leading-[1.0] group-hover:italic transition-all duration-300">
                         {typeset(album.title)}
