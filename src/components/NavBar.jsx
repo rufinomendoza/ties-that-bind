@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
@@ -20,6 +20,22 @@ const viewPrefetchMap = {
 };
 
 export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) => {
+
+  // --- FIX START ---
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    // Cleanup function to ensure scroll is restored if component unmounts
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+  // --- FIX END ---
   
   const NavButton = ({ page, children, mobile = false, isLogo = false }) => {
     const handlePrefetch = () => {
