@@ -96,7 +96,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
         <div className="max-w-[1920px] mx-auto border-t-2 border-[#041E42] pt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
              <div className="lg:col-span-4 flex flex-col justify-between">
                 <div>
-                    <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">01 — The Directory</span>
+                    <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">01 — The Directory</span>
                     <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[1.1] md:leading-[1.0] tracking-tighter mb-12">
                       Welcome the time, my boys: <span className="italic">we meet again.</span>
                     </h2>
@@ -150,7 +150,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
              </div>
         </div>
         <div className="bg-[#F4F4F3] p-8 md:p-24 flex flex-col justify-center border-l-0 md:border-l border-[#041E42]">
-            <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">02 — Upcoming Concert</span>
+            <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">02 — Upcoming Concert</span>
             <h3 className="text-5xl md:text-8xl font-serif mb-12 text-[#041E42] leading-[1.1] md:leading-[1.0] tracking-tighter">The Cherry Tree Massacre</h3>
             <div className="w-24 h-[2px] bg-[#041E42]/10 mb-12"></div>
             <div className="mb-16 max-w-md text-[#041E42]">
