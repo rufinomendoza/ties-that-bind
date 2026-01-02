@@ -88,6 +88,14 @@ export default function App() {
   const selectedEvent = activePage === 'event' && route.slug ? EVENTS_DATA.find(e => e.slug === route.slug) : null;
   const selectedAlbum = activePage === 'album' && route.slug ? ALBUMS_DATA.find(a => a.slug === route.slug) : null;
 
+  // Check if we are on a detail view but the data lookup failed
+  const isMissingData = 
+    (activePage === 'event' && !selectedEvent) || 
+    (activePage === 'album' && !selectedAlbum);
+
+  // If missing data, override the view to '404'
+  const effectiveView = isMissingData ? '404' : activePage;
+
   return (
     <div className="font-sans text-[#041E42] bg-[#F4F4F3] selection:bg-[#D50032] selection:text-[#F4F4F3]">
     <div className="bg-texture"></div>
@@ -103,15 +111,20 @@ export default function App() {
             unmountOnExit
           >
             <Suspense fallback={<div className="h-screen flex items-center justify-center font-bold tracking-widest uppercase text-[10px]">Loading...</div>}>
-              {activePage === 'home' && <HomeView navigateTo={navigateTo} openAlbumBySlug={openAlbumBySlug} openEvent={openEvent} />}
-              {activePage === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
-              {activePage === 'discography' && <DiscographyView openAlbum={openAlbum} navigateTo={navigateTo} />}
-              {activePage === 'album' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
-              {activePage === 'event' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
-              {activePage === 'philanthropy' && <PhilanthropyView />}
-              {activePage === 'store' && <StoreView />}
-              {activePage === 'backstage' && <BackstageView />}
-              {activePage === '404' && <NotFoundView navigateTo={navigateTo} />}
+              {effectiveView === 'home' && <HomeView navigateTo={navigateTo} openAlbumBySlug={openAlbumBySlug} openEvent={openEvent} />}
+              {effectiveView === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
+              {effectiveView === 'discography' && <DiscographyView openAlbum={openAlbum} navigateTo={navigateTo} />}
+              
+              {/* Note: We use effectiveView here, but pass the safely found data */}
+              {effectiveView === 'album' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
+              {effectiveView === 'event' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
+              
+              {effectiveView === 'philanthropy' && <PhilanthropyView />}
+              {effectiveView === 'store' && <StoreView />}
+              {effectiveView === 'backstage' && <BackstageView />}
+              
+              {/* This will now trigger if the URL was bad */}
+              {effectiveView === '404' && <NotFoundView navigateTo={navigateTo} />}
             </Suspense>
           </CSSTransition>
         </TransitionGroup>
