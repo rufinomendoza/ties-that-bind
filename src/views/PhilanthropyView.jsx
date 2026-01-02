@@ -23,8 +23,8 @@ const RestorationProgress = ({ phases }) => {
                 </span>
               </div>
               <div className="text-right tabular-nums">
-                <span className="text-3xl font-sans font-bold text-[#041E42]">{percentage}%</span>
-                <span className="block text-[9px] font-sans font-bold opacity-40 uppercase tracking-widest">Complete</span>
+                <span className="text-3xl font-mono font-bold text-[#041E42]">{percentage}%</span>
+                <span className="block text-[9px] font-mono font-bold opacity-40 uppercase tracking-widest">Complete</span>
               </div>
             </div>
 
@@ -81,7 +81,7 @@ const PhilanthropyView = () => {
                           Your membership ensures the tradition remains uninterrupted: the history documented, the reunions funded, and the legacy secured.
                       </p>
                       <div>
-                          <p className="text-[#041E42] text-[10px] leading-relaxed font-sans font-bold uppercase tracking-[0.05em] opacity-60">
+                          <p className="text-[#041E42] text-[10px] leading-relaxed font-mono font-bold uppercase tracking-[0.05em] opacity-60">
                               Legal Notice: Contributions to the Georgetown Chimes Alumni Association 501(c)(7) are not tax deductible.
                           </p>
                       </div>
@@ -106,7 +106,7 @@ const PhilanthropyView = () => {
                       >
                           <div className="md:col-span-2 pt-2">
                               <span className={`text-[11px] font-mono font-bold tracking-[0.1em] uppercase transition-colors ${isHero ? 'text-[#D50032]' : 'text-[#041E42]/70 group-hover:text-[#D50032]'}`}>
-                                  {isHero ? "★ Recommended" : `Level 0${idx + 1}`}
+                                  {isHero ? "★ Recommended" : `Guild Level 0${idx + 1}`}
                               </span>
                           </div>
                           <div className="md:col-span-6 md:pr-8 text-left">
@@ -254,8 +254,8 @@ const PhilanthropyView = () => {
 
                 {/* Management Link (Subtle Footer) */}
                 <div className="mt-32 pt-8 border-t border-[#041E42]/10 flex flex-col md:flex-row justify-between gap-4">
-                    <p className="text-[10px] font-sans font-bold uppercase opacity-40 tracking-widest">
-                      Georgetown Chimes Alumni Association — Established 1946
+                    <p className="text-[10px] font-mono font-bold uppercase opacity-40 tracking-widest">
+                      Georgetown Chimes Alumni Association, Inc.
                     </p>
                     <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60 hover:text-[#D50032] transition-colors">
                         Manage Donor Guild Subscription →
