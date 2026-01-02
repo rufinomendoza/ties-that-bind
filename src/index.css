@@ -5,11 +5,6 @@
 
 :root {
   color-scheme: light;
-  /* CHANGED: Removed "Montserrat", added system sans stack */
-  --font-sans: "neue-haas-unica", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  
-  /* CHANGED: Removed "Cormorant Garamond", added system serif stack */
-  --font-serif: "adobe-caslon-pro", "Times New Roman", Times, serif;
 }
 
 html {
@@ -27,18 +22,10 @@ body {
   width: 100%; 
   /* --------------------------------------- */
   overflow-x: hidden;
-  font-family: var(--font-sans) !important;
+  @apply font-sans;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.font-serif {
-  font-family: var(--font-serif) !important;
-}
-
-.font-sans {
-  font-family: var(--font-sans) !important;
 }
 
 @keyframes fadeIn {

@@ -7,8 +7,8 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Neue Haas Unica"', 'Montserrat', 'sans-serif'],
-        serif: ['"Adobe Caslon Pro"', '"Cormorant Garamond"', 'serif'],
+        sans: ['"Neue Haas Unica"', 'sans-serif'],
+        serif: ['"Adobe Caslon Pro"', 'serif'],
       },
       colors: {
         navy: '#041E42',
