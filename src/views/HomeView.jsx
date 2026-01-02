@@ -34,13 +34,30 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
         {/* Added a subtle overlay color to match the previous blend mode effect if needed */}
         <div className="absolute inset-0 z-0 bg-[#041E42] mix-blend-screen opacity-10 pointer-events-none"></div>
 
-        <div className="max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 py-12">
-           <div className="flex flex-col items-center justify-center text-center select-none mb-24 leading-none text-[#041E42]">
-            {/* LCP Text Optimization: Added [text-wrap:balance] for cleaner mobile rendering */}
-            <h1 className="text-[12.5vw] font-serif leading-[0.75] tracking-tighter relative z-10">BROTHERHOOD</h1>
-            <h1 className="text-[19vw] font-serif leading-[0.75] tracking-tighter opacity-40 italic -mt-[4vw] relative z-0 px-[0.2em]">HARMONY</h1>
-            <h1 className="text-[18vw] font-serif leading-[0.75] tracking-tighter block -mt-[4.5vw] relative z-10">HISTORY</h1>
-          </div>
+        {/* ... inside HomeView ... */}
+<div className="max-w-[1920px] mx-auto w-full flex flex-col items-center justify-center relative z-10 py-12 overflow-hidden">
+  {/* Added w-full and overflow-hidden here to clip any letter-spacing overflow */}
+  
+  <div className="w-full flex flex-col items-center justify-center text-center select-none mb-24 leading-none text-[#041E42]">
+    
+    {/* Word 1: BROTHERHOOD */}
+    <h1 className="w-full text-[12.5vw] font-serif leading-[0.75] tracking-tighter relative z-10">
+      BROTHERHOOD
+    </h1>
+    
+    {/* Word 2: HARMONY - Removed px-[0.2em] which was pushing it off-center */}
+    <h1 className="w-full text-[19vw] font-serif leading-[0.75] tracking-tighter opacity-40 italic -mt-[4vw] relative z-0">
+      HARMONY
+    </h1>
+    
+    {/* Word 3: HISTORY */}
+    <h1 className="w-full text-[18vw] font-serif leading-[0.75] tracking-tighter block -mt-[4.5vw] relative z-10">
+      HISTORY
+    </h1>
+    
+  </div>
+</div>
+  {/* Buttons Container */}
           <div className="flex flex-col md:flex-row gap-12 md:gap-24 items-center z-20">
              <button onClick={() => openAlbumBySlug('desperate-chimes-desperate-measures')} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors">
                 Stream “And So It Goes”
