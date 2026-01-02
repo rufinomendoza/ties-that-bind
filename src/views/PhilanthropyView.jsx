@@ -121,39 +121,69 @@ const PhilanthropyView = () => (
               })}
           </div>
 
-          {/* 03 — CAPITAL PROJECTS */}
-          <div className="border-t-2 border-[#041E42] pt-12">
-               <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
-                   <div className="lg:col-span-4">
-                      <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">03 — Capital Projects</span>
-                   </div>
-                   <div className="lg:col-span-8 grid grid-cols-1 md:grid-cols-2 gap-12">
-                       <h3 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[1.15] md:leading-[1.0] tracking-tighter text-left">
-                          Legacy &<br/><span className="italic text-[#D50032]">Restoration.</span>
-                      </h3>
-                      <div className="flex flex-col justify-end h-full">
-                          <p className="text-[#041E42] text-xl font-serif leading-relaxed mb-12 text-left">
-                              Single contributions fund the archival restoration of our master tapes and the capital projects that define our future.
-                          </p>
-                          
-                          {/* THE ACTION BLOCK */}
-                          <a href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4" target="_blank" rel="noopener noreferrer" className="group w-full flex items-center justify-between border border-[#041E42] py-8 px-10 transition-all duration-[600ms] ease-[cubic-bezier(0.19,1,0.22,1)] hover:bg-[#041E42] hover:text-[#F4F4F3] hover:shadow-xl hover:shadow-[#041E42]/10">
-                              <div className="flex flex-col text-left">
-                                  <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase mb-1">Capital Contribution</span>
-                                  <span className="text-xl font-serif italic">{typeset("Restoring the Past & Investing in the Future")}</span>
-                              </div>
-                              <div className="flex items-center gap-6">
-                                  <span className="hidden md:block text-[10px] font-sans font-bold tracking-[0.1em] uppercase opacity-0 group-hover:opacity-60 transition-opacity">One-time Gift</span>
-                                  <span className="text-3xl font-light group-hover:translate-x-3 transition-transform duration-500">→</span>
-                              </div>
-                          </a>
+            {/* 03 — CAPITAL PROJECTS */}
+            <div className="border-t-2 border-[#041E42] pt-12">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
+                
+                {/* Left Column: Label */}
+                <div className="lg:col-span-4 lg:sticky lg:top-40 h-fit">
+                  <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">
+                    03 — Capital Projects
+                  </span>
+                </div>
 
-                          {/* INTEGRATED PROGRESS BAR */}
-                          <RestorationProgress phases={RESTORATION_PHASES} />
+                {/* Right Column: Narrative & Progress */}
+                <div className="lg:col-span-8">
+                  
+                  {/* THE ARCHIVE ANCHOR */}
+<div className="flex flex-col md:flex-row gap-6 md:gap-10 mb-16 items-start md:items-center lg:items-start">
+  
+  {/* The Graphic Initial: Responsive Scaling */}
+  <div className="flex flex-row md:flex-col items-center border-b md:border-b-0 md:border-r border-[#041E42]/10 pb-4 md:pb-0 md:pr-10 w-full md:w-auto justify-between md:justify-start">
+    <span className="text-[80px] md:text-[140px] font-serif font-light leading-none md:leading-[0.7] text-[#D50032] select-none tracking-tighter pt-0 md:pt-12">
+      A
+    </span>
+    <span className="text-[9px] md:text-[10px] font-sans font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] text-[#041E42]/40 md:mt-4">
+      The Archive
+    </span>
+  </div>
+
+  {/* The Copy */}
+  <div className="flex-1 pt-2 md:pt-4 text-left">
+    <h3 className="text-2xl md:text-4xl font-serif font-bold text-[#041E42] mb-4 md:mb-6 leading-tight tracking-tight">
+      {typeset("Archives are the memory of the Brotherhood.")}
+    </h3>
+    <p className="text-[#041E42] text-lg md:text-xl font-serif leading-relaxed opacity-80 [text-wrap:balance]">
+      {typeset("Fifty-two years of harmony are currently locked in aging 1/4-inch analog reels. We are reclaiming the magnetic signatures of our founders to ensure our history carries on for the next century.")}
+    </p>
+  </div>
+</div>
+
+                  {/* THE ACTION BLOCK */}
+                  <div className="space-y-12">
+                    <a 
+                      href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4" 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="group w-full flex items-center justify-between border border-[#041E42] py-8 px-10 transition-all duration-[600ms] ease-[cubic-bezier(0.19,1,0.22,1)] hover:bg-[#041E42] hover:text-[#F4F4F3] hover:shadow-xl hover:shadow-[#041E42]/10"
+                    >
+                      <div className="flex flex-col text-left">
+                        <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase mb-1">Capital Contribution</span>
+                        <span className="text-xl font-serif italic">{typeset("Restoring the Past & Investing in the Future")}</span>
                       </div>
-                   </div>
-               </div>
-          </div>
+                      <div className="flex items-center gap-6">
+                        <span className="hidden md:block text-[10px] font-sans font-bold tracking-[0.1em] uppercase opacity-0 group-hover:opacity-60 transition-opacity">One-time Gift</span>
+                        <span className="text-3xl font-light group-hover:translate-x-3 transition-transform duration-500">→</span>
+                      </div>
+                    </a>
+
+                    {/* RESTORATION PROGRESS BARS */}
+                    <RestorationProgress phases={RESTORATION_PHASES} />
+                  </div>
+
+                </div>
+              </div>
+            </div>
 
           {/* FOOTER ACTION */}
           <div className="mt-48 pt-4 border-t border-[#041E42] flex justify-start opacity-40 hover:opacity-100 transition-opacity">
