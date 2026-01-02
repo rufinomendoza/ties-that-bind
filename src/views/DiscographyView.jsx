@@ -3,11 +3,9 @@ import { Helmet } from 'react-helmet-async';
 import { ALBUMS_DATA } from '../data';
 import { typeset } from '../utils/formatters';
 import SectionHeader from '../components/SectionHeader';
+import ImageLoader from '../components/ImageLoader'; // <--- Import
 
 const DiscographyView = ({ openAlbum, navigateTo }) => {
-  // Logic: We removed the setTimeout and triggerAnim state. 
-  // The Ferrari crossfade in App.jsx now handles the entrance.
-
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <Helmet>
@@ -47,25 +45,18 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                   onClick={() => openAlbum(album)} 
                   className="group cursor-pointer flex flex-col gap-6"
                 >
-                  <div className="relative aspect-square w-full bg-[#E5E5E4] overflow-hidden shadow-xl shadow-[#041E42]/5 group"> {/* Ensure 'group' is here */}
+                  <div className="relative aspect-square w-full bg-[#E5E5E4] overflow-hidden shadow-xl shadow-[#041E42]/5 group">
                       {album.image ? (
-                        <>
-                      <img 
-                        src={album.image}
-                        fetchPriority={index < 3 ? "high" : "auto"}
-                        alt={album.title} 
-                        // FIX: Eager load the first 3 images to match fetchPriority; lazy load the rest
-                        loading={index < 3 ? "eager" : "lazy"}
-                        decoding="async"
-                        onLoad={(e) => e.currentTarget.parentElement.classList.add('is-loaded')}
-                        ref={(img) => {
-                          if (img && img.complete) img.parentElement.classList.add('is-loaded');
-                        }}
-                        className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)] opacity-0 [.is-loaded_&]:opacity-100" 
-                      />
-                          {/* Overlay that vanishes when the parent has .is-loaded */}
-                          <div className="absolute inset-0 bg-[#E5E5E4] transition-opacity duration-500 pointer-events-none [.is-loaded_&]:opacity-0" />
-                        </>
+                        // FIX: Replaced direct DOM manipulation with ImageLoader
+                        <ImageLoader 
+                          src={album.image}
+                          alt={album.title} 
+                          fetchPriority={index < 3 ? "high" : "auto"}
+                          loading={index < 3 ? "eager" : "lazy"}
+                          decoding="async"
+                          className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-[cubic-bezier(0.19,1,0.22,1)]" 
+                          curtainClassName="absolute inset-0 bg-[#E5E5E4] transition-opacity duration-500 pointer-events-none"
+                        />
                       ) : (
                         <div className={`w-full h-full ${album.cover}`}></div>
                       )}

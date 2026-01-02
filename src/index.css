@@ -5,10 +5,7 @@
 
 :root {
   color-scheme: light;
-  /* CHANGED: Removed "Montserrat", added system sans stack */
   --font-sans: "neue-haas-unica", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-  
-  /* CHANGED: Removed "Cormorant Garamond", added system serif stack */
   --font-serif: "adobe-caslon-pro", "Times New Roman", Times, serif;
 }
 
@@ -17,6 +14,7 @@ html {
   overflow-y: scroll;
   /* Modern browsers: keeps the layout stable without a gray bar */
   scrollbar-gutter: stable;
+  font-family: var(--font-sans);
 }
 
 body {
@@ -27,18 +25,10 @@ body {
   width: 100%; 
   /* --------------------------------------- */
   overflow-x: hidden;
-  font-family: var(--font-sans) !important;
+  @apply font-sans;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.font-serif {
-  font-family: var(--font-serif) !important;
-}
-
-.font-sans {
-  font-family: var(--font-sans) !important;
 }
 
 @keyframes fadeIn {
@@ -64,16 +54,25 @@ body {
 
 /* --- High-Performance Page Transitions --- */
 
+/* FIX: CSS Grid Overlay for Transitions */
 .page-wrapper {
+  display: grid;
+  grid-template-areas: "content";
   width: 100%;
-  /* Fixes sub-pixel rendering issues during the 800ms fade */
   transform: translateZ(0); 
   backface-visibility: hidden;
+}
+
+/* Ensure both entering and exiting pages overlap perfectly */
+.page-wrapper > * {
+  grid-area: content;
+  width: 100%;
 }
 
 /* 1. Incoming Page */
 .page-enter {
   opacity: 0;
+  z-index: 10; /* Keep new content on top */
 }
 
 .page-enter-active {
@@ -85,13 +84,8 @@ body {
 /* 2. Outgoing Page */
 .page-exit {
   opacity: 1;
-  position: absolute;
-  top: 0;
-  left: 0;
-  /* Force it to match the width of the parent exactly */
-  width: 100%;
-  height: auto;
   pointer-events: none; /* Prevents clicking the old page while it's fading out */
+  z-index: 0;
 }
 
 .page-exit-active {
@@ -106,16 +100,6 @@ main#main-content {
   position: relative;
   overflow-x: hidden;
   width: 100%;
-}
-
-/* Targeted opacity control: only hide images that haven't loaded yet */
-.aspect-square img:not(.is-loaded) {
-  opacity: 0;
-}
-
-/* Once loaded, or if the parent has the class, show it */
-.is-loaded img {
-  opacity: 1 !important;
 }
 
 /* Fix for mobile browser "ghost" elements */

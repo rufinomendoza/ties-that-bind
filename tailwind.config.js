@@ -7,8 +7,9 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Neue Haas Unica"', 'Montserrat', 'sans-serif'],
-        serif: ['"Adobe Caslon Pro"', '"Cormorant Garamond"', 'serif'],
+        // Tailwind references the CSS variables
+        sans: ['var(--font-sans)', 'sans-serif'], 
+        serif: ['var(--font-serif)', 'serif'],
       },
       colors: {
         navy: '#041E42',

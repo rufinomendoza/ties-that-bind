@@ -15,18 +15,38 @@ export const isPast = (dateStr) => {
   if (!dateStr) return false;
   
   // FIX: Handle ranges like "April 16–19, 2026"
-  // This regex replaces "Number[Dash]Number" with just the second Number
-  // "16–19" becomes "19", resulting in "April 19, 2026"
   const cleanDateStr = dateStr.replace(/(\d+)[–-](\d+)/, '$2');
 
   const eventDate = new Date(cleanDateStr);
   const today = new Date();
   
-  // Optional: Reset time to ensure fair comparison
   today.setHours(0, 0, 0, 0);
 
-  // Safety check: if date is still invalid, assume it's upcoming (false)
   if (isNaN(eventDate)) return false;
 
   return eventDate < today;
+};
+
+// NEW: Robust Date Parsing Helper
+export const parseEventDate = (dateStr) => {
+  if (!dateStr) return { month: '', day: '' };
+  
+  const parts = dateStr.split(' ');
+  
+  // Case 1: Standard "Month Day, Year" or "Month Day"
+  // e.g. "February 6, 2026" -> parts[0]="February", parts[1]="6,"
+  if (parts.length >= 2) {
+    return {
+      month: parts[0],
+      // Remove comma from the day part if present
+      day: parts[1].replace(',', '') 
+    };
+  }
+  
+  // Case 2: "TBD", "Spring 2026", or single words
+  // Return the whole string as the main "day" display so it's large and visible
+  return {
+    month: '', 
+    day: dateStr
+  };
 };

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { EVENTS_DATA } from '../data';
-import { typeset } from '../utils/formatters';
+import { typeset, parseEventDate } from '../utils/formatters'; // <--- Import added here
 import SectionHeader from '../components/SectionHeader';
 
 const AgendaView = ({ navigateTo, openEvent }) => (
@@ -24,11 +24,8 @@ const AgendaView = ({ navigateTo, openEvent }) => (
         
         <div className="flex flex-col group/list border-t-2 md:border-t-0 border-[#041E42]">
           {EVENTS_DATA.map((event) => {
-            // --- FIX: Safe Date Parsing ---
-            // Handles cases like "TBD" or "Spring 2026" without crashing
-            const dateParts = event.date ? event.date.split(' ') : [];
-            const month = dateParts[0] || '';
-            const day = dateParts[1] ? dateParts[1].replace(',', '') : '';
+            // FIX: Use the robust helper function instead of inline splitting
+            const { month, day } = parseEventDate(event.date);
 
             return (
               <div 
@@ -36,16 +33,17 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                 role="button" 
                 tabIndex={0} 
                 onClick={() => openEvent(event)} 
-                // --- FIX: Accessibility Keyboard Handler ---
                 onKeyDown={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
                     e.preventDefault();
                     openEvent(event);
                   }
                 }}
-                className="group border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer transition-all duration-500 hover:pl-4 -ml-4 pl-4 pr-4 group-hover/list:opacity-30 hover:!opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#D50032]"              >
+                className="group border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer transition-all duration-500 hover:pl-4 -ml-4 pl-4 pr-4 group-hover/list:opacity-30 hover:!opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#D50032]"
+              >
                 <div className="md:col-span-2 flex flex-col">
-                   <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 uppercase mb-2">{month}</span>
+                   {/* Only render month if it exists to avoid empty spacing */}
+                   {month && <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 uppercase mb-2">{month}</span>}
                    <span className="text-4xl font-serif text-[#041E42] italic">{day}</span>
                 </div>
                 <div className="md:col-span-7">
