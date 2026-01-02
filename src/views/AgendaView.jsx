@@ -23,7 +23,18 @@ const AgendaView = ({ navigateTo, openEvent }) => (
         </div>
         <div className="flex flex-col group/list border-t-2 md:border-t-0 border-[#041E42]">
           {EVENTS_DATA.map((event) => (
-            <div key={event.id} role="button" tabIndex={0} onClick={() => openEvent(event)} className="group border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer transition-all duration-500 hover:pl-4 -ml-4 pl-4 pr-4 group-hover/list:opacity-30 hover:!opacity-100 focus-visible:opacity-100 focus-visible:outline-none">
+            <div
+              key={event.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => openEvent(event)}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault(); // Prevents page scroll on Space
+                  openEvent(event);
+                }
+              }}
+              className="group border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer transition-all duration-500 hover:pl-4 -ml-4 pl-4 pr-4 group-hover/list:opacity-30 hover:!opacity-100 focus-visible:opacity-100 focus-visible:outline-none">
               <div className="md:col-span-2 flex flex-col">
                  <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 uppercase mb-2">{event.date.split(' ')[0]}</span>
                  <span className="text-4xl font-serif text-[#041E42] italic">{event.date.split(' ')[1].replace(',', '')}</span>
