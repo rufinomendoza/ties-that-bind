@@ -1,6 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { typeset } from '../utils/formatters';
+import ImageLoader from '../components/ImageLoader'; // <--- Import
 
 const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
   if (!selectedAlbum) return null;
@@ -20,8 +21,6 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
             </button>
         </div>
         
-        {/* ... (Rest of AlbumDetailView Logic remains unchanged) ... */}
-        
         <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
           
           {/* Sidebar */}
@@ -29,22 +28,15 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
              <div className="sticky top-32">
                 <div className="aspect-square w-full overflow-hidden bg-[#E5E5E4] mb-12 shadow-2xl shadow-[#041E42]/5 group relative">
                   {selectedAlbum.image ? (
-                    <>
-                      <img 
-                        src={selectedAlbum.image} 
-                        alt={selectedAlbum.title} 
-                        // ⚡ Priority load for the main detail image
-                        fetchPriority="high"
-                        // ⚡ Attach the class to the PARENT 'group'
-                        onLoad={(e) => e.currentTarget.parentElement.classList.add('is-loaded')}
-                        ref={(img) => {
-                          if (img && img.complete) img.parentElement.classList.add('is-loaded');
-                        }}
-                        className="w-full h-full object-cover grayscale mix-blend-multiply transition-all duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] hover:grayscale-0 hover:mix-blend-normal opacity-0 [.is-loaded_&]:opacity-100" 
-                      />
-                      {/* 🏁 The "Ferrari" curtain: vanishes once the engine (image) is ready */}
-                      <div className="absolute inset-0 bg-[#E5E5E4] transition-opacity duration-800 ease-[cubic-bezier(0.19,1,0.22,1)] pointer-events-none [.is-loaded_&]:opacity-0" />
-                    </>
+                    // FIX: Replaced direct DOM manipulation with ImageLoader component
+                    <ImageLoader 
+                      src={selectedAlbum.image} 
+                      alt={selectedAlbum.title} 
+                      fetchPriority="high"
+                      // Note: Removed the 'opacity-0' and '[.is-loaded_&]' classes as the component handles state
+                      className="w-full h-full object-cover grayscale mix-blend-multiply transition-all duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] hover:grayscale-0 hover:mix-blend-normal" 
+                      curtainClassName="absolute inset-0 bg-[#E5E5E4] transition-opacity duration-800 ease-[cubic-bezier(0.19,1,0.22,1)] pointer-events-none"
+                    />
                   ) : (
                     <div className={`aspect-square w-full ${selectedAlbum.cover}`}></div>
                   )}

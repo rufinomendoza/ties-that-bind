@@ -112,16 +112,6 @@ main#main-content {
   width: 100%;
 }
 
-/* Targeted opacity control: only hide images that haven't loaded yet */
-.aspect-square img:not(.is-loaded) {
-  opacity: 0;
-}
-
-/* Once loaded, or if the parent has the class, show it */
-.is-loaded img {
-  opacity: 1 !important;
-}
-
 /* Fix for mobile browser "ghost" elements */
 .invisible {
   visibility: hidden !important;
