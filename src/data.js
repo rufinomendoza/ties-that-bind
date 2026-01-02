@@ -25,10 +25,39 @@ export const RESTORATION_PHASES = [
     title: "Digitizing Audiovisual Media",
     years: "1952–2014",
     current: 1817,
-    goal: 48000,
-    source: "1/4\" Analog Reels, Video Tapes, Compact Discs",
+    goal: 15300,
+    source: "Analog Reels, Video Tapes, Compact Discs",
+    unit: ""
+  },
+  {
+    id: "02",
+    title: "Scanning Paper Archives",
+    years: "1946–2026",
+    current: 0,
+    goal: 5000,
+    source: "Sheet Music, Photos, Documents",
+    unit: ""
+  },
+  {
+    id: "03",
+    title: "Restoration & Remastering of Studio Albums",
+    years: "1950s–1980s",
+    current: 0,
+    goal: 20000,
+    source: "Digitized Media",
+    unit: ""
+  },
+  {
+    id: "04",
+    title: "Sheet Music & Part Tapes Based on the Ur-Source",
+    years: "Core 80",
+    current: 0,
+    goal: 8000,
+    source: "Original Recordings",
     unit: ""
   }
+
+
 ];
 // --- Data ---
 export const EVENTS_DATA = [
