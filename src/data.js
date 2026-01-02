@@ -719,7 +719,7 @@ export const DONOR_TIERS = [
     description: "The price of a pint at The Tombs. This tier funds the casual hospitality that defines our gatherings, ensuring the green tea with honey is always flowing.",
   },
   {
-    title: "The 1946 Society",
+    title: "The Spirit of ’46",
     price: "$19.46/month",
     link: "https://buy.stripe.com/6oEbMC7YJf4YbaE5kt",
     description: "The definitive commitment. By matching the year of our founding every month, you become the backbone of our operations. This is the foundation of our sustainability.",
@@ -731,10 +731,10 @@ export const DONOR_TIERS = [
     description: "Dedicated to the experience. The Chimes are nothing without the gathering. You ensure that when we meet again, we can afford to do it right.",
   },
   {
-    title: "The Founder’s League",
+    title: "The Founders League",
     price: "$46/month",
     link: "https://buy.stripe.com/aEUeYO2EpaOI0w04gv",
-    description: "A commitment to the future. This level subsidizes our long-term initiatives, such as funding the archival restoration of master tapes and the preservation of our digital history.",
+    description: "A commitment to the future. While the “Spirit” tier honors the date, this tier honors the builders. You are subsidizing long-term initiatives like archival restoration and digital preservation.",
   },
   {
     title: "The Good Fellow",

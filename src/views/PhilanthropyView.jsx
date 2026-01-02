@@ -69,12 +69,14 @@ const PhilanthropyView = () => (
                   <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Mission</span>
               </div>
               <div className="lg:col-span-8">
+                  {/* RITSON EDIT: Inject the Brand Name into the H1 equivalent */}
                   <h3 className="text-5xl md:text-7xl font-serif leading-[1.15] md:leading-[1.0] text-[#041E42] tracking-tighter mb-12">
-                      The heartbeat of the Association.
+                      The <span className="text-[#D50032]">Donor Guild</span> is the heartbeat of the Association.
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
+                      {/* SYSTEM1 EDIT: Replace "subscribing" with specific asset naming */}
                       <p className="text-xl text-[#041E42] font-serif leading-relaxed">
-                          By subscribing, you ensure the tradition remains uninterrupted: the history documented, the reunions funded, and the legacy secured.
+                          Your membership in the <strong>Donor Guild</strong> ensures the tradition remains uninterrupted: the history documented, the reunions funded, and the legacy secured.
                       </p>
                       <div>
                           <p className="text-[#041E42] text-[10px] leading-relaxed font-sans font-bold uppercase tracking-[0.05em] opacity-60">
@@ -88,18 +90,18 @@ const PhilanthropyView = () => (
           {/* 02 — THE GUILD LIST */}
           <div className="mb-48">
               <div className="flex items-end justify-between border-b-2 border-[#041E42] pb-4 mb-0">
-                   <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">02 — The Donor Guild</span>
+                    <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">02 — The Donor Guild</span>
               </div>
 
               {DONOR_TIERS.map((tier, idx) => {
-                  const isHero = tier.title === "The 1946 Society";
+                  const isHero = tier.title === "The Spirit of ’46";
                   const [amount, frequency] = tier.price.includes('/') ? tier.price.split('/') : [tier.price, 'annually'];
 
                   return (
                       <div key={idx} className={`group relative border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-y-6 gap-x-4 items-start transition-all duration-500 hover:bg-white hover:pl-6 -ml-6 pl-6 pr-6 ${isHero ? 'bg-[#041E42]/5' : ''}`}>
                           <div className="md:col-span-2 pt-2">
                               <span className={`text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isHero ? 'text-[#D50032]' : 'text-[#041E42]/70 group-hover:text-[#D50032]'}`}>
-                                  {isHero ? "★ Recommended" : `Level 0${idx + 1}`}
+                                  {isHero ? "★ Recommended" : `Guild Level 0${idx + 1}`}
                               </span>
                           </div>
                           <div className="md:col-span-6 pr-8 text-left">
@@ -111,8 +113,9 @@ const PhilanthropyView = () => (
                                <span className="text-[9px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 uppercase">per {frequency}</span>
                           </div>
                           <div className="md:col-span-2 flex md:justify-end items-start pt-2">
+                               {/* RITSON EDIT: Specific CTA rather than generic 'Join' */}
                                <a href={tier.link} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-between w-full md:w-auto gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase transition-all duration-300 px-6 py-4 border ${isHero ? 'bg-[#D50032] border-[#D50032] text-white hover:bg-[#A51C30]' : 'border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-white'}`}>
-                                  <span>{isHero ? "Join the Society" : "Join"}</span>
+                                  <span>{isHero ? "Join the Guild " : "Join the Guild"}</span>
                                   <span className="text-lg font-light translate-y-[-1px]">→</span>
                                </a>
                           </div>
