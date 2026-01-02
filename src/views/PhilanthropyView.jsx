@@ -126,11 +126,17 @@ const PhilanthropyView = () => {
                       </div>
                   );
               })}
+
+              {/* --- UX IMPROVEMENT: Moved Subscription Management Here --- */}
+              <div className="mt-8 flex justify-end">
+                <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60 hover:text-[#D50032] transition-colors flex items-center gap-2">
+                   Already a member? Manage Subscription <span className="text-lg font-light leading-none">→</span>
+                </a>
+              </div>
           </div>
 
           {/* --- ONE-TIME DONATION BRIDGE --- */}
           <div className="relative w-full bg-[#041E42] text-[#F4F4F3] py-24 px-8 md:px-20 my-32 overflow-hidden md:-mx-12 md:w-[calc(100%+6rem)]">
-            {/* Background Decorative Element */}
             <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
                 <span className="text-[25vw] font-serif italic leading-none">Gift</span>
             </div>
@@ -157,11 +163,10 @@ const PhilanthropyView = () => {
             </div>
           </div>
 
-          {/* 03 — CAPITAL PROJECTS (THE FEATURE STORY) */}
+          {/* 03 — CAPITAL PROJECTS */}
           <div className="pt-24 mt-32 border-t-2 border-[#041E42]">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 lg:gap-x-12">
               
-              {/* Sidebar: The "Masthead" */}
               <div className="lg:col-span-4 lg:sticky lg:top-40 h-fit">
                 <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">
                   03 — Special Initiative
@@ -175,10 +180,7 @@ const PhilanthropyView = () => {
                 </p>
               </div>
 
-              {/* Main Story Body */}
               <div className="lg:col-span-8 flex flex-col">
-                
-                {/* Editorial Header */}
                 <div className="flex flex-col mb-20">
                   <span className="text-[150px] md:text-[220px] font-serif font-light leading-[0.7] text-[#D50032] select-none tracking-tighter mb-8">
                     A
@@ -191,17 +193,12 @@ const PhilanthropyView = () => {
                   </p>
                 </div>
 
-                {/* THE ARCHIVAL PLAYER (Patronage Version with Discography Widths) */}
                 {demoTrack && (
                   <div className="relative bg-white border border-[#041E42]/10 p-8 md:p-12 mb-20 shadow-sm overflow-hidden group">
-                    {/* Archival Utility Tag */}
                     <div className="absolute top-0 right-0 bg-[#041E42] text-white px-4 py-1 text-[9px] font-mono font-black uppercase tracking-[0.2em] select-none">
                       Log: Item #R-011
                     </div>
-                    
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-                      
-                      {/* Narrative Side - Span 8 (Matches Discography left-align) */}
                       <div className="lg:col-span-8">
                         <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] mb-4 block">
                           Technical Evidence
@@ -210,56 +207,40 @@ const PhilanthropyView = () => {
                           {typeset("The difference between loss and legacy: Listen to the raw extraction of our 1958 album versus the professional master transfer.")}
                         </p>
                       </div>
-
-                      {/* Action Side - Span 4 (Compact and Right-aligned on Desktop) */}
                       <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-center gap-6">
-                        <button 
-                          onClick={() => playTrack(demoTrack)} 
-                          className="flex items-center justify-between w-full lg:w-full gap-8 border-2 border-[#041E42] p-6 hover:bg-[#041E42] hover:text-white transition-all duration-500 group/btn"
-                        >
+                        <button onClick={() => playTrack(demoTrack)} className="flex items-center justify-between w-full lg:w-full gap-8 border-2 border-[#041E42] p-6 hover:bg-[#041E42] hover:text-white transition-all duration-500 group/btn">
                           <div className="text-left">
                             <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase block">Start A/B Demo</span>
                           </div>
                           <span className="text-2xl transition-transform group-hover/btn:translate-x-1">▶</span>
                         </button>
                       </div>
-
                     </div>
                   </div>
                 )}
 
-                {/* The Roadmap / Progress */}
                 <div className="mb-24">
-                  <h4 className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] mb-12 border-b border-[#041E42]/10 pb-4">
+                  <h4 className="text-[11px] font-mono font-bold tracking-[0.2em] uppercase text-[#041E42] mb-12 border-b border-[#041E42]/10 pb-4">
                     Restoration Roadmap
                   </h4>
                   <RestorationProgress phases={RESTORATION_PHASES} />
                 </div>
 
-                {/* The "Invest" Action */}
                 <div className="bg-[#E5E5E4] p-12 md:p-16 flex flex-col md:flex-row items-center justify-between gap-8 border-l-4 border-[#D50032]">
                   <div className="max-w-md text-left">
                     <h5 className="text-2xl font-serif font-bold mb-2">Fund this specific project</h5>
                     <p className="text-sm font-serif opacity-70 italic">Contributions go toward digitization, restoration, and digital storage.</p>
                   </div>
-                  <a 
-                    href="https://donate.stripe.com/5kQaEWb90fATbURbjP2ZO0B" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="whitespace-nowrap bg-[#041E42] text-white px-10 py-5 text-[11px] font-sans font-bold tracking-[0.2em] uppercase hover:bg-[#D50032] transition-colors duration-300"
-                  >
+                  <a href="https://donate.stripe.com/5kQaEWb90fATbURbjP2ZO0B" target="_blank" rel="noopener noreferrer" className="whitespace-nowrap bg-[#041E42] text-white px-10 py-5 text-[11px] font-sans font-bold tracking-[0.2em] uppercase hover:bg-[#D50032] transition-colors duration-300">
                     Make Capital Contribution →
                   </a>
                 </div>
 
-                {/* Management Link (Subtle Footer) */}
                 <div className="mt-32 pt-8 border-t border-[#041E42]/10 flex flex-col md:flex-row justify-between gap-4">
                     <p className="text-[10px] font-mono font-bold uppercase opacity-40 tracking-widest">
                       Georgetown Chimes Alumni Association, Inc.
                     </p>
-                    <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60 hover:text-[#D50032] transition-colors">
-                        Manage Donor Guild Subscription →
-                    </a>
+                    {/* Link removed from here since it moved up */}
                 </div>
               </div>
             </div>
