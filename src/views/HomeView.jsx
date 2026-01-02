@@ -123,7 +123,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                     className="group flex flex-row items-baseline justify-between py-10 md:py-12 border-b border-[#041E42]/20 transition-all duration-500 hover:bg-white hover:px-6 cursor-pointer"
                   >
                     <div className="flex items-baseline gap-6 md:gap-16">
-                      <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 group-hover:text-[#D50032] transition-colors uppercase">{item.id}</span>
+                      <span className="text-[11px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 group-hover:text-[#D50032] transition-colors uppercase">{item.id}</span>
                       <span className="text-4xl md:text-6xl font-serif text-[#041E42] italic leading-none">{item.room}</span>
                     </div>
                     <div className="flex items-center gap-8">

@@ -66,7 +66,8 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                 </div>
 
                 {/* LOGISTICS COLUMN — Now Mono (The Studio Log) */}
-                <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8">
+                {/* Add: border-l border-[#041E42]/10 pl-8 (and adjust gap to compensate if needed, or just let it breathe) */}
+                <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8 md:border-l md:border-[#041E42]/10 md:pl-8">
                   <div className="text-left md:text-right">
                       <span className="block text-[10px] font-mono font-bold tracking-[0.1em] uppercase text-[#041E42] mb-1">{event.time}</span>
                       <span className="block text-[10px] font-mono font-bold tracking-[0.1em] uppercase text-[#041E42]/70">{event.location}</span>

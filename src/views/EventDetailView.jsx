@@ -57,12 +57,12 @@ const EventDetailView = ({ event, navigateTo }) => {
                 {event.actions ? event.actions.map((action, idx) => (
                     <a key={idx} href={action.link} target="_blank" rel="noopener noreferrer" className={`group w-full flex items-center justify-between border-t border-b py-5 px-6 transition-all duration-300 ${action.primary ? "border-[#041E42] bg-[#041E42] text-[#F4F4F3] hover:bg-[#D50032] hover:border-[#D50032]" : "border-[#041E42]/20 text-[#041E42] hover:bg-[#041E42] hover:text-[#F4F4F3] hover:border-[#041E42]"}`}>
                         {/* Action Labels -> Mono for "Command" feel */}
-                        <span className="text-[10px] font-mono font-bold tracking-[0.1em] uppercase">{action.label}</span>
+                        <span className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase">{action.label}</span>
                         <span className="text-lg font-light group-hover:translate-x-2 transition-transform">→</span>
                     </a>
                 )) : event.link && (
                     <a href={event.link} target="_blank" rel="noopener noreferrer" className="group w-full flex items-center justify-between border-t border-b border-[#041E42] bg-[#041E42] text-[#F4F4F3] py-5 px-6 hover:bg-[#D50032] hover:border-[#D50032] transition-colors">
-                        <span className="text-[10px] font-mono font-bold tracking-[0.1em] uppercase">{event.type === 'CONCERT' ? 'Purchase Tickets' : 'Event Info'}</span>
+                        <span className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase">{event.type === 'CONCERT' ? 'Purchase Tickets' : 'Event Info'}</span>
                         <span className="text-lg font-light group-hover:translate-x-2 transition-transform">→</span>
                     </a>
                 )}

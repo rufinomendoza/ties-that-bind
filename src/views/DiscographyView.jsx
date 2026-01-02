@@ -24,7 +24,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
 {/* 01 — PRESERVATION SECTION */}
         <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
             <div className="lg:col-span-4">
-              <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span>
+              <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span>
             </div>
             <div className="lg:col-span-8">
                 <h3 className="text-5xl md:text-7xl font-serif leading-[1.15] md:leading-[1.0] text-[#041E42] tracking-tighter mb-12">A living record. Currently undergoing restoration.</h3>
@@ -82,7 +82,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
         {/* The Grid */}
         <div className="mb-48">
             <div className="flex items-end justify-between border-b-2 border-[#041E42] pb-4 mb-12">
-              <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">02 — The Discography</span>
+              <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#041E42] uppercase">02 — The Discography</span>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
             {ALBUMS_DATA.map((album, index) => (
@@ -109,7 +109,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                   </div>
                   <div className="flex flex-col items-start border-t border-[#041E42]/20 pt-4">
                       <div className="flex justify-between w-full items-baseline mb-2">
-                        <span className="text-[11px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 uppercase tabular-nums">Issue {album.year}</span>
+                        <span className="text-[11px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 uppercase tabular-nums pb-1">Issue {album.year}</span>
                       </div>
                       <h3 className="font-serif text-3xl md:text-4xl text-[#041E42] leading-[1.15] md:leading-[1.0] group-hover:italic transition-all duration-300">
                         {typeset(album.title)}
