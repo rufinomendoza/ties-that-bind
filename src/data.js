@@ -18,6 +18,18 @@ import IMG_CHIMES_66 from './assets/chimes-66.jpg';
 import IMG_1959 from './assets/1959.jpg';
 import IMG_UNDER_THE_TREE from './assets/under-the-tree.jpg';
 
+
+export const RESTORATION_PHASES = [
+  {
+    id: "01",
+    title: "Digitizing Audiovisual Media",
+    years: "1952–2014",
+    current: 1817,
+    goal: 48000,
+    source: "1/4\" Analog Reels, Video Tapes, Compact Discs",
+    unit: ""
+  }
+];
 // --- Data ---
 export const EVENTS_DATA = [
   { 
