@@ -47,6 +47,9 @@ export const EVENTS_DATA = [
         "The Cherry Tree Massacre remains a testament to the Chimes spirit: turning a night at the pub into a half-century of musical excellence. We invite you back to Gaston Hall to witness the latest chapter of a tradition that has defined the Georgetown experience since 1974.",
         "Doors open at 6:30 p.m."
       ],
+    actions: [
+        { label: "Buy Concert Tickets", link: "https://www.tickettailor.com/checkout/view-event/id/7391851/chk/a085/?ref=gcaa-site&modal_widget=true&widget=true", primary: true},
+    ],
     guestGroups: [
         "The GraceNotes",
         "The Phantoms",
@@ -68,8 +71,9 @@ export const EVENTS_DATA = [
     type: "Alumni Weekend", // kept for listing, overridden by eyebrow in detail view
     priceInfo: "General Admission $26.04",
     actions: [
-        { label: "Buy Concert Tickets", link: "https://buytickets.at/chimes/1998443/r/gcaa-site", primary: true},
+        { label: "Buy Concert Tickets", link: "https://www.tickettailor.com/checkout/view-event/id/7391899/chk/f6fc/?ref=gcaa-site&modal_widget=true&widget=true", primary: true},
     ],
+    link: "https://buytickets.at/chimes/1998443/r/gcaa-site",
     description: [
         "Fifty-two years ago, we sang for survival. This February, we sing for the legacy.",
         "The Cherry Tree Massacre remains a testament to the Chimes spirit: turning a night at the pub into a half-century of musical excellence. We invite you back to Gaston Hall to witness the latest chapter of a tradition that has defined the Georgetown experience since 1974.",
@@ -105,7 +109,6 @@ export const EVENTS_DATA = [
         { label: "Chimes Survey", link: "https://www.surveymonkey.com/r/BJ93CBF", primary: true },
         { label: "More Information", link: "https://jcw.georgetown.edu/", primary: false }
     ],
-    link: "",
     description: [
         "Experience an unforgettable Caribbean gathering April 16–19 as we honor Federico Stubbe #177 during John Carroll Weekend 2026.",
         "Set against the vibrant backdrop of Puerto Rico, this weekend blends cultural immersion with exceptional celebration, culminating in the John Carroll Awards Gala. Please refer to Slack announcements or your email to secure your accommodations within our private block."
