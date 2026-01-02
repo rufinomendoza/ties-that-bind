@@ -69,7 +69,7 @@ const StoreView = () => (
                         <img 
                             src={item.image} 
                             alt={item.name} 
-                            className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal group-hover:grayscale-0 transition-all duration-1000 ease-in-out scale-105 group-hover:scale-100"
+                            className="w-full h-full object-cover mix-blend-multiply group-hover:mix-blend-normal transition-all duration-1000 ease-in-out scale-105 group-hover:scale-100"
                         />
                     </div>
                 </div>
