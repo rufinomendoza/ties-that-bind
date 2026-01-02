@@ -32,10 +32,13 @@ export default function App() {
     if (cleanPath === '/store') return { view: 'store', slug: null };
     if (cleanPath === '/give') return { view: 'philanthropy', slug: null };
     if (cleanPath === '/comms') return { view: 'backstage', slug: null };
-    const eventMatch = cleanPath.match(/^\/event\/([\w-]+)$/);
-    if (eventMatch) return { view: 'event', slug: eventMatch[1] };
-    const albumMatch = cleanPath.match(/^\/album\/([\w-]+)$/);
-    if (albumMatch) return { view: 'album', slug: albumMatch[1] };
+    
+    const eventMatch = cleanPath.match(/^\/event\/([^/]+)$/);
+    if (eventMatch) return { view: 'event', slug: decodeURIComponent(eventMatch[1]) };
+    
+    const albumMatch = cleanPath.match(/^\/album\/([^/]+)$/);
+    if (albumMatch) return { view: 'album', slug: decodeURIComponent(albumMatch[1]) };
+    
     return { view: '404', slug: null };
   };
 
