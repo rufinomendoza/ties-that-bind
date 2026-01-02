@@ -43,7 +43,8 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handlePopState = () => { setRoute(getRouteFromPath()); setIsMenuOpen(false); window.scrollTo(0, 0); };
+    const handlePopState = () => { setRoute(getRouteFromPath()); setIsMenuOpen(false); };
+    // FIX: Removed window.scrollTo(0, 0) to allow browser's native scroll restoration 
     window.addEventListener('popstate', handlePopState);
     return () => { window.removeEventListener('popstate', handlePopState); };
   }, []);
