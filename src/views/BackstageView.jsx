@@ -21,7 +21,7 @@ const BackstageView = () => (
                  <div className="group flex flex-col h-full justify-between border-b md:border-b-0 md:border-r border-[#041E42] py-12 md:pr-12">
                      <div>
                          <div className="border-b border-[#041E42] pb-4 mb-12">
-                             <span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032]">
+                             <span className="text-[11px] font-mono font-bold tracking-[0.05em] uppercase text-[#D50032]">
                                  System 01 — Database
                              </span>
                          </div>
@@ -32,7 +32,7 @@ const BackstageView = () => (
                          </h3>
                          
                          <div className="flex items-center gap-4 mb-12 opacity-60">
-                             <span className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase">
+                             <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase">
                                 Platform: Notion
                              </span>
                          </div>
@@ -67,7 +67,7 @@ const BackstageView = () => (
                  <div className="group flex flex-col h-full justify-between py-12 md:pl-12">
                      <div>
                          <div className="border-b border-[#041E42] pb-4 mb-12">
-                             <span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032]">
+                             <span className="text-[11px] font-mono font-bold tracking-[0.05em] uppercase text-[#D50032]">
                                  System 02 — Comms
                              </span>
                          </div>
@@ -78,7 +78,7 @@ const BackstageView = () => (
                          </h3>
 
                          <div className="flex items-center gap-4 mb-12 opacity-60">
-                             <span className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase">
+                             <span className="text-[9px] font-mono font-bold tracking-[0.2em] uppercase">
                                 Platform: Slack
                              </span>
                          </div>
@@ -114,8 +114,8 @@ const BackstageView = () => (
 
         {/* Security Stamp */}
         <div className="mt-12 text-left opacity-30 px-1">
-            <p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase">
-                Restricted Access — Alumni Personnel Only
+            <p className="text-[10px] font-mono font-bold tracking-[0.1em] uppercase">
+                Restricted Access — Chimes Personnel Only
             </p>
         </div>
 

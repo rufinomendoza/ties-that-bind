@@ -66,7 +66,7 @@ export const EVENTS_DATA = [
     slug: "cherry-tree-seniors",
     title: "Cherry Tree Massacre I", 
     date: "February 6, 2026", 
-    time: "7:00 p.m.",
+    time: "19:00",
     location: "Gaston Hall", 
     type: "Senior Parents & Families Weekend",
     priceInfo: "General Admission $26.04",
@@ -74,7 +74,7 @@ export const EVENTS_DATA = [
     description: [
         "Fifty-two years ago, we sang for survival. This February, we sing for the legacy.",
         "The Cherry Tree Massacre remains a testament to the Chimes spirit: turning a night at the pub into a half-century of musical excellence. We invite you back to Gaston Hall to witness the latest chapter of a tradition that has defined the Georgetown experience since 1974.",
-        "Doors open at 6:30 p.m."
+        "Doors open at 18:30. Get your tickets."
       ],
     actions: [
         { label: "Buy Concert Tickets", link: "https://www.tickettailor.com/checkout/view-event/id/7391851/chk/a085/?ref=gcaa-site&modal_widget=true&widget=true", primary: true},
@@ -95,7 +95,7 @@ export const EVENTS_DATA = [
     slug: "cherry-tree-alumni",
     title: "Cherry Tree Massacre II", 
     date: "February 21, 2026", 
-    time: "7:00 p.m.",
+    time: "19:00",
     location: "Gaston Hall", 
     type: "Alumni Weekend", // kept for listing, overridden by eyebrow in detail view
     priceInfo: "General Admission $26.04",
@@ -106,7 +106,7 @@ export const EVENTS_DATA = [
     description: [
         "Fifty-two years ago, we sang for survival. This February, we sing for the legacy.",
         "The Cherry Tree Massacre remains a testament to the Chimes spirit: turning a night at the pub into a half-century of musical excellence. We invite you back to Gaston Hall to witness the latest chapter of a tradition that has defined the Georgetown experience since 1974.",
-        "Doors open at 6:30 p.m."
+        "Doors open at 18:30. Get your tickets."
     ],
     guestGroups: [
         "The Saxatones",

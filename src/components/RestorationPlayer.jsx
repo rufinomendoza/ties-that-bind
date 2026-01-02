@@ -92,8 +92,9 @@ const RestorationPlayer = () => {
                 <div className="hidden sm:flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-[#F4F4F3]/5 border border-[#F4F4F3]/20 text-[#D50032] flex-shrink-0 rounded-sm">
                    {sourceMode === 'reference' ? <Disc3 size={24} strokeWidth={1.25} /> : <Voicemail size={24} strokeWidth={1.25} />}
                 </div>
-                <div className="flex flex-col overflow-hidden text-left min-w-0">
-                    <span className="text-[8px] md:text-[9px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] mb-1 truncate">
+                {/* FIX: Added md:min-w-72 to prevent layout shift when toggling text labels */}
+                <div className="flex flex-col overflow-hidden text-left min-w-0 md:min-w-72">
+                    <span className="text-[8px] md:text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#D50032] mb-1 truncate">
                         {sourceMode === 'reference' ? 'Unfiltered Archival Recording' : '2025 Reel-to-Reel Digital Transfer'}
                     </span>
                     <span className="text-lg md:text-2xl font-serif text-[#F4F4F3] truncate leading-tight">
@@ -114,13 +115,13 @@ const RestorationPlayer = () => {
             <div className="flex flex-1 md:flex-none items-center bg-[#F4F4F3]/5 rounded-sm p-1 border border-[#F4F4F3]/10">
                 <button 
                     onClick={() => setSourceMode('reference')}
-                    className={`flex-1 md:w-24 py-2 text-[9px] font-sans font-bold tracking-[0.2em] uppercase leading-none transition-all ${sourceMode === 'reference' ? 'bg-[#F4F4F3] text-[#041E42]' : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3]'}`}
+                    className={`flex-1 md:w-24 py-2 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all ${sourceMode === 'reference' ? 'bg-[#F4F4F3] text-[#041E42]' : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3]'}`}
                 >
                     Raw
                 </button>
                 <button 
                     onClick={() => setSourceMode('restored')}
-                    className={`flex-1 md:w-24 py-2 text-[9px] font-sans font-bold tracking-[0.2em] uppercase leading-none transition-all ${sourceMode === 'restored' ? 'bg-[#D50032] text-white' : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3]'}`}
+                    className={`flex-1 md:w-24 py-2 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all ${sourceMode === 'restored' ? 'bg-[#D50032] text-white' : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3]'}`}
                 >
                     Master
                 </button>
@@ -146,7 +147,7 @@ const RestorationPlayer = () => {
 
         {/* Bottom/Right: Timestamp (and Desktop Close) */}
         <div className="flex items-center justify-between md:justify-end w-full md:w-auto border-t border-white/5 md:border-0 pt-3 md:pt-0">
-            <span className="text-[10px] md:text-[11px] font-sans font-bold tracking-[0.1em] tabular-nums opacity-60">
+            <span className="text-[10px] md:text-[11px] font-mono font-bold tracking-[0.1em] tabular-nums opacity-60">
                 {formatTime(progress)} <span className="opacity-30 mx-2">/</span> {formatTime(duration)}
             </span>
             <button onClick={closePlayer} className="hidden md:block opacity-40 hover:opacity-100 hover:text-[#D50032] transition-colors p-2 ml-4">

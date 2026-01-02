@@ -55,10 +55,10 @@ const StoreView = () => (
             >
                 {/* Col 1: THE SPEC */}
                 <div className="md:col-span-2 flex flex-col gap-1 px-1">
-                    <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#D50032] uppercase">
+                    <span className="text-[11px] font-mono font-bold tracking-[0.1em] text-[#D50032] uppercase">
                         Ref. 0{idx + 1}
                     </span>
-                    <span className="text-[9px] font-sans font-bold tracking-[0.05em] text-[#041E42]/40 uppercase">
+                    <span className="text-[9px] font-mono font-bold tracking-[0.05em] text-[#041E42]/40 uppercase">
                         Pure Silk · UK Woven
                     </span>
                 </div>
@@ -83,7 +83,7 @@ const StoreView = () => (
                     <p className="text-[#041E42] text-xl font-serif leading-relaxed opacity-80 max-w-md [text-wrap:balance] px-1">
                         {typeset(item.desc)}
                     </p>
-                    <p className="mt-6 text-[10px] font-sans font-bold uppercase tracking-widest text-[#041E42]/40 px-1">
+                    <p className="mt-6 text-[10px] font-mono font-bold uppercase tracking-widest text-[#041E42]/40 px-1">
                         Standard Issue Battle Gear
                     </p>
                 </div>
@@ -91,10 +91,10 @@ const StoreView = () => (
                 {/* Col 4: THE ACQUISITION */}
                 <div className="md:col-span-2 flex flex-col justify-between h-full pt-2 items-start md:items-end gap-12 px-1">
                     <div className="text-left md:text-right">
-                        <span className="text-3xl font-sans font-bold text-[#041E42] tracking-tight tabular-nums block">
+                        <span className="text-3xl font-mono font-bold text-[#041E42] tracking-tight tabular-nums block">
                             ${item.price}
                         </span>
-                        <span className="text-[9px] font-sans font-bold tracking-[0.1em] text-[#041E42]/50 uppercase">
+                        <span className="text-[9px] font-mono font-bold tracking-[0.1em] text-[#041E42]/50 uppercase">
                             With Shipping
                         </span>
                     </div>
