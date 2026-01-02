@@ -10,7 +10,9 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
   const ctmAlumni = EVENTS_DATA.find(e => e.slug === 'cherry-tree-alumni');
 
   return (
-    <>
+    // FIX: Replaced Fragment <> with <div className="w-full">
+    // This prevents the page transition CSS Grid from stacking the Hero, Directory, and Featured sections on top of each other.
+    <div className="w-full">
       {/* --- SEO INTEGRATION (HomeView) --- */}
       <Helmet>
         <title>Georgetown Chimes Alumni Association, Inc.</title>
@@ -147,7 +149,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
             )}
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
