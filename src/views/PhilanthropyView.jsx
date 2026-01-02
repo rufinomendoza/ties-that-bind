@@ -191,33 +191,39 @@ const PhilanthropyView = () => {
                   </p>
                 </div>
 
-                {/* The "Field Evidence" Audio Block */}
+                {/* THE ARCHIVAL PLAYER (Patronage Version with Discography Widths) */}
                 {demoTrack && (
-                  <div className="relative bg-white border border-[#041E42]/10 p-8 md:p-12 mb-20 shadow-sm">
-                    <div className="absolute top-0 right-0 bg-[#041E42] text-white px-4 py-1 text-[9px] font-sans font-bold uppercase tracking-widest">
-                      Log: Item #1958-A
+                  <div className="relative bg-white border border-[#041E42]/10 p-8 md:p-12 mb-20 shadow-sm overflow-hidden group">
+                    {/* Archival Utility Tag */}
+                    <div className="absolute top-0 right-0 bg-[#041E42] text-white px-4 py-1 text-[9px] font-sans font-black uppercase tracking-[0.2em] select-none">
+                      Log: Item #R-011
                     </div>
                     
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-                      <div>
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                      
+                      {/* Narrative Side - Span 8 (Matches Discography left-align) */}
+                      <div className="lg:col-span-8">
                         <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] mb-4 block">
                           Technical Evidence
                         </span>
-                        <p className="text-base font-serif italic leading-relaxed text-[#041E42]/80">
-                          {typeset("The difference between loss and legacy: Listen to the raw extraction of our 1958 session versus the professional master transfer.")}
+                        <p className="text-lg md:text-xl font-serif italic leading-relaxed text-[#041E42]/80 [text-wrap:balance]">
+                          {typeset("The difference between loss and legacy: Listen to the raw extraction of our 1958 album versus the professional master transfer.")}
                         </p>
                       </div>
-                      
-                      <button 
-                        onClick={() => playTrack(demoTrack)} 
-                        className="flex items-center justify-between group/btn border-2 border-[#041E42] p-6 hover:bg-[#041E42] hover:text-white transition-all duration-500"
-                      >
-                        <div className="text-left">
-                          <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase block">Start A/B Demo</span>
-                          <span className="text-[9px] font-sans font-bold opacity-40 uppercase">Reel-to-Reel Digitization</span>
-                        </div>
-                        <span className="text-3xl">▶</span>
-                      </button>
+
+                      {/* Action Side - Span 4 (Compact and Right-aligned on Desktop) */}
+                      <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-center gap-6">
+                        <button 
+                          onClick={() => playTrack(demoTrack)} 
+                          className="flex items-center justify-between w-full lg:w-full gap-8 border-2 border-[#041E42] p-6 hover:bg-[#041E42] hover:text-white transition-all duration-500 group/btn"
+                        >
+                          <div className="text-left">
+                            <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase block">Start A/B Demo</span>
+                          </div>
+                          <span className="text-2xl transition-transform group-hover/btn:translate-x-1">▶</span>
+                        </button>
+                      </div>
+
                     </div>
                   </div>
                 )}

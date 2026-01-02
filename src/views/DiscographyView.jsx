@@ -37,32 +37,45 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                     </div>
                 </div>
 
-                {/* THE COHESIVE PLAYER BLOCK (Vignelli-Style integration) */}
-                {demoTrack && (
-                    <div className="group relative border-t border-b border-[#041E42]/20 py-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-8 transition-all duration-500 hover:bg-white hover:px-6 -mx-0 hover:-mx-6 cursor-default">
-                        <div className="max-w-md">
-                            <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] mb-3 block">
-                                Hear the Difference: 1958 Pressing
-                            </span>
-                            <p className="text-sm font-serif leading-relaxed text-[#041E42]/70 italic [text-wrap:balance]">
-                              The <strong className="text-[#041E42] font-bold not-italic">Raw</strong> transfer is an uncalibrated extraction from the original 1958 vinyl. The <strong className="text-[#041E42] font-bold not-italic">Master</strong> demonstrates the high-fidelity clarity of a professional-grade, reel-to-reel digitization.
-                            </p>
-                        </div>
+                {/* THE ARCHIVAL PLAYER (Discography Spec Version) */}
+{/* THE ARCHIVAL PLAYER (Patronage-Style Integration) */}
+{demoTrack && (
+  <div className="relative bg-white border border-[#041E42]/10 p-8 md:p-12 mb-20 shadow-sm overflow-hidden group">
+    {/* Archival Utility Tag */}
+    <div className="absolute top-0 right-0 bg-[#041E42] text-white px-4 py-1 text-[9px] font-sans font-black uppercase tracking-[0.2em] select-none">
+        Log: Item #R-011
+    </div>
+    
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      
+      {/* Narrative Side */}
+      <div className="lg:col-span-8">
+        <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] mb-4 block">
+          Hear the Difference
+        </span>
+        <h4 className="text-2xl md:text-3xl font-serif text-[#041E42] tracking-tighter leading-tight mb-4">
+          The <em>Restoration</em> Demo
+        </h4>
+        <p className="text-base font-serif italic leading-relaxed text-[#041E42]/70 max-w-xl [text-wrap:balance]">
+          The difference between loss and legacy: Listen to the raw extraction of our 1958 album versus the professional master transfer.
+        </p>
+      </div>
 
-                        <button 
-                            onClick={() => playTrack(demoTrack)}
-                            className="flex flex-shrink-0 items-center gap-4 group/btn"
-                        >
-                            <div className="flex flex-col text-right">
-                                <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]">Listen</span>
-                                <span className="text-[9px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/40">A/B Comparison</span>
-                            </div>
-                            <div className="w-14 h-14 flex items-center justify-center border border-[#041E42] text-[#041E42] group-hover/btn:bg-[#D50032] group-hover/btn:border-[#D50032] group-hover/btn:text-white transition-all duration-300">
-                                <span className="text-xl translate-x-0.5">▶</span>
-                            </div>
-                        </button>
-                    </div>
-                )}
+      {/* Action Side */}
+      <div className="lg:col-span-4 flex flex-col md:flex-row lg:flex-col items-start lg:items-end justify-center gap-6">
+        <button 
+          onClick={() => playTrack(demoTrack)}
+          className="flex items-center justify-between w-full md:w-auto gap-8 border-2 border-[#041E42] p-5 lg:p-6 hover:bg-[#041E42] hover:text-white transition-all duration-500 group/btn"
+        >
+          <div className="text-left">
+            <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase block">Start A/B Demo</span>
+          </div>
+          <span className="text-2xl transition-transform group-hover/btn:translate-x-1">▶</span>
+        </button>
+      </div>
+    </div>
+  </div>
+)}
             </div>
         </div>
 
