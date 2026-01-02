@@ -39,22 +39,22 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
           <div className="flex-1 flex flex-col items-center justify-center pt-12">
             
             {/* Typography Stack */}
-<div className="w-full flex flex-col items-center justify-center text-center select-none leading-[0.8] text-[#041E42] overflow-visible">
-  {/* BROTHERHOOD */}
-  <h1 className="whitespace-nowrap text-[11.5vw] md:text-[12vw] font-serif tracking-tighter relative z-10">
-    BROTHERHOOD
-  </h1>
-  
-  {/* HARMONY - Added italic correction for 'Y' clipping */}
-  <h1 className="whitespace-nowrap text-[16vw] md:text-[19vw] font-serif tracking-tighter opacity-40 italic -mt-[3vw] relative z-0 pr-[0.25em]">
-    HARMONY
-  </h1>
-  
-  {/* HISTORY */}
-  <h1 className="whitespace-nowrap text-[16vw] md:text-[17vw] font-serif tracking-tighter block -mt-[3.5vw] relative z-10">
-    HISTORY
-  </h1>
-</div>
+            <div className="w-full flex flex-col items-center justify-center text-center select-none leading-[0.8] text-[#041E42] overflow-visible">
+              {/* BROTHERHOOD */}
+              <h1 className="whitespace-nowrap text-[11.5vw] md:text-[12vw] font-serif tracking-tighter relative z-10">
+                BROTHERHOOD
+              </h1>
+              
+              {/* HARMONY - Added italic correction for 'Y' clipping */}
+              <h1 className="whitespace-nowrap text-[16vw] md:text-[19vw] font-serif tracking-tighter opacity-40 italic -mt-[3vw] relative z-0 pr-[0.25em]">
+                HARMONY
+              </h1>
+              
+              {/* HISTORY */}
+              <h1 className="whitespace-nowrap text-[16vw] md:text-[17vw] font-serif tracking-tighter block -mt-[3.5vw] relative z-10">
+                HISTORY
+              </h1>
+            </div>
 
             {/* Action Buttons */}
             <div className="flex flex-col md:flex-row gap-8 md:gap-24 items-center mt-12 md:mt-16 z-20">
