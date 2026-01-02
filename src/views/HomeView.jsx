@@ -7,6 +7,7 @@ import { EVENTS_DATA } from '../data';
 import IMG_CTM_BOND from '../assets/ctm-bond.jpeg';
 
 const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
+
   const ctmAlumni = EVENTS_DATA.find(e => e.slug === 'cherry-tree-alumni');
 
   return (

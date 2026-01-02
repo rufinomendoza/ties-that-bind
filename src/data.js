@@ -666,6 +666,14 @@ export const ALBUMS_DATA = [
     cover: "bg-[#8A9BB5]",
     image: IMG_UNDER_THE_TREE,
     link: "https://thechimes.lnk.to/UnderTheTreeAA",
+    // --- CHANGE: Dedicated Restoration Object ---
+    restoration: {
+      title: "We Meet (1958)",
+      audioSources: {
+         reference: "/audio/we-meet-vinyl.mp3", // Placeholder
+         restored: "/audio/we-meet-tape.mp3" // Placeholder
+      }
+    },
     linerNotes: [
         {
             author: "Paul Hume (Music Critic of The Washington Post)",
