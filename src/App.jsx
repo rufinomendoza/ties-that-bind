@@ -1,157 +1,174 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useRef } from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Menu, X } from 'lucide-react';
-import { TransitionGroup, CSSTransition } from 'react-transition-group';
+import { isPast } from '../utils/formatters';
+import { EVENTS_DATA } from '../data';
 
-// Import Data
-import { EVENTS_DATA, ALBUMS_DATA, STORE_DATA } from './data';
-import Logo from './components/Logo';
-import { typeset, isPast } from './utils/formatters';
-import { NavBar } from './components/NavBar';
-import SectionHeader from './components/SectionHeader';
+// Asset imports
+import IMG_CTM_BOND from '../assets/ctm-bond.jpeg';
 
-import { AudioProvider } from './contexts/AudioContext';
-import RestorationPlayer from './components/RestorationPlayer';
+const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
+  const ctmAlumni = EVENTS_DATA.find(e => e.slug === 'cherry-tree-alumni');
+  
+  // Ref for smooth scroll
+  const directoryRef = useRef(null);
 
-
-// Dynamically import each view
-const HomeView = React.lazy(() => import('./views/HomeView'));
-const StoreView = React.lazy(() => import('./views/StoreView'));
-const BackstageView = React.lazy(() => import('./views/BackstageView'));
-const NotFoundView = React.lazy(() => import('./views/NotFoundView'));
-const PhilanthropyView = React.lazy(() => import('./views/PhilanthropyView'));
-const AgendaView = React.lazy(() => import('./views/AgendaView'));
-const EventDetailView = React.lazy(() => import('./views/EventDetailView'));
-const DiscographyView = React.lazy(() => import('./views/DiscographyView'));
-const AlbumDetailView = React.lazy(() => import('./views/AlbumDetailView'));
-
-// App
-export default function App() {
-  const getRouteFromPath = () => {
-    const path = window.location.pathname;
-    const cleanPath = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
-    
-    if (cleanPath === '/' || cleanPath === '') return { view: 'home', slug: null };
-    if (cleanPath === '/events') return { view: 'agenda', slug: null };
-    if (cleanPath === '/albums') return { view: 'discography', slug: null };
-    if (cleanPath === '/store') return { view: 'store', slug: null };
-    if (cleanPath === '/give') return { view: 'philanthropy', slug: null };
-    if (cleanPath === '/comms') return { view: 'backstage', slug: null };
-    
-    const eventMatch = cleanPath.match(/^\/event\/([^/]+)$/);
-    if (eventMatch) return { view: 'event', slug: decodeURIComponent(eventMatch[1]) };
-    
-    const albumMatch = cleanPath.match(/^\/album\/([^/]+)$/);
-    if (albumMatch) return { view: 'album', slug: decodeURIComponent(albumMatch[1]) };
-    
-    return { view: '404', slug: null };
+  const scrollToDirectory = () => {
+    directoryRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  const [route, setRoute] = useState(getRouteFromPath());
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const handlePopState = () => { setRoute(getRouteFromPath()); setIsMenuOpen(false); };
-    window.addEventListener('popstate', handlePopState);
-    return () => { window.removeEventListener('popstate', handlePopState); };
-  }, []);
-
-  const navigateTo = (view, slug = null) => {
-    let path = '/';
-    switch(view) {
-        case 'home': path = '/'; break;
-        case 'agenda': path = '/events'; break;
-        case 'discography': path = '/albums'; break;
-        case 'store': path = '/store'; break;
-        case 'philanthropy': path = '/give'; break;
-        case 'backstage': path = '/comms'; break;
-        case 'event': path = `/event/${slug}`; break;
-        case 'album': path = `/album/${slug}`; break;
-        default: path = '/';
-    }
-    try { window.history.pushState({}, '', path); } catch (err) { console.log('History API not available'); }
-    setRoute({ view, slug });
-    setIsMenuOpen(false);
-    window.scrollTo(0, 0);
-  };
-
-  // FIX: SEO / Metadata Bug
-  // Correctly saves the current dynamic title before hiding, and restores it on return.
-  useEffect(() => {
-    let previousTitle = document.title;
-
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        // Capture the specific page title (set by Helmet) before we overwrite it
-        previousTitle = document.title;
-        document.title = "We meet again soon…";
-      } else {
-        // Restore the specific title (e.g., "Box Office | ...") instead of a generic reset
-        document.title = previousTitle;
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
-  }, []);
-
-  const openAlbumBySlug = (slug) => navigateTo('album', slug);
-  const openAlbum = (album) => navigateTo('album', album.slug);
-  const openEvent = (event) => navigateTo('event', event.slug);
-
-  const activePage = route.view;
-  const selectedEvent = activePage === 'event' && route.slug ? EVENTS_DATA.find(e => e.slug === route.slug) : null;
-  const selectedAlbum = activePage === 'album' && route.slug ? ALBUMS_DATA.find(a => a.slug === route.slug) : null;
-
-  const isMissingData = 
-    (activePage === 'event' && !selectedEvent) || 
-    (activePage === 'album' && !selectedAlbum);
-
-  const effectiveView = isMissingData ? '404' : activePage;
 
   return (
-    <div className="font-sans text-[#041E42] bg-[#F4F4F3] selection:bg-[#D50032] selection:text-[#F4F4F3]">
-    <AudioProvider>
-      <div className="bg-texture"></div>
-        <a href="#main-content" className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] px-6 py-4 bg-[#041E42] text-[#F4F4F3] text-xs font-bold uppercase tracking-widest border border-[#D50032]">Skip to main content</a>
-        <NavBar activePage={activePage} navigateTo={navigateTo} mobileMenuOpen={isMenuOpen} setMobileMenuOpen={setIsMenuOpen} />
-        <main id="main-content" className="min-h-screen">
-          <TransitionGroup className="page-wrapper">
-            <CSSTransition
-              key={route.view + (route.slug || '')}
-              classNames="page"
-              timeout={800} 
-              unmountOnExit
-            >
-              <Suspense fallback={<div className="h-screen flex items-center justify-center font-bold tracking-widest uppercase text-[10px]">Loading...</div>}>
-                {effectiveView === 'home' && <HomeView navigateTo={navigateTo} openAlbumBySlug={openAlbumBySlug} openEvent={openEvent} />}
-                {effectiveView === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
-                {effectiveView === 'discography' && <DiscographyView openAlbum={openAlbum} navigateTo={navigateTo} />}
-                {effectiveView === 'album' && <AlbumDetailView selectedAlbum={selectedAlbum} navigateTo={navigateTo} />}
-                {effectiveView === 'event' && <EventDetailView event={selectedEvent} navigateTo={navigateTo} />}
-                {effectiveView === 'philanthropy' && <PhilanthropyView />}
-                {effectiveView === 'store' && <StoreView />}
-                {effectiveView === 'backstage' && <BackstageView />}
-                {effectiveView === '404' && <NotFoundView navigateTo={navigateTo} />}
-              </Suspense>
-            </CSSTransition>
-          </TransitionGroup>
-        </main>
-        <RestorationPlayer />
-        <footer className="bg-[#F4F4F3] text-[#041E42] pt-32 pb-12 px-6 md:px-12 antialiased selection:bg-[#D50032] selection:text-white">
-          <div className="max-w-[1920px] mx-auto">
-            <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 md:grid-cols-12 gap-y-12 md:gap-x-12">
-              <div className="md:col-span-4 flex flex-col justify-between h-full"><div><Logo className="h-8 w-auto mb-12 text-[#041E42] opacity-80" /><div className="space-y-6 max-w-xs"><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/70">Incorporated in Delaware<br/>501(c)(7) Non-Profit</p><p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase leading-relaxed text-[#041E42]/70">Kindly be advised that contributions are not tax-deductible.</p></div></div></div>
-              <div className="md:col-span-8 grid grid-cols-2 md:grid-cols-3 gap-12">
-                <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#D50032] border-b border-[#041E42]/20 pb-4 block">Index</span>{[{ name: 'Box Office', slug: 'agenda' }, { name: 'Listening Room', slug: 'discography' }, { name: 'Haberdasher', slug: 'store' }, { name: 'Patronage', slug: 'philanthropy' }].map((item) => (<button key={item.name} onClick={() => navigateTo(item.slug)} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">{item.name}</button>))}</div>
-                <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/70 border-b border-[#041E42]/20 pb-4 block">Backstage</span><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">Database</button><button onClick={() => navigateTo('backstage')} className="text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">Messaging</button></div>
-                <div className="flex flex-col gap-6"><span className="text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/70 border-b border-[#041E42]/20 pb-4 block">External</span>{[{ name: 'The House', url: 'https://3611.georgetownchimes.org' }, { name: 'The Actives', url: 'https://georgetownchimes.org' }].map((site) => (<button key={site.name} onClick={() => window.open(site.url, '_blank', 'noopener,noreferrer')} className="group flex items-center gap-2 text-left text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032] block py-2">{site.name}<span className="text-lg font-light leading-none opacity-0 group-hover:opacity-100 transition-opacity translate-y-[-1px]">&#x2197;&#xFE0E;</span></button>))}</div>
-              </div>
+    <div className="w-full bg-[#F4F4F3] selection:bg-[#D50032] selection:text-white">
+      <Helmet>
+        <title>Georgetown Chimes Alumni Association, Inc.</title>
+      </Helmet>
+
+      {/* --- HERO SECTION --- */}
+      <div className="relative h-screen w-full flex flex-col border-b-2 border-[#041E42] overflow-hidden antialiased">
+        <img 
+            src="/og-image.jpg"
+            alt="Alumni singing"
+            fetchPriority="high"
+            loading="eager"
+            className="absolute inset-0 z-0 w-full h-full object-cover object-center grayscale mix-blend-multiply opacity-20 pointer-events-none" 
+        />
+        <div className="absolute inset-0 z-0 bg-[#041E42] mix-blend-screen opacity-10 pointer-events-none"></div>
+
+        <div className="relative z-10 flex flex-col h-full w-full max-w-[1920px] mx-auto px-4">
+          
+          {/* Main Content Area */}
+          <div className="flex-1 flex flex-col items-center justify-center pt-12">
+            
+            {/* Typography Stack */}
+            <div className="w-full flex flex-col items-center justify-center text-center select-none leading-[0.8] text-[#041E42]">
+              {/* BROTHERHOOD - Scaled for mobile safety */}
+              <h1 className="w-full text-[11.5vw] md:text-[12.5vw] font-serif tracking-tighter relative z-10">
+                BROTHERHOOD
+              </h1>
+              {/* HARMONY - Reduced size and removed px to stop clipping the 'Y' */}
+              <h1 className="w-full text-[16vw] md:text-[19vw] font-serif tracking-tighter opacity-40 italic -mt-[3vw] relative z-0">
+                HARMONY
+              </h1>
+              {/* HISTORY */}
+              <h1 className="w-full text-[16vw] md:text-[18vw] font-serif tracking-tighter block -mt-[3.5vw] relative z-10">
+                HISTORY
+              </h1>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col md:flex-row gap-8 md:gap-24 items-center mt-12 md:mt-16 z-20">
+               <button onClick={() => openAlbumBySlug('desperate-chimes-desperate-measures')} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors">
+                  Stream “And So It Goes”
+                  <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
+               </button>
+              {ctmAlumni && (
+                <button 
+                    onClick={() => openEvent(ctmAlumni)} 
+                    disabled={isPast(ctmAlumni?.date)}
+                    className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors ${isPast(ctmAlumni?.date) ? 'text-[#041E42]/70 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
+                >
+                    {isPast(ctmAlumni?.date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
+                    {!isPast(ctmAlumni?.date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
+                </button>
+              )}
             </div>
           </div>
-          <div className="max-w-[1920px] mx-auto mt-24 pt-6 border-t border-[#041E42]/10 flex flex-col md:flex-row justify-between items-center text-[9px] font-sans font-bold text-[#041E42]/70 uppercase tracking-[0.2em] gap-8"><span>© {new Date().getFullYear()} Georgetown Chimes Alumni Association, Inc.</span><button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="flex items-center gap-2 group hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]">Return to Top <span className="text-lg font-light leading-none rotate-180">↓</span></button></div>
-        </footer>
-      </AudioProvider>
+
+          {/* Scroll Down Indicator */}
+          <button 
+            onClick={scrollToDirectory}
+            className="group pb-8 flex flex-col items-center gap-4 transition-all duration-300"
+          >
+            <span className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42]/40 group-hover:text-[#D50032]">Scroll</span>
+            <div className="w-[1px] h-10 bg-[#041E42]/20 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-full bg-[#D50032] -translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
+            </div>
+          </button>
+        </div>
+      </div>
+
+      {/* --- DIRECTORY SECTION --- */}
+      <section 
+        ref={directoryRef} 
+        className="py-24 md:py-32 px-6 md:px-12 bg-[#F4F4F3] text-[#041E42] antialiased"
+      >
+        <div className="max-w-[1920px] mx-auto border-t-2 border-[#041E42] pt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
+             <div className="lg:col-span-4 flex flex-col justify-between">
+                <div>
+                    <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">01 — The Directory</span>
+                    <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[1.1] md:leading-[1.0] tracking-tighter mb-12">
+                      Welcome the time, my boys: <span className="italic">we meet again.</span>
+                    </h2>
+                    <div className="w-12 h-[2px] bg-[#041E42]"></div>
+                </div>
+                <div className="hidden lg:block pt-24">
+                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
+                        Authorized Access
+                    </button>
+                </div>
+             </div>
+
+             <div className="lg:col-span-8 flex flex-col">
+                {[
+                  { sub: "Tickets & Gatherings", room: "Box Office", slug: 'agenda', id: "01" },
+                  { sub: "The Recorded Archive", room: "Listening Room", slug: 'discography', id: "02" },
+                  { sub: "Specially Commissioned", room: "Haberdashery", slug: 'store', id: "03" },
+                  { sub: "Fund the Brotherhood", room: "Patronage", slug: 'philanthropy', id: "04" },
+                ].map((item) => (
+                  <div 
+                    key={item.id} 
+                    onClick={() => navigateTo(item.slug)} 
+                    className="group flex flex-row items-baseline justify-between py-10 md:py-12 border-b border-[#041E42]/20 transition-all duration-500 hover:bg-white hover:px-6 cursor-pointer"
+                  >
+                    <div className="flex items-baseline gap-6 md:gap-16">
+                      <span className="text-[11px] font-sans font-bold tracking-[0.1em] text-[#041E42]/70 group-hover:text-[#D50032] transition-colors uppercase">{item.id}</span>
+                      <span className="text-4xl md:text-6xl font-serif text-[#041E42] italic leading-none">{item.room}</span>
+                    </div>
+                    <div className="flex items-center gap-8">
+                       <span className="hidden md:block text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/70">{item.sub}</span>
+                       <span className="text-xl font-light text-[#041E42] group-hover:translate-x-2 transition-transform">→</span>
+                    </div>
+                  </div>
+                ))}
+                <div className="lg:hidden pt-12 flex justify-center">
+                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2">
+                        <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
+                        Authorized Access
+                    </button>
+                </div>
+             </div>
+        </div>
+      </section>
+
+      {/* --- FEATURED EVENT --- */}
+      <section className="min-h-screen grid grid-cols-1 md:grid-cols-2 border-t-2 border-[#041E42]">
+        <div className="relative bg-[#E5E5E4] overflow-hidden group min-h-[50vh] md:min-h-auto">
+             <div className="absolute inset-0 z-0">
+                 <img src={IMG_CTM_BOND} alt="The Cherry Tree Massacre" className="w-full h-full object-cover grayscale mix-blend-multiply group-hover:mix-blend-normal opacity-90 group-hover:scale-105 transition-all duration-[2s] ease-out" />
+             </div>
+        </div>
+        <div className="bg-[#F4F4F3] p-8 md:p-24 flex flex-col justify-center border-l-0 md:border-l border-[#041E42]">
+            <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">02 — Upcoming Concert</span>
+            <h3 className="text-5xl md:text-8xl font-serif mb-12 text-[#041E42] leading-[1.1] md:leading-[1.0] tracking-tighter">The Cherry Tree Massacre</h3>
+            <div className="w-24 h-[2px] bg-[#041E42]/10 mb-12"></div>
+            <div className="mb-16 max-w-md text-[#041E42]">
+                <h4 className="text-xl md:text-2xl font-serif font-bold leading-tight mb-6">Most traditions fade. <br/> This one just gets louder.</h4>
+                <p className="text-lg font-serif italic leading-relaxed opacity-80">In 1974, we sang for survival. In 2026, we sing for the legacy.</p>
+            </div>
+            {ctmAlumni && (
+                <button 
+                    onClick={() => openEvent(ctmAlumni)} 
+                    disabled={isPast(ctmAlumni.date)}
+                    className="w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#D50032] md:border-0 transition-all duration-300 group/btn hover:translate-x-2"
+                >
+                    <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">Event Details & Tickets</span>
+                    <span className="text-xl font-light transition-transform text-[#D50032]">→</span>
+                </button>
+            )}
+        </div>
+      </section>
     </div>
   );
-}
+};
+
+export default HomeView;
