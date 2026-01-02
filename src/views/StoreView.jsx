@@ -18,7 +18,7 @@ const StoreView = () => (
       {/* MANIFESTO */}
       <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12">
         <div className="lg:col-span-4">
-          <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#d50032] uppercase block mb-4">
+          <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#d50032] uppercase block mb-4">
             01 — Battle Gear
           </span>
         </div>
@@ -43,7 +43,7 @@ const StoreView = () => (
       {/* THE CATALOG */}
       <div className="mb-48">
         <div className="flex items-end justify-between border-b-2 border-[#041E42] pb-4 mb-0">
-            <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase px-1">
+            <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#041E42] uppercase px-1">
                 02 — The Collection
             </span>
         </div>

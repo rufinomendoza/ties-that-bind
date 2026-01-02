@@ -70,7 +70,7 @@ const PhilanthropyView = () => {
           {/* 01 — MISSION */}
           <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
               <div className="lg:col-span-4">
-                  <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Mission</span>
+                  <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Mission</span>
               </div>
               <div className="lg:col-span-8">
                   <h3 className="text-4xl md:text-7xl font-serif leading-[1.15] md:leading-[1.0] text-[#041E42] tracking-tighter mb-12">
@@ -92,7 +92,7 @@ const PhilanthropyView = () => {
           {/* 02 — THE GUILD LIST */}
           <div className="mb-24">
               <div className="flex items-end justify-between border-b-2 border-[#041E42] pb-4 mb-0">
-                    <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#041E42] uppercase">02 — The Donor Guild</span>
+                    <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#041E42] uppercase">02 — The Donor Guild</span>
               </div>
 
               {DONOR_TIERS.map((tier, idx) => {
@@ -163,7 +163,7 @@ const PhilanthropyView = () => {
               
               {/* Sidebar: The "Masthead" */}
               <div className="lg:col-span-4 lg:sticky lg:top-40 h-fit">
-                <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">
+                <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">
                   03 — Special Initiative
                 </span>
                 <h2 className="text-5xl font-serif italic leading-tight text-[#041E42] mb-8">
