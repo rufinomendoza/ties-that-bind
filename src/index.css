@@ -23,7 +23,9 @@ body {
   margin: 0;
   padding: 0;
   background-color: #F4F4F3;
-  width: 100vw;
+  /* --- FIX: Changed from 100vw to 100% --- */
+  width: 100%; 
+  /* --------------------------------------- */
   overflow-x: hidden;
   font-family: var(--font-sans) !important;
   text-rendering: optimizeLegibility;
@@ -62,18 +64,12 @@ body {
 
 /* --- High-Performance Page Transitions --- */
 
-/* --- Synchronized Ferrari Transitions --- */
-
-/* --- Synchronized Pure Crossfade --- */
-
 .page-wrapper {
   width: 100%;
   /* Fixes sub-pixel rendering issues during the 800ms fade */
   transform: translateZ(0); 
   backface-visibility: hidden;
 }
-
-
 
 /* 1. Incoming Page */
 .page-enter {
