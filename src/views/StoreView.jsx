@@ -29,7 +29,7 @@ const StoreView = () => (
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
             <p className="text-xl text-[#041E42] font-serif leading-relaxed">
-              Commissioned for the Active group and curated for the Alumni. Woven in pure silk, these pieces are designed to replace the lost, the stained, and the borrowed.
+              Performance standard since 1946. This 2021 vintage is commissioned for the Actives and provisioned for the Alumni. Pure silk. Designed to replace the lost, the stained, and the borrowed.
             </p>
             <div>
               <p className="text-[#041E42] text-[10px] leading-relaxed font-sans font-bold uppercase tracking-[0.05em] opacity-60">
