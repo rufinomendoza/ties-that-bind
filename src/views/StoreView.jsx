@@ -95,7 +95,7 @@ const StoreView = () => (
                             ${item.price}
                         </span>
                         <span className="text-[9px] font-sans font-bold tracking-[0.1em] text-[#041E42]/50 uppercase">
-                            Plus Shipping
+                            With Shipping
                         </span>
                     </div>
                     

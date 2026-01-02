@@ -188,7 +188,7 @@ export const ALBUMS_DATA = [
     cover: "bg-[#2A3B55]", 
     image: IMG_DCDM,
     badge: "PRE-ORDER",
-    link: "https://bio.to/ChimesAA",
+    link: "https://thechimes.lnk.to/AndSoItGoesAA",
     ctaText: "Vinyl Early Access",
     description: "Experience the Georgetown Chimes in uncompromising high fidelity. Arriving later this year, Desperate Chimes, Desperate Measures presents the group’s latest arrangements on a premium, 180g double LP. Stream the lead single now and join the waitlist for priority access to the First Pressing.",
     leadSingle: { 
