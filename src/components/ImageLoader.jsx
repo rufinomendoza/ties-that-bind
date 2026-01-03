@@ -7,7 +7,12 @@ const ImageLoader = ({
   curtainClassName, 
   ...props 
 }) => {
-  const [isLoaded, setIsLoaded] = useState(false);
+  // FIX: Track the specific source that has loaded, rather than a generic boolean.
+  // This automatically "resets" the loading state when 'src' changes 
+  // because 'loadedSrc' will no longer match 'src'.
+  const [loadedSrc, setLoadedSrc] = useState(null);
+  
+  const isLoaded = loadedSrc === src;
 
   return (
     <>
@@ -15,18 +20,19 @@ const ImageLoader = ({
         src={src}
         alt={alt}
         {...props}
-        // FIX: Add ref callback to check if image is already cached/complete
+        // Ref callback checks for instant cache hits
         ref={(img) => {
-          if (img && img.complete) {
-             setIsLoaded(true);
+          if (img && img.complete && loadedSrc !== src) {
+             setLoadedSrc(src);
           }
         }}
-        onLoad={() => setIsLoaded(true)}
+        onLoad={() => setLoadedSrc(src)}
         className={`${className} ${isLoaded ? 'opacity-100' : 'opacity-0'}`}
       />
       {/* The "Curtain" overlay */}
       <div 
         className={`${curtainClassName} ${isLoaded ? 'opacity-0' : 'opacity-100'}`}
+        aria-hidden="true"
       />
     </>
   );
