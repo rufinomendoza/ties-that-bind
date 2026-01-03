@@ -127,7 +127,7 @@ const PhilanthropyView = () => {
                   );
               })}
 
-              {/* --- UX IMPROVEMENT: Moved Subscription Management Here --- */}
+              {/* UX IMPROVEMENT: Moved Subscription Management Here */}
               <div className="mt-8 flex justify-end">
                 <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60 hover:text-[#D50032] transition-colors flex items-center gap-2">
                    Already a member? Manage Subscription <span className="text-lg font-light leading-none">→</span>
@@ -143,7 +143,8 @@ const PhilanthropyView = () => {
 
             <div className="relative z-10 max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-16">
                 <div className="max-w-2xl text-center lg:text-left">
-                    <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] block mb-6">Support the GCAA</span>
+                    {/* 🔴 FIXED: Changed text-[#D50032] to white with opacity for contrast on navy bg */}
+                    <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase text-white/80 block mb-6">Support the GCAA</span>
                     <h3 className="text-4xl md:text-6xl font-serif italic leading-[1.1] tracking-tight mb-8">
                         Prefer to make a <span className="text-white border-b border-white/30">one-time contribution?</span>
                     </h3>
@@ -240,7 +241,6 @@ const PhilanthropyView = () => {
                     <p className="text-[10px] font-mono font-bold uppercase opacity-40 tracking-widest">
                       Georgetown Chimes Alumni Association, Inc.
                     </p>
-                    {/* Link removed from here since it moved up */}
                 </div>
               </div>
             </div>
