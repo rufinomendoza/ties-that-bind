@@ -117,10 +117,11 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                   { sub: "Specially Commissioned", room: "Haberdashery", slug: 'store', id: "03" },
                   { sub: "Fund the Brotherhood", room: "Patronage", slug: 'philanthropy', id: "04" },
                 ].map((item) => (
-                  <div 
+                  <button 
                     key={item.id} 
                     onClick={() => navigateTo(item.slug)} 
-                    className="group flex flex-row items-baseline justify-between py-10 md:py-12 border-b border-[#041E42]/20 transition-all duration-500 hover:bg-white hover:px-6 cursor-pointer"
+                    type="button"
+                    className="w-full text-left group flex flex-row items-baseline justify-between py-10 md:py-12 border-b border-[#041E42]/20 transition-all duration-500 hover:bg-white hover:px-6 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:bg-white focus-visible:px-6"
                   >
                     <div className="flex items-baseline gap-6 md:gap-16">
                       <span className="text-[11px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 group-hover:text-[#D50032] transition-colors uppercase">{item.id}</span>
@@ -130,7 +131,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                        <span className="hidden md:block text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/70">{item.sub}</span>
                        <span className="text-xl font-light text-[#041E42] group-hover:translate-x-2 transition-transform">→</span>
                     </div>
-                  </div>
+                  </button>
                 ))}
                 <div className="lg:hidden pt-12 flex justify-center">
                     <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2">
