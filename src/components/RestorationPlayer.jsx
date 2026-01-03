@@ -285,7 +285,7 @@ const RestorationPlayer = () => {
         <div className="flex items-center justify-between md:justify-center w-full md:w-auto gap-4 md:gap-10">
             
             {/* SKEUMORPHIC SWITCH */}
-            <div className="flex flex-1 md:flex-none items-center bg-[#031630] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] rounded-md h-8 border-b border-white/10">
+            <div className="flex flex-1 md:flex-none items-center bg-[#031630] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] rounded-md border-b border-white/10">
                 <button 
                     onClick={() => setSourceMode('reference')}
                     aria-pressed={sourceMode === 'reference'}
