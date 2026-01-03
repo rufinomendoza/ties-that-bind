@@ -134,11 +134,13 @@ const RestorationPlayer = () => {
         {/* Top/Left: Track Data */}
         <div className="flex items-center gap-4 md:gap-6 justify-between md:justify-start w-full md:w-auto min-w-0">
             <div className="flex items-center gap-4 min-w-0">
-                <div className="hidden sm:flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-[#F4F4F3]/5 border border-[#F4F4F3]/20 text-[#D50032] flex-shrink-0 rounded-sm">
+                {/* 🔴 FIXED: Changed text-[#D50032] to text-[#F4F4F3] for contrast */}
+                <div className="hidden sm:flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-[#F4F4F3]/5 border border-[#F4F4F3]/20 text-[#F4F4F3] flex-shrink-0 rounded-sm">
                    {sourceMode === 'reference' ? <Disc3 size={24} strokeWidth={1.25} aria-hidden="true" /> : <Voicemail size={24} strokeWidth={1.25} aria-hidden="true" />}
                 </div>
                 <div className="flex flex-col overflow-hidden text-left min-w-0 md:min-w-72">
-                    <span className="text-[8px] md:text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#D50032] mb-1 truncate">
+                    {/* 🔴 FIXED: Changed text-[#D50032] to text-[#F4F4F3]/80 for contrast */}
+                    <span className="text-[8px] md:text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#F4F4F3]/80 mb-1 truncate">
                         {sourceMode === 'reference' ? 'Unfiltered Archival Recording' : '2025 Reel-to-Reel Digital Transfer'}
                     </span>
                     <span className="text-lg md:text-2xl font-serif text-[#F4F4F3] truncate leading-tight">
