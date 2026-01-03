@@ -35,7 +35,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
 
             return (
               /* ✅ ACCESSIBILITY FIX: Converted div to button for native keyboard/focus support */
-              <button 
+              <a 
                 key={event.id} 
                 type="button"
                 onClick={() => openEvent(event)} 
@@ -71,7 +71,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                     <span className="text-lg font-sans font-light translate-y-[-1px]">→</span>
                   </span>
                 </div>
-              </button>
+              </a>
             );
           })}
         </div>

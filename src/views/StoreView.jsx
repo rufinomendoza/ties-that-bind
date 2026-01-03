@@ -71,6 +71,8 @@ const StoreView = () => (
                         <img 
                             src={item.image} 
                             alt={item.name} 
+                            loading="lazy"
+                            decoding="async"
                             className="w-full h-full object-cover mix-blend-multiply group-hover:mix-blend-normal transition-all duration-1000 ease-in-out scale-105 group-hover:scale-100"
                         />
                     </div>
@@ -80,7 +82,7 @@ const StoreView = () => (
                 <div className="md:col-span-5 flex flex-col justify-start pt-2">
                     {/* Italic protection: px-2 and -mx-2 allows swashes to breathe while keeping alignment */}
                     <h4 className="text-4xl md:text-6xl font-serif text-[#041E42] italic leading-none mb-8 px-2 -mx-2 [text-wrap:balance]">
-                        {item.name}
+                        {typeset(item.name)}
                     </h4>
                     <p className="text-[#041E42] text-xl font-serif leading-relaxed opacity-80 max-w-md [text-wrap:balance] px-1">
                         {typeset(item.desc)}

@@ -19,9 +19,21 @@ const viewPrefetchMap = {
   backstage: () => import('../views/BackstageView'),
 };
 
+// Helper to map view IDs to their actual URL paths for the <a> href
+const getPath = (view) => {
+  switch(view) {
+      case 'home': return '/';
+      case 'agenda': return '/events';
+      case 'discography': return '/albums';
+      case 'store': return '/store';
+      case 'philanthropy': return '/give';
+      case 'backstage': return '/comms';
+      default: return '/';
+  }
+};
+
 export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOpen }) => {
 
-  // --- FIX START ---
   // Lock body scroll when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
@@ -35,7 +47,6 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
       document.body.style.overflow = '';
     };
   }, [mobileMenuOpen]);
-  // --- FIX END ---
   
   const NavButton = ({ page, children, mobile = false, isLogo = false }) => {
     const handlePrefetch = () => {
@@ -44,17 +55,24 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
     };
 
     const isActive = activePage === page;
+    const href = getPath(page);
 
     return (
-      <button 
-        onClick={() => { 
+      <a 
+        href={href}
+        onClick={(e) => { 
+          // The Intercept: Stop the browser from reloading...
+          // ...unless the user is trying to open in a new tab (Meta/Ctrl click)
+          if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+          
+          e.preventDefault();
           navigateTo(page); 
           if (mobile) setMobileMenuOpen(false); 
         }} 
         onMouseEnter={!mobile ? handlePrefetch : undefined}
-        // ✅ ACCESSIBILITY ADDITION 1: Indicate active page
+        // Indicate active page for accessibility
         aria-current={isActive ? 'page' : undefined}
-        // ✅ ACCESSIBILITY ADDITION 2: Explicit label for the Logo button
+        // Explicit label for the Logo button
         aria-label={isLogo ? 'Go to Home Page' : undefined} 
         className={mobile 
           ? 'block w-full text-center text-4xl font-serif py-6 text-[#041E42] border-b border-[#041E42]/5' 
@@ -65,7 +83,7 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
         {!mobile && !isLogo && (
           <span className={`absolute bottom-0 left-0 w-full h-[2px] bg-[#041E42] transform origin-left transition-transform duration-500 ease-[cubic-bezier(0.19,1,0.22,1)] ${isActive ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'}`}></span>
         )}
-      </button>
+      </a>
     );
   };
 
@@ -98,7 +116,6 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)} 
             className="lg:hidden p-3 -mr-3 text-[#041E42] hover:text-[#D50032] transition-colors focus:outline-none"
             aria-label={mobileMenuOpen ? "Close Menu" : "Open Menu"}
-            // ✅ ACCESSIBILITY ADDITION 3: Tell user state of menu
             aria-expanded={mobileMenuOpen} 
             aria-controls="mobile-menu"
           >
@@ -110,7 +127,7 @@ export const NavBar = ({ activePage, navigateTo, mobileMenuOpen, setMobileMenuOp
 
       {/* Mobile Drawer */}
       <div 
-        id="mobile-menu" // Matches aria-controls above
+        id="mobile-menu" 
         aria-hidden={!mobileMenuOpen}
         className={`fixed inset-0 z-40 bg-[#F4F4F3] px-6 pt-32 transition-all duration-[800ms] ease-[cubic-bezier(0.19,1,0.22,1)] 
           ${mobileMenuOpen 
