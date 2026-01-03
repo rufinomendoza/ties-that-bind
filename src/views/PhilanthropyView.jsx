@@ -60,7 +60,7 @@ const PhilanthropyView = () => {
     return (
     <div className="min-h-screen bg-[#F4F4F3] text-[#041E42] pt-40 px-6 md:px-12 pb-32 antialiased selection:bg-[#D50032] selection:text-white overflow-x-hidden">
         <Helmet>
-          <title>Patronage | Georgetown Chimes Alumni Association</title>
+          <title>Patronage | Georgetown Chimes Alumni Association, Inc.</title>
           <meta name="description" content="Fund the Brotherhood. Join the Donor Guild and support the Georgetown Chimes Alumni Association." />
         </Helmet>
 

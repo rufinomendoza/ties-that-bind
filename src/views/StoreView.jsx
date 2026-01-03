@@ -8,7 +8,7 @@ const StoreView = () => (
   // Root safety: overflow-x-hidden handles any stray swashes
   <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] antialiased text-[#041E42] selection:bg-[#D50032] selection:text-white overflow-x-hidden">
     <Helmet>
-      <title>Haberdashery | Georgetown Chimes Alumni Association</title>
+      <title>Haberdashery | Georgetown Chimes Alumni Association, Inc.</title>
       <meta name="description" content="Official Battle Gear of the Georgetown Chimes. Specially commissioned silk neckwear." />
     </Helmet>
 

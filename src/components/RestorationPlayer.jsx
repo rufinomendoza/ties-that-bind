@@ -14,19 +14,35 @@ const RestorationPlayer = () => {
   useEffect(() => {
     if (currentTrack && audioRef.current) {
       const src = currentTrack.audioSources?.[sourceMode];
-      if (src && audioRef.current.src !== src) {
+      
+      // FIX: Use getAttribute to compare the exact string values (relative vs absolute)
+      // and ensure we don't reload if the src hasn't actually changed.
+      if (src && audioRef.current.getAttribute('src') !== src) {
+        
         const wasPlaying = isPlaying;
-        const currentTime = audioRef.current.currentTime;
+        const savedTime = audioRef.current.currentTime;
         
+        // FIX: Create a one-time listener to restore position AFTER metadata loads
+        const onMetadataLoaded = () => {
+            if (!audioRef.current) return;
+            
+            // Restore the timestamp
+            audioRef.current.currentTime = savedTime;
+            
+            // Resume playback if it was playing before
+            if (wasPlaying) {
+                audioRef.current.play().catch(e => console.log("Playback interrupted during switch", e));
+            }
+        };
+
+        // Attach listener with { once: true } so it self-cleans
+        audioRef.current.addEventListener('loadedmetadata', onMetadataLoaded, { once: true });
+        
+        // Now it is safe to switch the source
         audioRef.current.src = src;
-        audioRef.current.currentTime = currentTime; 
-        
-        if (wasPlaying) {
-            audioRef.current.play().catch(e => console.log("Playback interrupted", e));
-        }
       }
     }
-  }, [currentTrack, sourceMode, isPlaying]);
+  }, [currentTrack, sourceMode]); // Dependencies: Only update when track/source changes
 
   // Handle Play/Pause Global State
   useEffect(() => {
@@ -79,12 +95,20 @@ const RestorationPlayer = () => {
     setProgress(newTime);
   };
 
-  const handleSeekClick = (e) => {
-    if (audioRef.current) {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const pct = (e.clientX - rect.left) / rect.width;
-        audioRef.current.currentTime = pct * duration;
-    }
+  // ✅ MOBILE SUPPORT: Unified Touch/Mouse Seek Handler
+  const handleSeek = (e) => {
+    if (!audioRef.current || !duration) return;
+
+    // Detect touch or mouse coordinates
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const rect = e.currentTarget.getBoundingClientRect();
+    
+    // Calculate percentage and clamp between 0 and 1
+    const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    
+    audioRef.current.currentTime = pct * duration;
+    // Optimistic update for smooth dragging
+    setProgress(pct * duration);
   };
 
   const formatTime = (time) => {
@@ -109,10 +133,12 @@ const RestorationPlayer = () => {
         preload="auto"
       />
       
-      {/* 1. Progress Bar (The Ictus) - ✅ NOW ACCESSIBLE SLIDER */}
+      {/* 1. Progress Bar (The Ictus) - ✅ ACCESSIBLE & TOUCH FRIENDLY */}
       <div 
         className="w-full h-1 md:h-1.5 bg-[#F4F4F3]/10 cursor-pointer group relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-2 focus-visible:ring-offset-[#041E42]"
-        onClick={handleSeekClick}
+        onClick={handleSeek}
+        onTouchStart={handleSeek}
+        onTouchMove={handleSeek}
         onKeyDown={handleSeekKeyDown}
         role="slider"
         tabIndex={0}
@@ -134,12 +160,10 @@ const RestorationPlayer = () => {
         {/* Top/Left: Track Data */}
         <div className="flex items-center gap-4 md:gap-6 justify-between md:justify-start w-full md:w-auto min-w-0">
             <div className="flex items-center gap-4 min-w-0">
-                {/* 🔴 FIXED: Changed text-[#D50032] to text-[#F4F4F3] for contrast */}
                 <div className="hidden sm:flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-[#F4F4F3]/5 border border-[#F4F4F3]/20 text-[#F4F4F3] flex-shrink-0 rounded-sm">
                    {sourceMode === 'reference' ? <Disc3 size={24} strokeWidth={1.25} aria-hidden="true" /> : <Voicemail size={24} strokeWidth={1.25} aria-hidden="true" />}
                 </div>
                 <div className="flex flex-col overflow-hidden text-left min-w-0 md:min-w-72">
-                    {/* 🔴 FIXED: Changed text-[#D50032] to text-[#F4F4F3]/80 for contrast */}
                     <span className="text-[8px] md:text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#F4F4F3]/80 mb-1 truncate">
                         {sourceMode === 'reference' ? 'Unfiltered Archival Recording' : '2025 Reel-to-Reel Digital Transfer'}
                     </span>

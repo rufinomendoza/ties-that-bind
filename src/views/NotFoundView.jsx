@@ -5,7 +5,7 @@ const NotFoundView = ({ navigateTo }) => (
     <div className="min-h-screen pt-40 px-6 md:px-12 flex flex-col items-center justify-center bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
         {/* --- SEO INTEGRATION --- */}
         <Helmet>
-            <title>404 | Georgetown Chimes Alumni Association</title>
+            <title>404 | Georgetown Chimes Alumni Association, Inc.</title>
             <meta name="description" content="Page not found." />
         </Helmet>
         {/* ----------------------- */}

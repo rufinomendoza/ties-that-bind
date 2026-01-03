@@ -8,7 +8,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       {/* --- SEO INTEGRATION --- */}
       <Helmet>
-        <title>Box Office | Georgetown Chimes Alumni Association</title>
+        <title>Box Office | Georgetown Chimes Alumni Association, Inc.</title>
         <meta name="description" content="Upcoming concerts, events, and reunions for the Georgetown Chimes." />
       </Helmet>
       {/* ----------------------- */}
