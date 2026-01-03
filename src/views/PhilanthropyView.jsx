@@ -134,43 +134,51 @@ const PhilanthropyView = () => {
               </div>
           </div>
 
-          {/* --- ONE-TIME DONATION BRIDGE --- */}
-          {/* FIX 1: Use full-screen width with absolute centering (left-1/2 -translate-x-1/2) to prevent layout breaking on large monitors */}
-          <div className="relative w-screen left-1/2 -translate-x-1/2 bg-[#041E42] text-[#F4F4F3] py-24 px-8 md:px-20 my-32 overflow-hidden">
-            <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
-                <span className="text-[25vw] font-serif italic leading-none">Gift</span>
-            </div>
+          {/* --- 03: ONE-TIME CONTRIBUTION (Standard Issue Ghost Button) --- */}
+          <div className="border-t-2 border-[#041E42] py-24 mb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12 items-start">
+              
+              {/* Meta Label */}
+              <div className="lg:col-span-4">
+                  <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#041E42]/70 uppercase block">
+                      03 — Single Contribution
+                  </span>
+              </div>
 
-            <div className="relative z-10 max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-16">
-                <div className="max-w-2xl text-center lg:text-left">
-                    <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase text-white/80 block mb-6">Support the GCAA</span>
-                    <h3 className="text-4xl md:text-6xl font-serif italic leading-[1.1] tracking-tight mb-8">
-                        {/* FIX 2: Replaced border-b with underline/underline-offset to fix "breaking" visual on wrapped lines */}
-                        Prefer to make a <span className="text-white underline decoration-white/30 decoration-1 underline-offset-4 md:underline-offset-8">one-time contribution?</span>
-                    </h3>
-                    <p className="text-xl font-serif opacity-70 leading-relaxed">
-                        Support our ongoing operations, event subsidies, and archival efforts with a single gift of any amount.
-                    </p>
-                </div>
+              {/* The Narrative */}
+              <div className="lg:col-span-6">
+                  <h3 className="text-4xl md:text-5xl font-serif text-[#041E42] italic leading-[1.1] mb-8">
+                      For the preservation of the moment.
+                  </h3>
+                  <p className="text-xl text-[#041E42] font-serif leading-relaxed opacity-80 max-w-lg [text-wrap:balance]">
+                      Recurring membership is the lifeblood, but a single gift often bridges the gap between a good year and a historic one. Support operations, subsidies, and archives on your own terms.
+                  </p>
+              </div>
 
-                <div className="w-full md:w-auto shrink-0 flex flex-col items-center lg:items-end gap-6">
-                    <a href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4" target="_blank" rel="noopener noreferrer" 
-                       className="group flex items-center justify-between md:justify-start w-full md:w-auto gap-4 md:gap-12 bg-[#D50032] hover:bg-white hover:text-[#041E42] text-white px-6 py-6 md:px-12 md:py-8 transition-all duration-500 ease-out shadow-2xl">
-                        <span className="text-[12px] font-sans font-bold tracking-[0.2em] uppercase text-left">Make a One-Time Gift</span>
-                        <span className="text-3xl group-hover:translate-x-3 transition-transform duration-500">→</span>
-                    </a>
-                    <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase opacity-40">Secure via Stripe</span>
-                </div>
-            </div>
+              {/* The Action (Restored to Standard Button) */}
+              <div className="lg:col-span-2 flex flex-col justify-between h-full pt-2">
+                  <a 
+                    href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    /* CHANGED: Now uses the "Ghost Button" class consistent with the Guild section above */
+                    className="flex items-center justify-between w-full gap-4 px-6 py-4 border border-[#041E42] text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] hover:bg-[#041E42] hover:text-white transition-all duration-300 group"
+                  >
+                      <span>Execute Gift</span>
+                      <span className="text-lg font-light translate-y-[-1px] group-hover:translate-x-1 transition-transform">→</span>
+                  </a>
+                  <span className="text-[9px] font-mono font-bold tracking-[0.1em] uppercase opacity-40 mt-4 text-right">
+                      Processed via Stripe
+                  </span>
+              </div>
           </div>
 
-          {/* 03 — CAPITAL PROJECTS */}
+          {/* 04 — CAPITAL PROJECTS */}
           <div className="pt-24 mt-32 border-t-2 border-[#041E42]">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-y-16 lg:gap-x-12">
               
               <div className="lg:col-span-4 lg:sticky lg:top-40 h-fit">
                 <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">
-                  03 — Special Initiative
+                  04 — Special Initiative
                 </span>
                 <h2 className="text-5xl font-serif italic leading-tight text-[#041E42] mb-8">
                   The Archive Restoration
