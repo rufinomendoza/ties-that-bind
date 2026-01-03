@@ -127,7 +127,6 @@ const PhilanthropyView = () => {
                   );
               })}
 
-              {/* UX IMPROVEMENT: Moved Subscription Management Here */}
               <div className="mt-8 flex justify-end">
                 <a href="https://billing.stripe.com/login/eVa00CdRM41u2ZibII" target="_blank" rel="noopener noreferrer" className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/60 hover:text-[#D50032] transition-colors flex items-center gap-2">
                    Already a member? Manage Subscription <span className="text-lg font-light leading-none">→</span>
@@ -136,17 +135,18 @@ const PhilanthropyView = () => {
           </div>
 
           {/* --- ONE-TIME DONATION BRIDGE --- */}
-          <div className="relative w-full bg-[#041E42] text-[#F4F4F3] py-24 px-8 md:px-20 my-32 overflow-hidden md:-mx-12 md:w-[calc(100%+6rem)]">
+          {/* FIX 1: Use full-screen width with absolute centering (left-1/2 -translate-x-1/2) to prevent layout breaking on large monitors */}
+          <div className="relative w-screen left-1/2 -translate-x-1/2 bg-[#041E42] text-[#F4F4F3] py-24 px-8 md:px-20 my-32 overflow-hidden">
             <div className="absolute right-[-5%] top-1/2 -translate-y-1/2 opacity-[0.03] pointer-events-none select-none">
                 <span className="text-[25vw] font-serif italic leading-none">Gift</span>
             </div>
 
             <div className="relative z-10 max-w-[1920px] mx-auto flex flex-col lg:flex-row items-center justify-between gap-16">
                 <div className="max-w-2xl text-center lg:text-left">
-                    {/* 🔴 FIXED: Changed text-[#D50032] to white with opacity for contrast on navy bg */}
                     <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase text-white/80 block mb-6">Support the GCAA</span>
                     <h3 className="text-4xl md:text-6xl font-serif italic leading-[1.1] tracking-tight mb-8">
-                        Prefer to make a <span className="text-white border-b border-white/30">one-time contribution?</span>
+                        {/* FIX 2: Replaced border-b with underline/underline-offset to fix "breaking" visual on wrapped lines */}
+                        Prefer to make a <span className="text-white underline decoration-white/30 decoration-1 underline-offset-4 md:underline-offset-8">one-time contribution?</span>
                     </h3>
                     <p className="text-xl font-serif opacity-70 leading-relaxed">
                         Support our ongoing operations, event subsidies, and archival efforts with a single gift of any amount.
@@ -155,8 +155,8 @@ const PhilanthropyView = () => {
 
                 <div className="w-full md:w-auto shrink-0 flex flex-col items-center lg:items-end gap-6">
                     <a href="https://donate.stripe.com/fZe3g6frb6ys92wfZ4" target="_blank" rel="noopener noreferrer" 
-                       className="group flex items-center gap-12 bg-[#D50032] hover:bg-white hover:text-[#041E42] text-white px-12 py-8 transition-all duration-500 ease-out shadow-2xl">
-                        <span className="text-[12px] font-sans font-bold tracking-[0.2em] uppercase">Make a One-Time Gift</span>
+                       className="group flex items-center justify-between md:justify-start w-full md:w-auto gap-4 md:gap-12 bg-[#D50032] hover:bg-white hover:text-[#041E42] text-white px-6 py-6 md:px-12 md:py-8 transition-all duration-500 ease-out shadow-2xl">
+                        <span className="text-[12px] font-sans font-bold tracking-[0.2em] uppercase text-left">Make a One-Time Gift</span>
                         <span className="text-3xl group-hover:translate-x-3 transition-transform duration-500">→</span>
                     </a>
                     <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase opacity-40">Secure via Stripe</span>
@@ -209,7 +209,7 @@ const PhilanthropyView = () => {
                         </p>
                       </div>
                       <div className="lg:col-span-4 flex flex-col items-start lg:items-end justify-center gap-6">
-                        <button onClick={() => playTrack(demoTrack)} className="flex items-center justify-between w-full lg:w-full gap-8 border-2 border-[#041E42] p-6 hover:bg-[#041E42] hover:text-white transition-all duration-500 group/btn">
+                        <button onClick={() => playTrack(demoTrack)} className="flex items-center justify-between w-full lg:w-full gap-4 md:gap-8 border-2 border-[#041E42] p-4 md:p-6 hover:bg-[#041E42] hover:text-white transition-all duration-500 group/btn">
                           <div className="text-left">
                             <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase block">Start A/B Demo</span>
                           </div>
@@ -232,7 +232,7 @@ const PhilanthropyView = () => {
                     <h5 className="text-2xl font-serif font-bold mb-2">Fund this specific project</h5>
                     <p className="text-sm font-serif opacity-70 italic">Contributions go toward digitization, restoration, and digital storage.</p>
                   </div>
-                  <a href="https://donate.stripe.com/5kQaEWb90fATbURbjP2ZO0B" target="_blank" rel="noopener noreferrer" className="whitespace-nowrap bg-[#041E42] text-white px-10 py-5 text-[11px] font-sans font-bold tracking-[0.2em] uppercase hover:bg-[#D50032] transition-colors duration-300">
+                  <a href="https://donate.stripe.com/5kQaEWb90fATbURbjP2ZO0B" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto text-center whitespace-normal md:whitespace-nowrap bg-[#041E42] text-white px-6 py-4 md:px-10 md:py-5 text-[11px] font-sans font-bold tracking-[0.2em] uppercase hover:bg-[#D50032] transition-colors duration-300">
                     Make Capital Contribution →
                   </a>
                 </div>
