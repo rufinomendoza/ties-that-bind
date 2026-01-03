@@ -32,8 +32,8 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8 mb-16">
                     <p className="text-xl text-[#041E42] font-serif leading-relaxed">To ensure our recorded legacy carries on, our preservationists are currently digitizing master tapes from the 1950s through the ’80s to exacting high-fidelity standards.</p>
                     <div className="flex flex-col items-start gap-4">
-                        <button onClick={() => window.open('https://thechimes.notion.site', '_blank')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1 text-left">Explore the Rough Cuts &#x2197;&#xFE0E;</button>
-                        <button onClick={() => navigateTo('philanthropy')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1">Support Digitization</button>
+                        <a onClick={() => window.open('https://thechimes.notion.site', '_blank')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1 text-left">Explore the Rough Cuts &#x2197;&#xFE0E;</a>
+                        <a onClick={() => navigateTo('philanthropy')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1">Support Digitization</a>
                     </div>
                 </div>
 
@@ -62,7 +62,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
 
                       {/* Action Side */}
                       <div className="lg:col-span-4 flex flex-col md:flex-row lg:flex-col items-start lg:items-end justify-center gap-6">
-                        <button 
+                        <a 
                           onClick={() => playTrack(demoTrack)}
                           className="flex items-center justify-between w-full md:w-auto gap-8 border-2 border-[#041E42] p-5 lg:p-6 hover:bg-[#041E42] hover:text-white transition-all duration-500 group/btn"
                         >
@@ -70,7 +70,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                             <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase block">Start A/B Demo</span>
                           </div>
                           <span className="text-2xl transition-transform group-hover/btn:translate-x-1">▶</span>
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </div>
@@ -85,7 +85,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-24">
             {ALBUMS_DATA.map((album, index) => (
-                <button 
+                <a 
                   key={album.id} 
                   type="button"
                   onClick={() => openAlbum(album)} 
@@ -114,7 +114,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                         {typeset(album.title)}
                       </h3>
                   </div>
-                </button>
+                </a>
             ))}
             </div>
         </div>

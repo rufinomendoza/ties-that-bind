@@ -64,25 +64,25 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
 
             {/* Action Buttons */}
             <div className="flex flex-col md:flex-row gap-8 md:gap-24 items-center mt-12 md:mt-16 z-20">
-               <button onClick={() => openAlbumBySlug('desperate-chimes-desperate-measures')} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4F4F3]">
+               <a onClick={() => openAlbumBySlug('desperate-chimes-desperate-measures')} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4F4F3]">
                   Stream “And So It Goes”
                   <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
-               </button>
+               </a>
               {ctmAlumni && (
-                <button 
+                <a 
                     onClick={() => openEvent(ctmAlumni)} 
                     disabled={isPast(ctmAlumni?.date)}
                     className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4F4F3] ${isPast(ctmAlumni?.date) ? 'text-[#041E42]/70 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
                 >
                     {isPast(ctmAlumni?.date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
                     {!isPast(ctmAlumni?.date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
-                </button>
+                </a>
               )}
             </div>
           </div>
 
           {/* Scroll Down Indicator */}
-          <button 
+          <a 
             onClick={scrollToDirectory}
             className="group pb-8 flex flex-col items-center gap-4 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm"
             aria-label="Scroll down to directory"
@@ -91,7 +91,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
             <div className="w-[1px] h-10 bg-[#041E42]/20 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-[#D50032] -translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
             </div>
-          </button>
+          </a>
         </div>
       </div>
 
@@ -110,10 +110,10 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                     <div className="w-12 h-[2px] bg-[#041E42]"></div>
                 </div>
                 <div className="hidden lg:block pt-24">
-                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm p-1">
+                    <a onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm p-1">
                         <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
                         Authorized Access
-                    </button>
+                    </a>
                 </div>
              </div>
 
@@ -124,7 +124,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                   { sub: "Specially Commissioned", room: "Haberdashery", slug: 'store', id: "03" },
                   { sub: "Fund the Brotherhood", room: "Patronage", slug: 'philanthropy', id: "04" },
                 ].map((item) => (
-                  <button 
+                  <a 
                     key={item.id} 
                     onClick={() => navigateTo(item.slug)} 
                     type="button"
@@ -138,13 +138,13 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                        <span className="hidden md:block text-[11px] font-sans font-bold tracking-[0.05em] uppercase text-[#041E42]/70">{item.sub}</span>
                        <span className="text-xl font-light text-[#041E42] group-hover:translate-x-2 transition-transform">→</span>
                     </div>
-                  </button>
+                  </a>
                 ))}
                 <div className="lg:hidden pt-12 flex justify-center">
-                    <button onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm p-1">
+                    <a onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm p-1">
                         <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
                         Authorized Access
-                    </button>
+                    </a>
                 </div>
              </div>
         </div>
@@ -166,14 +166,14 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 <p className="text-lg font-serif italic leading-relaxed opacity-80">In 1974, we sang for survival. In 2026, we sing for the legacy.</p>
             </div>
             {ctmAlumni && (
-                <button 
+                <a 
                     onClick={() => openEvent(ctmAlumni)} 
                     disabled={isPast(ctmAlumni.date)}
                     className="w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#D50032] md:border-0 transition-all duration-300 group/btn hover:translate-x-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]"
                 >
                     <span className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#D50032]">Event Details & Tickets</span>
                     <span className="text-xl font-light transition-transform text-[#D50032]">→</span>
-                </button>
+                </a>
             )}
         </div>
       </section>

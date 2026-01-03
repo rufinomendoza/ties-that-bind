@@ -29,20 +29,20 @@ const NotFoundView = ({ navigateTo }) => (
             
             {/* 4. Primary Action */}
             <div className="flex flex-col items-start gap-8">
-                <button 
+                <a 
                     onClick={() => navigateTo('home')} 
                     className="group flex items-center gap-4 text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D50032]"
                     aria-label="Home"
                 >
                     <span>Return to Harmony</span>
                     <span className="text-lg font-light group-hover:translate-x-2 transition-transform">→</span>
-                </button>
+                </a>
 
                 {/* 5. Concierge Links: Added Patronage */}
                 <div className="flex flex-wrap gap-6 pt-8 border-t border-[#041E42]/10 w-full max-w-md opacity-60">
-                    <button onClick={() => navigateTo('agenda')} className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Box Office</button>
-                    <button onClick={() => navigateTo('discography')} className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Listening Room</button>
-                    <button onClick={() => navigateTo('philanthropy')} className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Patronage</button>
+                    <a onClick={() => navigateTo('agenda')} className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Box Office</a>
+                    <a onClick={() => navigateTo('discography')} className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Listening Room</a>
+                    <a onClick={() => navigateTo('philanthropy')} className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Patronage</a>
                 </div>
             </div>
 
