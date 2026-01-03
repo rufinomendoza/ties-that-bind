@@ -285,14 +285,14 @@ const RestorationPlayer = () => {
         <div className="flex items-center justify-between md:justify-center w-full md:w-auto gap-4 md:gap-10">
             
             {/* SKEUMORPHIC SWITCH */}
-            {/* 1. Added 'h-9' to lock the container height physically */}
+            {/* Container: Fixed h-9 to prevent outer layout shift */}
             <div className="h-9 flex flex-1 md:flex-none items-center bg-[#031630] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] rounded-md p-1 border-b border-white/10">
                 <button 
                     onClick={() => setSourceMode('reference')}
                     aria-pressed={sourceMode === 'reference'}
-                    // 2. Changed to 'h-full', added 'border-0', removed 'py-2'
+                    // ADDED: 'antialiased' to lock font rendering
                     className={`
-                        w-1/2 md:w-24 h-full border-0 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation
+                        w-1/2 md:w-24 h-full border-0 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation antialiased
                         ${sourceMode === 'reference' 
                             ? 'bg-gradient-to-b from-[#F4F4F3] to-[#E0E0E0] text-[#041E42] shadow-sm' 
                             : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3] hover:bg-white/5'}
@@ -304,9 +304,9 @@ const RestorationPlayer = () => {
                 <button 
                     onClick={() => setSourceMode('restored')}
                     aria-pressed={sourceMode === 'restored'}
-                    // 2. Changed to 'h-full', added 'border-0', removed 'py-2'
+                    // ADDED: 'antialiased' to lock font rendering
                     className={`
-                        w-1/2 md:w-24 h-full border-0 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation
+                        w-1/2 md:w-24 h-full border-0 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation antialiased
                         ${sourceMode === 'restored' 
                             ? 'bg-gradient-to-b from-[#D50032] to-[#B00028] text-white shadow-sm text-shadow-sm' 
                             : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3] hover:bg-white/5'}
