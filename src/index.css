@@ -156,11 +156,51 @@ div.fixed.z-40 {
 }
 
 @media print {
-  nav, footer, button, .bg-texture { display: none !important; }
-  body, main, div { background-color: white !important; color: black !important; }
-  .grid-cols-12 { display: block !important; }
-  .col-span-8 { width: 100% !important; }
-  a[href]:after { content: " (" attr(href) ")"; font-size: 0.8em; font-weight: normal; }
+  /* 1. Hide the Interface */
+  nav, footer, button, .bg-texture, .restoration-player { 
+    display: none !important; 
+  }
+
+  /* 2. Enforce Paper Physics */
+  body, main, div, section { 
+    background-color: white !important; 
+    color: black !important; 
+    width: 100% !important; 
+    margin: 0 !important; 
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  /* 3. Typography overrides for ink */
+  h1, h2, h3, h4, h5, h6, p, span {
+    color: black !important;
+    text-shadow: none !important;
+  }
+
+  /* 4. REMOVE the URL expansion. 
+     The "link rot" isn't worth ruining the reading experience. */
+  a[href]:after { 
+    content: none !important; 
+  }
+  
+  a {
+    text-decoration: none !important;
+    color: black !important;
+    border-bottom: 1px solid #000; /* Subtle underline for reference */
+  }
+
+  /* 5. Linearize the Grid */
+  .grid, .grid-cols-12 { 
+    display: block !important; 
+  }
+  
+  /* 6. Page Breaks */
+  h1, h2 { 
+    page-break-before: always; 
+  }
+  img { 
+    page-break-inside: avoid; 
+  }
 }
 
 /* --- THE WIDOW ELIMINATOR (Global Enforcement) --- */
