@@ -34,7 +34,7 @@ const LoadingScreen = () => (
     </div>
     {/* The "Machine" Status - Monospaced, tiny, technical */}
     <span className="mt-8 text-[9px] font-mono font-bold tracking-[0.2em] uppercase opacity-40 animate-[fadeIn_700ms_ease-out]">
-       Retrieving Archive...
+       Retrieving Archive…
     </span>
   </div>
 );
