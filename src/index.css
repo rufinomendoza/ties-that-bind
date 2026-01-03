@@ -33,6 +33,13 @@ html {
   background-color: #D50032; /* The "Red Alert" hover state */
 }
 
+/* --- ACCESSIBILITY: GLOBAL FOCUS VISIBILITY --- */
+/* Ensures a visible focus indicator for keyboard users on all interactive elements */
+:focus-visible {
+  outline: 2px solid #D50032;
+  outline-offset: 4px;
+}
+
 body {
   margin: 0;
   padding: 0;
