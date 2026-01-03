@@ -289,8 +289,9 @@ const RestorationPlayer = () => {
                 <button 
                     onClick={() => setSourceMode('reference')}
                     aria-pressed={sourceMode === 'reference'}
+                    // CHANGED: Removed 'py-2', added 'h-7' (Fixed Height)
                     className={`
-                        w-1/2 md:w-24 py-2 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation
+                        w-1/2 md:w-24 h-7 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation
                         ${sourceMode === 'reference' 
                             ? 'bg-gradient-to-b from-[#F4F4F3] to-[#E0E0E0] text-[#041E42] shadow-sm' 
                             : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3] hover:bg-white/5'}
@@ -302,8 +303,9 @@ const RestorationPlayer = () => {
                 <button 
                     onClick={() => setSourceMode('restored')}
                     aria-pressed={sourceMode === 'restored'}
+                    // CHANGED: Removed 'py-2', added 'h-7' (Fixed Height)
                     className={`
-                        w-1/2 md:w-24 py-2 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation
+                        w-1/2 md:w-24 h-7 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation
                         ${sourceMode === 'restored' 
                             ? 'bg-gradient-to-b from-[#D50032] to-[#B00028] text-white shadow-sm text-shadow-sm' 
                             : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3] hover:bg-white/5'}
