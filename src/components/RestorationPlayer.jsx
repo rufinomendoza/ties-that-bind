@@ -290,46 +290,51 @@ const RestorationPlayer = () => {
                 <button 
                     onClick={() => setSourceMode('reference')}
                     aria-pressed={sourceMode === 'reference'}
-                    // 2. Added 'transform-gpu' to force hardware layer
+                    // REMOVED: gap-2, transform-gpu (Causes iOS text jitter)
                     className={`
-                        w-1/2 md:w-24 h-full border-0 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation antialiased transform-gpu
+                        w-1/2 md:w-24 h-full border-0 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center touch-manipulation antialiased
                         ${sourceMode === 'reference' 
                             ? 'bg-gradient-to-b from-[#F4F4F3] to-[#E0E0E0] text-[#041E42] shadow-sm' 
                             : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3] hover:bg-white/5'}
                     `}
                 >
-                    {/* Light Wrapper: Fixed w-2 */}
-                    <div className="w-2 flex-none flex items-center justify-center">
-                        <div className={`w-1 h-1 rounded-full transition-all duration-300 ${sourceMode === 'reference' ? 'bg-[#D50032] shadow-[0_0_4px_#D50032]' : 'bg-[#041E42]/20'}`}></div>
+                    {/* ADDED: Inner Wrapper to lock layout during active state */}
+                    <div className="flex items-center justify-center gap-2 pointer-events-none">
+                        {/* Light Wrapper: Fixed w-2 */}
+                        <div className="w-2 flex-none flex items-center justify-center">
+                            <div className={`w-1 h-1 rounded-full transition-all duration-300 ${sourceMode === 'reference' ? 'bg-[#D50032] shadow-[0_0_4px_#D50032]' : 'bg-[#041E42]/20'}`}></div>
+                        </div>
+                        
+                        {/* 3. TEXT WRAPPER */}
+                        <span className="w-12 text-center flex-none">
+                            Raw
+                        </span>
                     </div>
-                    
-                    {/* 3. TEXT WRAPPER: Fixed width (w-12) + text-center. 
-                        This acts as a cage. If the text jitters, it stays inside the cage. */}
-                    <span className="w-12 text-center flex-none">
-                        Raw
-                    </span>
                 </button>
 
                 <button 
                     onClick={() => setSourceMode('restored')}
                     aria-pressed={sourceMode === 'restored'}
-                    // 2. Added 'transform-gpu'
+                    // REMOVED: gap-2, transform-gpu
                     className={`
-                        w-1/2 md:w-24 h-full border-0 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2 touch-manipulation antialiased transform-gpu
+                        w-1/2 md:w-24 h-full border-0 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center touch-manipulation antialiased
                         ${sourceMode === 'restored' 
                             ? 'bg-gradient-to-b from-[#D50032] to-[#B00028] text-white shadow-sm text-shadow-sm' 
                             : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3] hover:bg-white/5'}
                     `}
                 >
-                    {/* Light Wrapper: Fixed w-2 */}
-                    <div className="w-2 flex-none flex items-center justify-center">
-                        <div className={`w-1 h-1 rounded-full transition-all duration-300 ${sourceMode === 'restored' ? 'bg-white shadow-[0_0_4px_white]' : 'bg-[#041E42]/20'}`}></div>
+                    {/* ADDED: Inner Wrapper */}
+                    <div className="flex items-center justify-center gap-2 pointer-events-none">
+                        {/* Light Wrapper: Fixed w-2 */}
+                        <div className="w-2 flex-none flex items-center justify-center">
+                            <div className={`w-1 h-1 rounded-full transition-all duration-300 ${sourceMode === 'restored' ? 'bg-white shadow-[0_0_4px_white]' : 'bg-[#041E42]/20'}`}></div>
+                        </div>
+                        
+                        {/* 3. TEXT WRAPPER */}
+                        <span className="w-12 text-center flex-none">
+                            Master
+                        </span>
                     </div>
-                    
-                    {/* 3. TEXT WRAPPER: Fixed width (w-12) + text-center. */}
-                    <span className="w-12 text-center flex-none">
-                        Master
-                    </span>
                 </button>
             </div>
 
