@@ -12,37 +12,42 @@ const RestorationPlayer = () => {
 
   // --- LOGIC: Seamless Source Switching ---
   useEffect(() => {
-    if (currentTrack && audioRef.current) {
+    // 1. Capture the element to ensure cleanup works even if the ref changes later
+    const audioEl = audioRef.current;
+
+    if (currentTrack && audioEl) {
       const src = currentTrack.audioSources?.[sourceMode];
       
-      // FIX: Use getAttribute to compare the exact string values (relative vs absolute)
-      // and ensure we don't reload if the src hasn't actually changed.
-      if (src && audioRef.current.getAttribute('src') !== src) {
+      // Check if the source has actually changed
+      if (src && audioEl.getAttribute('src') !== src) {
         
         const wasPlaying = isPlaying;
-        const savedTime = audioRef.current.currentTime;
+        const savedTime = audioEl.currentTime;
         
-        // FIX: Create a one-time listener to restore position AFTER metadata loads
         const onMetadataLoaded = () => {
-            if (!audioRef.current) return;
-            
             // Restore the timestamp
-            audioRef.current.currentTime = savedTime;
+            audioEl.currentTime = savedTime;
             
             // Resume playback if it was playing before
             if (wasPlaying) {
-                audioRef.current.play().catch(e => console.log("Playback interrupted during switch", e));
+                audioEl.play().catch(e => console.log("Playback interrupted during switch", e));
             }
         };
 
-        // Attach listener with { once: true } so it self-cleans
-        audioRef.current.addEventListener('loadedmetadata', onMetadataLoaded, { once: true });
+        // Attach listener
+        audioEl.addEventListener('loadedmetadata', onMetadataLoaded, { once: true });
         
-        // Now it is safe to switch the source
-        audioRef.current.src = src;
+        // Switch the source
+        audioEl.src = src;
+
+        // ✅ FIX: Cleanup function to remove the specific listener if the effect re-runs
+        // This prevents "stacking" listeners if the user clicks rapidly
+        return () => {
+            audioEl.removeEventListener('loadedmetadata', onMetadataLoaded);
+        };
       }
     }
-  }, [currentTrack, sourceMode]); // Dependencies: Only update when track/source changes
+  }, [currentTrack, sourceMode, isPlaying]); // Added isPlaying to dependencies
 
   // Handle Play/Pause Global State
   useEffect(() => {
