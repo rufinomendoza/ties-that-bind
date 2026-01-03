@@ -27,7 +27,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
               <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span>
             </div>
             <div className="lg:col-span-8">
-                <h3 className="text-5xl md:text-7xl font-serif leading-[1.15] md:leading-[1.0] text-[#041E42] tracking-tighter mb-12">A living record. Currently undergoing restoration.</h3>
+                <h3 className="text-5xl md:text-7xl font-serif leading-[1.15] md:leading-[1.0] text-[#041E42] tracking-tighter mb-12 [text-wrap:balance]">A living record. Currently undergoing restoration.</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8 mb-16">
                     <p className="text-xl text-[#041E42] font-serif leading-relaxed">To ensure our recorded legacy carries on, our preservationists are currently digitizing master tapes from the 1950s through the ’80s to exacting high-fidelity standards.</p>
@@ -52,7 +52,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                         <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] mb-4 block">
                           Hear the Difference
                         </span>
-                        <h4 className="text-2xl md:text-3xl font-serif text-[#041E42] tracking-tighter leading-tight mb-4">
+                        <h4 className="text-2xl md:text-3xl font-serif text-[#041E42] tracking-tighter leading-tight mb-4 [text-wrap:balance]">
                           The <em>Restoration</em> Demo
                         </h4>
                         <p className="text-base font-serif italic leading-relaxed text-[#041E42]/70 max-w-xl [text-wrap:balance]">
@@ -110,7 +110,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                       <div className="flex justify-between w-full items-baseline mb-2">
                         <span className="text-[11px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 uppercase tabular-nums pb-1">Issue {album.year}</span>
                       </div>
-                      <h3 className="font-serif text-3xl md:text-4xl text-[#041E42] leading-[1.15] md:leading-[1.0] group-hover:italic transition-all duration-300">
+                      <h3 className="font-serif text-3xl md:text-4xl text-[#041E42] leading-[1.15] md:leading-[1.0] group-hover:italic transition-all duration-300 [text-wrap:balance]">
                         {typeset(album.title)}
                       </h3>
                   </div>

@@ -104,7 +104,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
              <div className="lg:col-span-4 flex flex-col justify-between">
                 <div>
                     <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">01 — The Directory</span>
-                    <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[1.1] md:leading-[1.0] tracking-tighter mb-12">
+                    <h2 className="text-5xl md:text-7xl font-serif text-[#041E42] leading-[1.1] md:leading-[1.0] tracking-tighter mb-12 [text-wrap:balance]">
                       Welcome the time, my boys: <span className="italic">we meet again.</span>
                     </h2>
                     <div className="w-12 h-[2px] bg-[#041E42]"></div>
@@ -159,10 +159,10 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
         </div>
         <div className="bg-[#F4F4F3] p-8 md:p-24 flex flex-col justify-center border-l-0 md:border-l border-[#041E42]">
             <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">02 — Upcoming Concert</span>
-            <h3 className="text-5xl md:text-8xl font-serif mb-12 text-[#041E42] leading-[1.1] md:leading-[1.0] tracking-tighter">The Cherry Tree Massacre</h3>
+            <h3 className="text-5xl md:text-8xl font-serif mb-12 text-[#041E42] leading-[1.1] md:leading-[1.0] tracking-tighter [text-wrap:balance]">The Cherry Tree Massacre</h3>
             <div className="w-24 h-[2px] bg-[#041E42]/10 mb-12"></div>
             <div className="mb-16 max-w-md text-[#041E42]">
-                <h4 className="text-xl md:text-2xl font-serif font-bold leading-tight mb-6">Most traditions fade. <br/> This one just gets louder.</h4>
+                <h4 className="text-xl md:text-2xl font-serif font-bold leading-tight mb-6 [text-wrap:balance]">Most traditions fade. <br/> This one just gets louder.</h4>
                 <p className="text-lg font-serif italic leading-relaxed opacity-80">In 1974, we sang for survival. In 2026, we sing for the legacy.</p>
             </div>
             {ctmAlumni && (

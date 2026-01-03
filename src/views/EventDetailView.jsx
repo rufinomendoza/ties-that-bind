@@ -108,7 +108,7 @@ const EventDetailView = ({ event, navigateTo }) => {
                           {item.location && <div className="block opacity-60 whitespace-pre-line">{item.location}</div>}
                       </div>
                       <div className="md:col-span-9">
-                          <h4 className="text-3xl md:text-4xl font-serif text-[#041E42] mb-4 italic">{typeset(item.title)}</h4>
+                          <h4 className="text-3xl md:text-4xl font-serif text-[#041E42] mb-4 italic [text-wrap:balance]">{typeset(item.title)}</h4>
                           <p className="text-[#041E42] text-lg font-serif leading-relaxed max-w-xl opacity-80">{typeset(item.description)}</p>
                       </div>
                     </div>
