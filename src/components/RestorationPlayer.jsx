@@ -16,8 +16,10 @@ const RestorationPlayer = () => {
   // Volume State (Linear 0-1 for UI)
   const [volume, setVolume] = useState(1);
   const [prevVolume, setPrevVolume] = useState(1);
+  const [isDraggingVolume, setIsDraggingVolume] = useState(false);
   
   const audioRef = useRef(null);
+  const volumeSliderRef = useRef(null); // Ref for the slider container
 
   // --- LOGIC 1: Seamless Source Switching (Memory Leak Fixed) ---
   useEffect(() => {
@@ -128,7 +130,7 @@ const RestorationPlayer = () => {
     setProgress(pct * duration);
   };
 
-  // --- VOLUME CONTROLS (iOS Optimized) ---
+  // --- VOLUME CONTROLS (Global Event Listeners for Reliable Drag) ---
 
   const handleVolumeKeyDown = (e) => {
     const VOL_STEP = 0.1;
@@ -147,22 +149,47 @@ const RestorationPlayer = () => {
     setVolume(newVol);
   };
 
-  const handleVolumePointerMove = (e) => {
-    // Check buttons for mouse, pointerType for touch compatibility
-    if (e.buttons === 1 || e.pointerType === 'touch') {
-       const rect = e.currentTarget.getBoundingClientRect();
-       const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-       setVolume(pct);
-    }
+  // Calculate volume based on pointer position relative to slider
+  const updateVolumeFromEvent = (clientX) => {
+    if (!volumeSliderRef.current) return;
+    const rect = volumeSliderRef.current.getBoundingClientRect();
+    const pct = Math.max(0, Math.min(1, (clientX - rect.left) / rect.width));
+    setVolume(pct);
   };
 
+  // Start dragging
   const handleVolumePointerDown = (e) => {
-    // CRITICAL: Prevent scrolling on iOS while dragging
-    e.preventDefault(); 
-    // CRITICAL: Capture pointer so drag continues even if finger leaves the element
-    e.currentTarget.setPointerCapture(e.pointerId);
-    handleVolumePointerMove(e);
+    e.preventDefault(); // Prevent text selection/scrolling
+    setIsDraggingVolume(true);
+    updateVolumeFromEvent(e.clientX); // Update immediately on click
   };
+
+  // Effect to manage global listeners during drag
+  useEffect(() => {
+    if (!isDraggingVolume) return;
+
+    const handleGlobalPointerMove = (e) => {
+      e.preventDefault();
+      updateVolumeFromEvent(e.clientX);
+    };
+
+    const handleGlobalPointerUp = () => {
+      setIsDraggingVolume(false);
+    };
+
+    // Add listeners to window to catch moves outside the element
+    window.addEventListener('pointermove', handleGlobalPointerMove);
+    window.addEventListener('pointerup', handleGlobalPointerUp);
+    // Also handle touchcancel/pointercancel
+    window.addEventListener('pointercancel', handleGlobalPointerUp);
+
+    return () => {
+      window.removeEventListener('pointermove', handleGlobalPointerMove);
+      window.removeEventListener('pointerup', handleGlobalPointerUp);
+      window.removeEventListener('pointercancel', handleGlobalPointerUp);
+    };
+  }, [isDraggingVolume]);
+
 
   const formatTime = (time) => {
     if (!time) return "0:00";
@@ -301,12 +328,12 @@ const RestorationPlayer = () => {
                     {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
                 </button>
                 
-                {/* FADER TRACK */}
+                {/* FADER TRACK - Uses Pointer Events with Global Listeners */}
                 <div 
+                    ref={volumeSliderRef}
                     className="w-24 h-8 relative cursor-pointer flex items-center touch-none" 
-                    style={{ touchAction: 'none' }} // iOS Fix
+                    style={{ touchAction: 'none' }} 
                     onPointerDown={handleVolumePointerDown}
-                    onPointerMove={handleVolumePointerMove}
                     onKeyDown={handleVolumeKeyDown}
                     role="slider"
                     aria-label="Volume Fader"
