@@ -14,19 +14,36 @@ const RestorationPlayer = () => {
   useEffect(() => {
     if (currentTrack && audioRef.current) {
       const src = currentTrack.audioSources?.[sourceMode];
-      if (src && audioRef.current.src !== src) {
+      
+      // FIX: Use getAttribute to compare the exact string values (relative vs absolute)
+      // and ensure we don't reload if the src hasn't actually changed.
+      if (src && audioRef.current.getAttribute('src') !== src) {
+        
         const wasPlaying = isPlaying;
-        const currentTime = audioRef.current.currentTime;
+        const savedTime = audioRef.current.currentTime;
         
+        // FIX: Create a one-time listener to restore position AFTER metadata loads
+        const onMetadataLoaded = () => {
+            if (!audioRef.current) return;
+            
+            // Restore the timestamp
+            audioRef.current.currentTime = savedTime;
+            
+            // Resume playback if it was playing before
+            if (wasPlaying) {
+                audioRef.current.play().catch(e => console.log("Playback interrupted during switch", e));
+            }
+        };
+
+        // Attach listener with { once: true } so it self-cleans
+        audioRef.current.addEventListener('loadedmetadata', onMetadataLoaded, { once: true });
+        
+        // Now it is safe to switch the source
         audioRef.current.src = src;
-        audioRef.current.currentTime = currentTime; 
-        
-        if (wasPlaying) {
-            audioRef.current.play().catch(e => console.log("Playback interrupted", e));
-        }
       }
     }
-  }, [currentTrack, sourceMode, isPlaying]);
+    // FIX: Removed 'isPlaying' from deps so simple play/pause toggles don't trigger source logic
+  }, [currentTrack, sourceMode]);
 
   // Handle Play/Pause Global State
   useEffect(() => {
