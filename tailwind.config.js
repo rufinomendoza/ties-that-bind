@@ -19,5 +19,20 @@ export default {
       }
     },
   },
-  plugins: [],
+  plugins: [
+    // THE WIDOW ELIMINATOR PLUGIN
+    // Explicitly defining the utilities to ensure 'balance' and 'pretty' are available
+    plugin(function({ addUtilities }) {
+      addUtilities({
+        // For Headlines: Balances lines to be roughly equal width
+        '.text-balance': {
+          'text-wrap': 'balance',
+        },
+        // For Body Copy: Prevents single words (orphans) on the last line
+        '.text-pretty': {
+          'text-wrap': 'pretty',
+        },
+      })
+    })
+  ],
 }

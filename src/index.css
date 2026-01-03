@@ -18,19 +18,32 @@ html {
   font-family: var(--font-sans);
 }
 
-/* --- ADDITION: TAILORED SCROLLBAR --- */
+
+
+/* src/index.css */
+
 ::-webkit-scrollbar {
-  width: 4px; /* Ultra-thin */
+  /* CHANGED: Increased from 4px to 8px. 
+     4px is invisible to the mouse; 8px is the minimum accessible target. */
+  width: 8px; 
 }
+
 ::-webkit-scrollbar-track {
-  background: #F4F4F3; /* Blends with the paper background */
+  background: #F4F4F3;
 }
+
 ::-webkit-scrollbar-thumb {
-  background-color: #041E42; /* Navy contrast */
-  border-radius: 0px; /* No rounded corners. Sharp edges only. */
+  background-color: #041E42;
+  /* ADDED: A white border creates a "floating" effect, making the 
+     bar feel thinner than it actually is (optical illusion). */
+  border: 2px solid #F4F4F3; 
+  border-radius: 0px; 
 }
+
 ::-webkit-scrollbar-thumb:hover {
-  background-color: #D50032; /* The "Red Alert" hover state */
+  background-color: #D50032;
+  /* On hover, fill the space more to indicate "grip" */
+  border-width: 1px; 
 }
 
 /* --- ACCESSIBILITY: GLOBAL FOCUS VISIBILITY --- */
@@ -148,4 +161,32 @@ div.fixed.z-40 {
   .grid-cols-12 { display: block !important; }
   .col-span-8 { width: 100% !important; }
   a[href]:after { content: " (" attr(href) ")"; font-size: 0.8em; font-weight: normal; }
+}
+
+/* --- THE WIDOW ELIMINATOR (Global Enforcement) --- */
+@layer base {
+  /* RULE 1: Headlines (Bringhurst's Rhythm)
+     All headings (H1-H6) automatically get balanced wrapping.
+     You never have to type 'text-balance' again.
+  */
+  h1, h2, h3, h4, h5, h6 {
+    text-wrap: balance;
+  }
+
+  /* RULE 2: Body Copy (Jobs's Perfectionism)
+     All paragraphs automatically avoid orphans on the last line.
+     It creates a subtle, cleaner block of text.
+  */
+  p {
+    text-wrap: pretty;
+  }
+  
+  /* RULE 3: The "Long Read" Constraint
+     Bringhurst notes that lines longer than 65 characters strain the eye.
+     This ensures paragraphs never stretch to the full 1920px width 
+     unless explicitly overridden.
+  */
+  p {
+    max-width: 65ch; 
+  }
 }
