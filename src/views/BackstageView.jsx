@@ -6,7 +6,7 @@ const BackstageView = () => (
     /* Added overflow-x-hidden as a safety wrapper */
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] antialiased text-[#041E42] selection:bg-[#D50032] selection:text-white overflow-x-hidden">
       <Helmet>
-        <title>Backstage | Georgetown Chimes Alumni Association</title>
+        <title>Backstage | Georgetown Chimes Alumni Association, Inc.</title>
         <meta name="description" content="Authorized Access Only. Internal tools and database management for Alumni." />
       </Helmet>
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, Suspense } from 'react';
+import React, { useState, useEffect, Suspense, startTransition } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { Menu, X } from 'lucide-react';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
@@ -29,7 +29,15 @@ const AlbumDetailView = React.lazy(() => import('./views/AlbumDetailView'));
 export default function App() {
   const getRouteFromPath = () => {
     const path = window.location.pathname;
-    const cleanPath = path.length > 1 && path.endsWith('/') ? path.slice(0, -1) : path;
+    
+    // FIX: Handle subdirectory deployments (Vite Base URL)
+    const base = import.meta.env.BASE_URL || '/';
+    let relativePath = path;
+    if (base !== '/' && path.startsWith(base)) {
+        relativePath = path.slice(base.length - 1); 
+    }
+
+    const cleanPath = relativePath.length > 1 && relativePath.endsWith('/') ? relativePath.slice(0, -1) : relativePath;
     
     if (cleanPath === '/' || cleanPath === '') return { view: 'home', slug: null };
     if (cleanPath === '/events') return { view: 'agenda', slug: null };
@@ -51,7 +59,14 @@ export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handlePopState = () => { setRoute(getRouteFromPath()); setIsMenuOpen(false); };
+    const handlePopState = () => { 
+        // FIX: Wrap in startTransition to prevent Suspense fallback from collapsing height
+        // and breaking browser scroll restoration on "Back"
+        startTransition(() => {
+            setRoute(getRouteFromPath()); 
+        });
+        setIsMenuOpen(false); 
+    };
     window.addEventListener('popstate', handlePopState);
     return () => { window.removeEventListener('popstate', handlePopState); };
   }, []);
@@ -69,31 +84,23 @@ export default function App() {
         case 'album': path = `/album/${slug}`; break;
         default: path = '/';
     }
-    try { window.history.pushState({}, '', path); } catch (err) { console.log('History API not available'); }
-    setRoute({ view, slug });
+
+    // FIX: Respect Base URL for pushState
+    const base = import.meta.env.BASE_URL === '/' ? '' : (import.meta.env.BASE_URL || '');
+    const fullPath = (base && path.startsWith('/')) ? (base.replace(/\/$/, '') + path) : path;
+
+    try { window.history.pushState({}, '', fullPath); } catch (err) { console.log('History API not available'); }
+    
+    // FIX: Use startTransition to keep old UI visible while loading new one
+    startTransition(() => {
+        setRoute({ view, slug });
+    });
     setIsMenuOpen(false);
     window.scrollTo(0, 0);
   };
 
-  // FIX: SEO / Metadata Bug
-  // Correctly saves the current dynamic title before hiding, and restores it on return.
-  useEffect(() => {
-    let previousTitle = document.title;
-
-    const handleVisibilityChange = () => {
-      if (document.hidden) {
-        // Capture the specific page title (set by Helmet) before we overwrite it
-        previousTitle = document.title;
-        document.title = "We meet again soon…";
-      } else {
-        // Restore the specific title (e.g., "Box Office | ...") instead of a generic reset
-        document.title = previousTitle;
-      }
-    };
-
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    return () => document.removeEventListener("visibilitychange", handleVisibilityChange);
-  }, []);
+  // FIX: Removed conflicting SEO title logic. 
+  // The previous useEffect here caused race conditions with Helmet.
 
   const openAlbumBySlug = (slug) => navigateTo('album', slug);
   const openAlbum = (album) => navigateTo('album', album.slug);
