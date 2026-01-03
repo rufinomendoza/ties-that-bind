@@ -32,7 +32,8 @@ const StoreView = () => (
               Performance standard since 1946. This 2021 vintage is commissioned for the Actives and provisioned for the Alumni. Pure silk. Designed to replace the lost, the stained, and the borrowed.
             </p>
             <div>
-              <p className="text-[#041E42] text-[10px] leading-relaxed font-sans font-bold uppercase tracking-[0.05em] opacity-60 px-1">
+              {/* ✅ CONTRAST FIX: Increased opacity from 60 to 70 for legibility */}
+              <p className="text-[#041E42] text-[10px] leading-relaxed font-sans font-bold uppercase tracking-[0.05em] opacity-70 px-1">
                  Provenance: A Drew Poling original, produced in collaboration with our master weavers in the United Kingdom.
               </p>
             </div>
@@ -58,7 +59,8 @@ const StoreView = () => (
                     <span className="text-[11px] font-mono font-bold tracking-[0.1em] text-[#D50032] uppercase">
                         Ref. 0{idx + 1}
                     </span>
-                    <span className="text-[9px] font-mono font-bold tracking-[0.05em] text-[#041E42]/40 uppercase">
+                    {/* ✅ CONTRAST FIX: Increased opacity from /40 to /70 */}
+                    <span className="text-[9px] font-mono font-bold tracking-[0.05em] text-[#041E42]/70 uppercase">
                         Pure Silk · UK Woven
                     </span>
                 </div>
@@ -83,7 +85,8 @@ const StoreView = () => (
                     <p className="text-[#041E42] text-xl font-serif leading-relaxed opacity-80 max-w-md [text-wrap:balance] px-1">
                         {typeset(item.desc)}
                     </p>
-                    <p className="mt-6 text-[10px] font-mono font-bold uppercase tracking-widest text-[#041E42]/40 px-1">
+                    {/* ✅ CONTRAST FIX: Increased opacity from /40 to /70 */}
+                    <p className="mt-6 text-[10px] font-mono font-bold uppercase tracking-widest text-[#041E42]/70 px-1">
                         Standard Issue Battle Gear
                     </p>
                 </div>
@@ -94,7 +97,8 @@ const StoreView = () => (
                         <span className="text-3xl font-mono font-bold text-[#041E42] tracking-tight tabular-nums block">
                             ${item.price}
                         </span>
-                        <span className="text-[9px] font-mono font-bold tracking-[0.1em] text-[#041E42]/50 uppercase">
+                        {/* ✅ CONTRAST FIX: Increased opacity from /50 to /70 */}
+                        <span className="text-[9px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 uppercase">
                             With Shipping
                         </span>
                     </div>
@@ -103,7 +107,7 @@ const StoreView = () => (
                         href={item.link} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="w-full md:w-auto flex items-center justify-center gap-4 px-8 py-4 border border-[#041E42] text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] hover:bg-[#041E42] hover:text-white transition-all duration-300"
+                        className="w-full md:w-auto flex items-center justify-center gap-4 px-8 py-4 border border-[#041E42] text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42] hover:bg-[#041E42] hover:text-white transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-2"
                     >
                         <span>Acquire</span>
                         <span className="text-lg font-light translate-y-[-1px]">→</span>
@@ -114,7 +118,8 @@ const StoreView = () => (
       </div>
 
       {/* Archive Stamp */}
-      <div className="mt-48 pt-4 border-t border-[#041E42] flex justify-start opacity-40 px-1">
+      {/* ✅ CONTRAST FIX: Increased opacity from 40 to 70 */}
+      <div className="mt-48 pt-4 border-t border-[#041E42] flex justify-start opacity-70 px-1">
         <p className="text-[10px] font-sans font-bold tracking-[0.1em] uppercase antialiased">
           Official Battle Gear of the Georgetown Chimes
         </p>

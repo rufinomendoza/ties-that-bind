@@ -14,8 +14,11 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-between items-end mb-12">
-            {/* NAVIGATION: Kept Sans (Structure) */}
-            <button onClick={() => navigateTo('discography')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4">
+            {/* Internal Navigation: Button is appropriate here for SPA routing */}
+            <button 
+                onClick={() => navigateTo('discography')} 
+                className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm"
+            >
                 <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to the Listening Room
             </button>
         </div>
@@ -40,16 +43,20 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                 </div>
                 <div className="space-y-0 border-t border-[#041E42]">
                    <div className="flex justify-between items-baseline py-4 border-b border-[#041E42]/20">
-                        {/* CHANGED: Sans -> Mono (Data Label) */}
                         <span className="text-[10px] font-mono font-bold tracking-[0.1em] uppercase text-[#D50032]">Issue</span>
                         <span className="text-l font-mono font-normal tabular-nums">{selectedAlbum.year}</span>
                    </div>
                 </div>
                 {selectedAlbum.link && (
-                    /* ACTION: Kept Sans (Interactive) */
-                    <button onClick={() => window.open(selectedAlbum.link, '_blank', 'noopener,noreferrer')} className="mt-12 w-full py-5 border border-[#041E42] bg-[#041E42] text-[#F4F4F3] text-[11px] font-sans font-bold tracking-[0.1em] uppercase hover:bg-[#D50032] hover:border-[#D50032] transition-all">
+                    /* ✅ SEMANTIC FIX: Converted button to anchor */
+                    <a 
+                        href={selectedAlbum.link}
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="mt-12 block w-full text-center py-5 border border-[#041E42] bg-[#041E42] text-[#F4F4F3] text-[11px] font-sans font-bold tracking-[0.1em] uppercase hover:bg-[#D50032] hover:border-[#D50032] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-2"
+                    >
                         {selectedAlbum.ctaText || "Listen on Streaming"}
-                    </button>
+                    </a>
                 )}
                 {selectedAlbum.dedication && (
                     <div className="mt-12 pt-8 border-t border-[#041E42]/20 space-y-4">
@@ -75,22 +82,28 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
             {selectedAlbum.leadSingle && (
               <div className="border border-[#041E42]/10 p-12 mb-32 relative group/single bg-white shadow-sm">
                  <div className="absolute top-0 right-0 w-1 h-full bg-[#D50032] opacity-0 group-hover/single:opacity-100 transition-opacity"></div>
-                 {/* CHANGED: Sans -> Mono (Section Label) */}
                  <span className="text-[10px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase mb-8 block">Featured Track</span>
                  <h3 className="text-5xl md:text-6xl font-serif text-[#041E42] mb-6 italic leading-none">{typeset(selectedAlbum.leadSingle.title)}</h3>
                  <div className="flex flex-col gap-2 mb-8">
-                    {/* CHANGED: Sans -> Mono (Metadata) */}
                     {selectedAlbum.leadSingle.composer && <span className="text-[10px] font-mono font-bold tracking-[0.1em] uppercase text-[#041E42]/70">{selectedAlbum.leadSingle.composer}</span>}
                     {selectedAlbum.leadSingle.soloist && <span className="text-[10px] font-mono font-bold tracking-[0.1em] uppercase text-[#D50032]">Feat. {selectedAlbum.leadSingle.soloist}</span>}
                  </div>
-                 {/* ACTION: Kept Sans */}
-                 {selectedAlbum.leadSingle.link && <button onClick={() => window.open(selectedAlbum.leadSingle.link, '_blank', 'noopener,noreferrer')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42] pb-1 hover:text-[#D50032] hover:border-[#D50032] transition-all">Play Track &#x2197;&#xFE0E;</button>}
+                 {/* ✅ SEMANTIC FIX: Converted button to anchor */}
+                 {selectedAlbum.leadSingle.link && (
+                    <a 
+                        href={selectedAlbum.leadSingle.link}
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-block text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42] pb-1 hover:text-[#D50032] hover:border-[#D50032] transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm"
+                    >
+                        Play Track &#x2197;&#xFE0E;
+                    </a>
+                 )}
               </div>
             )}
 
             {/* REPERTOIRE SECTION */}
             <div className="mb-32 border-t-2 border-[#041E42] pt-12">
-                {/* CHANGED: Sans -> Mono (Section Label) */}
                 <span className="text-[10px] font-mono font-bold tracking-[0.05em] text-[#D50032] mb-12 block uppercase">Repertoire</span>
                 <div>
                     {selectedAlbum.tracks.map((track, idx) => (
@@ -110,7 +123,6 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
                             {/* Right Col: Metadata */}
                             <div className="hidden md:block md:col-span-5 text-right opacity-40 group-hover:opacity-100 transition-opacity">
-                                {/* CHANGED: Sans -> Mono (The Cue Sheet Look) */}
                                 <span className="text-[9px] font-mono font-bold tracking-[0.1em] uppercase text-[#041E42] leading-tight block [text-wrap:balance]">
                                     {typeset(
                                         [
@@ -129,17 +141,14 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
             {selectedAlbum.credits && (
                 <div className="mb-32 border-t-2 border-[#041E42] pt-12">
-                    {/* CHANGED: Sans -> Mono */}
                     <span className="text-[10px] font-mono font-bold tracking-[0.05em] text-[#D50032] mb-12 block uppercase">Technical Specifications</span>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
                         {Object.entries(selectedAlbum.credits).map(([section, roles]) => (
                             <div key={section}>
-                                {/* CHANGED: Sans -> Mono (Subsection Header) */}
                                 <h5 className="font-mono font-bold text-[10px] uppercase tracking-[0.1em] text-[#041E42] mb-8 border-b border-[#041E42]/20 pb-2">{section}</h5>
                                 <div className="space-y-6">
                                     {roles.map((role, idx) => (
                                         <div key={idx} className="flex flex-col">
-                                            {/* CHANGED: Sans -> Mono (The Role/Job Title) */}
                                             <span className="text-[9px] font-mono font-bold tracking-[0.1em] uppercase text-[#041E42]/70 mb-1">{role.role}</span>
                                             <span className="font-serif text-xl text-[#041E42] leading-tight [text-wrap:balance]">{typeset(role.name)}</span>
                                         </div>
@@ -153,7 +162,6 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
             {selectedAlbum.linerNotes && (
                 <div className="mb-32 border-t-2 border-[#041E42] pt-12">
-                    {/* CHANGED: Sans -> Mono */}
                     <span className="text-[10px] font-mono font-bold tracking-[0.05em] text-[#D50032] mb-12 block uppercase">Album Notes</span>
                     <div className="space-y-16">
                         {selectedAlbum.linerNotes.map((note, idx) => (
@@ -168,7 +176,6 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
             {selectedAlbum.acknowledgements && (
                 <div className="py-24 border-t border-[#041E42]/10 mb-24">
-                    {/* CHANGED: Sans -> Mono */}
                     <h5 className="font-mono font-bold text-[10px] uppercase tracking-[0.1em] mb-12 text-[#041E42]/70">Acknowledgements</h5>
                     <div className="flex flex-wrap gap-x-8 gap-y-4 max-w-4xl">
                         {selectedAlbum.acknowledgements.map((name, i) => (
@@ -179,7 +186,6 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
             )}
 
             <div className="pt-24 border-t border-[#041E42] opacity-40 text-left">
-                {/* CHANGED: Sans -> Mono (Archival Footnote) */}
                 <p className="text-[9px] font-mono font-bold tracking-[0.1em] uppercase">Transcribed from the Physical Liner Notes</p>
             </div>
           </div>
