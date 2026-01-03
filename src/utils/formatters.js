@@ -5,6 +5,7 @@ export const typeset = (text) => {
   return text
     .replace(/(\W|^)"/g, '$1“').replace(/"/g, '”') // Smart Quotes
     .replace(/'/g, '’') // Smart Apostrophes
+    .replace(/\.\.\./g, '…') // [ADDED] Ellipsis: Converts "..." to "…"
     .replace(/(\d)-(\d)/g, '$1–$2') // En-dashes for ranges
     .replace(/ - /g, ' — ') // Em-dashes for breaks
     .replace(/ \/ /g, ' · '); // Slashes to Interpuncts
