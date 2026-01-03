@@ -25,6 +25,20 @@ const EventDetailView = React.lazy(() => import('./views/EventDetailView'));
 const DiscographyView = React.lazy(() => import('./views/DiscographyView'));
 const AlbumDetailView = React.lazy(() => import('./views/AlbumDetailView'));
 
+// --- NEW: SKEUMORPHIC LOADING SCREEN ---
+const LoadingScreen = () => (
+  <div className="h-screen w-full flex flex-col items-center justify-center bg-[#F4F4F3] text-[#041E42]">
+    {/* The Pulsing Logo */}
+    <div className="w-16 h-16 md:w-24 md:h-24 animate-pulse opacity-80">
+       <Logo />
+    </div>
+    {/* The "Machine" Status - Monospaced, tiny, technical */}
+    <span className="mt-8 text-[9px] font-mono font-bold tracking-[0.2em] uppercase opacity-40 animate-[fadeIn_2s_ease-in]">
+       Retrieving Archive...
+    </span>
+  </div>
+);
+
 // App
 export default function App() {
   const getRouteFromPath = () => {
@@ -130,7 +144,7 @@ export default function App() {
               timeout={800} 
               unmountOnExit
             >
-              <Suspense fallback={<div className="h-screen flex items-center justify-center font-bold tracking-widest uppercase text-[10px]">Loading...</div>}>
+              <Suspense fallback={<LoadingScreen />}>
                 {effectiveView === 'home' && <HomeView navigateTo={navigateTo} openAlbumBySlug={openAlbumBySlug} openEvent={openEvent} />}
                 {effectiveView === 'agenda' && <AgendaView navigateTo={navigateTo} openEvent={openEvent} />}
                 {effectiveView === 'discography' && <DiscographyView openAlbum={openAlbum} navigateTo={navigateTo} />}
