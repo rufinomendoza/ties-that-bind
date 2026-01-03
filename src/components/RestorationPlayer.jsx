@@ -13,23 +13,25 @@ const RestorationPlayer = () => {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   
-  // Volume State
+  // Volume & Interaction State
   const [volume, setVolume] = useState(1);
   const [prevVolume, setPrevVolume] = useState(1);
   const [isDraggingVolume, setIsDraggingVolume] = useState(false);
-  const [isIOS, setIsIOS] = useState(false); // New State for iOS detection
+  const [isIOS, setIsIOS] = useState(false);
+  
+  // Marquee State
+  const titleRef = useRef(null);
+  const [isOverflowing, setIsOverflowing] = useState(false);
   
   const audioRef = useRef(null);
   const volumeSliderRef = useRef(null);
 
-  // --- LOGIC 0: Detect iOS ---
+  // --- LOGIC 0: Detect iOS (To hide software volume control) ---
   useEffect(() => {
-    // Robust check for iOS (including iPads with iPadOS 13+)
     const checkIsIOS = () => {
       const platform = navigator.userAgent || navigator.platform || 'unknown';
       return (
         /iPhone|iPod|iPad/.test(platform) ||
-        // iPad Pro detection (mimics MacIntel but has touch points)
         (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
       );
     };
@@ -43,6 +45,7 @@ const RestorationPlayer = () => {
     if (currentTrack && audioEl) {
       const src = currentTrack.audioSources?.[sourceMode];
       
+      // Only reload if the source URL has actually changed
       if (src && audioEl.getAttribute('src') !== src) {
         
         const wasPlaying = isPlaying;
@@ -50,7 +53,7 @@ const RestorationPlayer = () => {
         
         const onMetadataLoaded = () => {
             audioEl.currentTime = savedTime;
-            // Only attempt to set volume if NOT iOS
+            // Only set volume on non-iOS devices to avoid interference
             if (!isIOS) {
                 audioEl.volume = volume * volume;
             }
@@ -68,7 +71,7 @@ const RestorationPlayer = () => {
         };
       }
     }
-  }, [currentTrack, sourceMode, isPlaying, isIOS, volume]); // Added isIOS dependency
+  }, [currentTrack, sourceMode, isPlaying, isIOS, volume]);
 
   // --- LOGIC 2: Play/Pause Sync ---
   useEffect(() => {
@@ -79,13 +82,21 @@ const RestorationPlayer = () => {
 
   // --- LOGIC 3: Logarithmic Volume ---
   useEffect(() => {
-    // Only apply volume logic on non-iOS devices
     if (audioRef.current && !isIOS) {
+        // Square the volume for a natural "Logarithmic" feel
         audioRef.current.volume = volume * volume;
     }
   }, [volume, isIOS]);
 
+  // --- LOGIC 4: Marquee Check ---
+  useEffect(() => {
+    if (titleRef.current) {
+        setIsOverflowing(titleRef.current.scrollWidth > titleRef.current.clientWidth);
+    }
+  }, [currentTrack]);
+
   // --- HANDLERS ---
+
   const handleTimeUpdate = () => {
     if (audioRef.current) {
       setProgress(audioRef.current.currentTime);
@@ -108,17 +119,15 @@ const RestorationPlayer = () => {
     }
   };
 
-  // Keyboard Seek
+  // Keyboard Navigation for Seek
   const handleSeekKeyDown = (e) => {
     if (!audioRef.current) return;
     const SEEK_STEP = 5;
     let newTime = audioRef.current.currentTime;
 
     switch (e.key) {
-        case 'ArrowLeft':
-        case 'ArrowDown': newTime = Math.max(0, newTime - SEEK_STEP); break;
-        case 'ArrowRight':
-        case 'ArrowUp': newTime = Math.min(duration, newTime + SEEK_STEP); break;
+        case 'ArrowLeft': case 'ArrowDown': newTime = Math.max(0, newTime - SEEK_STEP); break;
+        case 'ArrowRight': case 'ArrowUp': newTime = Math.min(duration, newTime + SEEK_STEP); break;
         case 'Home': newTime = 0; break;
         case 'End': newTime = duration; break;
         default: return; 
@@ -128,7 +137,6 @@ const RestorationPlayer = () => {
     setProgress(newTime);
   };
 
-  // Main Bar Seek
   const handleSeek = (e) => {
     if (!audioRef.current || !duration) return;
     const clientX = e.touches ? e.touches[0].clientX : e.clientX;
@@ -139,16 +147,14 @@ const RestorationPlayer = () => {
     setProgress(pct * duration);
   };
 
-  // --- VOLUME CONTROLS ---
+  // --- VOLUME CONTROLS (Robust Global Dragging) ---
+
   const handleVolumeKeyDown = (e) => {
     const VOL_STEP = 0.1;
     let newVol = volume;
-
     switch (e.key) {
-        case 'ArrowLeft':
-        case 'ArrowDown': newVol = Math.max(0, newVol - VOL_STEP); break;
-        case 'ArrowRight':
-        case 'ArrowUp': newVol = Math.min(1, newVol + VOL_STEP); break;
+        case 'ArrowLeft': case 'ArrowDown': newVol = Math.max(0, newVol - VOL_STEP); break;
+        case 'ArrowRight': case 'ArrowUp': newVol = Math.min(1, newVol + VOL_STEP); break;
         case 'Home': newVol = 0; break;
         case 'End': newVol = 1; break;
         default: return;
@@ -170,6 +176,7 @@ const RestorationPlayer = () => {
     updateVolumeFromEvent(e.clientX);
   };
 
+  // Attach global listeners only while dragging
   useEffect(() => {
     if (!isDraggingVolume) return;
 
@@ -193,7 +200,6 @@ const RestorationPlayer = () => {
     };
   }, [isDraggingVolume]);
 
-
   const formatTime = (time) => {
     if (!time) return "0:00";
     const min = Math.floor(time / 60);
@@ -216,7 +222,7 @@ const RestorationPlayer = () => {
         preload="auto"
       />
       
-      {/* 1. Progress Bar */}
+      {/* 1. Progress Bar (The Ictus) */}
       <div 
         className="w-full h-1 md:h-1.5 bg-[#F4F4F3]/10 cursor-pointer group relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-2 focus-visible:ring-offset-[#041E42]"
         onClick={handleSeek}
@@ -242,20 +248,30 @@ const RestorationPlayer = () => {
         
         {/* Top/Left: Track Data */}
         <div className="flex items-center gap-4 md:gap-6 justify-between md:justify-start w-full md:w-auto min-w-0">
-            {/* ... (Existing Track Data UI) ... */}
             <div className="flex items-center gap-4 min-w-0">
                 <div className="hidden sm:flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-[#F4F4F3]/5 border border-[#F4F4F3]/20 text-[#F4F4F3] flex-shrink-0 rounded-sm">
                    {sourceMode === 'reference' ? <Disc3 size={24} strokeWidth={1.25} aria-hidden="true" /> : <Voicemail size={24} strokeWidth={1.25} aria-hidden="true" />}
                 </div>
-                <div className="flex flex-col overflow-hidden text-left min-w-0 md:min-w-72 select-none">
+                
+                {/* MARQUEE METADATA - Fixed Width to prevent jumping */}
+                <div className="flex flex-col overflow-hidden text-left min-w-0 md:w-72 select-none relative group">
                     <span className="text-[8px] md:text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#F4F4F3]/80 mb-1 truncate">
                         {sourceMode === 'reference' ? 'Unfiltered Archival Recording' : '2025 Reel-to-Reel Digital Transfer'}
                     </span>
-                    <span className="text-lg md:text-2xl font-serif text-[#F4F4F3] truncate leading-tight">
-                        {currentTrack.title}
-                    </span>
+                    
+                    {/* The Scrolling Title Container */}
+                    <div className="relative overflow-hidden h-6 md:h-8 w-full mask-linear-fade">
+                        <div 
+                            ref={titleRef}
+                            className={`whitespace-nowrap text-lg md:text-2xl font-serif text-[#F4F4F3] leading-tight ${isOverflowing && isPlaying ? 'animate-marquee' : ''}`}
+                        >
+                            {currentTrack.title}
+                            {isOverflowing && <span className="mx-8">{currentTrack.title}</span>}
+                        </div>
+                    </div>
                 </div>
             </div>
+            
             <button 
                 onClick={closePlayer} 
                 className="md:hidden opacity-40 hover:opacity-100 p-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm"
@@ -267,7 +283,8 @@ const RestorationPlayer = () => {
 
         {/* Middle: Source Toggle & Transport */}
         <div className="flex items-center justify-between md:justify-center w-full md:w-auto gap-4 md:gap-10">
-            {/* ... (Existing Switch & Transport UI) ... */}
+            
+            {/* SKEUMORPHIC SWITCH */}
             <div className="flex flex-1 md:flex-none items-center bg-[#031630] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] rounded-md p-1 border-b border-white/10">
                 <button 
                     onClick={() => setSourceMode('reference')}
@@ -275,7 +292,7 @@ const RestorationPlayer = () => {
                     className={`
                         flex-1 md:w-24 py-2 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2
                         ${sourceMode === 'reference' 
-                            ? 'bg-gradient-to-b from-[#F4F4F3] to-[#E0E0E0] text-[#041E42] shadow-sm transform scale-[0.98]' 
+                            ? 'bg-gradient-to-b from-[#F4F4F3] to-[#E0E0E0] text-[#041E42] shadow-sm' 
                             : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3] hover:bg-white/5'}
                     `}
                 >
@@ -288,7 +305,7 @@ const RestorationPlayer = () => {
                     className={`
                         flex-1 md:w-24 py-2 text-[9px] font-mono font-bold tracking-[0.2em] uppercase leading-none transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm select-none flex items-center justify-center gap-2
                         ${sourceMode === 'restored' 
-                            ? 'bg-gradient-to-b from-[#D50032] to-[#B00028] text-white shadow-sm transform scale-[0.98] text-shadow-sm' 
+                            ? 'bg-gradient-to-b from-[#D50032] to-[#B00028] text-white shadow-sm text-shadow-sm' 
                             : 'text-[#F4F4F3]/40 hover:text-[#F4F4F3] hover:bg-white/5'}
                     `}
                 >
@@ -319,7 +336,7 @@ const RestorationPlayer = () => {
         {/* Bottom/Right: Volume, Timestamp & Close */}
         <div className="flex items-center justify-between md:justify-end w-full md:w-auto border-t border-white/5 md:border-0 pt-3 md:pt-0">
             
-            {/* ONLY RENDER VOLUME IF NOT ON iOS */}
+            {/* Volume Control - Hidden on iOS */}
             {!isIOS && (
                 <div className="flex items-center gap-4 mr-6 group/volume">
                     <button 
@@ -330,6 +347,7 @@ const RestorationPlayer = () => {
                         {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
                     </button>
                     
+                    {/* FADER TRACK - Global Events for Robust Dragging */}
                     <div 
                         ref={volumeSliderRef}
                         className="w-24 h-8 relative cursor-pointer flex items-center touch-none" 
@@ -343,19 +361,20 @@ const RestorationPlayer = () => {
                         aria-valuenow={Math.round(volume * 100)}
                         tabIndex={0}
                     >
-                        {/* Rail */}
+                        {/* Rail: Deep Recessed Groove */}
                         <div className="w-full h-1.5 bg-[#020d1c] shadow-[inset_0_1px_2px_rgba(0,0,0,1),0_1px_0_rgba(255,255,255,0.1)] rounded-full overflow-hidden relative">
-                                <div 
+                             <div 
                                 className="h-full bg-gradient-to-b from-[#D50032] to-[#A50026]" 
                                 style={{ width: `${volume * 100}%` }}
-                                />
+                             />
                         </div>
 
-                        {/* Fader Cap */}
+                        {/* Fader Cap: Machined Look */}
                         <div 
                             className="absolute h-5 w-3 bg-gradient-to-b from-[#F4F4F3] to-[#CDCDCD] rounded-[1px] shadow-[0_2px_4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(0,0,0,0.1)] transform -translate-x-1/2 pointer-events-none flex items-center justify-center"
                             style={{ left: `${volume * 100}%` }}
                         >
+                            {/* Grip Lines */}
                             <div className="w-1.5 h-3" style={faderGripStyle}></div>
                         </div>
                     </div>
