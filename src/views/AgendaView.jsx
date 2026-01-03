@@ -17,7 +17,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
         <SectionHeader title="The 2026 Season" number="Tickets & Gatherings" />
         
         {/* HEADER ROW — Now Mono for Technical Precision */}
-        <div className="hidden md:grid grid-cols-12 gap-12 pb-4 mb-4 border-b-2 border-[#041E42] opacity-100">
+        <div className="hidden md:grid grid-cols-12 gap-12 pb-4 mb-4 border-b-2 border-[#041E42] opacity-100" aria-hidden="true">
             <span className="col-span-2 text-[10px] font-mono font-bold tracking-[0.1em] uppercase">
                 Date
             </span>
@@ -34,18 +34,13 @@ const AgendaView = ({ navigateTo, openEvent }) => (
             const { month, day } = parseEventDate(event.date);
 
             return (
-              <div 
+              /* ✅ ACCESSIBILITY FIX: Converted div to button for native keyboard/focus support */
+              <button 
                 key={event.id} 
-                role="button" 
-                tabIndex={0} 
+                type="button"
                 onClick={() => openEvent(event)} 
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    openEvent(event);
-                  }
-                }}
-                className="group border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer transition-all duration-500 hover:pl-4 -ml-4 pl-4 pr-4 group-hover/list:opacity-30 hover:!opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#D50032]"
+                className="w-full text-left group border-b border-[#041E42]/20 py-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-baseline relative cursor-pointer transition-all duration-500 hover:pl-4 -ml-4 pl-4 pr-4 group-hover/list:opacity-30 hover:!opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#D50032] focus-visible:bg-white focus-visible:px-6 rounded-sm"
+                aria-label={`View details for ${event.title} on ${event.date}`}
               >
                 {/* DATE COLUMN */}
                 <div className="md:col-span-2 flex flex-col">
@@ -66,7 +61,6 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                 </div>
 
                 {/* LOGISTICS COLUMN — Now Mono (The Studio Log) */}
-                {/* Add: border-l border-[#041E42]/10 pl-8 (and adjust gap to compensate if needed, or just let it breathe) */}
                 <div className="md:col-span-3 flex flex-col items-start md:items-end justify-between h-full gap-8 md:border-l md:border-[#041E42]/10 md:pl-8">
                   <div className="text-left md:text-right">
                       <span className="block text-[10px] font-mono font-bold tracking-[0.1em] uppercase text-[#041E42] mb-1">{event.time}</span>
@@ -77,7 +71,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                     <span className="text-lg font-sans font-light translate-y-[-1px]">→</span>
                   </span>
                 </div>
-              </div>
+              </button>
             );
           })}
         </div>
