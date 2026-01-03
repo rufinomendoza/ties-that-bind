@@ -284,9 +284,6 @@ const RestorationPlayer = () => {
         {/* Middle: Source Toggle & Transport */}
         <div className="flex items-center justify-between md:justify-center w-full md:w-auto gap-4 md:gap-10">
             
-            {/* Middle: Source Toggle & Transport */}
-        <div className="flex items-center justify-between md:justify-center w-full md:w-auto gap-4 md:gap-10">
-            
             {/* SKEUMORPHIC SWITCH */}
             {/* 1. Container: Fixed h-9 */}
             <div className="h-9 flex flex-1 md:flex-none items-center bg-[#031630] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] rounded-md p-1 border-b border-white/10">
