@@ -57,7 +57,7 @@ const AgendaView = ({ navigateTo, openEvent }) => (
                   {/* Serif for the title (Artistic Focus) */}
                   <h3 className="text-5xl md:text-7xl font-serif mb-6 text-[#041E42] leading-[1.15] md:leading-[1.0] tracking-tight group-hover:italic transition-all duration-500 [text-wrap:balance]">{typeset(event.title)}</h3>
                   {/* Serif for the narrative */}
-                  <p className="text-[#041E42] font-serif text-lg md:text-xl max-w-xl leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700">{Array.isArray(event.description) ? typeset(event.description[0]) : typeset(event.description)}</p>
+                  <p className="text-[#041E42] font-serif text-lg md:text-xl max-w-xl leading-relaxed opacity-60 group-hover:opacity-100 transition-opacity duration-700 [text-wrap:pretty]">{Array.isArray(event.description) ? typeset(event.description[0]) : typeset(event.description)}</p>
                 </div>
 
                 {/* LOGISTICS COLUMN — Now Mono (The Studio Log) */}

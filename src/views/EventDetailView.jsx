@@ -82,7 +82,7 @@ const EventDetailView = ({ event, navigateTo }) => {
           <div className="lg:col-span-8">
             <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] mb-8 block uppercase">{event.eyebrow || event.type}</span>
             <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif mb-12 text-[#041E42] leading-[1.15] md:leading-[1.0] tracking-tighter [text-wrap:balance]">{typeset(event.title)}</h1>
-            <div className="text-xl md:text-3xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-[65ch] space-y-8 pl-6 border-l-2 border-[#041E42]/10">
+            <div className="text-xl md:text-3xl font-serif italic text-[#041E42] mb-24 leading-relaxed max-w-[65ch] space-y-8 pl-6 border-l-2 border-[#041E42]/10 [text-wrap:pretty]">
                 {Array.isArray(event.description) ? event.description.map((para, i) => <p key={i}>{typeset(para)}</p>) : <p>{typeset(event.description)}</p>}
             </div>
 
@@ -109,7 +109,7 @@ const EventDetailView = ({ event, navigateTo }) => {
                       </div>
                       <div className="md:col-span-9">
                           <h4 className="text-3xl md:text-4xl font-serif text-[#041E42] mb-4 italic [text-wrap:balance]">{typeset(item.title)}</h4>
-                          <p className="text-[#041E42] text-lg font-serif leading-relaxed max-w-xl opacity-80">{typeset(item.description)}</p>
+                          <p className="text-[#041E42] text-lg font-serif leading-relaxed max-w-xl opacity-80 [text-wrap:pretty]">{typeset(item.description)}</p>
                       </div>
                     </div>
                 ))}

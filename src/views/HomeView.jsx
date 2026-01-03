@@ -43,7 +43,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
             <h1 className="sr-only">Brotherhood, Harmony, History</h1>
             
             <div 
-              className="w-full flex flex-col items-center justify-center text-center select-none leading-[0.8] text-[#041E42] overflow-visible"
+              className="w-full flex flex-col items-center justify-center text-center select-none leading-[0.8] text-[#041E42] overflow-visible [text-wrap:balance]"
               aria-hidden="true"
             >
               {/* BROTHERHOOD */}
