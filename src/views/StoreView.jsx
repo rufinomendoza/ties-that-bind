@@ -24,7 +24,7 @@ const StoreView = () => (
         </div>
         <div className="lg:col-span-8">
           {/* Swash protection: px-1 ensures the 'S' or 'e' doesn't clip on narrow viewports */}
-          <h3 className="text-5xl md:text-7xl font-serif leading-[1.15] md:leading-[1.0] text-[#041E42] tracking-tighter mb-12 px-1">
+          <h3 className="text-5xl md:text-7xl font-serif leading-[1.15] md:leading-[1.0] text-[#041E42] tracking-tighter mb-12 px-1 [text-wrap:balance]">
             Standard Issue.
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
@@ -79,7 +79,7 @@ const StoreView = () => (
                 {/* Col 3: THE NARRATIVE */}
                 <div className="md:col-span-5 flex flex-col justify-start pt-2">
                     {/* Italic protection: px-2 and -mx-2 allows swashes to breathe while keeping alignment */}
-                    <h4 className="text-4xl md:text-6xl font-serif text-[#041E42] italic leading-none mb-8 px-2 -mx-2">
+                    <h4 className="text-4xl md:text-6xl font-serif text-[#041E42] italic leading-none mb-8 px-2 -mx-2 [text-wrap:balance]">
                         {item.name}
                     </h4>
                     <p className="text-[#041E42] text-xl font-serif leading-relaxed opacity-80 max-w-md [text-wrap:balance] px-1">

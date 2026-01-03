@@ -748,37 +748,37 @@ export const ALBUMS_DATA = [
 export const DONOR_TIERS = [
   {
     title: "The Ictus",
-    price: "$19.46/year",
+    price: { amount: "$19.46", frequency: "Year" },
     link: "https://buy.stripe.com/dR67wmceZ3mgdiM9AS",
     description: "The pulse that holds the ensemble together. In conducting, the ictus is the precise moment the beat occurs. It’s what defines the rhythm. For $19.46 a year, you provide that pulse, ensuring the beat goes on.",
   },
   {
     title: "The Tonic",
-    price: "$10/month",
+    price: { amount: "$10", frequency: "Month"},
     link: "https://buy.stripe.com/28o3g692N6ysa6AaEJ",
     description: "The price of a pint at The Tombs. This tier funds the casual hospitality that defines our gatherings, ensuring the green tea with honey is always flowing.",
   },
   {
     title: "The Spirit of ’46",
-    price: "$19.46/month",
+    price: { amount: "$19.46", frequency: "Month"},
     link: "https://buy.stripe.com/6oEbMC7YJf4YbaE5kt",
     description: "The definitive commitment. By matching the year of our founding every month, you become the backbone of our operations. This is the foundation of our sustainability.",
   },
   {
     title: "The Social Chair",
-    price: "$27.80/month",
+    price: { amount: "27.80", frequency: "Month"},
     link: "https://buy.stripe.com/aEUaIy7YJaOI5QkcMW",
     description: "Dedicated to the experience. The Chimes are nothing without the gathering. You ensure that when we meet again, we can afford to do it right.",
   },
   {
     title: "The Founders League",
-    price: "$46/month",
+    price: { amount: "$46", frequency: "Month"},
     link: "https://buy.stripe.com/aEUeYO2EpaOI0w04gv",
     description: "A commitment to the future. While the “Spirit” tier honors the date, this tier honors the builders. You are subsidizing long-term initiatives like archival restoration and digital preservation.",
   },
   {
     title: "The Good Fellow",
-    price: "$100/month",
+    price: { amount: "$100", frequency: "Month"},
     link: "https://buy.stripe.com/5kA17Y92N6ysguYbIY",
     description: "The bedrock of the Association. This does the heavy lifting for our most ambitious projects. Because some traditions are too important to be left to chance, you ensure the Chimes legacy is secure for decades to come.",
   }

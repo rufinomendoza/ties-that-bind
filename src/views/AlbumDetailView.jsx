@@ -83,7 +83,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
               <div className="border border-[#041E42]/10 p-12 mb-32 relative group/single bg-white shadow-sm">
                  <div className="absolute top-0 right-0 w-1 h-full bg-[#D50032] opacity-0 group-hover/single:opacity-100 transition-opacity"></div>
                  <span className="text-[10px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase mb-8 block">Featured Track</span>
-                 <h3 className="text-5xl md:text-6xl font-serif text-[#041E42] mb-6 italic leading-none">{typeset(selectedAlbum.leadSingle.title)}</h3>
+                 <h3 className="text-5xl md:text-6xl font-serif text-[#041E42] mb-6 italic leading-none  [text-wrap:balance]">{typeset(selectedAlbum.leadSingle.title)}</h3>
                  <div className="flex flex-col gap-2 mb-8">
                     {selectedAlbum.leadSingle.composer && <span className="text-[10px] font-mono font-bold tracking-[0.1em] uppercase text-[#041E42]/70">{selectedAlbum.leadSingle.composer}</span>}
                     {selectedAlbum.leadSingle.soloist && <span className="text-[10px] font-mono font-bold tracking-[0.1em] uppercase text-[#D50032]">Feat. {selectedAlbum.leadSingle.soloist}</span>}
@@ -166,7 +166,7 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
                     <div className="space-y-16">
                         {selectedAlbum.linerNotes.map((note, idx) => (
                             <div key={idx} className="max-w-2xl">
-                                {note.author && <h4 className="font-serif text-3xl mb-6 italic">{typeset(note.author)}</h4>}
+                                {note.author && <h4 className="font-serif text-3xl mb-6 italic [text-wrap:balance]">{typeset(note.author)}</h4>}
                                 <p className="leading-relaxed font-serif text-lg opacity-90 antialiased">{typeset(note.text)}</p>
                             </div>
                         ))}

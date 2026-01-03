@@ -27,7 +27,7 @@ const BackstageView = () => (
                          </div>
                          
                          {/* Swash Protection: Added px-1 and adjusted mobile font size for narrow screens */}
-                         <h3 className="text-6xl md:text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.1] md:leading-[1.0] -ml-1 px-1">
+                         <h3 className="text-6xl md:text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.1] md:leading-[1.0] -ml-1 px-1 [text-wrap:balance]">
                              GleeManager
                          </h3>
                          
@@ -73,7 +73,7 @@ const BackstageView = () => (
                          </div>
                          
                          {/* Swash Protection: px-1 */}
-                         <h3 className="text-6xl md:text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.1] md:leading-[1.0] -ml-1 px-1">
+                         <h3 className="text-6xl md:text-7xl font-serif text-[#041E42] italic mb-4 leading-[1.1] md:leading-[1.0] -ml-1 px-1 [text-wrap:balance]">
                              Slack
                          </h3>
 

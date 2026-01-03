@@ -73,7 +73,7 @@ const PhilanthropyView = () => {
                   <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Mission</span>
               </div>
               <div className="lg:col-span-8">
-                  <h3 className="text-4xl md:text-7xl font-serif leading-[1.15] md:leading-[1.0] text-[#041E42] tracking-tighter mb-12">
+                  <h3 className="text-4xl md:text-7xl font-serif leading-[1.15] md:leading-[1.0] text-[#041E42] tracking-tighter mb-12 [text-wrap:balance]">
                       The <span className="text-[#D50032]">Donor Guild</span> is the heartbeat of the Association.
                   </h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8">
@@ -97,7 +97,7 @@ const PhilanthropyView = () => {
 
               {DONOR_TIERS.map((tier, idx) => {
                   const isHero = tier.title === "The Spirit of ’46";
-                  const [amount, frequency] = tier.price.includes('/') ? tier.price.split('/') : [tier.price, 'annually'];
+                  const { amount, frequency } = tier.price;
 
                   return (
                       <div 
@@ -114,8 +114,12 @@ const PhilanthropyView = () => {
                               <p className="text-[#041E42] text-lg font-serif leading-tight opacity-60 max-w-md">{typeset(tier.description)}</p>
                           </div>
                           <div className="md:col-span-2 pt-3 text-left">
+                               {/* The amount and frequency are now clean variables */}
                                <span className="text-lg font-mono font-bold text-[#041E42] tracking-wide tabular-nums block">{amount}</span>
-                               <span className="text-[9px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 uppercase">per {frequency}</span>
+                               {/* Added "per" manually to ensure the grammar flows, assuming 'frequency' is just the noun (e.g., "Year") */}
+                               <span className="text-[9px] font-mono font-bold tracking-[0.1em] text-[#041E42]/70 uppercase">
+                                  per {frequency}
+                               </span>
                           </div>
                           <div className="md:col-span-2 flex md:justify-end items-start pt-2">
                                <a href={tier.link} target="_blank" rel="noopener noreferrer" className={`flex items-center justify-between w-full md:w-auto gap-4 text-[10px] font-sans font-bold tracking-[0.2em] uppercase transition-all duration-300 px-6 py-4 border ${isHero ? 'bg-[#D50032] border-[#D50032] text-white hover:bg-[#A51C30]' : 'border-[#041E42] text-[#041E42] hover:bg-[#041E42] hover:text-white'}`}>
@@ -146,7 +150,7 @@ const PhilanthropyView = () => {
 
               {/* The Narrative */}
               <div className="lg:col-span-6">
-                  <h3 className="text-4xl md:text-5xl font-serif text-[#041E42] italic leading-[1.1] mb-8">
+                  <h3 className="text-4xl md:text-5xl font-serif text-[#041E42] italic leading-[1.1] mb-8 [text-wrap:balance]">
                       For the preservation of the moment.
                   </h3>
                   <p className="text-xl text-[#041E42] font-serif leading-relaxed opacity-80 max-w-lg [text-wrap:balance]">
@@ -180,7 +184,7 @@ const PhilanthropyView = () => {
                 <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">
                   04 — Special Initiative
                 </span>
-                <h2 className="text-5xl font-serif italic leading-tight text-[#041E42] mb-8">
+                <h2 className="text-5xl font-serif italic leading-tight text-[#041E42] mb-8 [text-wrap:balance]">
                   The Archive Restoration
                 </h2>
                 <div className="w-12 h-[1px] bg-[#041E42] mb-8"></div>
