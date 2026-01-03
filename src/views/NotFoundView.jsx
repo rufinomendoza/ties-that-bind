@@ -12,8 +12,8 @@ const NotFoundView = ({ navigateTo }) => (
 
         <div className="w-full max-w-3xl border-t-2 border-[#041E42] pt-12">
             
-            {/* 1. Meta Label */}
-            <span className="text-[11px] font-sans font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">
+            {/* 1. Meta Label: CHANGED Sans -> Mono (System Status) */}
+            <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-8">
                 Error 404 — Missing Record
             </span>
             
@@ -40,9 +40,9 @@ const NotFoundView = ({ navigateTo }) => (
 
                 {/* 5. Concierge Links: Added Patronage */}
                 <div className="flex flex-wrap gap-6 pt-8 border-t border-[#041E42]/10 w-full max-w-md opacity-60">
-                    <button onClick={() => navigateTo('agenda')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Box Office</button>
-                    <button onClick={() => navigateTo('discography')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Archive</button>
-                    <button onClick={() => navigateTo('philanthropy')} className="text-[10px] font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Patronage</button>
+                    <button onClick={() => navigateTo('agenda')} className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Box Office</button>
+                    <button onClick={() => navigateTo('discography')} className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Listening Room</button>
+                    <button onClick={() => navigateTo('philanthropy')} className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase hover:text-[#D50032] transition-colors">Patronage</button>
                 </div>
             </div>
 
