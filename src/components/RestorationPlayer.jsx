@@ -13,52 +13,62 @@ const RestorationPlayer = () => {
   const [progress, setProgress] = useState(0);
   const [duration, setDuration] = useState(0);
   
-  // Volume State (Linear 0-1 for UI)
+  // Volume State
   const [volume, setVolume] = useState(1);
   const [prevVolume, setPrevVolume] = useState(1);
   const [isDraggingVolume, setIsDraggingVolume] = useState(false);
+  const [isIOS, setIsIOS] = useState(false); // New State for iOS detection
   
   const audioRef = useRef(null);
-  const volumeSliderRef = useRef(null); // Ref for the slider container
+  const volumeSliderRef = useRef(null);
 
-  // --- LOGIC 1: Seamless Source Switching (Memory Leak Fixed) ---
+  // --- LOGIC 0: Detect iOS ---
+  useEffect(() => {
+    // Robust check for iOS (including iPads with iPadOS 13+)
+    const checkIsIOS = () => {
+      const platform = navigator.userAgent || navigator.platform || 'unknown';
+      return (
+        /iPhone|iPod|iPad/.test(platform) ||
+        // iPad Pro detection (mimics MacIntel but has touch points)
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+      );
+    };
+    setIsIOS(checkIsIOS());
+  }, []);
+
+  // --- LOGIC 1: Seamless Source Switching ---
   useEffect(() => {
     const audioEl = audioRef.current;
 
     if (currentTrack && audioEl) {
       const src = currentTrack.audioSources?.[sourceMode];
       
-      // Only reload if the source URL has actually changed
       if (src && audioEl.getAttribute('src') !== src) {
         
         const wasPlaying = isPlaying;
         const savedTime = audioEl.currentTime;
         
         const onMetadataLoaded = () => {
-            // Restore timestamp
             audioEl.currentTime = savedTime;
-            // Restore volume (Logarithmic)
-            audioEl.volume = volume * volume;
+            // Only attempt to set volume if NOT iOS
+            if (!isIOS) {
+                audioEl.volume = volume * volume;
+            }
             
-            // Resume playback if it was playing before
             if (wasPlaying) {
                 audioEl.play().catch(e => console.log("Playback interrupted during switch", e));
             }
         };
 
-        // Attach listener
         audioEl.addEventListener('loadedmetadata', onMetadataLoaded, { once: true });
-        
-        // Switch the source
         audioEl.src = src;
 
-        // Cleanup: Remove listener if effect re-runs before loading finishes
         return () => {
             audioEl.removeEventListener('loadedmetadata', onMetadataLoaded);
         };
       }
     }
-  }, [currentTrack, sourceMode, isPlaying]);
+  }, [currentTrack, sourceMode, isPlaying, isIOS, volume]); // Added isIOS dependency
 
   // --- LOGIC 2: Play/Pause Sync ---
   useEffect(() => {
@@ -69,14 +79,13 @@ const RestorationPlayer = () => {
 
   // --- LOGIC 3: Logarithmic Volume ---
   useEffect(() => {
-    if (audioRef.current) {
-        // Square the volume for a natural "Logarithmic" feel
+    // Only apply volume logic on non-iOS devices
+    if (audioRef.current && !isIOS) {
         audioRef.current.volume = volume * volume;
     }
-  }, [volume]);
+  }, [volume, isIOS]);
 
   // --- HANDLERS ---
-
   const handleTimeUpdate = () => {
     if (audioRef.current) {
       setProgress(audioRef.current.currentTime);
@@ -130,8 +139,7 @@ const RestorationPlayer = () => {
     setProgress(pct * duration);
   };
 
-  // --- VOLUME CONTROLS (Global Event Listeners for Reliable Drag) ---
-
+  // --- VOLUME CONTROLS ---
   const handleVolumeKeyDown = (e) => {
     const VOL_STEP = 0.1;
     let newVol = volume;
@@ -149,7 +157,6 @@ const RestorationPlayer = () => {
     setVolume(newVol);
   };
 
-  // Calculate volume based on pointer position relative to slider
   const updateVolumeFromEvent = (clientX) => {
     if (!volumeSliderRef.current) return;
     const rect = volumeSliderRef.current.getBoundingClientRect();
@@ -157,14 +164,12 @@ const RestorationPlayer = () => {
     setVolume(pct);
   };
 
-  // Start dragging
   const handleVolumePointerDown = (e) => {
-    e.preventDefault(); // Prevent text selection/scrolling
+    e.preventDefault();
     setIsDraggingVolume(true);
-    updateVolumeFromEvent(e.clientX); // Update immediately on click
+    updateVolumeFromEvent(e.clientX);
   };
 
-  // Effect to manage global listeners during drag
   useEffect(() => {
     if (!isDraggingVolume) return;
 
@@ -177,10 +182,8 @@ const RestorationPlayer = () => {
       setIsDraggingVolume(false);
     };
 
-    // Add listeners to window to catch moves outside the element
     window.addEventListener('pointermove', handleGlobalPointerMove);
     window.addEventListener('pointerup', handleGlobalPointerUp);
-    // Also handle touchcancel/pointercancel
     window.addEventListener('pointercancel', handleGlobalPointerUp);
 
     return () => {
@@ -213,7 +216,7 @@ const RestorationPlayer = () => {
         preload="auto"
       />
       
-      {/* 1. Progress Bar (The Ictus) */}
+      {/* 1. Progress Bar */}
       <div 
         className="w-full h-1 md:h-1.5 bg-[#F4F4F3]/10 cursor-pointer group relative focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-2 focus-visible:ring-offset-[#041E42]"
         onClick={handleSeek}
@@ -239,11 +242,11 @@ const RestorationPlayer = () => {
         
         {/* Top/Left: Track Data */}
         <div className="flex items-center gap-4 md:gap-6 justify-between md:justify-start w-full md:w-auto min-w-0">
+            {/* ... (Existing Track Data UI) ... */}
             <div className="flex items-center gap-4 min-w-0">
                 <div className="hidden sm:flex items-center justify-center w-10 h-10 md:w-14 md:h-14 bg-[#F4F4F3]/5 border border-[#F4F4F3]/20 text-[#F4F4F3] flex-shrink-0 rounded-sm">
                    {sourceMode === 'reference' ? <Disc3 size={24} strokeWidth={1.25} aria-hidden="true" /> : <Voicemail size={24} strokeWidth={1.25} aria-hidden="true" />}
                 </div>
-                {/* select-none ensures text doesn't highlight during frantic clicking */}
                 <div className="flex flex-col overflow-hidden text-left min-w-0 md:min-w-72 select-none">
                     <span className="text-[8px] md:text-[9px] font-mono font-bold tracking-[0.2em] uppercase text-[#F4F4F3]/80 mb-1 truncate">
                         {sourceMode === 'reference' ? 'Unfiltered Archival Recording' : '2025 Reel-to-Reel Digital Transfer'}
@@ -264,8 +267,7 @@ const RestorationPlayer = () => {
 
         {/* Middle: Source Toggle & Transport */}
         <div className="flex items-center justify-between md:justify-center w-full md:w-auto gap-4 md:gap-10">
-            
-            {/* SKEUMORPHIC SWITCH */}
+            {/* ... (Existing Switch & Transport UI) ... */}
             <div className="flex flex-1 md:flex-none items-center bg-[#031630] shadow-[inset_0_2px_4px_rgba(0,0,0,0.6)] rounded-md p-1 border-b border-white/10">
                 <button 
                     onClick={() => setSourceMode('reference')}
@@ -295,7 +297,6 @@ const RestorationPlayer = () => {
                 </button>
             </div>
 
-            {/* Transport Controls */}
             <div className="flex items-center gap-2 md:gap-4">
                 <button 
                     onClick={handleRewind}
@@ -318,48 +319,48 @@ const RestorationPlayer = () => {
         {/* Bottom/Right: Volume, Timestamp & Close */}
         <div className="flex items-center justify-between md:justify-end w-full md:w-auto border-t border-white/5 md:border-0 pt-3 md:pt-0">
             
-            {/* SKEUMORPHIC VOLUME CONTROL */}
-            <div className="flex items-center gap-4 mr-6 group/volume">
-                <button 
-                    onClick={toggleMute}
-                    className="text-[#F4F4F3]/40 hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm active:translate-y-[1px]"
-                    aria-label={volume === 0 ? "Unmute" : "Mute"}
-                >
-                    {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
-                </button>
-                
-                {/* FADER TRACK - Uses Pointer Events with Global Listeners */}
-                <div 
-                    ref={volumeSliderRef}
-                    className="w-24 h-8 relative cursor-pointer flex items-center touch-none" 
-                    style={{ touchAction: 'none' }} 
-                    onPointerDown={handleVolumePointerDown}
-                    onKeyDown={handleVolumeKeyDown}
-                    role="slider"
-                    aria-label="Volume Fader"
-                    aria-valuemin={0}
-                    aria-valuemax={1}
-                    aria-valuenow={Math.round(volume * 100)}
-                    tabIndex={0}
-                >
-                    {/* Rail: Deep Recessed Groove */}
-                    <div className="w-full h-1.5 bg-[#020d1c] shadow-[inset_0_1px_2px_rgba(0,0,0,1),0_1px_0_rgba(255,255,255,0.1)] rounded-full overflow-hidden relative">
-                         <div 
-                            className="h-full bg-gradient-to-b from-[#D50032] to-[#A50026]" 
-                            style={{ width: `${volume * 100}%` }}
-                         />
-                    </div>
-
-                    {/* Fader Cap: Machined Look */}
-                    <div 
-                        className="absolute h-5 w-3 bg-gradient-to-b from-[#F4F4F3] to-[#CDCDCD] rounded-[1px] shadow-[0_2px_4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(0,0,0,0.1)] transform -translate-x-1/2 pointer-events-none flex items-center justify-center"
-                        style={{ left: `${volume * 100}%` }}
+            {/* ONLY RENDER VOLUME IF NOT ON iOS */}
+            {!isIOS && (
+                <div className="flex items-center gap-4 mr-6 group/volume">
+                    <button 
+                        onClick={toggleMute}
+                        className="text-[#F4F4F3]/40 hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm active:translate-y-[1px]"
+                        aria-label={volume === 0 ? "Unmute" : "Mute"}
                     >
-                        {/* Grip Lines */}
-                        <div className="w-1.5 h-3" style={faderGripStyle}></div>
+                        {volume === 0 ? <VolumeX size={18} /> : <Volume2 size={18} />}
+                    </button>
+                    
+                    <div 
+                        ref={volumeSliderRef}
+                        className="w-24 h-8 relative cursor-pointer flex items-center touch-none" 
+                        style={{ touchAction: 'none' }} 
+                        onPointerDown={handleVolumePointerDown}
+                        onKeyDown={handleVolumeKeyDown}
+                        role="slider"
+                        aria-label="Volume Fader"
+                        aria-valuemin={0}
+                        aria-valuemax={1}
+                        aria-valuenow={Math.round(volume * 100)}
+                        tabIndex={0}
+                    >
+                        {/* Rail */}
+                        <div className="w-full h-1.5 bg-[#020d1c] shadow-[inset_0_1px_2px_rgba(0,0,0,1),0_1px_0_rgba(255,255,255,0.1)] rounded-full overflow-hidden relative">
+                                <div 
+                                className="h-full bg-gradient-to-b from-[#D50032] to-[#A50026]" 
+                                style={{ width: `${volume * 100}%` }}
+                                />
+                        </div>
+
+                        {/* Fader Cap */}
+                        <div 
+                            className="absolute h-5 w-3 bg-gradient-to-b from-[#F4F4F3] to-[#CDCDCD] rounded-[1px] shadow-[0_2px_4px_rgba(0,0,0,0.5),0_0_0_1px_rgba(0,0,0,0.1)] transform -translate-x-1/2 pointer-events-none flex items-center justify-center"
+                            style={{ left: `${volume * 100}%` }}
+                        >
+                            <div className="w-1.5 h-3" style={faderGripStyle}></div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            )}
 
             <span className="text-[10px] md:text-[11px] font-mono font-bold tracking-[0.1em] tabular-nums opacity-60 select-none">
                 {formatTime(progress)} <span className="opacity-30 mx-2">/</span> {formatTime(duration)}
