@@ -16,6 +16,24 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
     directoryRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  // Helper for internal links to preserve SPA routing while allowing right-click
+  const handleNav = (e, action) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+    e.preventDefault();
+    action();
+  };
+
+  // Map slugs to URL paths for the directory
+  const getPath = (slug) => {
+    switch(slug) {
+        case 'agenda': return '/events';
+        case 'discography': return '/albums';
+        case 'store': return '/store';
+        case 'philanthropy': return '/give';
+        default: return '/';
+    }
+  };
+
   return (
     <div className="w-full bg-[#F4F4F3] selection:bg-[#D50032] selection:text-white">
       <Helmet>
@@ -38,25 +56,18 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
           {/* Main Content Area */}
           <div className="flex-1 flex flex-col items-center justify-center pt-12">
             
-            {/* Typography Stack */}
-            {/* ✅ SEMANTIC FIX: Single H1 for Screen Readers, Decorative visual stack */}
             <h1 className="sr-only">Brotherhood, Harmony, History</h1>
             
             <div 
               className="w-full flex flex-col items-center justify-center text-center select-none leading-[0.8] text-[#041E42] overflow-visible [text-wrap:balance]"
               aria-hidden="true"
             >
-              {/* BROTHERHOOD */}
               <span className="whitespace-nowrap text-[11.5vw] md:text-[12vw] font-serif tracking-tighter relative z-10">
                 BROTHERHOOD
               </span>
-              
-              {/* HARMONY - Added italic correction for 'Y' clipping */}
               <span className="whitespace-nowrap text-[16vw] md:text-[19vw] font-serif tracking-tighter opacity-40 italic -mt-[3vw] relative z-0 pr-[0.25em]">
                 HARMONY
               </span>
-              
-              {/* HISTORY */}
               <span className="whitespace-nowrap text-[16vw] md:text-[17vw] font-serif tracking-tighter block -mt-[3.5vw] relative z-10">
                 HISTORY
               </span>
@@ -64,15 +75,20 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
 
             {/* Action Buttons */}
             <div className="flex flex-col md:flex-row gap-8 md:gap-24 items-center mt-12 md:mt-16 z-20">
-               <a onClick={() => openAlbumBySlug('desperate-chimes-desperate-measures')} className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4F4F3]">
+               <a 
+                 href="/album/desperate-chimes-desperate-measures"
+                 onClick={(e) => handleNav(e, () => openAlbumBySlug('desperate-chimes-desperate-measures'))}
+                 className="group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42] hover:text-[#D50032] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4F4F3]"
+               >
                   Stream “And So It Goes”
                   <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>
                </a>
               {ctmAlumni && (
                 <a 
-                    onClick={() => openEvent(ctmAlumni)} 
+                    href={`/event/${ctmAlumni.slug}`}
+                    onClick={(e) => !isPast(ctmAlumni?.date) && handleNav(e, () => openEvent(ctmAlumni))}
                     disabled={isPast(ctmAlumni?.date)}
-                    className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4F4F3] ${isPast(ctmAlumni?.date) ? 'text-[#041E42]/70 cursor-default' : 'text-[#041E42] hover:text-[#D50032]'}`}
+                    className={`group relative text-[11px] font-sans font-bold tracking-[0.1em] uppercase transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 focus-visible:ring-offset-[#F4F4F3] ${isPast(ctmAlumni?.date) ? 'text-[#041E42]/70 cursor-default pointer-events-none' : 'text-[#041E42] hover:text-[#D50032]'}`}
                 >
                     {isPast(ctmAlumni?.date) ? 'Event Archived' : 'Book Cherry Tree Tickets'}
                     {!isPast(ctmAlumni?.date) && <span className="absolute -bottom-2 left-0 w-full h-[2px] bg-[#041E42] group-hover:bg-[#D50032] transition-colors"></span>}
@@ -81,17 +97,17 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
             </div>
           </div>
 
-          {/* Scroll Down Indicator */}
-          <a 
+          {/* Scroll Down Indicator - Uses button for in-page action */}
+          <button 
             onClick={scrollToDirectory}
-            className="group pb-8 flex flex-col items-center gap-4 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm"
+            className="group pb-8 flex flex-col items-center gap-4 transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm bg-transparent border-0 cursor-pointer"
             aria-label="Scroll down to directory"
           >
             <span className="text-[9px] font-sans font-bold tracking-[0.2em] uppercase text-[#041E42]/40 group-hover:text-[#D50032]">Scroll</span>
             <div className="w-[1px] h-10 bg-[#041E42]/20 relative overflow-hidden">
                 <div className="absolute top-0 left-0 w-full h-full bg-[#D50032] -translate-y-full group-hover:translate-y-0 transition-transform duration-500"></div>
             </div>
-          </a>
+          </button>
         </div>
       </div>
 
@@ -110,7 +126,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                     <div className="w-12 h-[2px] bg-[#041E42]"></div>
                 </div>
                 <div className="hidden lg:block pt-24">
-                    <a onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm p-1">
+                    <a href="/comms" onClick={(e) => handleNav(e, () => navigateTo('backstage'))} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm p-1 w-fit">
                         <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
                         Authorized Access
                     </a>
@@ -126,8 +142,8 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                 ].map((item) => (
                   <a 
                     key={item.id} 
-                    onClick={() => navigateTo(item.slug)} 
-                    type="button"
+                    href={getPath(item.slug)}
+                    onClick={(e) => handleNav(e, () => navigateTo(item.slug))} 
                     className="w-full text-left group flex flex-row items-baseline justify-between py-10 md:py-12 border-b border-[#041E42]/20 transition-all duration-500 hover:bg-white hover:px-6 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] focus-visible:bg-white focus-visible:px-6"
                   >
                     <div className="flex items-baseline gap-6 md:gap-16">
@@ -141,7 +157,7 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
                   </a>
                 ))}
                 <div className="lg:hidden pt-12 flex justify-center">
-                    <a onClick={() => navigateTo('backstage')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm p-1">
+                    <a href="/comms" onClick={(e) => handleNav(e, () => navigateTo('backstage'))} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase text-[#041E42]/70 hover:text-[#041E42] transition-colors flex items-center gap-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm p-1">
                         <div className="w-1.5 h-1.5 bg-[#041E42] rounded-full"></div>
                         Authorized Access
                     </a>
@@ -167,7 +183,8 @@ const HomeView = ({ navigateTo, openAlbumBySlug, openEvent }) => {
             </div>
             {ctmAlumni && (
                 <a 
-                    onClick={() => openEvent(ctmAlumni)} 
+                    href={`/event/${ctmAlumni.slug}`}
+                    onClick={(e) => !isPast(ctmAlumni?.date) && handleNav(e, () => openEvent(ctmAlumni))} 
                     disabled={isPast(ctmAlumni.date)}
                     className="w-full md:w-auto flex items-center justify-between md:justify-start gap-8 py-5 border-t border-b border-[#D50032] md:border-0 transition-all duration-300 group/btn hover:translate-x-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032]"
                 >

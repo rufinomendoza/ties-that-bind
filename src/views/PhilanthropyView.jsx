@@ -199,7 +199,7 @@ const PhilanthropyView = () => {
                     A
                   </span>
                   <h3 className="text-4xl md:text-6xl font-serif font-bold text-[#041E42] mb-10 leading-[1.1] tracking-tighter [text-wrap:balance]">
-                    Archives are the <span className="italic font-bold">immortal</span> memory of the Brotherhood.
+                    Archives are the <span className="italic">immortal</span> memory of the Brotherhood.
                   </h3>
                   <p className="text-[#041E42] text-xl md:text-2xl font-serif leading-relaxed opacity-90 mb-12 max-w-2xl">
                     Fifty-two years of harmony are currently locked in aging &frac14;&Prime; analog reels. We are reclaiming the magnetic signatures of our founders to ensure our history carries on for the next century.

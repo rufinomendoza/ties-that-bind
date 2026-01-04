@@ -19,9 +19,17 @@ const EventDetailView = ({ event, navigateTo }) => {
 
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-between items-end mb-12">
-            <button onClick={() => navigateTo('agenda')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4">
+            <a 
+                href="/events"
+                onClick={(e) => {
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+                    e.preventDefault();
+                    navigateTo('agenda');
+                }}
+                className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm"
+            >
                 <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to the Box Office
-            </button>
+            </a>
         </div>
         
         {/* REVERTED: Back to solid border (Removed dashed) */}
