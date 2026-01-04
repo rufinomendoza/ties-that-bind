@@ -14,13 +14,17 @@ const AlbumDetailView = ({ selectedAlbum, navigateTo }) => {
 
       <div className="max-w-[1920px] mx-auto">
         <div className="flex justify-between items-end mb-12">
-            {/* Internal Navigation: Button is appropriate here for SPA routing */}
-            <button 
-                onClick={() => navigateTo('discography')} 
+            <a 
+                href="/albums"
+                onClick={(e) => {
+                    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+                    e.preventDefault();
+                    navigateTo('discography');
+                }}
                 className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase flex items-center gap-4 hover:text-[#D50032] transition-colors opacity-60 hover:opacity-100 group py-4 -my-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D50032] rounded-sm"
             >
                 <span className="group-hover:-translate-x-1 transition-transform">←</span> Return to the Listening Room
-            </button>
+            </a>
         </div>
         
         <div className="border-t-2 border-[#041E42] pt-12 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">

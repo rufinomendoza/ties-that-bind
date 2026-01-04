@@ -11,6 +11,12 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
   const demoAlbum = ALBUMS_DATA.find(a => a.id === 12);
   const demoTrack = demoAlbum?.restoration;
 
+  const handleNav = (e, album) => {
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+    e.preventDefault();
+    openAlbum(album);
+  };
+
   return (
     <div className="min-h-screen pt-40 px-6 md:px-12 pb-32 bg-[#F4F4F3] text-[#041E42] antialiased selection:bg-[#D50032] selection:text-white">
       <Helmet>
@@ -23,6 +29,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
         
         {/* 01 — PRESERVATION SECTION */}
         <div className="border-t-2 border-[#041E42] pt-12 pb-32 grid grid-cols-1 lg:grid-cols-12 gap-y-12 lg:gap-x-12">
+            {/* ... Content remains same ... */}
             <div className="lg:col-span-4">
               <span className="text-[11px] font-mono font-bold tracking-[0.05em] text-[#D50032] uppercase block mb-4">01 — The Preservation</span>
             </div>
@@ -32,22 +39,28 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12 border-t border-[#041E42]/20 pt-8 mb-16">
                     <p className="text-xl text-[#041E42] font-serif leading-relaxed">To ensure our recorded legacy carries on, our preservationists are currently digitizing master tapes from the 1950s through the ’80s to exacting high-fidelity standards.</p>
                     <div className="flex flex-col items-start gap-4">
-                        <a onClick={() => window.open('https://thechimes.notion.site', '_blank')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1 text-left">Explore the Rough Cuts &#x2197;&#xFE0E;</a>
-                        <a onClick={() => navigateTo('philanthropy')} className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1">Support Digitization</a>
+                        <a href="https://thechimes.notion.site" target="_blank" rel="noopener noreferrer" className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1 text-left">Explore the Rough Cuts &#x2197;&#xFE0E;</a>
+                        <a 
+                            href="/give" 
+                            onClick={(e) => { 
+                                if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+                                e.preventDefault(); 
+                                navigateTo('philanthropy'); 
+                            }} 
+                            className="text-[11px] font-sans font-bold tracking-[0.1em] uppercase border-b border-[#041E42]/20 hover:text-[#D50032] hover:border-[#D50032] transition-colors pb-1"
+                        >
+                            Support Digitization
+                        </a>
                     </div>
                 </div>
 
-                {/* THE ARCHIVAL PLAYER (Patronage-Style Integration) */}
+                {/* THE ARCHIVAL PLAYER */}
                 {demoTrack && (
                   <div className="relative bg-white border border-[#041E42]/10 p-8 md:p-12 mb-20 shadow-sm overflow-hidden group">
-                    {/* Archival Utility Tag */}
                     <div className="absolute top-0 right-0 bg-[#041E42] text-white px-4 py-1 text-[9px] font-mono font-black uppercase tracking-[0.2em] select-none">
                         Log: Item #R-011
                     </div>
-                    
                     <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                      
-                      {/* Narrative Side */}
                       <div className="lg:col-span-8">
                         <span className="text-[10px] font-sans font-bold tracking-[0.2em] uppercase text-[#D50032] mb-4 block">
                           Hear the Difference
@@ -59,10 +72,8 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                           The difference between loss and legacy: Listen to the raw extraction of our 1958 album versus the professional master transfer.
                         </p>
                       </div>
-
-                      {/* Action Side */}
                       <div className="lg:col-span-4 flex flex-col md:flex-row lg:flex-col items-start lg:items-end justify-center gap-6">
-                        <a 
+                        <button 
                           onClick={() => playTrack(demoTrack)}
                           className="flex items-center justify-between w-full md:w-auto gap-8 border-2 border-[#041E42] p-5 lg:p-6 hover:bg-[#041E42] hover:text-white transition-all duration-500 group/btn"
                         >
@@ -70,7 +81,7 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
                             <span className="text-[11px] font-sans font-bold tracking-[0.2em] uppercase block">Start A/B Demo</span>
                           </div>
                           <span className="text-2xl transition-transform group-hover/btn:translate-x-1">▶</span>
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -87,8 +98,8 @@ const DiscographyView = ({ openAlbum, navigateTo }) => {
             {ALBUMS_DATA.map((album, index) => (
                 <a 
                   key={album.id} 
-                  type="button"
-                  onClick={() => openAlbum(album)} 
+                  href={`/album/${album.slug}`}
+                  onClick={(e) => handleNav(e, album)} 
                   className="w-full text-left group cursor-pointer flex flex-col gap-6 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#D50032] focus-visible:ring-offset-4 rounded-sm"
                 >
                   <div className="relative aspect-square w-full bg-[#E5E5E4] overflow-hidden shadow-xl shadow-[#041E42]/5 group">
